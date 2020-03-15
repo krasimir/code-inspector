@@ -9,7 +9,6 @@
     "target": "ESNext",
     "allowJs": true,
     "checkJs": false,
-    "jsx": "react",
     "pretty": true,
     "skipLibCheck": true,
     "strict": true,

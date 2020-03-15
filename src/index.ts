@@ -1,7 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies, no-param-reassign */
 import * as BabelParser from '@babel/parser';
-import { visit } from 'ast-types';
-import { NodePath } from 'ast-types/def';
+import { visit, Type, ASTNode } from 'ast-types';
+
+import { NodePath } from 'ast-types/lib/node-path';
 import { BreadcrumbsNodesParser } from './types';
 
 const plugins = [
@@ -31,13 +32,13 @@ const plugins = [
   'throwExpressions',
   'topLevelAwait',
 ];
-
 const babelParserOptions = {
   allowImportExportEverywhere: true,
   allowAwaitOutsideFunction: true,
   plugins: plugins as BabelParser.ParserPlugin[],
   decoratorsBeforeExport: true,
 };
+
 const VALID_BREADCRUMBS_NODES: BreadcrumbsNodesParser = {
   ClassMethod: {
     parse: (node: any) => node.key.name,
@@ -75,9 +76,18 @@ function extractBreadcrumbsNodes(path: NodePath): string[] {
   return chain;
 }
 
-export function analyzeAST(text: string, line: number) {
+export function toAST(code: string): ASTNode {
+  return BabelParser.parse(code, babelParserOptions);
+}
+
+export function analyze(code: string | ASTNode, line: number) {
+  let ast: ASTNode;
+  if (typeof code === 'string') {
+    ast = toAST(code);
+  } else {
+    ast = code;
+  }
   try {
-    const ast = BabelParser.parse(text, babelParserOptions);
     let breadcrumbs: string[] = [];
 
     visit(ast, {
