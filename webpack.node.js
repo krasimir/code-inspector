@@ -25,6 +25,7 @@ module.exports = {
   output: {
     path: `${__dirname}/node`,
     filename: 'code-inspector.js',
+    libraryTarget: 'commonjs',
   },
   optimization: {
     minimizer: [new TerserPlugin()],

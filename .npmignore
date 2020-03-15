@@ -2,5 +2,8 @@ src
 .babelrc
 .eslintrc
 tsconfig.json
-webpack.prod.json
+webpack.browser.json
+webpack.node.json
 yarn.lock
+browser
+demo
