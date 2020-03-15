@@ -24,8 +24,9 @@ module.exports = {
   },
   output: {
     path: `${__dirname}/dist`,
-    publicPath: '/',
     filename: 'code-inspector.js',
+    library: 'CodeInspector',
+    libraryTarget: 'umd',
   },
   optimization: {
     minimizer: [new TerserPlugin()],
@@ -35,4 +36,7 @@ module.exports = {
       __DEV__: true,
     }),
   ],
+  performance: {
+    hints: false,
+  },
 };
