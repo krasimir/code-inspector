@@ -23,10 +23,8 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    path: `${__dirname}/dist`,
+    path: `${__dirname}/node`,
     filename: 'code-inspector.js',
-    library: 'CodeInspector',
-    libraryTarget: 'umd',
   },
   optimization: {
     minimizer: [new TerserPlugin()],

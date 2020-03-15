@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "outDir": "dist/",
+    "outDir": "lib/",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,

@@ -1,7 +1,7 @@
 {
   "name": "code-inspector",
-  "version": "0.3.0",
-  "main": "dist/code-inspector.js",
+  "version": "0.4.0",
+  "main": "node/code-inspector.js",
   "description": "Static analysis for your code",
   "devDependencies": {
     "@babel/core": "7.5.0",
@@ -40,7 +40,7 @@
     "webpack-cli": "3.1.2"
   },
   "scripts": {
-    "build": "webpack --config ./webpack.prod.js --mode production",
+    "build": "webpack --config ./webpack.browser.js --mode production && webpack --config ./webpack.node.js --mode production",
     "test": "./node_modules/.bin/jest ./src/__tests__/*.spec.ts",
     "test-watch": "./node_modules/.bin/jest ./src/__tests__/*.spec.ts --watch",
     "release": "yarn test && yarn build"
