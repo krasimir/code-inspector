@@ -1,0 +1,12 @@
+function getData() {
+  request('endpoint', (res) => {
+    res.then(() => {
+      console.log('a');
+    }).catch(e => throw e)
+  });
+}
+const XXX: BreadcrumbsNodesParser = {
+  FooBar: {
+    parse: (node: any) => get(node, 'id.name', 'declarator'),
+  }
+};

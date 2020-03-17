@@ -1,0 +1,23 @@
+export function analyze(
+  code: string | ASTNode,
+  line: number,
+  position: number
+) {
+  try {
+    let breadcrumbs: string[] = [];
+
+    visit(ast, {
+      visitNode(path) {
+        const { start, end } = path.value.loc;
+        const [ a, b ] = something;
+      },
+    });
+    return {
+      breadcrumbs,
+    };
+  } catch (err) {
+    console.log('Error parsing to ast');
+    console.log(err);
+    return {};
+  }
+}

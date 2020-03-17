@@ -5,7 +5,7 @@ export class App extends React.Component {
 
   public bar() {
     console.log(this.foo);
-  }
+  } 
 }
 
 class Helper {}
@@ -15,6 +15,11 @@ const util = () => {
     // something
     new App(() => {
       // something else
+    });
+    lib.onNotification(() => {
+      request.then(() => {
+        console.log('success');
+      })
     });
   }
 };
