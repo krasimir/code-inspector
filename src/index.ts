@@ -2,10 +2,12 @@
 import * as BabelParser from '@babel/parser';
 import { visit, Type, ASTNode } from 'ast-types';
 import uniq from 'lodash/uniq';
-import get from 'lodash/get';
 
 import { NodePath } from 'ast-types/lib/node-path';
-import { BreadcrumbsNodesParser } from './types';
+import parse from './parsers/parse';
+
+const DEBUG = true;
+let DEBUG_LOG: any[] = [];
 
 const plugins = [
   'jsx',
@@ -41,65 +43,33 @@ const babelParserOptions = {
   decoratorsBeforeExport: true,
 };
 
-const VALID_BREADCRUMBS_NODES: BreadcrumbsNodesParser = {
-  ClassMethod: {
-    parse: (node: any) => get(node, 'key.name', 'class method'),
-  },
-  ClassDeclaration: {
-    parse: (node: any) => get(node, 'id.name', 'class declaration'),
-  },
-  VariableDeclarator: {
-    parse: (node: any) => get(node, 'id.name', 'declarator'),
-  },
-  VariableDeclaration: {
-    parse: (node: any) => {
-      const declarationNode = get(node, 'declarations.0', null);
-      if (declarationNode === null) {
-        return 'VariableDeclaration';
-      }
-      if (declarationNode.id.name) {
-        return declarationNode.id.name;
-      }
-      if (declarationNode.id.type === 'ObjectPattern') {
-        return `{${declarationNode.id.properties
-          .map((p: any) => get(p, 'key.name', 'var'))
-          .join(',')}}`;
-      }
-      if (declarationNode.id.type === 'ArrayPattern') {
-        return `[${declarationNode.id.elements
-          .map((e: any) => get(e, 'name', 'var'))
-          .join(',')}]`;
-      }
-      return 'variable';
-    },
-  },
-  ArrowFunctionExpression: {
-    parse: (node: any) => 'ƒ',
-  },
-  ObjectProperty: {
-    parse: (node: any) => get(node, 'key.name'),
-  },
-  FunctionDeclaration: {
-    parse: (node: any) => node.id.name,
-  },
-};
-
 function extractBreadcrumbsNodes(path: NodePath): string[] {
   let chain = [];
+  const IGNORE = [
+    'File',
+    'Program',
+    'ExportNamedDeclaration',
+    'ClassBody',
+    'BlockStatement',
+    'ExpressionStatement',
+    'ObjectExpression',
+    'TryStatement',
+    'ReturnStatement',
+  ];
+  const STOP_AT = ['CallExpression'];
   (function up(p) {
+    if (DEBUG) {
+      DEBUG_LOG.push(p.value.type);
+    }
     chain.push(p);
     if (p.parentPath) {
       up(p.parentPath);
     }
   })(path);
   chain = chain.reduce((res: string[], pathItem) => {
-    if (
-      pathItem &&
-      Object.keys(VALID_BREADCRUMBS_NODES).includes(pathItem.value.type)
-    ) {
-      res.push(
-        VALID_BREADCRUMBS_NODES[pathItem.value.type].parse(pathItem.value)
-      );
+    const parsed = parse(pathItem.value);
+    if (pathItem && parsed && !IGNORE.includes(parsed as string)) {
+      res.push(parsed as string);
     }
     return res;
   }, []);
@@ -115,6 +85,7 @@ export function analyze(
   line: number,
   position: number
 ) {
+  DEBUG_LOG = [];
   position -= 1;
   let ast: ASTNode;
   if (typeof code === 'string') {
@@ -129,11 +100,6 @@ export function analyze(
       visitNode(path) {
         const { start, end } = path.value.loc;
         if (line >= start.line && line <= end.line) {
-          // console.log(
-          //   `${start.line}:${start.column}`,
-          //   path.value.type,
-          //   `${end.line}:${end.column}`
-          // );
           if (line === start.line && position < start.column) {
             this.traverse(path);
             return;
@@ -148,6 +114,9 @@ export function analyze(
         this.traverse(path);
       },
     });
+    if (DEBUG) {
+      console.log(DEBUG_LOG);
+    }
     return {
       breadcrumbs,
     };

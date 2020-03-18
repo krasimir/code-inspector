@@ -29,7 +29,7 @@ describe('Given the code-inspector library', () => {
         breadcrumbs: ['Helper'],
       });
       expect(analyze(code, 17, 1)).toMatchObject({
-        breadcrumbs: ['util', 'doSomething', 'ƒ'],
+        breadcrumbs: ['util', 'doSomething', 'new App', 'ƒ'],
       });
       expect(analyze(code, 27, 1)).toMatchObject({
         breadcrumbs: ['Yes'],
@@ -41,10 +41,10 @@ describe('Given the code-inspector library', () => {
     it('should extract scope breadcrumbs #2', () => {
       const code = getCode('code2.txt');
       expect(analyze(code, 11, 47)).toMatchObject({
-        breadcrumbs: ['analyze', '{start,end}'],
+        breadcrumbs: ['analyze', 'visit()', 'visitNode', '{start,end}'],
       });
       expect(analyze(code, 12, 36)).toMatchObject({
-        breadcrumbs: ['analyze', '[a,b]'],
+        breadcrumbs: ['analyze', 'visit()', 'visitNode', '[a,b]'],
       });
     });
     it('should extract scope breadcrumbs #3', () => {
@@ -56,7 +56,19 @@ describe('Given the code-inspector library', () => {
         breadcrumbs: ['XXX', 'FooBar'],
       });
       expect(analyze(code, 10, 61)).toMatchObject({
-        breadcrumbs: ['XXX', 'FooBar', 'parse', 'ƒ'],
+        breadcrumbs: ['XXX', 'FooBar', 'parse', 'ƒ', 'get()'],
+      });
+    });
+    fit('should extract scope breadcrumbs #4', () => {
+      const code = getCode('code4.txt');
+      // expect(analyze(code, 4, 56)).toMatchObject({
+      //   breadcrumbs: ['graph', 'entityExists'],
+      // });
+      // expect(analyze(code, 5, 43)).toMatchObject({
+      //   breadcrumbs: ['graph', 'entityExists', 'this.items.find()', 'ƒ'],
+      // });
+      expect(analyze(code, 8, 33)).toMatchObject({
+        breadcrumbs: ['graph', 'itemPosition', 'App.getReport()', 'ƒ'],
       });
     });
   });

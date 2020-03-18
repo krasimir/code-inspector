@@ -15,7 +15,8 @@
     "react/jsx-filename-extension": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/no-var-requires": 0
+    "@typescript-eslint/no-var-requires": 0,
+    "import/no-extraneous-dependencies": 0
   },
   "settings": {
     "import/parsers": {

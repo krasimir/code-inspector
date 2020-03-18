@@ -1,5 +1,3 @@
-export interface BreadcrumbsNodesParser {
-  [key: string]: {
-    parse(node: any): string;
-  };
+export interface ParsersInterface {
+  [key: string]: (node: any, parse: Function) => string;
 }
