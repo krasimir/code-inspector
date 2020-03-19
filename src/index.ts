@@ -64,6 +64,7 @@ function extractBreadcrumbsNodes(path: NodePath): string[] {
     'ForStatement',
     'SwitchStatement',
     'SwitchCase',
+    'ExportDefaultDeclaration',
   ];
   const STOP_AT = ['ObjectMethod', 'ObjectProperty'];
   (function up(p) {
