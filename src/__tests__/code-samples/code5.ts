@@ -57,13 +57,6 @@ function extractBreadcrumbsNodes(path: NodePath): string[] {
     'ReturnStatement',
     'ArrowFunctionExpression',
     'NewExpression',
-    'ArrayExpression',
-    'FunctionExpression',
-    'IfStatement',
-    'StringLiteral',
-    'ForStatement',
-    'SwitchStatement',
-    'SwitchCase',
   ];
   const STOP_AT = ['ObjectMethod', 'ObjectProperty'];
   (function up(p) {
@@ -146,4 +139,16 @@ export function analyze(
     console.log(err);
     return {};
   }
+}
+
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
+
+switch (analyze) {
+  case 'Foo':
+    console.log('a');
+    break;
+  default:
+    console.log('default');
 }

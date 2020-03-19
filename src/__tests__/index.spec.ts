@@ -71,5 +71,40 @@ describe('Given the code-inspector library', () => {
         breadcrumbs: ['graph', 'itemPosition'],
       });
     });
+    it('should extract scope breadcrumbs #5', () => {
+      const code = getCode('code5.ts');
+      expect(analyze(code, 27, 16)).toMatchObject({
+        breadcrumbs: ['plugins'],
+      });
+      expect(analyze(code, 20, 46)).toMatchObject({
+        breadcrumbs: ['plugins', 'decoratorsBeforeExport'],
+      });
+      expect(analyze(code, 65, 24)).toMatchObject({
+        breadcrumbs: ['extractBreadcrumbsNodes', 'up()'],
+      });
+      expect(analyze(code, 50, 10)).toMatchObject({
+        breadcrumbs: ['extractBreadcrumbsNodes', 'IGNORE'],
+      });
+      expect(analyze(code, 103, 23)).toMatchObject({
+        breadcrumbs: ['analyze'],
+      });
+      expect(analyze(code, 144, 24)).toMatchObject({
+        breadcrumbs: [],
+      });
+      expect(analyze(code, 149, 11)).toMatchObject({
+        breadcrumbs: [],
+      });
+    });
+    it('should extract scope breadcrumbs #6', () => {
+      const code = getCode('code6.ts');
+      expect(analyze(code, 9, 35)).toMatchObject({
+        breadcrumbs: [
+          'describe()',
+          'it()',
+          'expect().toMatchObject()',
+          'breadcrumbs',
+        ],
+      });
+    });
   });
 });

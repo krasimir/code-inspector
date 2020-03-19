@@ -12,6 +12,7 @@ import FunctionDeclaration from './FunctionDeclaration';
 import ObjectMethod from './ObjectMethod';
 import NewExpression from './NewExpression';
 import ThisExpression from './ThisExpression';
+import FunctionExpression from './FunctionExpression';
 
 const parsers: ParsersInterface = {
   CallExpression,
@@ -27,6 +28,7 @@ const parsers: ParsersInterface = {
   ObjectMethod,
   NewExpression,
   ThisExpression,
+  FunctionExpression,
 };
 
 export default function parse(node: any): string | boolean {
