@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-ignore
 import * as React from 'React';
 
 export class App extends React.Component {

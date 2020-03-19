@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-ignore
 export function analyze(
   code: string | ASTNode,
   line: number,

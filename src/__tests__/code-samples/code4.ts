@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-ignore
 const graph: Graph = {
   container: null,
   items: [],

@@ -6,7 +6,7 @@ import uniq from 'lodash/uniq';
 import { NodePath } from 'ast-types/lib/node-path';
 import parse from './parsers/parse';
 
-const DEBUG = true;
+const DEBUG = false;
 let DEBUG_LOG: any[] = [];
 
 const plugins = [
@@ -55,21 +55,32 @@ function extractBreadcrumbsNodes(path: NodePath): string[] {
     'ObjectExpression',
     'TryStatement',
     'ReturnStatement',
+    'ArrowFunctionExpression',
+    'NewExpression',
   ];
-  const STOP_AT = ['CallExpression'];
+  const STOP_AT = ['ObjectMethod', 'ObjectProperty'];
   (function up(p) {
-    if (DEBUG) {
-      DEBUG_LOG.push(p.value.type);
-    }
     chain.push(p);
     if (p.parentPath) {
       up(p.parentPath);
     }
   })(path);
-  chain = chain.reduce((res: string[], pathItem) => {
+  chain.reverse();
+  // finding the last occurrence of the token
+  const stopAtIdx = Math.max(
+    ...chain.map((p, i) => (STOP_AT.includes(p.value.type) ? i : 0))
+  );
+  let stop = false;
+  chain = chain.reduce((res: string[], pathItem, i) => {
+    if (stop) {
+      return res;
+    }
     const parsed = parse(pathItem.value);
-    if (pathItem && parsed && !IGNORE.includes(parsed as string)) {
+    if (pathItem && parsed && !IGNORE.includes(pathItem.value.type as string)) {
       res.push(parsed as string);
+    }
+    if (i !== 0 && i === stopAtIdx) {
+      stop = true;
     }
     return res;
   }, []);
@@ -108,8 +119,11 @@ export function analyze(
             this.traverse(path);
             return;
           }
+          if (DEBUG) {
+            DEBUG_LOG.push(`${path.value.type} (${parse(path.value)})`);
+          }
           // console.log('\n', path.value);
-          breadcrumbs = extractBreadcrumbsNodes(path).reverse();
+          breadcrumbs = extractBreadcrumbsNodes(path);
         }
         this.traverse(path);
       },

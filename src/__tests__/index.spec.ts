@@ -12,63 +12,63 @@ describe('Given the code-inspector library', () => {
       });
     });
     it('should extract scope breadcrumbs #1', () => {
-      const code = getCode('code1.txt');
-      expect(analyze(code, 7, 1)).toMatchObject({
+      const code = getCode('code1.js');
+      expect(analyze(code, 9, 1)).toMatchObject({
         breadcrumbs: ['App', 'bar'],
       });
-      expect(analyze(code, 6, 2)).toMatchObject({
+      expect(analyze(code, 8, 2)).toMatchObject({
         breadcrumbs: ['App'],
       });
-      expect(analyze(code, 8, 5)).toMatchObject({
+      expect(analyze(code, 10, 5)).toMatchObject({
         breadcrumbs: ['App'],
       });
-      expect(analyze(code, 10, 1)).toMatchObject({
+      expect(analyze(code, 12, 1)).toMatchObject({
         breadcrumbs: [],
       });
-      expect(analyze(code, 11, 1)).toMatchObject({
+      expect(analyze(code, 13, 1)).toMatchObject({
         breadcrumbs: ['Helper'],
       });
-      expect(analyze(code, 17, 1)).toMatchObject({
-        breadcrumbs: ['util', 'doSomething', 'new App', 'ƒ'],
+      expect(analyze(code, 19, 1)).toMatchObject({
+        breadcrumbs: ['util', 'doSomething'],
       });
-      expect(analyze(code, 27, 1)).toMatchObject({
+      expect(analyze(code, 29, 1)).toMatchObject({
         breadcrumbs: ['Yes'],
       });
-      expect(analyze(code, 29, 6)).toMatchObject({
+      expect(analyze(code, 31, 6)).toMatchObject({
         breadcrumbs: ['h'],
       });
     });
     it('should extract scope breadcrumbs #2', () => {
-      const code = getCode('code2.txt');
-      expect(analyze(code, 11, 47)).toMatchObject({
-        breadcrumbs: ['analyze', 'visit()', 'visitNode', '{start,end}'],
+      const code = getCode('code2.ts');
+      expect(analyze(code, 13, 47)).toMatchObject({
+        breadcrumbs: ['analyze', 'visit()', 'visitNode'],
       });
-      expect(analyze(code, 12, 36)).toMatchObject({
-        breadcrumbs: ['analyze', 'visit()', 'visitNode', '[a,b]'],
+      expect(analyze(code, 14, 36)).toMatchObject({
+        breadcrumbs: ['analyze', 'visit()', 'visitNode'],
       });
     });
     it('should extract scope breadcrumbs #3', () => {
-      const code = getCode('code3.txt');
-      expect(analyze(code, 10, 5)).toMatchObject({
+      const code = getCode('code3.js');
+      expect(analyze(code, 12, 5)).toMatchObject({
         breadcrumbs: ['XXX', 'FooBar', 'parse'],
       });
-      expect(analyze(code, 10, 62)).toMatchObject({
+      expect(analyze(code, 12, 62)).toMatchObject({
         breadcrumbs: ['XXX', 'FooBar'],
       });
-      expect(analyze(code, 10, 61)).toMatchObject({
-        breadcrumbs: ['XXX', 'FooBar', 'parse', 'ƒ', 'get()'],
+      expect(analyze(code, 12, 61)).toMatchObject({
+        breadcrumbs: ['XXX', 'FooBar', 'parse'],
       });
     });
-    fit('should extract scope breadcrumbs #4', () => {
-      const code = getCode('code4.txt');
-      // expect(analyze(code, 4, 56)).toMatchObject({
-      //   breadcrumbs: ['graph', 'entityExists'],
-      // });
-      // expect(analyze(code, 5, 43)).toMatchObject({
-      //   breadcrumbs: ['graph', 'entityExists', 'this.items.find()', 'ƒ'],
-      // });
-      expect(analyze(code, 8, 33)).toMatchObject({
-        breadcrumbs: ['graph', 'itemPosition', 'App.getReport()', 'ƒ'],
+    it('should extract scope breadcrumbs #4', () => {
+      const code = getCode('code4.ts');
+      expect(analyze(code, 6, 56)).toMatchObject({
+        breadcrumbs: ['graph', 'entityExists'],
+      });
+      expect(analyze(code, 7, 43)).toMatchObject({
+        breadcrumbs: ['graph', 'entityExists'],
+      });
+      expect(analyze(code, 10, 33)).toMatchObject({
+        breadcrumbs: ['graph', 'itemPosition'],
       });
     });
   });

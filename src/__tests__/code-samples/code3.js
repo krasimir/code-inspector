@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-ignore
 function getData() {
   request('endpoint', (res) => {
     res.then(() => {
