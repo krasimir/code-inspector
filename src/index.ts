@@ -5,6 +5,7 @@ import uniq from 'lodash/uniq';
 
 import { NodePath } from 'ast-types/lib/node-path';
 import parse from './parsers/parse';
+import { BreadcrumbsItem } from './types';
 
 const DEBUG = false;
 let DEBUG_LOG: any[] = [];
@@ -43,7 +44,7 @@ const babelParserOptions = {
   decoratorsBeforeExport: true,
 };
 
-function extractBreadcrumbsNodes(path: NodePath): string[] {
+function extractBreadcrumbsNodes(path: NodePath): BreadcrumbsItem[] {
   let chain = [];
   const IGNORE = [
     'File',
@@ -79,13 +80,18 @@ function extractBreadcrumbsNodes(path: NodePath): string[] {
     ...chain.map((p, i) => (STOP_AT.includes(p.value.type) ? i : 0))
   );
   let stop = false;
-  chain = chain.reduce((res: string[], pathItem, i) => {
+  chain = chain.reduce((res: BreadcrumbsItem[], pathItem, i) => {
     if (stop) {
       return res;
     }
     const parsed = parse(pathItem.value);
     if (pathItem && parsed && !IGNORE.includes(pathItem.value.type as string)) {
-      res.push(parsed as string);
+      const { start, end } = pathItem.value.loc;
+      res.push({
+        text: parsed as string,
+        start: [start.line, start.column + 1],
+        end: [end.line, end.column + 1],
+      });
     }
     if (i !== 0 && i === stopAtIdx) {
       stop = true;
