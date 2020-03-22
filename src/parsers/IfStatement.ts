@@ -10,7 +10,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'IfStatement',
-    text: helpers.parse(node.test).text,
+    text: `if (${helpers.parse(node.test).text})`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

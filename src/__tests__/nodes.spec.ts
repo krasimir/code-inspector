@@ -383,19 +383,31 @@ setupTest(code1, 'FunctionDeclaration', {
   type: 'FunctionDeclaration',
 });
 
-setupTest('', 'FunctionExpression', undefined, true);
+setupTest(code1, 'FunctionExpression', {
+  end: [19, 2],
+  start: [17, 2],
+  text: 'ƒ(w)',
+  type: 'FunctionExpression',
+});
 
-setupTest('', 'FunctionParent', undefined, true);
+setupTest('', 'FunctionParent', 'not-found');
+setupTest('', 'FunctionTypeAnnotation', 'not-found');
+setupTest('', 'FunctionTypeParam', 'not-found');
+setupTest('', 'GenericTypeAnnotation', 'not-found');
 
-setupTest('', 'FunctionTypeAnnotation', undefined, true);
+setupTest('var a = "test"', 'Identifier', {
+  end: [1, 6],
+  start: [1, 5],
+  text: 'a',
+  type: 'Identifier',
+});
 
-setupTest('', 'FunctionTypeParam', undefined, true);
-
-setupTest('', 'GenericTypeAnnotation', undefined, true);
-
-setupTest('', 'Identifier', undefined, true);
-
-setupTest('', 'IfStatement', undefined, true);
+setupTest('if (a) {}', 'IfStatement', {
+  end: [1, 10],
+  start: [1, 1],
+  text: 'if (a)',
+  type: 'IfStatement',
+});
 
 setupTest('', 'Immutable', undefined, true);
 

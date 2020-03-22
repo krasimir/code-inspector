@@ -8,10 +8,15 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
+  let funcName = helpers.parse(node.id).text;
+  if (funcName === '') {
+    funcName = 'ƒ';
+  }
   return {
     type: 'FunctionExpression',
-    text: 'FunctionExpression',
+    text: `${funcName}(${node.params
+      .map(p => helpers.parse(p).text)
+      .join(', ')})`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

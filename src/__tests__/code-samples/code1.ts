@@ -13,3 +13,7 @@ for(var i=0; i<10; i++) {
 for(var c in d) {
   console.log(a);
 }
+
+(function (w) {
+  return function fn(op) {} /42/i
+})(window)
