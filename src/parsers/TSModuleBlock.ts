@@ -4,11 +4,14 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.TSModuleBlock,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
+  console.log(node);
   return {
     type: 'TSModuleBlock',
-    text: '',
+    text: 'TSModuleBlock',
     ...helpers.normalizeLoc(node.loc),
   };
 }

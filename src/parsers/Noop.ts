@@ -4,11 +4,14 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.Noop,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
+  console.log(node);
   return {
     type: 'Noop',
-    text: '',
+    text: 'Noop',
     ...helpers.normalizeLoc(node.loc),
   };
 }

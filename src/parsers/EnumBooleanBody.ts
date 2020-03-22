@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'EnumBooleanBody',
-    text: '',
+    text: 'EnumBooleanBody',
     ...helpers.normalizeLoc(node.loc),
   };
 }

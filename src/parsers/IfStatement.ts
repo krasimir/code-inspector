@@ -4,11 +4,13 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.IfStatement,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
   return {
     type: 'IfStatement',
-    text: '',
+    text: helpers.parse(node.test).text,
     ...helpers.normalizeLoc(node.loc),
   };
 }

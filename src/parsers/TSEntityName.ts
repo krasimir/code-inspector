@@ -4,11 +4,14 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.TSEntityName,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
+  console.log(node);
   return {
     type: 'TSEntityName',
-    text: '',
+    text: 'TSEntityName',
     ...helpers.normalizeLoc(node.loc),
   };
 }

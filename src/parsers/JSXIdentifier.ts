@@ -4,11 +4,14 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.JSXIdentifier,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
+  console.log(node);
   return {
     type: 'JSXIdentifier',
-    text: '',
+    text: 'JSXIdentifier',
     ...helpers.normalizeLoc(node.loc),
   };
 }

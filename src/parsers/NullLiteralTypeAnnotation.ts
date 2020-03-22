@@ -4,11 +4,14 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.NullLiteralTypeAnnotation,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
+  console.log(node);
   return {
     type: 'NullLiteralTypeAnnotation',
-    text: '',
+    text: 'NullLiteralTypeAnnotation',
     ...helpers.normalizeLoc(node.loc),
   };
 }

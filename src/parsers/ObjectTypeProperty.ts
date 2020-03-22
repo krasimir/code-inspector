@@ -4,11 +4,14 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.ObjectTypeProperty,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
+  console.log(node);
   return {
     type: 'ObjectTypeProperty',
-    text: '',
+    text: 'ObjectTypeProperty',
     ...helpers.normalizeLoc(node.loc),
   };
 }

@@ -4,11 +4,14 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.PipelineTopicExpression,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
+  console.log(node);
   return {
     type: 'PipelineTopicExpression',
-    text: '',
+    text: 'PipelineTopicExpression',
     ...helpers.normalizeLoc(node.loc),
   };
 }

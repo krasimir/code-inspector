@@ -4,11 +4,13 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.ReturnStatement,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
   return {
     type: 'ReturnStatement',
-    text: '',
+    text: `← ${helpers.parse(node.argument).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

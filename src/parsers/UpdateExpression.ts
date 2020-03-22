@@ -4,11 +4,13 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.UpdateExpression,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
   return {
     type: 'UpdateExpression',
-    text: '',
+    text: node.operator,
     ...helpers.normalizeLoc(node.loc),
   };
 }

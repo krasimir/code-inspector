@@ -4,11 +4,14 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.TSBooleanKeyword,
-  helpers: ParserHelpers
+  helpers: ParserHelpers,
+  parent: T.Node,
+  grandParent: T.Node
 ): NormalizedNode {
+  console.log(node);
   return {
     type: 'TSBooleanKeyword',
-    text: '',
+    text: 'TSBooleanKeyword',
     ...helpers.normalizeLoc(node.loc),
   };
 }
