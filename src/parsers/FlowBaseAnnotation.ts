@@ -1,7 +1,14 @@
 import T from '@babel/types';
 
-import { NormalizedNode } from '../types';
+import { NormalizedNode, ParserHelpers } from '../types';
 
-export default function(node: T.FlowBaseAnnotation): NormalizedNode | undefined {
-  return undefined;
+export default function(
+  node: T.FlowBaseAnnotation,
+  helpers: ParserHelpers
+): NormalizedNode {
+  return {
+    type: 'FlowBaseAnnotation',
+    text: '',
+    ...helpers.normalizeLoc(node.loc),
+  };
 }

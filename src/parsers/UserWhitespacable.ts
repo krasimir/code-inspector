@@ -1,7 +1,14 @@
 import T from '@babel/types';
 
-import { NormalizedNode } from '../types';
+import { NormalizedNode, ParserHelpers } from '../types';
 
-export default function(node: T.UserWhitespacable): NormalizedNode | undefined {
-  return undefined;
+export default function(
+  node: T.UserWhitespacable,
+  helpers: ParserHelpers
+): NormalizedNode {
+  return {
+    type: 'UserWhitespacable',
+    text: '',
+    ...helpers.normalizeLoc(node.loc),
+  };
 }

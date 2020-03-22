@@ -1,7 +1,14 @@
 import T from '@babel/types';
 
-import { NormalizedNode } from '../types';
+import { NormalizedNode, ParserHelpers } from '../types';
 
-export default function(node: T.JSXClosingFragment): NormalizedNode | undefined {
-  return undefined;
+export default function(
+  node: T.JSXClosingFragment,
+  helpers: ParserHelpers
+): NormalizedNode {
+  return {
+    type: 'JSXClosingFragment',
+    text: '',
+    ...helpers.normalizeLoc(node.loc),
+  };
 }

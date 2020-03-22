@@ -1,7 +1,14 @@
 import T from '@babel/types';
 
-import { NormalizedNode } from '../types';
+import { NormalizedNode, ParserHelpers } from '../types';
 
-export default function(node: T.InferredPredicate): NormalizedNode | undefined {
-  return undefined;
+export default function(
+  node: T.InferredPredicate,
+  helpers: ParserHelpers
+): NormalizedNode {
+  return {
+    type: 'InferredPredicate',
+    text: '',
+    ...helpers.normalizeLoc(node.loc),
+  };
 }

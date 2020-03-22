@@ -7,10 +7,17 @@ const types = require(`${__dirname}/../src/types.json`);
 function getCode(type) {
   return `import T from '@babel/types';
 
-import { NormalizedNode } from '../types';
+import { NormalizedNode, ParserHelpers } from '../types';
 
-export default function(node: T.${type}): NormalizedNode | undefined {
-  return undefined;
+export default function(
+  node: T.${type},
+  helpers: ParserHelpers
+): NormalizedNode {
+  return {
+    type: '${type}',
+    text: '',
+    ...helpers.normalizeLoc(node.loc),
+  };
 }
 `;
 }

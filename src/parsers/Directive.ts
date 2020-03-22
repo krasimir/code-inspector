@@ -1,7 +1,14 @@
 import T from '@babel/types';
 
-import { NormalizedNode } from '../types';
+import { NormalizedNode, ParserHelpers } from '../types';
 
-export default function(node: T.Directive): NormalizedNode | undefined {
-  return undefined;
+export default function(
+  node: T.Directive,
+  helpers: ParserHelpers
+): NormalizedNode {
+  return {
+    type: 'Directive',
+    text: '',
+    ...helpers.normalizeLoc(node.loc),
+  };
 }

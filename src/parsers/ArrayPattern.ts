@@ -1,5 +1,4 @@
 import T, { Identifier as IdentifierType } from '@babel/types';
-import get from 'lodash/get';
 
 import { NormalizedNode, ParserHelpers } from '../types';
 import Identifier from './Identifier';
@@ -7,7 +6,7 @@ import Identifier from './Identifier';
 export default function(
   node: T.ArrayPattern,
   helpers: ParserHelpers
-): NormalizedNode | undefined {
+): NormalizedNode {
   return {
     type: 'ArrayPattern',
     text: `[${node.elements

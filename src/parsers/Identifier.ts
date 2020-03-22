@@ -4,11 +4,11 @@ import { NormalizedNode, ParserHelpers } from '../types';
 
 export default function(
   node: T.Identifier,
-  { normalizeLoc }: ParserHelpers
+  helpers: ParserHelpers
 ): NormalizedNode {
   return {
     type: 'Identifier',
     text: node.name,
-    ...normalizeLoc(node.loc),
+    ...helpers.normalizeLoc(node.loc),
   };
 }

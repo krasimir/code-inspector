@@ -1,7 +1,14 @@
 import T from '@babel/types';
 
-import { NormalizedNode } from '../types';
+import { NormalizedNode, ParserHelpers } from '../types';
 
-export default function(node: T.EnumSymbolBody): NormalizedNode | undefined {
-  return undefined;
+export default function(
+  node: T.EnumSymbolBody,
+  helpers: ParserHelpers
+): NormalizedNode {
+  return {
+    type: 'EnumSymbolBody',
+    text: '',
+    ...helpers.normalizeLoc(node.loc),
+  };
 }

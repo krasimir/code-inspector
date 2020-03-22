@@ -12,14 +12,14 @@ export function normalizeLoc(loc: SourceLocation) {
   };
 }
 
-export function parse(path: Traverse.NodePath): NormalizedNode {
-  if (Parsers[path.node.type]) {
-    return Parsers[path.node.type](path.node, { normalizeLoc });
+export function parse(node: Traverse.Node): NormalizedNode {
+  if (Parsers[node.type]) {
+    return Parsers[node.type](node, { normalizeLoc, parse });
   }
-  if (path.node.type) {
+  if (node.type) {
     return {
-      text: path.node.type,
-      type: path.node.type,
+      text: node.type,
+      type: node.type,
     };
   }
   return {

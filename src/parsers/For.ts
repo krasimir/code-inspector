@@ -1,7 +1,14 @@
 import T from '@babel/types';
 
-import { NormalizedNode } from '../types';
+import { NormalizedNode, ParserHelpers } from '../types';
 
-export default function(node: T.For): NormalizedNode | undefined {
-  return undefined;
+export default function(
+  node: T.For,
+  helpers: ParserHelpers
+): NormalizedNode {
+  return {
+    type: 'For',
+    text: '',
+    ...helpers.normalizeLoc(node.loc),
+  };
 }
