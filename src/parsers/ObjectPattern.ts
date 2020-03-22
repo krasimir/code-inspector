@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'ObjectPattern',
-    text: 'ObjectPattern',
+    text: `{${node.properties.map(n => helpers.parse(n).text).join(', ')}}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

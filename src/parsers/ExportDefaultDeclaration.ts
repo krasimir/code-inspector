@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'ExportDefaultDeclaration',
-    text: 'ExportDefaultDeclaration',
+    text: `↗ ${helpers.parse(node.declaration).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

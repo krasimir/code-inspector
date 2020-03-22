@@ -10,7 +10,9 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'FunctionDeclaration',
-    text: helpers.parse(node.id).text,
+    text: `${helpers.parse(node.id).text}(${node.params
+      .map(p => helpers.parse(p).text)
+      .join(', ')})`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

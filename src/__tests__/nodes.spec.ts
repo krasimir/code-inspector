@@ -1,4 +1,9 @@
+import fs from 'fs';
 import { setupTest } from '../__helpers__';
+
+const code1 = fs
+  .readFileSync(`${__dirname}/code-samples/code1.ts`)
+  .toString('utf8');
 
 setupTest('', 'AnyTypeAnnotation', 'not-found');
 
@@ -278,72 +283,105 @@ setupTest(
 setupTest('', 'EmptyTypeAnnotation', 'not-found');
 setupTest('', 'EnumBody', 'not-found');
 setupTest('', 'EnumBooleanBody', 'not-found');
+setupTest('', 'EnumBooleanMember', 'not-found');
+setupTest('', 'EnumDeclaration', 'not-found');
+setupTest('', 'EnumDefaultedMember', 'not-found');
+setupTest('', 'EnumMember', 'not-found');
+setupTest('', 'EnumNumberBody', 'not-found');
+setupTest('', 'EnumNumberMember', 'not-found');
+setupTest('', 'EnumStringBody', 'not-found');
+setupTest('', 'EnumStringMember', 'not-found');
+setupTest('', 'EnumSymbolBody', 'not-found');
+setupTest('', 'ExistsTypeAnnotation', 'not-found');
 
-setupTest('', 'EnumBooleanMember', undefined, true);
+setupTest('export * from "crypto"', 'ExportAllDeclaration', {
+  end: [1, 23],
+  start: [1, 1],
+  text: '↗ crypto',
+  type: 'ExportAllDeclaration',
+});
 
-setupTest('', 'EnumDeclaration', undefined, true);
+setupTest(code1, 'ExportDeclaration', 'not-found');
 
-setupTest('', 'EnumDefaultedMember', undefined, true);
+setupTest(code1, 'ExportDefaultDeclaration', {
+  end: [4, 18],
+  start: [4, 1],
+  text: '↗ b',
+  type: 'ExportDefaultDeclaration',
+});
 
-setupTest('', 'EnumMember', undefined, true);
+setupTest(code1, 'ExportDefaultSpecifier', {
+  end: [1, 15],
+  start: [1, 8],
+  text: '↗ default',
+  type: 'ExportDefaultSpecifier',
+});
 
-setupTest('', 'EnumNumberBody', undefined, true);
+setupTest('export type G = typeof foo;', 'ExportNamedDeclaration', {
+  end: [1, 28],
+  start: [1, 1],
+  text: 'G:foo',
+  type: 'ExportNamedDeclaration',
+});
 
-setupTest('', 'EnumNumberMember', undefined, true);
+setupTest('export * as default from "foo";', 'ExportNamespaceSpecifier', {
+  end: [1, 20],
+  start: [1, 8],
+  text: '↗ default',
+  type: 'ExportNamespaceSpecifier',
+});
 
-setupTest('', 'EnumStringBody', undefined, true);
+setupTest('', 'ExportSpecifier', 'not-found');
+setupTest('', 'Expression', 'not-found');
 
-setupTest('', 'EnumStringMember', undefined, true);
+setupTest(code1, 'ExpressionStatement', {
+  end: [7, 20],
+  start: [7, 3],
+  text: 'use strict.foo',
+  type: 'ExpressionStatement',
+});
 
-setupTest('', 'EnumSymbolBody', undefined, true);
+setupTest('', 'ExpressionWrapper', 'not-found');
+setupTest('', 'File', 'not-found');
+setupTest('', 'Flow', 'not-found');
+setupTest('', 'FlowBaseAnnotation', 'not-found');
+setupTest('', 'FlowDeclaration', 'not-found');
+setupTest('', 'FlowPredicate', 'not-found');
+setupTest('', 'FlowType', 'not-found');
 
-setupTest('', 'ExistsTypeAnnotation', undefined, true);
+setupTest('', 'For', 'not-found');
 
-setupTest('', 'ExportAllDeclaration', undefined, true);
+setupTest(code1, 'ForInStatement', {
+  end: [15, 2],
+  start: [13, 1],
+  text: 'c in d',
+  type: 'ForInStatement',
+});
 
-setupTest('', 'ExportDeclaration', undefined, true);
+setupTest('for (p of q);', 'ForOfStatement', {
+  end: [1, 14],
+  start: [1, 1],
+  text: 'p of q',
+  type: 'ForOfStatement',
+});
 
-setupTest('', 'ExportDefaultDeclaration', undefined, true);
+setupTest(code1, 'ForStatement', {
+  end: [12, 2],
+  start: [10, 1],
+  text: 'for',
+  type: 'ForStatement',
+});
 
-setupTest('', 'ExportDefaultSpecifier', undefined, true);
+setupTest('', 'ForXStatement', 'not-found');
 
-setupTest('', 'ExportNamedDeclaration', undefined, true);
+setupTest('', 'Function', 'not-found');
 
-setupTest('', 'ExportNamespaceSpecifier', undefined, true);
-
-setupTest('', 'ExportSpecifier', undefined, true);
-
-setupTest('', 'Expression', undefined, true);
-
-setupTest('', 'ExpressionStatement', undefined, true);
-
-setupTest('', 'ExpressionWrapper', undefined, true);
-
-setupTest('', 'File', undefined, true);
-
-setupTest('', 'Flow', undefined, true);
-
-setupTest('', 'FlowBaseAnnotation', undefined, true);
-
-setupTest('', 'FlowDeclaration', undefined, true);
-
-setupTest('', 'FlowPredicate', undefined, true);
-
-setupTest('', 'FlowType', undefined, true);
-
-setupTest('', 'For', undefined, true);
-
-setupTest('', 'ForInStatement', undefined, true);
-
-setupTest('', 'ForOfStatement', undefined, true);
-
-setupTest('', 'ForStatement', undefined, true);
-
-setupTest('', 'ForXStatement', undefined, true);
-
-setupTest('', 'Function', undefined, true);
-
-setupTest('', 'FunctionDeclaration', undefined, true);
+setupTest(code1, 'FunctionDeclaration', {
+  end: [8, 2],
+  start: [6, 1],
+  text: 'f(j, k)',
+  type: 'FunctionDeclaration',
+});
 
 setupTest('', 'FunctionExpression', undefined, true);
 

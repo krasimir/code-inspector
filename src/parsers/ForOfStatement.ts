@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'ForOfStatement',
-    text: 'ForOfStatement',
+    text: `${helpers.parse(node.left).text} of ${
+      helpers.parse(node.right).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

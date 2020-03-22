@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'ObjectProperty',
-    text: 'ObjectProperty',
+    text: helpers.parse(node.key).text,
     ...helpers.normalizeLoc(node.loc),
   };
 }
