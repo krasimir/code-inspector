@@ -1,5 +1,7 @@
-export default function MemberExpression(node: any, parse: Function): string {
-  const object = parse(node.object);
-  const property = parse(node.property);
-  return `${object}.${property}`;
+import T from '@babel/types';
+
+import { NormalizedNode } from '../types';
+
+export default function(node: T.MemberExpression): NormalizedNode | undefined {
+  return undefined;
 }

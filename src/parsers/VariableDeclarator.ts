@@ -1,5 +1,7 @@
-import get from 'lodash/get';
+import T from '@babel/types';
 
-export default function(node: any): string {
-  return get(node, 'id.name', 'declarator');
+import { NormalizedNode } from '../types';
+
+export default function(node: T.VariableDeclarator): NormalizedNode | undefined {
+  return undefined;
 }

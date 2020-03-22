@@ -2,10 +2,9 @@
 import * as parser from '@babel/parser';
 import * as Traverse from '@babel/traverse';
 import T from '@babel/types';
-import parse from './parsers/parse';
+import { parse } from './parse';
 
-const DEBUG = false;
-let DEBUG_LOG: any[] = [];
+import { NormalizedNode } from './types';
 
 const plugins = [
   'jsx',
@@ -41,20 +40,30 @@ const babelParserOptions = {
   decoratorsBeforeExport: true,
 };
 
-export function analyze(code: string, line: number, column: number) {
-  DEBUG_LOG = [];
-  column -= 1;
+export function analyze(code: string) {
   try {
     const ast = parser.parse(code, babelParserOptions);
+    const nodes: NormalizedNode[] = [];
+    // console.log(code, '\n\n', ast.program.body);
     // @ts-ignore
     Traverse.default(ast, {
       enter(path: Traverse.NodePath) {
-        console.log(path.type);
+        // console.log('->', path.type);
+        const normalizedNode = parse(path);
+        if (normalizedNode) {
+          nodes.push(normalizedNode);
+        }
+      },
+      exit(path: Traverse.NodePath) {
+        // exit
       },
     });
+    return {
+      nodes,
+    };
   } catch (err) {
     console.log('Error parsing to ast');
     console.log(err);
-    return {};
+    return { nodes: [] };
   }
 }

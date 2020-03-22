@@ -1,6 +1,7 @@
-export default function CallExpression(node: any, parse: Function) {
-  if (node.callee.type === 'Identifier') {
-    return `${parse(node.callee)}()`;
-  }
-  return `${parse(node.callee)}()`;
+import T from '@babel/types';
+
+import { NormalizedNode } from '../types';
+
+export default function(node: T.CallExpression): NormalizedNode | undefined {
+  return undefined;
 }

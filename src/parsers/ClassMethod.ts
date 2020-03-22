@@ -1,5 +1,7 @@
-import get from 'lodash/get';
+import T from '@babel/types';
 
-export default function(node: any): string {
-  return get(node, 'key.name', 'ClassMethod');
+import { NormalizedNode } from '../types';
+
+export default function(node: T.ClassMethod): NormalizedNode | undefined {
+  return undefined;
 }

@@ -1,9 +1,10 @@
-export interface ParsersInterface {
-  [key: string]: (node: any, parse: Function) => string;
+export interface NormalizedNode {
+  text: string;
+  type: string;
+  start?: [number | undefined, number | undefined];
+  end?: [number | undefined, number | undefined];
 }
 
-export interface BreadcrumbsItem {
-  text: string;
-  start: [number, number];
-  end: [number, number];
-}
+export type ParserHelpers = {
+  normalizeLoc: Function;
+};

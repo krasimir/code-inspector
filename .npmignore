@@ -7,3 +7,5 @@ webpack.node.json
 yarn.lock
 browser
 demo
+jest
+scripts

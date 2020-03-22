@@ -1,3 +1,7 @@
-export default function MemberExpression(node: any, parse: Function): string {
-  return 'this';
+import T from '@babel/types';
+
+import { NormalizedNode } from '../types';
+
+export default function(node: T.ThisExpression): NormalizedNode | undefined {
+  return undefined;
 }
