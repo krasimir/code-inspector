@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'DoExpression',
-    text: '',
+    text: 'do',
     ...helpers.normalizeLoc(node.loc),
   };
 }

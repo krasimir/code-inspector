@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'ContinueStatement',
-    text: '',
+    text: 'continue',
     ...helpers.normalizeLoc(node.loc),
   };
 }

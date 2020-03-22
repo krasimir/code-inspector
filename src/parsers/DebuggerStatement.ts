@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'DebuggerStatement',
-    text: '',
+    text: 'debugger',
     ...helpers.normalizeLoc(node.loc),
   };
 }

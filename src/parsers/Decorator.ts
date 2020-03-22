@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'Decorator',
-    text: '',
+    text: `@${helpers.parse(node.expression).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

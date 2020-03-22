@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'DeclareTypeAlias',
-    text: '',
+    text: 'DeclareTypeAlias',
     ...helpers.normalizeLoc(node.loc),
   };
 }

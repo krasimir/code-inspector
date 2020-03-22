@@ -181,61 +181,103 @@ setupTest(
   { end: [4, 4], start: [2, 3], text: 'Foo.test', type: 'ClassPrivateMethod' }
 );
 
-setupTest('', 'ClassPrivateProperty', undefined, true);
+setupTest(
+  `class Foo {
+  #something: string
+}`,
+  'ClassPrivateProperty',
+  {
+    end: [2, 21],
+    start: [2, 3],
+    text: 'Foo.something',
+    type: 'ClassPrivateProperty',
+  }
+);
 
-setupTest('', 'ClassProperty', undefined, true);
+setupTest(
+  `class Foo {
+  bar = 'Hey';
+}
+`,
+  'ClassProperty',
+  { end: [2, 15], start: [2, 3], text: 'Foo.bar', type: 'ClassProperty' }
+);
 
-setupTest('', 'CompletionStatement', undefined, true);
+setupTest('', 'CompletionStatement', 'not-found');
 
-setupTest('', 'Conditional', undefined, true);
+setupTest('', 'Conditional', 'not-found');
 
-setupTest('', 'ConditionalExpression', undefined, true);
+setupTest('test.is() ? true : false', 'ConditionalExpression', {
+  end: [1, 25],
+  start: [1, 1],
+  text: 'test.is()',
+  type: 'ConditionalExpression',
+});
 
-setupTest('', 'ContinueStatement', undefined, true);
+setupTest(
+  'for(var i =0; i<10; i++) { if (i===3) continue; }',
+  'ContinueStatement',
+  { end: [1, 48], start: [1, 39], text: 'continue', type: 'ContinueStatement' }
+);
 
-setupTest('', 'DebuggerStatement', undefined, true);
+setupTest('function T() { debugger; }', 'DebuggerStatement', {
+  end: [1, 25],
+  start: [1, 16],
+  text: 'debugger',
+  type: 'DebuggerStatement',
+});
 
-setupTest('', 'Declaration', undefined, true);
+setupTest('', 'Declaration', 'not-found');
+setupTest('', 'DeclareClass', 'not-found');
+setupTest('', 'DeclareExportAllDeclaration', 'not-found');
+setupTest('', 'DeclareExportDeclaration', 'not-found');
+setupTest('', 'DeclareFunction', 'not-found');
+setupTest('', 'DeclareInterface', 'not-found');
+setupTest('', 'DeclareModule', 'not-found');
+setupTest('', 'DeclareModuleExports', 'not-found');
+setupTest('', 'DeclareOpaqueType', 'not-found');
+setupTest('', 'DeclareTypeAlias', 'not-found');
+setupTest('', 'DeclareVariable', 'not-found');
+setupTest('', 'DeclaredPredicate', 'not-found');
 
-setupTest('', 'DeclareClass', undefined, true);
+setupTest(
+  `@abc
+class Foo {
 
-setupTest('', 'DeclareExportAllDeclaration', undefined, true);
+}`,
+  'Decorator',
+  { end: [1, 5], start: [1, 1], text: '@abc', type: 'Decorator' }
+);
 
-setupTest('', 'DeclareExportDeclaration', undefined, true);
+setupTest(``, 'Directive', 'not-found');
+setupTest('', 'DirectiveLiteral', 'not-found');
 
-setupTest('', 'DeclareFunction', undefined, true);
+setupTest(
+  `let x = do {
+  let tmp = f();
+  tmp * tmp + 1
+};`,
+  'DoExpression',
+  { end: [4, 2], start: [1, 9], text: 'do', type: 'DoExpression' }
+);
 
-setupTest('', 'DeclareInterface', undefined, true);
+setupTest(
+  `do that()
+;while (true)`,
+  'DoWhileStatement',
+  { end: [2, 14], start: [1, 1], text: 'do/while', type: 'DoWhileStatement' }
+);
 
-setupTest('', 'DeclareModule', undefined, true);
+setupTest(
+  `if (cond) // Leading to EmptyStatement
+; // Trailing to EmptyStatement`,
+  'EmptyStatement',
+  { end: [2, 2], start: [2, 1], text: '☐', type: 'EmptyStatement' }
+);
 
-setupTest('', 'DeclareModuleExports', undefined, true);
-
-setupTest('', 'DeclareOpaqueType', undefined, true);
-
-setupTest('', 'DeclareTypeAlias', undefined, true);
-
-setupTest('', 'DeclareVariable', undefined, true);
-
-setupTest('', 'DeclaredPredicate', undefined, true);
-
-setupTest('', 'Decorator', undefined, true);
-
-setupTest('', 'Directive', undefined, true);
-
-setupTest('', 'DirectiveLiteral', undefined, true);
-
-setupTest('', 'DoExpression', undefined, true);
-
-setupTest('', 'DoWhileStatement', undefined, true);
-
-setupTest('', 'EmptyStatement', undefined, true);
-
-setupTest('', 'EmptyTypeAnnotation', undefined, true);
-
-setupTest('', 'EnumBody', undefined, true);
-
-setupTest('', 'EnumBooleanBody', undefined, true);
+setupTest('', 'EmptyTypeAnnotation', 'not-found');
+setupTest('', 'EnumBody', 'not-found');
+setupTest('', 'EnumBooleanBody', 'not-found');
 
 setupTest('', 'EnumBooleanMember', undefined, true);
 

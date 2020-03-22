@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'DeclareFunction',
-    text: '',
+    text: 'DeclareFunction',
     ...helpers.normalizeLoc(node.loc),
   };
 }

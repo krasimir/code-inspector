@@ -19,7 +19,8 @@
     "import/no-extraneous-dependencies": 0,
     "@typescript-eslint/ban-ts-ignore": 0,
     "import/no-dynamic-require": 0,
-    "import/no-cycle": 0
+    "import/no-cycle": 0,
+    "no-octal-escape": 0
   },
   "settings": {
     "import/parsers": {

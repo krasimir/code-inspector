@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'DoWhileStatement',
-    text: '',
+    text: 'do/while',
     ...helpers.normalizeLoc(node.loc),
   };
 }

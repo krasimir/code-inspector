@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'DeclareOpaqueType',
-    text: '',
+    text: 'DeclareOpaqueType',
     ...helpers.normalizeLoc(node.loc),
   };
 }
