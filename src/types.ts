@@ -1,10 +1,10 @@
 export interface NormalizedNode {
-  text: string | number;
+  text: string | number | boolean;
   type: string;
   start?: [number | undefined, number | undefined];
   end?: [number | undefined, number | undefined];
-  left?: NormalizedNode;
-  right?: NormalizedNode;
+  left?: string | number | boolean;
+  right?: string | number | boolean;
 }
 
 export type ParserHelpers = {

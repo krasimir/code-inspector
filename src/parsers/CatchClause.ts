@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'CatchClause',
-    text: '',
+    text: `catch(${helpers.parse(node.param).text})`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

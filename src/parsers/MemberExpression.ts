@@ -8,7 +8,9 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'MemberExpression',
-    text: '',
+    text: `${helpers.parse(node.object).text}.${
+      helpers.parse(node.property).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

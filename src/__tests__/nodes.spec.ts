@@ -34,56 +34,152 @@ setupTest(`(x) => x`, 'ArrowFunctionExpression', {
 
 setupTest(`a = 10;`, 'AssignmentExpression', {
   end: [1, 7],
-  left: { end: [1, 2], start: [1, 1], text: 'a', type: 'Identifier' },
-  right: { end: [1, 7], start: [1, 5], text: 10, type: 'NumericLiteral' },
+  left: 'a',
+  right: 10,
   start: [1, 1],
   text: '=',
   type: 'AssignmentExpression',
 });
 
-setupTest('', 'AssignmentPattern', undefined, true);
+setupTest('function A(foo = "bar"){}', 'AssignmentPattern', {
+  end: [1, 23],
+  left: 'foo',
+  right: 'bar',
+  start: [1, 12],
+  text: '=',
+  type: 'AssignmentPattern',
+});
 
-setupTest('', 'AwaitExpression', undefined, true);
+setupTest(
+  `async function A() {
+  await service();
+}`,
+  'AwaitExpression',
+  {
+    end: [2, 18],
+    start: [2, 3],
+    text: '🕒 service()',
+    type: 'AwaitExpression',
+  }
+);
 
-setupTest('', 'BigIntLiteral', undefined, true);
+setupTest('0o16432n', 'BigIntLiteral', {
+  end: [1, 9],
+  start: [1, 1],
+  text: '0o16432',
+  type: 'BigIntLiteral',
+});
 
-setupTest('', 'Binary', undefined, true);
+setupTest('', 'Binary', 'not-found');
 
-setupTest('', 'BinaryExpression', undefined, true);
+setupTest('a + b', 'BinaryExpression', {
+  end: [1, 6],
+  left: 'a',
+  right: 'b',
+  start: [1, 1],
+  text: '',
+  type: 'BinaryExpression',
+});
 
-setupTest('', 'BindExpression', undefined, true);
+setupTest('on("click", ::view.reset)', 'BindExpression', {
+  end: [1, 25],
+  start: [1, 13],
+  text: 'view.reset',
+  type: 'BindExpression',
+});
 
-setupTest('', 'Block', undefined, true);
+setupTest('', 'Block', 'not-found');
 
-setupTest('', 'BlockParent', undefined, true);
+setupTest('', 'BlockParent', 'not-found');
 
-setupTest('', 'BlockStatement', undefined, true);
+setupTest('function A(){}', 'BlockStatement', {
+  end: [1, 15],
+  start: [1, 13],
+  text: '⊏…⊐',
+  type: 'BlockStatement',
+});
 
-setupTest('', 'BooleanLiteral', undefined, true);
+setupTest('var a = true;', 'BooleanLiteral', {
+  end: [1, 13],
+  start: [1, 9],
+  text: true,
+  type: 'BooleanLiteral',
+});
 
-setupTest('', 'BooleanLiteralTypeAnnotation', undefined, true);
+setupTest('', 'BooleanLiteralTypeAnnotation', 'not-found');
 
-setupTest('', 'BooleanTypeAnnotation', undefined, true);
+setupTest('', 'BooleanTypeAnnotation', 'not-found');
 
-setupTest('', 'BreakStatement', undefined, true);
+setupTest(
+  `switch(foo) {
+  case "BAR":
+    //test
+  break;
+}`,
+  'BreakStatement',
+  { end: [4, 9], start: [4, 3], text: 'break', type: 'BreakStatement' }
+);
 
-setupTest('', 'CallExpression', undefined, true);
+setupTest('instance.method.fire("foo", bar)', 'CallExpression', {
+  end: [1, 33],
+  start: [1, 1],
+  text: 'instance.method.fire(…)',
+  type: 'CallExpression',
+});
 
-setupTest('', 'CatchClause', undefined, true);
+setupTest(
+  `try {
+}catch(err) {
+  console.log(error);
+}`,
+  'CatchClause',
+  { end: [4, 2], start: [2, 2], text: 'catch(err)', type: 'CatchClause' }
+);
 
-setupTest('', 'Class', undefined, true);
+setupTest('', 'Class', 'not-found');
 
-setupTest('', 'ClassBody', undefined, true);
+setupTest('class F {}', 'ClassBody', {
+  end: [1, 11],
+  start: [1, 9],
+  text: '⊏F⊐',
+  type: 'ClassBody',
+});
 
-setupTest('', 'ClassDeclaration', undefined, true);
+setupTest('class F {}', 'ClassDeclaration', {
+  end: [1, 11],
+  start: [1, 1],
+  text: 'F',
+  type: 'ClassDeclaration',
+});
 
-setupTest('', 'ClassExpression', undefined, true);
+setupTest('x = class A{}', 'ClassExpression', {
+  end: [1, 14],
+  start: [1, 5],
+  text: 'A',
+  type: 'ClassExpression',
+});
 
-setupTest('', 'ClassImplements', undefined, true);
+setupTest('', 'ClassImplements', 'not-found');
 
-setupTest('', 'ClassMethod', undefined, true);
+setupTest(
+  `class Foo {
+  test() {
+    return 'bar';
+  }
+}`,
+  'ClassMethod',
+  { end: [4, 4], start: [2, 3], text: 'Foo.test', type: 'ClassMethod' }
+);
 
-setupTest('', 'ClassPrivateMethod', undefined, true);
+setupTest(
+  `class Foo {
+  #test() {
+    return 'bar';
+  }
+}`,
+  'ClassPrivateMethod',
+  { end: [4, 4], start: [2, 3], text: 'Foo.test', type: 'ClassPrivateMethod' }
+);
 
 setupTest('', 'ClassPrivateProperty', undefined, true);
 

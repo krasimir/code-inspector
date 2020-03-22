@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'BlockParent',
-    text: '',
+    text: 'BlockParent',
     ...helpers.normalizeLoc(node.loc),
   };
 }

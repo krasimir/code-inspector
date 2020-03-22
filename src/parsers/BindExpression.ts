@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'BindExpression',
-    text: '',
+    text: helpers.parse(node.callee).text,
     ...helpers.normalizeLoc(node.loc),
   };
 }

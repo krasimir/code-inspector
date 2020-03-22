@@ -12,18 +12,27 @@ export function normalizeLoc(loc: SourceLocation) {
   };
 }
 
-export function parse(node: Traverse.Node): NormalizedNode {
-  if (Parsers[node.type]) {
-    return Parsers[node.type](node, { normalizeLoc, parse });
+export function parse(
+  node: Traverse.Node | undefined,
+  parent: Traverse.Node | null,
+  grandParent: Traverse.Node | null
+): NormalizedNode {
+  if (node && Parsers[node.type]) {
+    return Parsers[node.type](
+      node,
+      { normalizeLoc, parse },
+      parent,
+      grandParent
+    );
   }
-  if (node.type) {
+  if (node && node.type) {
     return {
       text: node.type,
       type: node.type,
     };
   }
   return {
-    text: 'Unknown',
+    text: '',
     type: 'Unknown',
   };
 }

@@ -1,3 +1,4 @@
+// flow
 import T from '@babel/types';
 
 import { NormalizedNode, ParserHelpers } from '../types';

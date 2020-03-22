@@ -8,7 +8,9 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'AssignmentPattern',
-    text: '',
+    left: helpers.parse(node.left).text,
+    right: helpers.parse(node.right).text,
+    text: '=',
     ...helpers.normalizeLoc(node.loc),
   };
 }

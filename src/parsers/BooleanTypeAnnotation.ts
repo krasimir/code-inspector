@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'BooleanTypeAnnotation',
-    text: '',
+    text: 'BooleanTypeAnnotation',
     ...helpers.normalizeLoc(node.loc),
   };
 }

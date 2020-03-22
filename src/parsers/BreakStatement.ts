@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'BreakStatement',
-    text: '',
+    text: 'break',
     ...helpers.normalizeLoc(node.loc),
   };
 }

@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'BlockStatement',
-    text: '',
+    text: '⊏…⊐',
     ...helpers.normalizeLoc(node.loc),
   };
 }

@@ -8,8 +8,8 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'AssignmentExpression',
-    left: helpers.parse(node.left),
-    right: helpers.parse(node.right),
+    left: helpers.parse(node.left).text,
+    right: helpers.parse(node.right).text,
     text: '=',
     ...helpers.normalizeLoc(node.loc),
   };

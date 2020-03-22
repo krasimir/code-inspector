@@ -49,7 +49,13 @@ export function analyze(code: string) {
     Traverse.default(ast, {
       enter(path: Traverse.NodePath) {
         // console.log('->', path.type);
-        const normalizedNode = parse(path.node);
+        const normalizedNode = parse(
+          path.node,
+          path.parentPath ? path.parentPath.node : null,
+          path.parentPath && path.parentPath.parentPath
+            ? path.parentPath.parentPath.node
+            : null
+        );
         if (normalizedNode) {
           nodes.push(normalizedNode);
         }

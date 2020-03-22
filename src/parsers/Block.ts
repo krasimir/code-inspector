@@ -2,13 +2,10 @@ import T from '@babel/types';
 
 import { NormalizedNode, ParserHelpers } from '../types';
 
-export default function(
-  node: T.Block,
-  helpers: ParserHelpers
-): NormalizedNode {
+export default function(node: T.Block, helpers: ParserHelpers): NormalizedNode {
   return {
     type: 'Block',
-    text: '',
+    text: 'Block',
     ...helpers.normalizeLoc(node.loc),
   };
 }

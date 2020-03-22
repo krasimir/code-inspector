@@ -8,6 +8,8 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'BinaryExpression',
+    left: helpers.parse(node.left).text,
+    right: helpers.parse(node.right).text,
     text: '',
     ...helpers.normalizeLoc(node.loc),
   };

@@ -6,9 +6,10 @@ export default function(
   node: T.AwaitExpression,
   helpers: ParserHelpers
 ): NormalizedNode {
+  const argument = helpers.parse(node.argument);
   return {
     type: 'AwaitExpression',
-    text: '',
+    text: `🕒 ${argument.text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

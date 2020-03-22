@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'Binary',
-    text: '',
+    text: 'Binary',
     ...helpers.normalizeLoc(node.loc),
   };
 }

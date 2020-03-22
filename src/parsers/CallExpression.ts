@@ -8,7 +8,9 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'CallExpression',
-    text: '',
+    text: `${helpers.parse(node.callee).text}(${
+      node.arguments.length > 0 ? '…' : ''
+    })`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

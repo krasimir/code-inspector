@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'ClassExpression',
-    text: '',
+    text: helpers.parse(node.id).text,
     ...helpers.normalizeLoc(node.loc),
   };
 }
