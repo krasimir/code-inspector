@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'JSXOpeningElement',
-    text: 'JSXOpeningElement',
+    text: `<${helpers.parse(node.name).text}${
+      node.attributes.length > 0 ? `...${node.attributes.length}` : ''
+    }}${node.selfClosing ? '/>' : '>'}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

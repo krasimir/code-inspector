@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'JSXMemberExpression',
-    text: 'JSXMemberExpression',
+    text: `${helpers.parse(node.object).text}.${
+      helpers.parse(node.property).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

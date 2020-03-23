@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'JSXText',
-    text: 'JSXText',
+    text: node.value,
     ...helpers.normalizeLoc(node.loc),
   };
 }

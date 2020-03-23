@@ -409,61 +409,124 @@ setupTest('if (a) {}', 'IfStatement', {
   type: 'IfStatement',
 });
 
-setupTest('', 'Immutable', undefined, true);
+setupTest('', 'Immutable', 'not-found');
+setupTest('', 'Import', 'not-found');
 
-setupTest('', 'Import', undefined, true);
+setupTest('import a, { b } from "B"', 'ImportDeclaration', {
+  end: [1, 25],
+  start: [1, 1],
+  text: 'a, b ⤺ B',
+  type: 'ImportDeclaration',
+});
 
-setupTest('', 'ImportDeclaration', undefined, true);
+setupTest('import Service from "./code/somewhere"', 'ImportDefaultSpecifier', {
+  end: [1, 15],
+  start: [1, 8],
+  text: 'Service ⤺ ./code/somewhere',
+  type: 'ImportDefaultSpecifier',
+});
 
-setupTest('', 'ImportDefaultSpecifier', undefined, true);
+setupTest('import * as crypto from "crypto"', 'ImportNamespaceSpecifier', {
+  end: [1, 19],
+  start: [1, 8],
+  text: 'crypto ⤺ crypto',
+  type: 'ImportNamespaceSpecifier',
+});
 
-setupTest('', 'ImportNamespaceSpecifier', undefined, true);
+setupTest('import a, { b } from "B"', 'ImportSpecifier', {
+  end: [1, 14],
+  start: [1, 13],
+  text: 'b',
+  type: 'ImportSpecifier',
+});
 
-setupTest('', 'ImportSpecifier', undefined, true);
-
-setupTest('', 'InferredPredicate', undefined, true);
-
-setupTest('', 'InterfaceDeclaration', undefined, true);
-
-setupTest('', 'InterfaceExtends', undefined, true);
-
-setupTest('', 'InterfaceTypeAnnotation', undefined, true);
-
-setupTest('', 'InterpreterDirective', undefined, true);
-
-setupTest('', 'IntersectionTypeAnnotation', undefined, true);
+setupTest('', 'InferredPredicate', 'not-found');
+setupTest('', 'InterfaceDeclaration', 'not-found');
+setupTest('', 'InterfaceExtends', 'not-found');
+setupTest('', 'InterfaceTypeAnnotation', 'not-found');
+setupTest('', 'InterpreterDirective', 'not-found');
+setupTest('', 'IntersectionTypeAnnotation', 'not-found');
 
 setupTest('', 'JSX', undefined, true);
 
-setupTest('', 'JSXAttribute', undefined, true);
+setupTest(code1, 'JSXAttribute', {
+  end: [27, 17],
+  start: [27, 10],
+  text: 'b=" "',
+  type: 'JSXAttribute',
+});
 
-setupTest('', 'JSXClosingElement', undefined, true);
+setupTest(code1, 'JSXClosingElement', {
+  end: [25, 27],
+  start: [25, 23],
+  text: '</p>',
+  type: 'JSXClosingElement',
+});
 
-setupTest('', 'JSXClosingFragment', undefined, true);
+setupTest(code1, 'JSXClosingFragment', {
+  end: [30, 10],
+  start: [30, 7],
+  text: '</>',
+  type: 'JSXClosingFragment',
+});
 
-setupTest('', 'JSXElement', undefined, true);
+setupTest(code1, 'JSXElement', {
+  end: [32, 24],
+  start: [23, 5],
+  text: '<AnotherComponent}></AnotherComponent>',
+  type: 'JSXElement',
+});
 
-setupTest('', 'JSXEmptyExpression', undefined, true);
+setupTest(code1, 'JSXEmptyExpression', {
+  end: [31, 8],
+  start: [31, 8],
+  text: '{}',
+  type: 'JSXEmptyExpression',
+});
 
-setupTest('', 'JSXExpressionContainer', undefined, true);
+setupTest(
+  `<><div>JSXElement</div>JSXText{'FooBar'}</>`,
+  'JSXExpressionContainer',
+  {
+    end: [1, 41],
+    start: [1, 31],
+    text: 'FooBar',
+    type: 'JSXExpressionContainer',
+  }
+);
 
-setupTest('', 'JSXFragment', undefined, true);
+setupTest(code1, 'JSXFragment', {
+  end: [30, 10],
+  start: [28, 7],
+  text: '<></>',
+  type: 'JSXFragment',
+});
 
-setupTest('', 'JSXIdentifier', undefined, true);
+setupTest(code1, 'JSXIdentifier', {
+  end: [23, 22],
+  start: [23, 6],
+  text: 'AnotherComponent',
+  type: 'JSXIdentifier',
+});
 
-setupTest('', 'JSXMemberExpression', undefined, true);
+setupTest('<a.b.c></a.b.c>', 'JSXMemberExpression', {
+  end: [1, 7],
+  start: [1, 2],
+  text: 'a.b.c',
+  type: 'JSXMemberExpression',
+});
 
-setupTest('', 'JSXNamespacedName', undefined, true);
+setupTest(code1, 'JSXNamespacedName', undefined, true);
 
-setupTest('', 'JSXOpeningElement', undefined, true);
+setupTest(code1, 'JSXOpeningElement', undefined, true);
 
-setupTest('', 'JSXOpeningFragment', undefined, true);
+setupTest(code1, 'JSXOpeningFragment', undefined, true);
 
-setupTest('', 'JSXSpreadAttribute', undefined, true);
+setupTest(code1, 'JSXSpreadAttribute', undefined, true);
 
-setupTest('', 'JSXSpreadChild', undefined, true);
+setupTest(code1, 'JSXSpreadChild', undefined, true);
 
-setupTest('', 'JSXText', undefined, true);
+setupTest(code1, 'JSXText', undefined, true);
 
 setupTest('', 'LVal', undefined, true);
 

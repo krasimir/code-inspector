@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'ImportDeclaration',
-    text: 'ImportDeclaration',
+    text: `${node.specifiers.map(s => helpers.parse(s).text).join(', ')} ⤺ ${
+      helpers.parse(node.source).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

@@ -8,10 +8,13 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'ImportNamespaceSpecifier',
-    text: 'ImportNamespaceSpecifier',
+    text: `${helpers.parse(node.local).text}${
+      parent && parent.type === 'ImportDeclaration'
+        ? ` ⤺ ${helpers.parse(parent.source).text}`
+        : ''
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

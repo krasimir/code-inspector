@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'JSXFragment',
-    text: 'JSXFragment',
+    text:
+      helpers.parse(node.openingFragment).text +
+      (node.closingFragment ? helpers.parse(node.closingFragment).text : ''),
     ...helpers.normalizeLoc(node.loc),
   };
 }
