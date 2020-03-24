@@ -8,10 +8,16 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSConstructSignatureDeclaration',
-    text: 'TSConstructSignatureDeclaration',
+    text: `new (${node.parameters
+      .map(
+        p =>
+          `${helpers.parse(p).text}${
+            p.typeAnnotation ? `${helpers.parse(p.typeAnnotation).text}` : ''
+          }`
+      )
+      .join(', ')})${helpers.parse(node.typeAnnotation).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

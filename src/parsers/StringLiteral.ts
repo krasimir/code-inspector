@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'StringLiteral',
-    text: node.value,
+    text: `"${node.value}"`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

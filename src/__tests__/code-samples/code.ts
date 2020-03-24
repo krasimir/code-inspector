@@ -71,3 +71,43 @@ function MyFunc(a, b, ...re) {
 }
 
 function aIO({ b, ...c }) {}
+
+const moo = (a(), b());
+
+class M extends TT {
+  constructor() {
+    super('aa')
+  }
+}
+
+switch(SOME) {
+  case 'foo': console.log('aaa'); break;
+}
+
+function UI(a: any):void {}
+var tsa: number[] = [];
+
+tsa(a as Object)
+
+let appp: any;
+let un: unknown;
+let bnnnn: boolean;
+let ne: never;
+let nul: null;
+let num: number;
+let o: object;
+let st: string;
+let sy: symbol;
+let u: undefined;
+let v: void;
+let n: bigint;
+
+interface I {
+  (x: number, b: string): void;
+}
+
+let x: number extends string ? boolean : null;
+
+interface II {
+  new (x: number): void;
+}

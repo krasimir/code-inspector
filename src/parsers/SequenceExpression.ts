@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'SequenceExpression',
-    text: 'SequenceExpression',
+    text: node.expressions.map(e => helpers.parse(e).text).join(', '),
     ...helpers.normalizeLoc(node.loc),
   };
 }

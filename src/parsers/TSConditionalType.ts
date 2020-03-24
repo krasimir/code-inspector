@@ -8,10 +8,13 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSConditionalType',
-    text: 'TSConditionalType',
+    text: `${helpers.parse(node.checkType).text} extends ${
+      helpers.parse(node.extendsType).text
+    } ? ${helpers.parse(node.trueType).text} : ${
+      helpers.parse(node.falseType).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

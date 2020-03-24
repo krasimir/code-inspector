@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSAsExpression',
-    text: 'TSAsExpression',
+    text: `${helpers.parse(node.expression).text} as ${
+      helpers.parse(node.typeAnnotation).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

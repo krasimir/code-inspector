@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'Super',
-    text: 'Super',
+    text: `super`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

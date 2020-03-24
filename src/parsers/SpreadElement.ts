@@ -10,7 +10,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'SpreadElement',
-    text: `...${helpers.parse(node.argument)}`,
+    text: `...${helpers.parse(node.argument).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

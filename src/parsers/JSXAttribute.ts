@@ -10,9 +10,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'JSXAttribute',
-    text: `${helpers.parse(node.name).text}="${
-      helpers.parse(node.value).text
-    }"`,
+    text: `${helpers.parse(node.name).text}=${helpers.parse(node.value).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

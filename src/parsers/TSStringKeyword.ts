@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSStringKeyword',
-    text: 'TSStringKeyword',
+    text: 'string',
     ...helpers.normalizeLoc(node.loc),
   };
 }

@@ -1,8 +1,8 @@
 import fs from 'fs';
 import { setupTest } from '../__helpers__';
 
-const code1 = fs
-  .readFileSync(`${__dirname}/code-samples/code1.ts`)
+const code = fs
+  .readFileSync(`${__dirname}/code-samples/code.ts`)
   .toString('utf8');
 
 setupTest('', 'AnyTypeAnnotation', 'not-found');
@@ -49,7 +49,7 @@ setupTest(`a = 10;`, 'AssignmentExpression', {
 setupTest('function A(foo = "bar"){}', 'AssignmentPattern', {
   end: [1, 23],
   left: 'foo',
-  right: 'bar',
+  right: '"bar"',
   start: [1, 12],
   text: '=',
   type: 'AssignmentPattern',
@@ -297,20 +297,20 @@ setupTest('', 'ExistsTypeAnnotation', 'not-found');
 setupTest('export * from "crypto"', 'ExportAllDeclaration', {
   end: [1, 23],
   start: [1, 1],
-  text: '↗ crypto',
+  text: '↗ "crypto"',
   type: 'ExportAllDeclaration',
 });
 
-setupTest(code1, 'ExportDeclaration', 'not-found');
+setupTest(code, 'ExportDeclaration', 'not-found');
 
-setupTest(code1, 'ExportDefaultDeclaration', {
+setupTest(code, 'ExportDefaultDeclaration', {
   end: [4, 18],
   start: [4, 1],
   text: '↗ b',
   type: 'ExportDefaultDeclaration',
 });
 
-setupTest(code1, 'ExportDefaultSpecifier', {
+setupTest(code, 'ExportDefaultSpecifier', {
   end: [1, 15],
   start: [1, 8],
   text: '↗ default',
@@ -334,10 +334,10 @@ setupTest('export * as default from "foo";', 'ExportNamespaceSpecifier', {
 setupTest('', 'ExportSpecifier', 'not-found');
 setupTest('', 'Expression', 'not-found');
 
-setupTest(code1, 'ExpressionStatement', {
+setupTest(code, 'ExpressionStatement', {
   end: [7, 20],
   start: [7, 3],
-  text: 'use strict.foo',
+  text: '"use strict".foo',
   type: 'ExpressionStatement',
 });
 
@@ -351,7 +351,7 @@ setupTest('', 'FlowType', 'not-found');
 
 setupTest('', 'For', 'not-found');
 
-setupTest(code1, 'ForInStatement', {
+setupTest(code, 'ForInStatement', {
   end: [15, 2],
   start: [13, 1],
   text: 'c in d',
@@ -365,7 +365,7 @@ setupTest('for (p of q);', 'ForOfStatement', {
   type: 'ForOfStatement',
 });
 
-setupTest(code1, 'ForStatement', {
+setupTest(code, 'ForStatement', {
   end: [12, 2],
   start: [10, 1],
   text: 'for',
@@ -376,14 +376,14 @@ setupTest('', 'ForXStatement', 'not-found');
 
 setupTest('', 'Function', 'not-found');
 
-setupTest(code1, 'FunctionDeclaration', {
+setupTest(code, 'FunctionDeclaration', {
   end: [8, 2],
   start: [6, 1],
   text: 'f(j, k)',
   type: 'FunctionDeclaration',
 });
 
-setupTest(code1, 'FunctionExpression', {
+setupTest(code, 'FunctionExpression', {
   end: [19, 2],
   start: [17, 2],
   text: 'ƒ(w)',
@@ -415,21 +415,21 @@ setupTest('', 'Import', 'not-found');
 setupTest('import a, { b } from "B"', 'ImportDeclaration', {
   end: [1, 25],
   start: [1, 1],
-  text: 'a, b ⤺ B',
+  text: 'a, b ⤺ "B"',
   type: 'ImportDeclaration',
 });
 
 setupTest('import Service from "./code/somewhere"', 'ImportDefaultSpecifier', {
   end: [1, 15],
   start: [1, 8],
-  text: 'Service ⤺ ./code/somewhere',
+  text: 'Service ⤺ "./code/somewhere"',
   type: 'ImportDefaultSpecifier',
 });
 
 setupTest('import * as crypto from "crypto"', 'ImportNamespaceSpecifier', {
   end: [1, 19],
   start: [1, 8],
-  text: 'crypto ⤺ crypto',
+  text: 'crypto ⤺ "crypto"',
   type: 'ImportNamespaceSpecifier',
 });
 
@@ -449,35 +449,35 @@ setupTest('', 'IntersectionTypeAnnotation', 'not-found');
 
 setupTest('', 'JSX', undefined, true);
 
-setupTest(code1, 'JSXAttribute', {
+setupTest(code, 'JSXAttribute', {
   end: [27, 17],
   start: [27, 10],
   text: 'b=" "',
   type: 'JSXAttribute',
 });
 
-setupTest(code1, 'JSXClosingElement', {
+setupTest(code, 'JSXClosingElement', {
   end: [25, 27],
   start: [25, 23],
   text: '</p>',
   type: 'JSXClosingElement',
 });
 
-setupTest(code1, 'JSXClosingFragment', {
+setupTest(code, 'JSXClosingFragment', {
   end: [30, 10],
   start: [30, 7],
   text: '</>',
   type: 'JSXClosingFragment',
 });
 
-setupTest(code1, 'JSXElement', {
+setupTest(code, 'JSXElement', {
   end: [32, 24],
   start: [23, 5],
   text: '<AnotherComponent>…</AnotherComponent>',
   type: 'JSXElement',
 });
 
-setupTest(code1, 'JSXEmptyExpression', {
+setupTest(code, 'JSXEmptyExpression', {
   end: [31, 8],
   start: [31, 8],
   text: '{}',
@@ -490,19 +490,19 @@ setupTest(
   {
     end: [1, 41],
     start: [1, 31],
-    text: 'FooBar',
+    text: '"FooBar"',
     type: 'JSXExpressionContainer',
   }
 );
 
-setupTest(code1, 'JSXFragment', {
+setupTest(code, 'JSXFragment', {
   end: [30, 10],
   start: [28, 7],
   text: '<></>',
   type: 'JSXFragment',
 });
 
-setupTest(code1, 'JSXIdentifier', {
+setupTest(code, 'JSXIdentifier', {
   end: [23, 22],
   start: [23, 6],
   text: 'AnotherComponent',
@@ -523,14 +523,14 @@ setupTest('<Foo:Bar />', 'JSXNamespacedName', {
   type: 'JSXNamespacedName',
 });
 
-setupTest(code1, 'JSXOpeningElement', {
+setupTest(code, 'JSXOpeningElement', {
   end: [23, 23],
   start: [23, 5],
   text: '<AnotherComponent>',
   type: 'JSXOpeningElement',
 });
 
-setupTest(code1, 'JSXOpeningFragment', {
+setupTest(code, 'JSXOpeningFragment', {
   end: [28, 9],
   start: [28, 7],
   text: '<>',
@@ -568,19 +568,19 @@ setupTest(
 
 setupTest('', 'Literal', 'not-found');
 
-setupTest(code1, 'LogicalExpression', {
+setupTest(code, 'LogicalExpression', {
   end: [36, 31],
   start: [36, 5],
-  text: 'a === foo && x || y || z',
+  text: 'a === "foo" && x || y || z',
   type: 'LogicalExpression',
 });
 
 setupTest('', 'Loop', 'not-found');
 
-setupTest(code1, 'MemberExpression', {
+setupTest(code, 'MemberExpression', {
   end: [7, 19],
   start: [7, 3],
-  text: 'use strict.foo',
+  text: '"use strict".foo',
   type: 'MemberExpression',
 });
 
@@ -594,7 +594,7 @@ setupTest('', 'ModuleDeclaration', 'not-found');
 
 setupTest('', 'ModuleSpecifier', 'not-found');
 
-setupTest(code1, 'NewExpression', {
+setupTest(code, 'NewExpression', {
   end: [40, 34],
   start: [40, 13],
   text: 'new CCC(…2)',
@@ -603,7 +603,7 @@ setupTest(code1, 'NewExpression', {
 
 setupTest('', 'Noop', 'not-found');
 
-setupTest(code1, 'NullLiteral', {
+setupTest(code, 'NullLiteral', {
   end: [41, 17],
   start: [41, 13],
   text: 'null',
@@ -623,7 +623,7 @@ setupTest('[1, 2, 3]', 'NumericLiteral', {
   type: 'NumericLiteral',
 });
 
-setupTest(code1, 'ObjectExpression', {
+setupTest(code, 'ObjectExpression', {
   end: [2, 20],
   start: [2, 18],
   text: '{…}',
@@ -632,21 +632,21 @@ setupTest(code1, 'ObjectExpression', {
 
 setupTest('', 'ObjectMember', 'not-found');
 
-setupTest(code1, 'ObjectMethod', {
+setupTest(code, 'ObjectMethod', {
   end: [47, 4],
   start: [45, 3],
   text: 'mmm(…1)',
   type: 'ObjectMethod',
 });
 
-setupTest(code1, 'ObjectPattern', {
+setupTest(code, 'ObjectPattern', {
   end: [49, 19],
   start: [49, 7],
   text: '{foo, mmm}',
   type: 'ObjectPattern',
 });
 
-setupTest(code1, 'ObjectProperty', {
+setupTest(code, 'ObjectProperty', {
   end: [44, 13],
   start: [44, 3],
   text: 'foo',
@@ -683,10 +683,10 @@ setupTest('', 'PatternLike', 'not-found');
 setupTest('', 'PipelineBareFunction', 'not-found');
 setupTest('', 'PipelinePrimaryTopicReference', 'not-found');
 setupTest('', 'PipelineTopicExpression', 'not-found');
-setupTest(code1, 'Placeholder', 'not-found');
-setupTest(code1, 'Private', 'not-found');
+setupTest(code, 'Placeholder', 'not-found');
+setupTest(code, 'Private', 'not-found');
 
-setupTest(code1, 'PrivateName', {
+setupTest(code, 'PrivateName', {
   end: [58, 5],
   start: [58, 3],
   text: 'a',
@@ -705,241 +705,310 @@ setupTest('', 'Pureish', 'not-found');
 setupTest('', 'QualifiedTypeIdentifier', 'not-found');
 setupTest('', 'RecordExpression', 'not-found');
 
-setupTest(code1, 'RegExpLiteral', {
+setupTest(code, 'RegExpLiteral', {
   end: [65, 23],
   start: [65, 13],
   text: '/foo bar/g',
   type: 'RegExpLiteral',
 });
 
-setupTest(code1, 'RegexLiteral', 'not-found');
+setupTest(code, 'RegexLiteral', 'not-found');
 
-setupTest(code1, 'RestElement', {
+setupTest(code, 'RestElement', {
   end: [67, 28],
   start: [67, 23],
   text: '...re',
   type: 'RestElement',
 });
 
-setupTest(code1, 'RestProperty', 'not-found');
+setupTest(code, 'RestProperty', 'not-found');
 
-setupTest(code1, 'ReturnStatement', {
+setupTest(code, 'ReturnStatement', {
   end: [18, 34],
   start: [18, 3],
   text: '← fn(op) / 42 / i',
   type: 'ReturnStatement',
 });
 
-setupTest(code1, 'Scopable', 'not-found');
+setupTest(code, 'Scopable', 'not-found');
+
+setupTest(code, 'SequenceExpression', {
+  end: [75, 22],
+  start: [75, 14],
+  text: 'a(), b()',
+  type: 'SequenceExpression',
+});
+
+setupTest(code, 'SpreadElement', {
+  end: [69, 10],
+  start: [69, 5],
+  text: '...re',
+  type: 'SpreadElement',
+});
+
+setupTest(code, 'SpreadProperty', 'not-found');
+
+setupTest(code, 'Statement', 'not-found');
+
+setupTest(code, 'StringLiteral', {
+  end: [1, 26],
+  start: [1, 21],
+  text: '"bar"',
+  type: 'StringLiteral',
+});
+
+setupTest(code, 'StringLiteralTypeAnnotation', 'not-found');
+setupTest(code, 'StringTypeAnnotation', 'not-found');
+
+setupTest(code, 'Super', {
+  end: [79, 10],
+  start: [79, 5],
+  text: 'super',
+  type: 'Super',
+});
+
+setupTest(code, 'SwitchCase', {
+  end: [84, 41],
+  start: [84, 3],
+  text: 'case "foo"',
+  type: 'SwitchCase',
+});
 
-setupTest('', 'SequenceExpression', undefined, true);
+setupTest(code, 'SwitchStatement', {
+  end: [85, 2],
+  start: [83, 1],
+  text: 'switch(SOME}',
+  type: 'SwitchStatement',
+});
 
-setupTest('', 'SpreadElement', undefined, true);
+setupTest(code, 'SymbolTypeAnnotation', 'not-found');
 
-setupTest('', 'SpreadProperty', undefined, true);
+setupTest(code, 'TSAnyKeyword', {
+  end: [87, 19],
+  start: [87, 16],
+  text: 'any',
+  type: 'TSAnyKeyword',
+});
 
-setupTest('', 'Statement', undefined, true);
+setupTest(code, 'TSArrayType', {
+  end: [88, 18],
+  start: [88, 10],
+  text: 'number[]',
+  type: 'TSArrayType',
+});
 
-setupTest('', 'StringLiteral', undefined, true);
+setupTest(code, 'TSAsExpression', {
+  end: [90, 16],
+  start: [90, 5],
+  text: 'a as Object',
+  type: 'TSAsExpression',
+});
 
-setupTest('', 'StringLiteralTypeAnnotation', undefined, true);
+setupTest(code, 'TSBigIntKeyword', {
+  end: [103, 14],
+  start: [103, 8],
+  text: 'bigint',
+  type: 'TSBigIntKeyword',
+});
 
-setupTest('', 'StringTypeAnnotation', undefined, true);
+setupTest(code, 'TSBooleanKeyword', {
+  end: [94, 19],
+  start: [94, 12],
+  text: 'boolean',
+  type: 'TSBooleanKeyword',
+});
 
-setupTest('', 'Super', undefined, true);
+setupTest(code, 'TSCallSignatureDeclaration', {
+  end: [106, 32],
+  start: [106, 3],
+  text: '(x:number, b:string):void',
+  type: 'TSCallSignatureDeclaration',
+});
 
-setupTest('', 'SwitchCase', undefined, true);
+setupTest(code, 'TSConditionalType', {
+  end: [109, 46],
+  start: [109, 8],
+  text: 'number extends string ? boolean : null',
+  type: 'TSConditionalType',
+});
 
-setupTest('', 'SwitchStatement', undefined, true);
+setupTest(code, 'TSConstructSignatureDeclaration', {
+  end: [112, 25],
+  start: [112, 3],
+  text: 'new (x:number):void',
+  type: 'TSConstructSignatureDeclaration',
+});
 
-setupTest('', 'SymbolTypeAnnotation', undefined, true);
+setupTest(code, 'TSConstructorType', undefined, true);
 
-setupTest('', 'TSAnyKeyword', undefined, true);
+setupTest(code, 'TSDeclareFunction', undefined, true);
 
-setupTest('', 'TSArrayType', undefined, true);
+setupTest(code, 'TSDeclareMethod', undefined, true);
 
-setupTest('', 'TSAsExpression', undefined, true);
+setupTest(code, 'TSEntityName', undefined, true);
 
-setupTest('', 'TSBigIntKeyword', undefined, true);
+setupTest(code, 'TSEnumDeclaration', undefined, true);
 
-setupTest('', 'TSBooleanKeyword', undefined, true);
+setupTest(code, 'TSEnumMember', undefined, true);
 
-setupTest('', 'TSCallSignatureDeclaration', undefined, true);
+setupTest(code, 'TSExportAssignment', undefined, true);
 
-setupTest('', 'TSConditionalType', undefined, true);
+setupTest(code, 'TSExpressionWithTypeArguments', undefined, true);
 
-setupTest('', 'TSConstructSignatureDeclaration', undefined, true);
+setupTest(code, 'TSExternalModuleReference', undefined, true);
 
-setupTest('', 'TSConstructorType', undefined, true);
+setupTest(code, 'TSFunctionType', undefined, true);
 
-setupTest('', 'TSDeclareFunction', undefined, true);
+setupTest(code, 'TSImportEqualsDeclaration', undefined, true);
 
-setupTest('', 'TSDeclareMethod', undefined, true);
+setupTest(code, 'TSImportType', undefined, true);
 
-setupTest('', 'TSEntityName', undefined, true);
+setupTest(code, 'TSIndexSignature', undefined, true);
 
-setupTest('', 'TSEnumDeclaration', undefined, true);
+setupTest(code, 'TSIndexedAccessType', undefined, true);
 
-setupTest('', 'TSEnumMember', undefined, true);
+setupTest(code, 'TSInferType', undefined, true);
 
-setupTest('', 'TSExportAssignment', undefined, true);
+setupTest(code, 'TSInterfaceBody', undefined, true);
 
-setupTest('', 'TSExpressionWithTypeArguments', undefined, true);
+setupTest(code, 'TSInterfaceDeclaration', undefined, true);
 
-setupTest('', 'TSExternalModuleReference', undefined, true);
+setupTest(code, 'TSIntersectionType', undefined, true);
 
-setupTest('', 'TSFunctionType', undefined, true);
+setupTest(code, 'TSLiteralType', undefined, true);
 
-setupTest('', 'TSImportEqualsDeclaration', undefined, true);
+setupTest(code, 'TSMappedType', undefined, true);
 
-setupTest('', 'TSImportType', undefined, true);
+setupTest(code, 'TSMethodSignature', undefined, true);
 
-setupTest('', 'TSIndexSignature', undefined, true);
+setupTest(code, 'TSModuleBlock', undefined, true);
 
-setupTest('', 'TSIndexedAccessType', undefined, true);
+setupTest(code, 'TSModuleDeclaration', undefined, true);
 
-setupTest('', 'TSInferType', undefined, true);
+setupTest(code, 'TSNamespaceExportDeclaration', undefined, true);
 
-setupTest('', 'TSInterfaceBody', undefined, true);
+setupTest(code, 'TSNeverKeyword', undefined, true);
 
-setupTest('', 'TSInterfaceDeclaration', undefined, true);
+setupTest(code, 'TSNonNullExpression', undefined, true);
 
-setupTest('', 'TSIntersectionType', undefined, true);
+setupTest(code, 'TSNullKeyword', undefined, true);
 
-setupTest('', 'TSLiteralType', undefined, true);
+setupTest(code, 'TSNumberKeyword', undefined, true);
 
-setupTest('', 'TSMappedType', undefined, true);
+setupTest(code, 'TSObjectKeyword', undefined, true);
 
-setupTest('', 'TSMethodSignature', undefined, true);
+setupTest(code, 'TSOptionalType', undefined, true);
 
-setupTest('', 'TSModuleBlock', undefined, true);
+setupTest(code, 'TSParameterProperty', undefined, true);
 
-setupTest('', 'TSModuleDeclaration', undefined, true);
+setupTest(code, 'TSParenthesizedType', undefined, true);
 
-setupTest('', 'TSNamespaceExportDeclaration', undefined, true);
+setupTest(code, 'TSPropertySignature', undefined, true);
 
-setupTest('', 'TSNeverKeyword', undefined, true);
+setupTest(code, 'TSQualifiedName', undefined, true);
 
-setupTest('', 'TSNonNullExpression', undefined, true);
+setupTest(code, 'TSRestType', undefined, true);
 
-setupTest('', 'TSNullKeyword', undefined, true);
+setupTest(code, 'TSStringKeyword', undefined, true);
 
-setupTest('', 'TSNumberKeyword', undefined, true);
+setupTest(code, 'TSSymbolKeyword', undefined, true);
 
-setupTest('', 'TSObjectKeyword', undefined, true);
+setupTest(code, 'TSThisType', undefined, true);
 
-setupTest('', 'TSOptionalType', undefined, true);
+setupTest(code, 'TSTupleType', undefined, true);
 
-setupTest('', 'TSParameterProperty', undefined, true);
+setupTest(code, 'TSType', undefined, true);
 
-setupTest('', 'TSParenthesizedType', undefined, true);
+setupTest(code, 'TSTypeAliasDeclaration', undefined, true);
 
-setupTest('', 'TSPropertySignature', undefined, true);
+setupTest(code, 'TSTypeAnnotation', undefined, true);
 
-setupTest('', 'TSQualifiedName', undefined, true);
+setupTest(code, 'TSTypeAssertion', undefined, true);
 
-setupTest('', 'TSRestType', undefined, true);
+setupTest(code, 'TSTypeElement', undefined, true);
 
-setupTest('', 'TSStringKeyword', undefined, true);
+setupTest(code, 'TSTypeLiteral', undefined, true);
 
-setupTest('', 'TSSymbolKeyword', undefined, true);
+setupTest(code, 'TSTypeOperator', undefined, true);
 
-setupTest('', 'TSThisType', undefined, true);
+setupTest(code, 'TSTypeParameter', undefined, true);
 
-setupTest('', 'TSTupleType', undefined, true);
+setupTest(code, 'TSTypeParameterDeclaration', undefined, true);
 
-setupTest('', 'TSType', undefined, true);
+setupTest(code, 'TSTypeParameterInstantiation', undefined, true);
 
-setupTest('', 'TSTypeAliasDeclaration', undefined, true);
+setupTest(code, 'TSTypePredicate', undefined, true);
 
-setupTest('', 'TSTypeAnnotation', undefined, true);
+setupTest(code, 'TSTypeQuery', undefined, true);
 
-setupTest('', 'TSTypeAssertion', undefined, true);
+setupTest(code, 'TSTypeReference', undefined, true);
 
-setupTest('', 'TSTypeElement', undefined, true);
+setupTest(code, 'TSUndefinedKeyword', undefined, true);
 
-setupTest('', 'TSTypeLiteral', undefined, true);
+setupTest(code, 'TSUnionType', undefined, true);
 
-setupTest('', 'TSTypeOperator', undefined, true);
+setupTest(code, 'TSUnknownKeyword', undefined, true);
 
-setupTest('', 'TSTypeParameter', undefined, true);
+setupTest(code, 'TSVoidKeyword', undefined, true);
 
-setupTest('', 'TSTypeParameterDeclaration', undefined, true);
+setupTest(code, 'TaggedTemplateExpression', undefined, true);
 
-setupTest('', 'TSTypeParameterInstantiation', undefined, true);
+setupTest(code, 'TemplateElement', undefined, true);
 
-setupTest('', 'TSTypePredicate', undefined, true);
+setupTest(code, 'TemplateLiteral', undefined, true);
 
-setupTest('', 'TSTypeQuery', undefined, true);
+setupTest(code, 'Terminatorless', undefined, true);
 
-setupTest('', 'TSTypeReference', undefined, true);
+setupTest(code, 'ThisExpression', undefined, true);
 
-setupTest('', 'TSUndefinedKeyword', undefined, true);
+setupTest(code, 'ThisTypeAnnotation', undefined, true);
 
-setupTest('', 'TSUnionType', undefined, true);
+setupTest(code, 'ThrowStatement', undefined, true);
 
-setupTest('', 'TSUnknownKeyword', undefined, true);
+setupTest(code, 'TryStatement', undefined, true);
 
-setupTest('', 'TSVoidKeyword', undefined, true);
+setupTest(code, 'TupleExpression', undefined, true);
 
-setupTest('', 'TaggedTemplateExpression', undefined, true);
+setupTest(code, 'TupleTypeAnnotation', undefined, true);
 
-setupTest('', 'TemplateElement', undefined, true);
+setupTest(code, 'TypeAlias', undefined, true);
 
-setupTest('', 'TemplateLiteral', undefined, true);
+setupTest(code, 'TypeAnnotation', undefined, true);
 
-setupTest('', 'Terminatorless', undefined, true);
+setupTest(code, 'TypeCastExpression', undefined, true);
 
-setupTest('', 'ThisExpression', undefined, true);
+setupTest(code, 'TypeParameter', undefined, true);
 
-setupTest('', 'ThisTypeAnnotation', undefined, true);
+setupTest(code, 'TypeParameterDeclaration', undefined, true);
 
-setupTest('', 'ThrowStatement', undefined, true);
+setupTest(code, 'TypeParameterInstantiation', undefined, true);
 
-setupTest('', 'TryStatement', undefined, true);
+setupTest(code, 'TypeofTypeAnnotation', undefined, true);
 
-setupTest('', 'TupleExpression', undefined, true);
+setupTest(code, 'UnaryExpression', undefined, true);
 
-setupTest('', 'TupleTypeAnnotation', undefined, true);
+setupTest(code, 'UnaryLike', undefined, true);
 
-setupTest('', 'TypeAlias', undefined, true);
+setupTest(code, 'UnionTypeAnnotation', undefined, true);
 
-setupTest('', 'TypeAnnotation', undefined, true);
+setupTest(code, 'UpdateExpression', undefined, true);
 
-setupTest('', 'TypeCastExpression', undefined, true);
+setupTest(code, 'UserWhitespacable', undefined, true);
 
-setupTest('', 'TypeParameter', undefined, true);
+setupTest(code, 'V8IntrinsicIdentifier', undefined, true);
 
-setupTest('', 'TypeParameterDeclaration', undefined, true);
+setupTest(code, 'VariableDeclaration', undefined, true);
 
-setupTest('', 'TypeParameterInstantiation', undefined, true);
+setupTest(code, 'VariableDeclarator', undefined, true);
 
-setupTest('', 'TypeofTypeAnnotation', undefined, true);
+setupTest(code, 'Variance', undefined, true);
 
-setupTest('', 'UnaryExpression', undefined, true);
+setupTest(code, 'VoidTypeAnnotation', undefined, true);
 
-setupTest('', 'UnaryLike', undefined, true);
+setupTest(code, 'While', undefined, true);
 
-setupTest('', 'UnionTypeAnnotation', undefined, true);
+setupTest(code, 'WhileStatement', undefined, true);
 
-setupTest('', 'UpdateExpression', undefined, true);
+setupTest(code, 'WithStatement', undefined, true);
 
-setupTest('', 'UserWhitespacable', undefined, true);
-
-setupTest('', 'V8IntrinsicIdentifier', undefined, true);
-
-setupTest('', 'VariableDeclaration', undefined, true);
-
-setupTest('', 'VariableDeclarator', undefined, true);
-
-setupTest('', 'Variance', undefined, true);
-
-setupTest('', 'VoidTypeAnnotation', undefined, true);
-
-setupTest('', 'While', undefined, true);
-
-setupTest('', 'WhileStatement', undefined, true);
-
-setupTest('', 'WithStatement', undefined, true);
-
-setupTest('', 'YieldExpression', undefined, true);
+setupTest(code, 'YieldExpression', undefined, true);
