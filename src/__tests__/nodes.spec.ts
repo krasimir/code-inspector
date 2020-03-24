@@ -839,17 +839,37 @@ setupTest(code, 'TSConstructSignatureDeclaration', {
   type: 'TSConstructSignatureDeclaration',
 });
 
-setupTest(code, 'TSConstructorType', undefined, true);
+setupTest(code, 'TSConstructorType', 'not-found');
 
-setupTest(code, 'TSDeclareFunction', undefined, true);
+setupTest(code, 'TSDeclareFunction', {
+  end: [115, 36],
+  start: [115, 1],
+  text: 'declare f(a:number):void',
+  type: 'TSDeclareFunction',
+});
 
-setupTest(code, 'TSDeclareMethod', undefined, true);
+setupTest(code, 'TSDeclareMethod', {
+  end: [119, 33],
+  start: [119, 3],
+  text: 'static f(…2)',
+  type: 'TSDeclareMethod',
+});
 
-setupTest(code, 'TSEntityName', undefined, true);
+setupTest(code, 'TSEntityName', 'not-found');
 
-setupTest(code, 'TSEnumDeclaration', undefined, true);
+setupTest(code, 'TSEnumDeclaration', {
+  end: [127, 2],
+  start: [125, 1],
+  text: 'enum Foo1 {"OP"}',
+  type: 'TSEnumDeclaration',
+});
 
-setupTest(code, 'TSEnumMember', undefined, true);
+setupTest(code, 'TSEnumMember', {
+  end: [126, 14],
+  start: [126, 3],
+  text: '"OP"',
+  type: 'TSEnumMember',
+});
 
 setupTest(code, 'TSExportAssignment', undefined, true);
 

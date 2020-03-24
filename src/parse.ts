@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+/* eslint-disable global-require, @typescript-eslint/no-use-before-define */
 import * as Traverse from '@babel/traverse';
 import { SourceLocation } from '@babel/types';
 import { NormalizedNode } from './types';
@@ -12,6 +12,24 @@ export function normalizeLoc(loc: SourceLocation) {
   };
 }
 
+function parseFunctionParameters(params: any[]): string {
+  if (params.length > 0) {
+    return `…${params.length}`;
+  }
+  return '';
+}
+
+function parseItems(
+  items: any[],
+  parent: Traverse.Node,
+  grandParent: Traverse.Node
+): string {
+  if (items.length > 0) {
+    return items.map(i => parse(i, parent, grandParent).text).join(', ');
+  }
+  return '';
+}
+
 export function parse(
   node: Traverse.Node | undefined,
   parent: Traverse.Node | null,
@@ -20,7 +38,7 @@ export function parse(
   if (node && Parsers[node.type]) {
     return Parsers[node.type](
       node,
-      { normalizeLoc, parse },
+      { normalizeLoc, parse, parseFunctionParameters, parseItems },
       parent,
       grandParent
     );

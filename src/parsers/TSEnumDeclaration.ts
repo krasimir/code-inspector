@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSEnumDeclaration',
-    text: 'TSEnumDeclaration',
+    text: `enum ${helpers.parse(node.id).text} {${helpers.parseItems(
+      node.members
+    )}}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

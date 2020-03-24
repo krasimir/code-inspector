@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import T from '@babel/types';
 
 import { NormalizedNode, ParserHelpers } from '../types';
@@ -8,10 +9,13 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSDeclareMethod',
-    text: 'TSDeclareMethod',
+    text: `${
+      !node.accessibility ? (node.static ? 'static' : '') : node.accessibility
+    } ${helpers.parse(node.key).text}(${helpers.parseFunctionParameters(
+      node.params
+    )})`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

@@ -111,3 +111,22 @@ let x: number extends string ? boolean : null;
 interface II {
   new (x: number): void;
 }
+
+declare function f(a:number): void;
+declare function f<T>(): T;
+
+class C {
+  static f(a:string, b: string);
+  public static f(a:string, b: string);
+  protected static f(a:string, b: string);
+  private static f(a:string, b: string);
+}
+
+const enum Foo1 {
+  "OP"= "HOP"
+}
+
+enum A90 {
+  a,
+  "r"
+}

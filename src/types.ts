@@ -10,4 +10,6 @@ export interface NormalizedNode {
 export type ParserHelpers = {
   normalizeLoc: Function;
   parse: Function;
+  parseFunctionParameters: Function;
+  parseItems: Function;
 };
