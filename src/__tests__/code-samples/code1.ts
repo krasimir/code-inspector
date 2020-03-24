@@ -32,3 +32,42 @@ const Comp = function () {
     </AnotherComponent>
   )
 }
+
+if (a === 'foo' && x || y || z) {
+  console.log('a is foo');
+}
+
+const cxc = new CCC('foo', 'bar');
+const nnn = null;
+
+var obob = {
+  foo: 'bar',
+  mmm(a) {
+    return a + 1;
+  }
+}
+const { foo, mmm } = obob;
+
+function * TTT() {
+  if ((yield select(mySelector))) {
+    return 'aaa';
+  }
+}
+
+class A {
+  #a: string;
+  #b?;
+  #c?: number;
+  #d!;
+  #e!: boolean;
+}
+
+const eee = /foo bar/g;
+
+function MyFunc(a, b, ...re) {
+  return {
+    ...re
+  }
+}
+
+function aIO({ b, ...c }) {}

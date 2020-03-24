@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'NullLiteral',
-    text: 'NullLiteral',
+    text: 'null',
     ...helpers.normalizeLoc(node.loc),
   };
 }

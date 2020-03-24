@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'SpreadElement',
-    text: 'SpreadElement',
+    text: `...${helpers.parse(node.argument)}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

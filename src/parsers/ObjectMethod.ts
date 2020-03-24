@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'ObjectMethod',
-    text: 'ObjectMethod',
+    text: `${helpers.parse(node.key).text}(${
+      node.params.length > 0 ? `…${node.params.length}` : ''
+    })`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

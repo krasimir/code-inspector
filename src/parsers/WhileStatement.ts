@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'WhileStatement',
-    text: 'WhileStatement',
+    text: `while(${helpers.parse(node.test).text})`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

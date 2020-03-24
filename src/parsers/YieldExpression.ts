@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'YieldExpression',
-    text: 'YieldExpression',
+    text: `yield ${helpers.parse(node.argument).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

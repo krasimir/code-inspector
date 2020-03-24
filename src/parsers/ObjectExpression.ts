@@ -10,7 +10,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'ObjectExpression',
-    text: '{}',
+    text: '{…}',
     ...helpers.normalizeLoc(node.loc),
   };
 }

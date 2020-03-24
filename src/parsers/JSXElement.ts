@@ -10,7 +10,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'JSXElement',
-    text: `${helpers.parse(node.openingElement).text}${
+    text: `${helpers.parse(node.openingElement).text}…${
       node.closingElement ? helpers.parse(node.closingElement).text : ''
     }`,
     ...helpers.normalizeLoc(node.loc),

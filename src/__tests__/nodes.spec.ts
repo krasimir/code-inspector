@@ -82,7 +82,7 @@ setupTest('a + b', 'BinaryExpression', {
   left: 'a',
   right: 'b',
   start: [1, 1],
-  text: '',
+  text: 'a + b',
   type: 'BinaryExpression',
 });
 
@@ -473,7 +473,7 @@ setupTest(code1, 'JSXClosingFragment', {
 setupTest(code1, 'JSXElement', {
   end: [32, 24],
   start: [23, 5],
-  text: '<AnotherComponent}></AnotherComponent>',
+  text: '<AnotherComponent>…</AnotherComponent>',
   type: 'JSXElement',
 });
 
@@ -516,125 +516,221 @@ setupTest('<a.b.c></a.b.c>', 'JSXMemberExpression', {
   type: 'JSXMemberExpression',
 });
 
-setupTest(code1, 'JSXNamespacedName', undefined, true);
+setupTest('<Foo:Bar />', 'JSXNamespacedName', {
+  end: [1, 9],
+  start: [1, 2],
+  text: '<Foo:Bar>',
+  type: 'JSXNamespacedName',
+});
 
-setupTest(code1, 'JSXOpeningElement', undefined, true);
+setupTest(code1, 'JSXOpeningElement', {
+  end: [23, 23],
+  start: [23, 5],
+  text: '<AnotherComponent>',
+  type: 'JSXOpeningElement',
+});
 
-setupTest(code1, 'JSXOpeningFragment', undefined, true);
+setupTest(code1, 'JSXOpeningFragment', {
+  end: [28, 9],
+  start: [28, 7],
+  text: '<>',
+  type: 'JSXOpeningFragment',
+});
 
-setupTest(code1, 'JSXSpreadAttribute', undefined, true);
+setupTest('<Foo {...data} />', 'JSXSpreadAttribute', {
+  end: [1, 15],
+  start: [1, 6],
+  text: '...data',
+  type: 'JSXSpreadAttribute',
+});
 
-setupTest(code1, 'JSXSpreadChild', undefined, true);
+setupTest('<div {...c}> {...children}{a}{...b}</div>', 'JSXSpreadChild', {
+  end: [1, 27],
+  start: [1, 14],
+  text: '...children',
+  type: 'JSXSpreadChild',
+});
 
-setupTest(code1, 'JSXText', undefined, true);
+setupTest('<p>Hello</p>', 'JSXText', {
+  end: [1, 9],
+  start: [1, 4],
+  text: 'Hello',
+  type: 'JSXText',
+});
 
-setupTest('', 'LVal', undefined, true);
+setupTest('', 'LVal', 'not-found');
 
-setupTest('', 'LabeledStatement', undefined, true);
+setupTest(
+  'target1: target2: target3: while (true) { continue target1; }',
+  'LabeledStatement',
+  { end: [1, 62], start: [1, 1], text: 'target1:', type: 'LabeledStatement' }
+);
 
-setupTest('', 'Literal', undefined, true);
+setupTest('', 'Literal', 'not-found');
 
-setupTest('', 'LogicalExpression', undefined, true);
+setupTest(code1, 'LogicalExpression', {
+  end: [36, 31],
+  start: [36, 5],
+  text: 'a === foo && x || y || z',
+  type: 'LogicalExpression',
+});
 
-setupTest('', 'Loop', undefined, true);
+setupTest('', 'Loop', 'not-found');
 
-setupTest('', 'MemberExpression', undefined, true);
+setupTest(code1, 'MemberExpression', {
+  end: [7, 19],
+  start: [7, 3],
+  text: 'use strict.foo',
+  type: 'MemberExpression',
+});
 
-setupTest('', 'MetaProperty', undefined, true);
+setupTest(``, 'MetaProperty', 'not-found');
 
-setupTest('', 'Method', undefined, true);
+setupTest('', 'Method', 'not-found');
 
-setupTest('', 'MixedTypeAnnotation', undefined, true);
+setupTest('', 'MixedTypeAnnotation', 'not-found');
 
-setupTest('', 'ModuleDeclaration', undefined, true);
+setupTest('', 'ModuleDeclaration', 'not-found');
 
-setupTest('', 'ModuleSpecifier', undefined, true);
+setupTest('', 'ModuleSpecifier', 'not-found');
 
-setupTest('', 'NewExpression', undefined, true);
+setupTest(code1, 'NewExpression', {
+  end: [40, 34],
+  start: [40, 13],
+  text: 'new CCC(…2)',
+  type: 'NewExpression',
+});
 
-setupTest('', 'Noop', undefined, true);
+setupTest('', 'Noop', 'not-found');
 
-setupTest('', 'NullLiteral', undefined, true);
+setupTest(code1, 'NullLiteral', {
+  end: [41, 17],
+  start: [41, 13],
+  text: 'null',
+  type: 'NullLiteral',
+});
 
-setupTest('', 'NullLiteralTypeAnnotation', undefined, true);
+setupTest('', 'NullLiteralTypeAnnotation', 'not-found');
+setupTest('', 'NullableTypeAnnotation', 'not-found');
+setupTest('', 'NumberLiteral', 'not-found');
+setupTest('', 'NumberLiteralTypeAnnotation', 'not-found');
+setupTest('', 'NumberTypeAnnotation', 'not-found');
 
-setupTest('', 'NullableTypeAnnotation', undefined, true);
+setupTest('[1, 2, 3]', 'NumericLiteral', {
+  end: [1, 3],
+  start: [1, 2],
+  text: 1,
+  type: 'NumericLiteral',
+});
 
-setupTest('', 'NumberLiteral', undefined, true);
+setupTest(code1, 'ObjectExpression', {
+  end: [2, 20],
+  start: [2, 18],
+  text: '{…}',
+  type: 'ObjectExpression',
+});
 
-setupTest('', 'NumberLiteralTypeAnnotation', undefined, true);
+setupTest('', 'ObjectMember', 'not-found');
 
-setupTest('', 'NumberTypeAnnotation', undefined, true);
+setupTest(code1, 'ObjectMethod', {
+  end: [47, 4],
+  start: [45, 3],
+  text: 'mmm(…1)',
+  type: 'ObjectMethod',
+});
 
-setupTest('', 'NumericLiteral', undefined, true);
+setupTest(code1, 'ObjectPattern', {
+  end: [49, 19],
+  start: [49, 7],
+  text: '{foo, mmm}',
+  type: 'ObjectPattern',
+});
 
-setupTest('', 'ObjectExpression', undefined, true);
+setupTest(code1, 'ObjectProperty', {
+  end: [44, 13],
+  start: [44, 3],
+  text: 'foo',
+  type: 'ObjectProperty',
+});
 
-setupTest('', 'ObjectMember', undefined, true);
+setupTest('', 'ObjectTypeAnnotation', 'not-found');
+setupTest('', 'ObjectTypeCallProperty', 'not-found');
+setupTest('', 'ObjectTypeIndexer', 'not-found');
+setupTest('', 'ObjectTypeInternalSlot', 'not-found');
+setupTest('', 'ObjectTypeProperty', 'not-found');
+setupTest('', 'ObjectTypeSpreadProperty', 'not-found');
+setupTest('', 'OpaqueType', 'not-found');
 
-setupTest('', 'ObjectMethod', undefined, true);
+setupTest('a?.func?.(foo)', 'OptionalCallExpression', {
+  end: [1, 15],
+  start: [1, 1],
+  text: 'a?.func?.(…1)',
+  type: 'OptionalCallExpression',
+});
 
-setupTest('', 'ObjectPattern', undefined, true);
+setupTest('a?.func?.(foo)', 'OptionalMemberExpression', {
+  end: [1, 8],
+  start: [1, 1],
+  text: 'a?.func',
+  type: 'OptionalMemberExpression',
+});
 
-setupTest('', 'ObjectProperty', undefined, true);
+setupTest('', 'ParenthesizedExpression', 'not-found');
 
-setupTest('', 'ObjectTypeAnnotation', undefined, true);
+setupTest('', 'Pattern', 'not-found');
 
-setupTest('', 'ObjectTypeCallProperty', undefined, true);
+setupTest('', 'PatternLike', 'not-found');
+setupTest('', 'PipelineBareFunction', 'not-found');
+setupTest('', 'PipelinePrimaryTopicReference', 'not-found');
+setupTest('', 'PipelineTopicExpression', 'not-found');
+setupTest(code1, 'Placeholder', 'not-found');
+setupTest(code1, 'Private', 'not-found');
 
-setupTest('', 'ObjectTypeIndexer', undefined, true);
+setupTest(code1, 'PrivateName', {
+  end: [58, 5],
+  start: [58, 3],
+  text: 'a',
+  type: 'PrivateName',
+});
 
-setupTest('', 'ObjectTypeInternalSlot', undefined, true);
+setupTest('', 'Program', {
+  end: [1, 1],
+  start: [1, 1],
+  text: 'Program',
+  type: 'Program',
+});
 
-setupTest('', 'ObjectTypeProperty', undefined, true);
+setupTest('', 'Property', 'not-found');
+setupTest('', 'Pureish', 'not-found');
+setupTest('', 'QualifiedTypeIdentifier', 'not-found');
+setupTest('', 'RecordExpression', 'not-found');
 
-setupTest('', 'ObjectTypeSpreadProperty', undefined, true);
+setupTest(code1, 'RegExpLiteral', {
+  end: [65, 23],
+  start: [65, 13],
+  text: '/foo bar/g',
+  type: 'RegExpLiteral',
+});
 
-setupTest('', 'OpaqueType', undefined, true);
+setupTest(code1, 'RegexLiteral', 'not-found');
 
-setupTest('', 'OptionalCallExpression', undefined, true);
+setupTest(code1, 'RestElement', {
+  end: [67, 28],
+  start: [67, 23],
+  text: '...re',
+  type: 'RestElement',
+});
 
-setupTest('', 'OptionalMemberExpression', undefined, true);
+setupTest(code1, 'RestProperty', 'not-found');
 
-setupTest('', 'ParenthesizedExpression', undefined, true);
+setupTest(code1, 'ReturnStatement', {
+  end: [18, 34],
+  start: [18, 3],
+  text: '← fn(op) / 42 / i',
+  type: 'ReturnStatement',
+});
 
-setupTest('', 'Pattern', undefined, true);
-
-setupTest('', 'PatternLike', undefined, true);
-
-setupTest('', 'PipelineBareFunction', undefined, true);
-
-setupTest('', 'PipelinePrimaryTopicReference', undefined, true);
-
-setupTest('', 'PipelineTopicExpression', undefined, true);
-
-setupTest('', 'Placeholder', undefined, true);
-
-setupTest('', 'Private', undefined, true);
-
-setupTest('', 'PrivateName', undefined, true);
-
-setupTest('', 'Program', undefined, true);
-
-setupTest('', 'Property', undefined, true);
-
-setupTest('', 'Pureish', undefined, true);
-
-setupTest('', 'QualifiedTypeIdentifier', undefined, true);
-
-setupTest('', 'RecordExpression', undefined, true);
-
-setupTest('', 'RegExpLiteral', undefined, true);
-
-setupTest('', 'RegexLiteral', undefined, true);
-
-setupTest('', 'RestElement', undefined, true);
-
-setupTest('', 'RestProperty', undefined, true);
-
-setupTest('', 'ReturnStatement', undefined, true);
-
-setupTest('', 'Scopable', undefined, true);
+setupTest(code1, 'Scopable', 'not-found');
 
 setupTest('', 'SequenceExpression', undefined, true);
 

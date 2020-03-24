@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'JSXNamespacedName',
-    text: 'JSXNamespacedName',
+    text: `<${helpers.parse(node.namespace).text}:${
+      helpers.parse(node.name).text
+    }>`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

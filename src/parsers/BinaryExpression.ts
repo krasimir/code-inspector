@@ -6,11 +6,13 @@ export default function(
   node: T.BinaryExpression,
   helpers: ParserHelpers
 ): NormalizedNode {
+  const l = helpers.parse(node.left).text;
+  const r = helpers.parse(node.right).text;
   return {
     type: 'BinaryExpression',
-    left: helpers.parse(node.left).text,
-    right: helpers.parse(node.right).text,
-    text: '',
+    left: l,
+    right: r,
+    text: `${l} ${node.operator} ${r}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

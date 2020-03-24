@@ -11,8 +11,8 @@ export default function(
   return {
     type: 'JSXOpeningElement',
     text: `<${helpers.parse(node.name).text}${
-      node.attributes.length > 0 ? `...${node.attributes.length}` : ''
-    }}${node.selfClosing ? '/>' : '>'}`,
+      node.attributes.length > 0 ? `…${node.attributes.length}` : ''
+    }${node.selfClosing ? '/>' : '>'}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

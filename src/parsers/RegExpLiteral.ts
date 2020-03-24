@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'RegExpLiteral',
-    text: 'RegExpLiteral',
+    text: `/${node.pattern}/${node.flags}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }
