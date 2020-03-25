@@ -51,7 +51,7 @@ setupTest('function A(foo = "bar"){}', 'AssignmentPattern', {
   left: 'foo',
   right: '"bar"',
   start: [1, 12],
-  text: '=',
+  text: 'foo="bar"',
   type: 'AssignmentPattern',
 });
 
@@ -990,55 +990,164 @@ setupTest(code, 'TSModuleDeclaration', {
   type: 'TSModuleDeclaration',
 });
 
-setupTest(code, 'TSNamespaceExportDeclaration', undefined, true);
+setupTest(code, 'TSNamespaceExportDeclaration', {
+  end: [166, 23],
+  start: [166, 1],
+  text: '↗ as namespace A',
+  type: 'TSNamespaceExportDeclaration',
+});
 
-setupTest(code, 'TSNeverKeyword', undefined, true);
+setupTest(code, 'TSNeverKeyword', {
+  end: [95, 14],
+  start: [95, 9],
+  text: 'never',
+  type: 'TSNeverKeyword',
+});
 
-setupTest(code, 'TSNonNullExpression', undefined, true);
+setupTest(code, 'TSNonNullExpression', {
+  end: [168, 3],
+  start: [168, 1],
+  text: 'x!',
+  type: 'TSNonNullExpression',
+});
 
-setupTest(code, 'TSNullKeyword', undefined, true);
+setupTest(code, 'TSNullKeyword', {
+  end: [96, 14],
+  start: [96, 10],
+  text: 'null',
+  type: 'TSNullKeyword',
+});
 
-setupTest(code, 'TSNumberKeyword', undefined, true);
+setupTest(code, 'TSNumberKeyword', {
+  end: [88, 16],
+  start: [88, 10],
+  text: 'number',
+  type: 'TSNumberKeyword',
+});
 
-setupTest(code, 'TSObjectKeyword', undefined, true);
+setupTest(code, 'TSObjectKeyword', {
+  end: [98, 14],
+  start: [98, 8],
+  text: 'object',
+  type: 'TSObjectKeyword',
+});
 
-setupTest(code, 'TSOptionalType', undefined, true);
+setupTest(code, 'TSOptionalType', {
+  end: [170, 27],
+  start: [170, 20],
+  text: 'number?',
+  type: 'TSOptionalType',
+});
 
-setupTest(code, 'TSParameterProperty', undefined, true);
+setupTest(code, 'TSParameterProperty', {
+  end: [174, 28],
+  start: [174, 7],
+  text: 'public y?:number=0',
+  type: 'TSParameterProperty',
+});
 
-setupTest(code, 'TSParenthesizedType', undefined, true);
+setupTest(code, 'TSParenthesizedType', {
+  end: [151, 38],
+  start: [151, 29],
+  text: '(infer U)',
+  type: 'TSParenthesizedType',
+});
 
-setupTest(code, 'TSPropertySignature', undefined, true);
+setupTest(code, 'TSPropertySignature', {
+  end: [178, 29],
+  start: [178, 19],
+  text: 'x:number',
+  type: 'TSPropertySignature',
+});
 
-setupTest(code, 'TSQualifiedName', undefined, true);
+setupTest(code, 'TSQualifiedName', {
+  end: [136, 24],
+  start: [136, 21],
+  text: 'X.Y',
+  type: 'TSQualifiedName',
+});
 
-setupTest(code, 'TSRestType', undefined, true);
+setupTest(code, 'TSRestType', {
+  end: [180, 31],
+  start: [180, 20],
+  text: '...string[]',
+  type: 'TSRestType',
+});
 
-setupTest(code, 'TSStringKeyword', undefined, true);
+setupTest(code, 'TSStringKeyword', {
+  end: [99, 15],
+  start: [99, 9],
+  text: 'string',
+  type: 'TSStringKeyword',
+});
 
-setupTest(code, 'TSSymbolKeyword', undefined, true);
+setupTest(code, 'TSSymbolKeyword', {
+  end: [100, 15],
+  start: [100, 9],
+  text: 'symbol',
+  type: 'TSSymbolKeyword',
+});
 
-setupTest(code, 'TSThisType', undefined, true);
+setupTest(code, 'TSThisType', {
+  end: [183, 16],
+  start: [183, 12],
+  text: 'this',
+  type: 'TSThisType',
+});
 
-setupTest(code, 'TSTupleType', undefined, true);
+setupTest(code, 'TSTupleType', {
+  end: [170, 48],
+  start: [170, 11],
+  text: '[string, number?, (string | number)?]',
+  type: 'TSTupleType',
+});
 
-setupTest(code, 'TSType', undefined, true);
+setupTest(code, 'TSType', 'not-found');
 
-setupTest(code, 'TSTypeAliasDeclaration', undefined, true);
+setupTest(code, 'TSTypeAliasDeclaration', {
+  end: [140, 39],
+  start: [140, 1],
+  text: 'MyType:ƒ({theme}:any)',
+  type: 'TSTypeAliasDeclaration',
+});
 
-setupTest(code, 'TSTypeAnnotation', undefined, true);
+setupTest(code, 'TSTypeAnnotation', {
+  end: [87, 19],
+  start: [87, 14],
+  text: ':any',
+  type: 'TSTypeAnnotation',
+});
 
-setupTest(code, 'TSTypeAssertion', undefined, true);
+setupTest(code, 'TSTypeAssertion', 'not-found');
+setupTest(code, 'TSTypeElement', 'not-found');
 
-setupTest(code, 'TSTypeElement', undefined, true);
+setupTest(code, 'TSTypeLiteral', {
+  end: [190, 28],
+  start: [190, 15],
+  text: '{x:number}',
+  type: 'TSTypeLiteral',
+});
 
-setupTest(code, 'TSTypeLiteral', undefined, true);
+setupTest(code, 'TSTypeOperator', {
+  end: [193, 17],
+  start: [193, 10],
+  text: 'keyof T',
+  type: 'TSTypeOperator',
+});
 
-setupTest(code, 'TSTypeOperator', undefined, true);
+setupTest(code, 'TSTypeParameter', {
+  end: [116, 21],
+  start: [116, 20],
+  text: 'T',
+  type: 'TSTypeParameter',
+});
 
-setupTest(code, 'TSTypeParameter', undefined, true);
-
-setupTest(code, 'TSTypeParameterDeclaration', undefined, true);
+setupTest(code, 'TSTypeParameterDeclaration', {
+  end: [116, 22],
+  start: [116, 19],
+  text: '<T>',
+  type: 'TSTypeParameterDeclaration',
+});
 
 setupTest(code, 'TSTypeParameterInstantiation', undefined, true);
 

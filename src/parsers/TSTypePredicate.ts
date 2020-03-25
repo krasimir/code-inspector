@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSTypePredicate',
-    text: 'TSTypePredicate',
+    text: `${helpers.parse(node.parameterName).text} is ${
+      helpers.parse(node.typeAnnotation).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

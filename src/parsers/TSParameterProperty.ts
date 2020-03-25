@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSParameterProperty',
-    text: 'TSParameterProperty',
+    text: `${node.accessibility ? `${node.accessibility} ` : ''}${
+      helpers.parse(node.parameter).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

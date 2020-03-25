@@ -6,11 +6,13 @@ export default function(
   node: T.AssignmentPattern,
   helpers: ParserHelpers
 ): NormalizedNode {
+  const left = helpers.parse(node.left).text;
+  const right = helpers.parse(node.right).text;
   return {
     type: 'AssignmentPattern',
-    left: helpers.parse(node.left).text,
-    right: helpers.parse(node.right).text,
-    text: '=',
+    left,
+    right,
+    text: `${left}=${right}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

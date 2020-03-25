@@ -9,9 +9,10 @@ export default function(
   const typeScriptAnnotation: string = node.typeAnnotation
     ? helpers.parse(node.typeAnnotation).text
     : '';
+  const typeScriptOptional: string = node.optional ? '?' : '';
   return {
     type: 'Identifier',
-    text: node.name + typeScriptAnnotation,
+    text: node.name + typeScriptOptional + typeScriptAnnotation,
     ...helpers.normalizeLoc(node.loc),
   };
 }

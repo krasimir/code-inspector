@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSNamespaceExportDeclaration',
-    text: 'TSNamespaceExportDeclaration',
+    text: `↗ as namespace ${helpers.parse(node.id).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

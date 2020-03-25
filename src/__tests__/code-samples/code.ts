@@ -162,3 +162,32 @@ interface I892 {
 }
 
 declare module "m" {}
+
+export as namespace A;
+
+x!;
+
+let go22: [string, number?, (string | number)?]
+
+class C221 {
+  constructor(
+      public y?: number = 0
+  ) {}
+}
+
+interface Comma { x: number, y: number }
+
+let x123: [string, ...string[],]
+
+class F3oo {
+  isBar(): this is string {
+  }
+  isBaz = (): this is string => {
+  }
+}
+
+const s = {
+  set m(this: { x: number }, value) {}
+};
+
+let x76: keyof T;

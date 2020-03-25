@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSOptionalType',
-    text: 'TSOptionalType',
+    text: `${helpers.parse(node.typeAnnotation).text}?`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

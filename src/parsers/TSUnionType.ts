@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSUnionType',
-    text: 'TSUnionType',
+    text: helpers.parseItems(node.types, parent, grandParent, ' |'),
     ...helpers.normalizeLoc(node.loc),
   };
 }
