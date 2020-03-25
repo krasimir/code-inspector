@@ -130,3 +130,35 @@ enum A90 {
   a,
   "r"
 }
+
+export = f;
+
+(class C implements X.Y<T> {});
+
+import xxff = require ("asdfasdf");
+
+type MyType = ({ theme }: any) => any;
+
+let opi: typeof import('./x');
+
+class FF2C {
+  [x: string]: any;
+  readonly [x: string]: any;
+}
+
+let x90: T[K];
+
+type Element<T> = T extends (infer U)[] ? U : T;
+
+type F10 = x90 & Element;
+
+type Foo12 = false;
+
+let map1: { [P in string]: number; };
+
+interface I892 {
+  [Symbol.iterator](): void;
+  [Symbol.iterator]?(): number;
+}
+
+declare module "m" {}

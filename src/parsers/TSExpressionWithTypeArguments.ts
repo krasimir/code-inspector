@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSExpressionWithTypeArguments',
-    text: 'TSExpressionWithTypeArguments',
+    text: `${helpers.parse(node.expression).text}${
+      helpers.parse(node.typeParameters).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

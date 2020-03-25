@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSMappedType',
-    text: 'TSMappedType',
+    text: `{ [${helpers.parse(node.typeParameter).text}]:${
+      helpers.parse(node.typeAnnotation).text
+    } }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

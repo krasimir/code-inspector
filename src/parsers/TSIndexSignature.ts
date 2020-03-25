@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSIndexSignature',
-    text: 'TSIndexSignature',
+    text: `[${helpers.parseItems(node.parameters)}]${
+      helpers.parse(node.typeAnnotation).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

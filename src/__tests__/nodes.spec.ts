@@ -871,39 +871,124 @@ setupTest(code, 'TSEnumMember', {
   type: 'TSEnumMember',
 });
 
-setupTest(code, 'TSExportAssignment', undefined, true);
+setupTest(code, 'TSExportAssignment', {
+  end: [134, 12],
+  start: [134, 1],
+  text: '↗ f',
+  type: 'TSExportAssignment',
+});
 
-setupTest(code, 'TSExpressionWithTypeArguments', undefined, true);
+setupTest(code, 'TSExpressionWithTypeArguments', {
+  end: [136, 27],
+  start: [136, 21],
+  text: 'X.Y<T>',
+  type: 'TSExpressionWithTypeArguments',
+});
 
-setupTest(code, 'TSExternalModuleReference', undefined, true);
+setupTest(code, 'TSExternalModuleReference', {
+  end: [138, 35],
+  start: [138, 15],
+  text: '"asdfasdf"',
+  type: 'TSExternalModuleReference',
+});
 
-setupTest(code, 'TSFunctionType', undefined, true);
+setupTest(code, 'TSFunctionType', {
+  end: [140, 38],
+  start: [140, 15],
+  text: 'ƒ({theme}:any)',
+  type: 'TSFunctionType',
+});
 
-setupTest(code, 'TSImportEqualsDeclaration', undefined, true);
+setupTest(code, 'TSImportEqualsDeclaration', {
+  end: [138, 36],
+  start: [138, 1],
+  text: 'xxff ⤺ "asdfasdf"',
+  type: 'TSImportEqualsDeclaration',
+});
 
-setupTest(code, 'TSImportType', undefined, true);
+setupTest(code, 'TSImportType', {
+  end: [142, 30],
+  start: [142, 17],
+  text: '⤺ "./x"',
+  type: 'TSImportType',
+});
 
-setupTest(code, 'TSIndexSignature', undefined, true);
+setupTest(code, 'TSIndexSignature', {
+  end: [145, 20],
+  start: [145, 3],
+  text: '[x:string]:any',
+  type: 'TSIndexSignature',
+});
 
-setupTest(code, 'TSIndexedAccessType', undefined, true);
+setupTest(code, 'TSIndexedAccessType', {
+  end: [149, 14],
+  start: [149, 10],
+  text: 'T[K]',
+  type: 'TSIndexedAccessType',
+});
 
-setupTest(code, 'TSInferType', undefined, true);
+setupTest(code, 'TSInferType', {
+  end: [151, 37],
+  start: [151, 30],
+  text: 'infer U',
+  type: 'TSInferType',
+});
 
-setupTest(code, 'TSInterfaceBody', undefined, true);
+setupTest(code, 'TSInterfaceBody', {
+  end: [107, 2],
+  start: [105, 13],
+  text: '{…}',
+  type: 'TSInterfaceBody',
+});
 
-setupTest(code, 'TSInterfaceDeclaration', undefined, true);
+setupTest(code, 'TSInterfaceDeclaration', {
+  end: [107, 2],
+  start: [105, 1],
+  text: 'interface I',
+  type: 'TSInterfaceDeclaration',
+});
 
-setupTest(code, 'TSIntersectionType', undefined, true);
+setupTest(code, 'TSIntersectionType', {
+  end: [153, 25],
+  start: [153, 12],
+  text: 'x90 & Element',
+  type: 'TSIntersectionType',
+});
 
-setupTest(code, 'TSLiteralType', undefined, true);
+setupTest(code, 'TSLiteralType', {
+  end: [155, 19],
+  start: [155, 14],
+  text: false,
+  type: 'TSLiteralType',
+});
 
-setupTest(code, 'TSMappedType', undefined, true);
+setupTest(code, 'TSMappedType', {
+  end: [157, 37],
+  start: [157, 11],
+  text: '{ [P in string]:number }',
+  type: 'TSMappedType',
+});
 
-setupTest(code, 'TSMethodSignature', undefined, true);
+setupTest(code, 'TSMethodSignature', {
+  end: [160, 29],
+  start: [160, 3],
+  text: 'Symbol.iterator():void',
+  type: 'TSMethodSignature',
+});
 
-setupTest(code, 'TSModuleBlock', undefined, true);
+setupTest(code, 'TSModuleBlock', {
+  end: [164, 22],
+  start: [164, 20],
+  text: '{…}',
+  type: 'TSModuleBlock',
+});
 
-setupTest(code, 'TSModuleDeclaration', undefined, true);
+setupTest(code, 'TSModuleDeclaration', {
+  end: [164, 22],
+  start: [164, 1],
+  text: 'declare module "m"',
+  type: 'TSModuleDeclaration',
+});
 
 setupTest(code, 'TSNamespaceExportDeclaration', undefined, true);
 

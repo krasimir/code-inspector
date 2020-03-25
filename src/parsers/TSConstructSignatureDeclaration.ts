@@ -10,14 +10,9 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'TSConstructSignatureDeclaration',
-    text: `new (${node.parameters
-      .map(
-        p =>
-          `${helpers.parse(p).text}${
-            p.typeAnnotation ? `${helpers.parse(p.typeAnnotation).text}` : ''
-          }`
-      )
-      .join(', ')})${helpers.parse(node.typeAnnotation).text}`,
+    text: `new (${helpers.parseItems(node.parameters)})${
+      helpers.parse(node.typeAnnotation).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

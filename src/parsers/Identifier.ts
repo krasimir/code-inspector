@@ -6,9 +6,12 @@ export default function(
   node: T.Identifier,
   helpers: ParserHelpers
 ): NormalizedNode {
+  const typeScriptAnnotation: string = node.typeAnnotation
+    ? helpers.parse(node.typeAnnotation).text
+    : '';
   return {
     type: 'Identifier',
-    text: node.name,
+    text: node.name + typeScriptAnnotation,
     ...helpers.normalizeLoc(node.loc),
   };
 }

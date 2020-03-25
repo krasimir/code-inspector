@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSImportEqualsDeclaration',
-    text: 'TSImportEqualsDeclaration',
+    text: `${helpers.parse(node.id).text} ⤺ ${
+      helpers.parse(node.moduleReference).text
+    }`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

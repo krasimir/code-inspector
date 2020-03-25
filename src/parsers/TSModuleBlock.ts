@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSModuleBlock',
-    text: 'TSModuleBlock',
+    text: '{…}',
     ...helpers.normalizeLoc(node.loc),
   };
 }

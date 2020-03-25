@@ -8,10 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSIndexedAccessType',
-    text: 'TSIndexedAccessType',
+    text: `${helpers.parse(node.objectType).text}[${
+      helpers.parse(node.indexType).text
+    }]`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

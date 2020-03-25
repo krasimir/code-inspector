@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TSInferType',
-    text: 'TSInferType',
+    text: `infer ${helpers.parse(node.typeParameter).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }
