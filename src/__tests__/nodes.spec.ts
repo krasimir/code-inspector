@@ -1149,13 +1149,33 @@ setupTest(code, 'TSTypeParameterDeclaration', {
   type: 'TSTypeParameterDeclaration',
 });
 
-setupTest(code, 'TSTypeParameterInstantiation', undefined, true);
+setupTest(code, 'TSTypeParameterInstantiation', {
+  end: [136, 27],
+  start: [136, 24],
+  text: '<T>',
+  type: 'TSTypeParameterInstantiation',
+});
 
-setupTest(code, 'TSTypePredicate', undefined, true);
+setupTest(code, 'TSTypePredicate', {
+  end: [183, 26],
+  start: [183, 12],
+  text: 'this is :string',
+  type: 'TSTypePredicate',
+});
 
-setupTest(code, 'TSTypeQuery', undefined, true);
+setupTest(code, 'TSTypeQuery', {
+  end: [142, 30],
+  start: [142, 10],
+  text: '⤺ "./x"',
+  type: 'TSTypeQuery',
+});
 
-setupTest(code, 'TSTypeReference', undefined, true);
+setupTest(code, 'TSTypeReference', {
+  end: [90, 16],
+  start: [90, 10],
+  text: 'Object',
+  type: 'TSTypeReference',
+});
 
 setupTest(code, 'TSUndefinedKeyword', undefined, true);
 
