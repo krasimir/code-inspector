@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'ThrowStatement',
-    text: 'ThrowStatement',
+    text: `throw ${helpers.parse(node.argument).text}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

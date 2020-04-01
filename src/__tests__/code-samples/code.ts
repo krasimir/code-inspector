@@ -191,3 +191,29 @@ const s = {
 };
 
 let x76: keyof T;
+
+raw`token ${`nested ${`deeply` + {}} blah`}`
+
+class Foo1920 {
+  method() {
+    this.go();
+  }
+}
+
+throw ui89;
+
+try {
+  throw new Error('foo');
+} catch(err) {
+  console.log(err);
+}
+
+let a786: any;
+
+-x675
+
+while (true) {  }
+
+with (x4590d) {
+  foo = bar
+}

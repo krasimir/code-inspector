@@ -447,7 +447,7 @@ setupTest('', 'InterfaceTypeAnnotation', 'not-found');
 setupTest('', 'InterpreterDirective', 'not-found');
 setupTest('', 'IntersectionTypeAnnotation', 'not-found');
 
-setupTest('', 'JSX', undefined, true);
+setupTest('', 'JSX', 'not-found');
 
 setupTest(code, 'JSXAttribute', {
   end: [27, 17],
@@ -1177,72 +1177,149 @@ setupTest(code, 'TSTypeReference', {
   type: 'TSTypeReference',
 });
 
-setupTest(code, 'TSUndefinedKeyword', undefined, true);
+setupTest(code, 'TSUndefinedKeyword', {
+  end: [101, 17],
+  start: [101, 8],
+  text: 'undefined',
+  type: 'TSUndefinedKeyword',
+});
 
-setupTest(code, 'TSUnionType', undefined, true);
+setupTest(code, 'TSUnionType', {
+  end: [170, 45],
+  start: [170, 30],
+  text: 'string | number',
+  type: 'TSUnionType',
+});
 
-setupTest(code, 'TSUnknownKeyword', undefined, true);
+setupTest(code, 'TSUnknownKeyword', {
+  end: [93, 16],
+  start: [93, 9],
+  text: 'unknown',
+  type: 'TSUnknownKeyword',
+});
 
-setupTest(code, 'TSVoidKeyword', undefined, true);
+setupTest(code, 'TSVoidKeyword', {
+  end: [87, 25],
+  start: [87, 21],
+  text: 'void',
+  type: 'TSVoidKeyword',
+});
 
-setupTest(code, 'TaggedTemplateExpression', undefined, true);
+setupTest(code, 'TaggedTemplateExpression', {
+  end: [195, 45],
+  start: [195, 1],
+  text: 'raw`...`',
+  type: 'TaggedTemplateExpression',
+});
 
-setupTest(code, 'TemplateElement', undefined, true);
+setupTest(code, 'TemplateElement', {
+  end: [195, 11],
+  start: [195, 5],
+  text: 'token ',
+  type: 'TemplateElement',
+});
 
-setupTest(code, 'TemplateLiteral', undefined, true);
+setupTest(code, 'TemplateLiteral', {
+  end: [195, 45],
+  start: [195, 4],
+  text: '`...`',
+  type: 'TemplateLiteral',
+});
 
-setupTest(code, 'Terminatorless', undefined, true);
+setupTest('code', 'Terminatorless', 'not-found');
 
-setupTest(code, 'ThisExpression', undefined, true);
+setupTest(code, 'ThisExpression', {
+  end: [199, 9],
+  start: [199, 5],
+  text: 'this',
+  type: 'ThisExpression',
+});
 
-setupTest(code, 'ThisTypeAnnotation', undefined, true);
+setupTest(code, 'ThisTypeAnnotation', 'not-found');
 
-setupTest(code, 'ThrowStatement', undefined, true);
+setupTest(code, 'ThrowStatement', {
+  end: [203, 12],
+  start: [203, 1],
+  text: 'throw ui89',
+  type: 'ThrowStatement',
+});
 
-setupTest(code, 'TryStatement', undefined, true);
+setupTest(code, 'TryStatement', {
+  end: [209, 2],
+  start: [205, 1],
+  text: 'try',
+  type: 'TryStatement',
+});
 
-setupTest(code, 'TupleExpression', undefined, true);
+setupTest(code, 'TupleExpression', 'not-found');
+setupTest(code, 'TupleTypeAnnotation', 'not-found');
+setupTest(code, 'TypeAlias', 'not-found');
+setupTest(code, 'TypeAnnotation', 'not-found');
+setupTest(code, 'TypeCastExpression', 'not-found');
+setupTest(code, 'TypeParameter', 'not-found');
+setupTest(code, 'TypeParameterDeclaration', 'not-found');
+setupTest(code, 'TypeParameterInstantiation', 'not-found');
+setupTest(code, 'TypeofTypeAnnotation', 'not-found');
 
-setupTest(code, 'TupleTypeAnnotation', undefined, true);
+setupTest(code, 'UnaryExpression', {
+  end: [213, 6],
+  start: [213, 1],
+  text: '-x675',
+  type: 'UnaryExpression',
+});
 
-setupTest(code, 'TypeAlias', undefined, true);
+setupTest(code, 'UnaryLike', 'not-found');
 
-setupTest(code, 'TypeAnnotation', undefined, true);
+setupTest(code, 'UnionTypeAnnotation', 'not-found');
 
-setupTest(code, 'TypeCastExpression', undefined, true);
+setupTest(code, 'UpdateExpression', {
+  end: [10, 23],
+  start: [10, 20],
+  text: '++',
+  type: 'UpdateExpression',
+});
 
-setupTest(code, 'TypeParameter', undefined, true);
+setupTest(code, 'UserWhitespacable', 'not-found');
 
-setupTest(code, 'TypeParameterDeclaration', undefined, true);
+setupTest(code, 'V8IntrinsicIdentifier', 'not-found');
 
-setupTest(code, 'TypeParameterInstantiation', undefined, true);
+setupTest(code, 'VariableDeclaration', {
+  end: [2, 21],
+  start: [2, 8],
+  text: 'a',
+  type: 'VariableDeclaration',
+});
 
-setupTest(code, 'TypeofTypeAnnotation', undefined, true);
+setupTest(code, 'VariableDeclarator', {
+  end: [2, 20],
+  start: [2, 14],
+  text: 'a',
+  type: 'VariableDeclarator',
+});
 
-setupTest(code, 'UnaryExpression', undefined, true);
+setupTest(code, 'Variance', 'not-found');
 
-setupTest(code, 'UnaryLike', undefined, true);
+setupTest(code, 'VoidTypeAnnotation', 'not-found');
 
-setupTest(code, 'UnionTypeAnnotation', undefined, true);
+setupTest(code, 'While', 'not-found');
 
-setupTest(code, 'UpdateExpression', undefined, true);
+setupTest(code, 'WhileStatement', {
+  end: [215, 18],
+  start: [215, 1],
+  text: 'while(true)',
+  type: 'WhileStatement',
+});
 
-setupTest(code, 'UserWhitespacable', undefined, true);
+setupTest(code, 'WithStatement', {
+  end: [219, 2],
+  start: [217, 1],
+  text: 'with(x4590d) { ... }',
+  type: 'WithStatement',
+});
 
-setupTest(code, 'V8IntrinsicIdentifier', undefined, true);
-
-setupTest(code, 'VariableDeclaration', undefined, true);
-
-setupTest(code, 'VariableDeclarator', undefined, true);
-
-setupTest(code, 'Variance', undefined, true);
-
-setupTest(code, 'VoidTypeAnnotation', undefined, true);
-
-setupTest(code, 'While', undefined, true);
-
-setupTest(code, 'WhileStatement', undefined, true);
-
-setupTest(code, 'WithStatement', undefined, true);
-
-setupTest(code, 'YieldExpression', undefined, true);
+setupTest(code, 'YieldExpression', {
+  end: [52, 32],
+  start: [52, 8],
+  text: 'yield select(…)',
+  type: 'YieldExpression',
+});

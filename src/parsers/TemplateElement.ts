@@ -8,10 +8,9 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
-  console.log(node);
   return {
     type: 'TemplateElement',
-    text: 'TemplateElement',
+    text: node.value.raw,
     ...helpers.normalizeLoc(node.loc),
   };
 }
