@@ -31,6 +31,7 @@ The result will be:
 
 ```json
 {
+  "ast": {...},
   "nodes": [
     { "type": "Program", "text": "Program", "start": [1, 1], "end": [8, 1] },
     { "type": "FunctionDeclaration", "text": "print<name>", "start": [3, 2], "end": [6, 4] },
