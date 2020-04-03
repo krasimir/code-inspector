@@ -1,17 +1,15 @@
 {
   "name": "code-inspector",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "node/code-inspector.js",
   "description": "Static analysis for your code",
   "devDependencies": {
     "@babel/core": "7.5.0",
-    "@babel/parser": "7.8.8",
     "@babel/plugin-transform-regenerator": "7.4.5",
     "@babel/plugin-transform-runtime": "7.5.0",
     "@babel/preset-env": "7.5.0",
     "@babel/preset-typescript": "7.8.3",
     "@babel/runtime": "7.5.0",
-    "@babel/types": "7.9.0",
     "@jest/console": "25.1.0",
     "@types/jest": "25.1.4",
     "@types/lodash": "4.14.149",
@@ -34,7 +32,6 @@
     "eslint-plugin-react": "7.18.0",
     "eslint-plugin-react-hooks": "1.7.0",
     "jest": "25.1.0",
-    "lodash": "4.17.15",
     "prettier": "1.19.1",
     "regenerator-runtime": "0.13.2",
     "terser-webpack-plugin": "1.2.3",
@@ -76,6 +73,8 @@
     ]
   },
   "dependencies": {
-    "@babel/traverse": "7.9.0"
+    "@babel/traverse": "7.9.0",
+    "@babel/parser": "7.8.8",
+    "@babel/types": "7.9.0"
   }
 }

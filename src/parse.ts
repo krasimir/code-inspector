@@ -19,6 +19,18 @@ function parseFunctionParameters(params: any[]): string {
   return '';
 }
 
+function renderFunctionParameters(
+  node: any,
+  parent: Traverse.Node,
+  grandParent: Traverse.Node,
+  delimiter = ','
+): string {
+  if (node.params && node.params.length > 0) {
+    return `<${parseItems(node.params, parent, grandParent, delimiter)}>`;
+  }
+  return '';
+}
+
 function parseItems(
   items: any[],
   parent: Traverse.Node,
@@ -41,7 +53,13 @@ export function parse(
   if (node && Parsers[node.type]) {
     return Parsers[node.type](
       node,
-      { normalizeLoc, parse, parseFunctionParameters, parseItems },
+      {
+        normalizeLoc,
+        parse,
+        parseFunctionParameters,
+        parseItems,
+        renderFunctionParameters,
+      },
       parent,
       grandParent
     );

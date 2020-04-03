@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies, no-param-reassign */
 import * as parser from '@babel/parser';
 import * as Traverse from '@babel/traverse';
-import T from '@babel/types';
 import { parse } from './parse';
 
 import { NormalizedNode } from './types';
+import filterToScopeNodes from './api/scope';
 
 const plugins = [
   'jsx',
@@ -40,24 +40,38 @@ const babelParserOptions = {
   decoratorsBeforeExport: true,
 };
 
+function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
+  return parse(
+    n.node,
+    n.parentPath ? n.parentPath.node : null,
+    n.parentPath && n.parentPath.parentPath
+      ? n.parentPath.parentPath.node
+      : null
+  );
+}
+
+function getNestedLevel(node: Traverse.NodePath, level = 0): number {
+  if (node.scope.path.parentPath) {
+    return getNestedLevel(node.scope.path.parentPath, level + 1);
+  }
+  return level;
+}
+
 export function analyze(code: string) {
   try {
     const ast = parser.parse(code, babelParserOptions);
     const nodes: NormalizedNode[] = [];
-    // console.log(code, '\n\n', ast.program.body);
-    // @ts-ignore
+    const scopes: NormalizedNode[] = [];
     Traverse.default(ast, {
       enter(path: Traverse.NodePath) {
-        // console.log('->', path.type);
-        const normalizedNode = parse(
-          path.node,
-          path.parentPath ? path.parentPath.node : null,
-          path.parentPath && path.parentPath.parentPath
-            ? path.parentPath.parentPath.node
-            : null
-        );
+        const normalizedNode = toNormalizeNode(path);
+        const scopeNode = toNormalizeNode(path.scope.path);
+        scopeNode.nesting = getNestedLevel(path.scope.path);
         if (normalizedNode) {
           nodes.push(normalizedNode);
+        }
+        if (scopeNode) {
+          scopes.push(scopeNode);
         }
       },
       exit(path: Traverse.NodePath) {
@@ -66,10 +80,11 @@ export function analyze(code: string) {
     });
     return {
       nodes,
+      scopes: filterToScopeNodes(scopes),
     };
   } catch (err) {
     console.log('Error parsing to ast');
     console.log(err);
-    return { nodes: [] };
+    return { nodes: [], scopes: [] };
   }
 }

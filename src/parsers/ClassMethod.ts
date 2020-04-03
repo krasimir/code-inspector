@@ -12,7 +12,7 @@ export default function(
     type: 'ClassMethod',
     text: `${grandParent ? `${helpers.parse(grandParent).text}.` : ''}${
       helpers.parse(node.key).text
-    }`,
+    }${helpers.renderFunctionParameters(node)}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

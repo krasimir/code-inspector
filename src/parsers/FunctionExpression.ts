@@ -14,9 +14,7 @@ export default function(
   }
   return {
     type: 'FunctionExpression',
-    text: `${funcName}(${node.params
-      .map(p => helpers.parse(p).text)
-      .join(', ')})`,
+    text: `${funcName}${helpers.renderFunctionParameters(node)}`,
     ...helpers.normalizeLoc(node.loc),
   };
 }
