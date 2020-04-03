@@ -35,7 +35,6 @@ describe('Given the code4.tsx code sample', () => {
         'ObjectMethod | itemPosition(…1) 1',
         'ArrowFunctionExpression | this.items.findIndex(…) callback 2',
         'FunctionDeclaration | Graph<{entities}> 1',
-        'ObjectPattern | {entities} 2',
         'ArrowFunctionExpression | useEffect(…) callback 2',
       ]);
     });
