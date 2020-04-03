@@ -9,6 +9,7 @@ export interface NormalizedNode {
 }
 
 export interface Analysis {
+  ast: any;
   nodes: NormalizedNode[];
   scopes: NormalizedNode[];
 }

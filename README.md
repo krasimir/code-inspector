@@ -69,3 +69,25 @@ The library works in a browser too. It's of course a bit heavy. There is a clien
 ## How it works
 
 It is based on [@babel/traverse](https://www.npmjs.com/package/@babel/traverse), [@babel/parser](https://www.npmjs.com/package/@babel/parser), and [@babel/types](https://www.npmjs.com/package/@babel/types). It gets your code and traverses the AST tree normalizing the nodes.
+
+## API
+
+```
+export function analyze(code: string): Analysis;
+
+export interface Analysis {
+  ast: any;
+  nodes: NormalizedNode[];
+  scopes: NormalizedNode[];
+}
+
+export interface NormalizedNode {
+  text: string | number | boolean;
+  type: string;
+  start?: [number | undefined, number | undefined];
+  end?: [number | undefined, number | undefined];
+  left?: string | number | boolean;
+  right?: string | number | boolean;
+  nesting?: number;
+}
+```

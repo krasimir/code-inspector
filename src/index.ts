@@ -78,6 +78,7 @@ export function analyze(code: string) {
     },
   });
   return {
+    ast,
     nodes,
     scopes: filterToScopeNodes(scopes),
   };
