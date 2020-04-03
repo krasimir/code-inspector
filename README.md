@@ -56,12 +56,16 @@ The result will be:
     { "type": "Identifier", "text": "name", "start": [5, 25], "end": [5, 29] }
   ],
   "scopes": [
-    { "type": "FunctionDeclaration", "text": "print<name>", "start": [3, 2], "end": [6, 4], nesting": 1 },
-    { "type": "ArrowFunctionExpression", "text": "format<str>", "start": [4, 21], "end": [4, 45], nesting": 2 }
+    { "type": "FunctionDeclaration", "text": "print<name>", "start": [3, 2], "end": [6, 4], "nesting": 1 },
+    { "type": "ArrowFunctionExpression", "text": "format<str>", "start": [4, 21], "end": [4, 45], "nesting": 2 }
   ]
 }
 ```
 
-# Using it in a browser
+## Using it in a browser
 
 The library works in a browser too. It's of course a bit heavy. There is a client-side bundle here [unpkg.com/code-inspector@latest/browser/code-inspector.js](https://unpkg.com/code-inspector@1.1.8/browser/code-inspector.js). Once you load the file you'll have a `CodeInspector` global variable available.
+
+## How it works
+
+It is based on [@babel/traverse](https://www.npmjs.com/package/@babel/traverse), [@babel/parser](https://www.npmjs.com/package/@babel/parser), and [@babel/types](https://www.npmjs.com/package/@babel/types). It gets your code and traverses the AST tree normalizing the nodes.
