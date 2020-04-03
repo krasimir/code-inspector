@@ -8,6 +8,6 @@ export interface NormalizedNode {
   nesting?: number;
 }
 
-export default interface CodeInspector {
-  analyze(code: string): { nodes: NormalizedNode[]; scopes: NormalizedNode[] };
-}
+export function analyze(
+  code: string
+): { nodes: NormalizedNode[]; scopes: NormalizedNode[] };
