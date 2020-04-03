@@ -8,6 +8,9 @@ export interface NormalizedNode {
   nesting?: number;
 }
 
-export function analyze(
-  code: string
-): { nodes: NormalizedNode[]; scopes: NormalizedNode[] };
+export interface Analysis {
+  nodes: NormalizedNode[];
+  scopes: NormalizedNode[];
+}
+
+export function analyze(code: string): Analysis;
