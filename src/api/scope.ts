@@ -8,6 +8,7 @@ const getScopeNodeKey = (node: NormalizedNode): string =>
 
 const NODE_TYPES_TO_IGNORE: Record<string, boolean> = {
   Program: true,
+  BlockStatement: true,
 };
 
 export default function filterToScopeNodes(
