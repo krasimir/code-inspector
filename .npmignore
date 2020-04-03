@@ -5,7 +5,6 @@ tsconfig.json
 webpack.browser.json
 webpack.node.json
 yarn.lock
-browser
 demo
 jest
 scripts
