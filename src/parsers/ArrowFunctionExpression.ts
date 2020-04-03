@@ -15,6 +15,13 @@ export default function(
       ...helpers.normalizeLoc(node.loc),
     };
   }
+  if (parent && parent.type === 'NewExpression') {
+    return {
+      type: 'ArrowFunctionExpression',
+      text: `new ${helpers.parse(parent.callee).text}(…) argument`,
+      ...helpers.normalizeLoc(node.loc),
+    };
+  }
   if (parent && parent.type === 'VariableDeclarator') {
     return {
       type: 'ArrowFunctionExpression',

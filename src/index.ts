@@ -58,33 +58,27 @@ function getNestedLevel(node: Traverse.NodePath, level = 0): number {
 }
 
 export function analyze(code: string) {
-  try {
-    const ast = parser.parse(code, babelParserOptions);
-    const nodes: NormalizedNode[] = [];
-    const scopes: NormalizedNode[] = [];
-    Traverse.default(ast, {
-      enter(path: Traverse.NodePath) {
-        const normalizedNode = toNormalizeNode(path);
-        const scopeNode = toNormalizeNode(path.scope.path);
-        scopeNode.nesting = getNestedLevel(path.scope.path);
-        if (normalizedNode) {
-          nodes.push(normalizedNode);
-        }
-        if (scopeNode) {
-          scopes.push(scopeNode);
-        }
-      },
-      exit(path: Traverse.NodePath) {
-        // exit
-      },
-    });
-    return {
-      nodes,
-      scopes: filterToScopeNodes(scopes),
-    };
-  } catch (err) {
-    console.log('Error parsing to ast');
-    console.log(err);
-    return { nodes: [], scopes: [] };
-  }
+  const ast = parser.parse(code, babelParserOptions);
+  const nodes: NormalizedNode[] = [];
+  const scopes: NormalizedNode[] = [];
+  Traverse.default(ast, {
+    enter(path: Traverse.NodePath) {
+      const normalizedNode = toNormalizeNode(path);
+      const scopeNode = toNormalizeNode(path.scope.path);
+      scopeNode.nesting = getNestedLevel(path.scope.path);
+      if (normalizedNode) {
+        nodes.push(normalizedNode);
+      }
+      if (scopeNode) {
+        scopes.push(scopeNode);
+      }
+    },
+    exit(path: Traverse.NodePath) {
+      // exit
+    },
+  });
+  return {
+    nodes,
+    scopes: filterToScopeNodes(scopes),
+  };
 }
