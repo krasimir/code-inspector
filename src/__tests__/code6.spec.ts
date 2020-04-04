@@ -14,15 +14,15 @@ describe('Given the code6.tsx code sample', () => {
       );
       expect(expectation).toStrictEqual([
         'ArrowFunctionExpression | defer(…) callback 1',
-        'ArrowFunctionExpression | progressiveJpg<src> 1',
-        'ArrowFunctionExpression | smallProgressiveJpg<src> 1',
-        'ArrowFunctionExpression | largeProgressiveJpg<src> 1',
-        'ArrowFunctionExpression | LandingPage<{content, match, prescreenerType, goToStep, prescreenerLandingPageShown}> 1',
+        'ArrowFunctionExpression | progressiveJpg(src) 1',
+        'ArrowFunctionExpression | smallProgressiveJpg(src) 1',
+        'ArrowFunctionExpression | largeProgressiveJpg(src) 1',
+        'ArrowFunctionExpression | LandingPage({content, match, prescreenerType, goToStep, prescreenerLandingPageShown}) 1',
         'ArrowFunctionExpression | useEffect(…) callback 2',
         'ArrowFunctionExpression | <ViewContext.Consumer…1>…</ViewContext.Consumer> 2',
         'ArrowFunctionExpression | Object.keys(…).find(…) callback 3',
-        'ArrowFunctionExpression | mapStateToProps<state, ownProps> 1',
-        'ArrowFunctionExpression | mapDispatchToProps<dispatch> 1',
+        'ArrowFunctionExpression | mapStateToProps(state, ownProps) 1',
+        'ArrowFunctionExpression | mapDispatchToProps(dispatch) 1',
         'ArrowFunctionExpression | goToStep: ƒ 2',
         'ArrowFunctionExpression | prescreenerLandingPageShown: ƒ 2',
       ]);

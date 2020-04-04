@@ -38,15 +38,15 @@ describe('Given the code-inspector library', () => {
         ({ text, nesting }) => `${text} ${nesting}`
       );
       expect(expectation).toStrictEqual([
-        'NormalizeBoo<a> 1',
-        'somethingElse<a, b> 1',
+        'NormalizeBoo(a) 1',
+        'somethingElse(a, b) 1',
         'getAnswer(…) callback 2',
         'Moo 1',
-        'Moo.go<c, d> 2',
-        'foo 3',
-        'boo 3',
+        'Moo.go(c, d) 2',
+        'foo() 3',
+        'boo() 3',
         'DATA.forEach(…) callback 4',
-        'boo 1',
+        'boo() 1',
       ]);
     });
   });

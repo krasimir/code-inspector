@@ -173,7 +173,7 @@ setupTest(
   }
 }`,
   'ClassMethod',
-  { end: [4, 4], start: [2, 3], text: 'Foo.test', type: 'ClassMethod' }
+  { end: [4, 4], start: [2, 3], text: 'Foo.test()', type: 'ClassMethod' }
 );
 
 setupTest(
@@ -379,14 +379,14 @@ setupTest('', 'Function', 'not-found');
 setupTest(code, 'FunctionDeclaration', {
   end: [8, 2],
   start: [6, 1],
-  text: 'f<j, k>',
+  text: 'f(j, k)',
   type: 'FunctionDeclaration',
 });
 
 setupTest(code, 'FunctionExpression', {
   end: [19, 2],
   start: [17, 2],
-  text: 'ƒ<w>',
+  text: 'ƒ(w)',
   type: 'FunctionExpression',
 });
 
@@ -726,7 +726,7 @@ setupTest(code, 'RestProperty', 'not-found');
 setupTest(code, 'ReturnStatement', {
   end: [18, 34],
   start: [18, 3],
-  text: '← fn<op> / 42 / i',
+  text: '← fn(op) / 42 / i',
   type: 'ReturnStatement',
 });
 

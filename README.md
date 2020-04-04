@@ -1,6 +1,13 @@
 # code-inspector
 
-Static analysis of your code.
+Dependencies free static analysis of your code.
+
+- [code-inspector](#code-inspector)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Using it in a browser](#using-it-in-a-browser)
+  - [How it works](#how-it-works)
+  - [API](#api)
 
 ## Installation
 

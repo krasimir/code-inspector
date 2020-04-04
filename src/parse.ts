@@ -26,9 +26,9 @@ function renderFunctionParameters(
   delimiter = ','
 ): string {
   if (node.params && node.params.length > 0) {
-    return `<${parseItems(node.params, parent, grandParent, delimiter)}>`;
+    return `(${parseItems(node.params, parent, grandParent, delimiter)})`;
   }
-  return '';
+  return '()';
 }
 
 function parseItems(

@@ -13,8 +13,8 @@ describe('Given the code5.tsx code sample', () => {
         ({ text, nesting, type }) => `${type} | ${text} ${nesting}`
       );
       expect(expectation).toStrictEqual([
-        'ArrowFunctionExpression | util 1',
-        'FunctionDeclaration | doSomething 2',
+        'ArrowFunctionExpression | util() 1',
+        'FunctionDeclaration | doSomething() 2',
         'ArrowFunctionExpression | new App(…) argument 3',
       ]);
     });
