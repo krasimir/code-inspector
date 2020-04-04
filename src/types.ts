@@ -1,6 +1,7 @@
 export interface NormalizedNode {
   text: string | number | boolean;
   type: string;
+  key?: string;
   start?: [number | undefined, number | undefined];
   end?: [number | undefined, number | undefined];
   left?: string | number | boolean;

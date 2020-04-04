@@ -1,10 +1,6 @@
 import { NormalizedNode } from '../types';
 
-const getScopeNodeKey = (node: NormalizedNode): string =>
-  node.type +
-  node.text +
-  (node.start ? node.start.join(':') : '') +
-  (node.end ? node.end.join(':') : '');
+const NO_KEY = 'no-key';
 
 const NODE_TYPES_TO_IGNORE: Record<string, boolean> = {
   Program: true,
@@ -19,9 +15,8 @@ export default function filterToScopeNodes(
   const registered: Record<string, boolean> = {};
   const { filtered } = nodes.reduce(
     (res, node) => {
-      const key = getScopeNodeKey(node);
-      if (!registered[key]) {
-        registered[key] = true;
+      if (!registered[node.key || NO_KEY]) {
+        registered[node.key || NO_KEY] = true;
         if (!NODE_TYPES_TO_IGNORE[node.type]) res.filtered.push(node);
       }
       return res;

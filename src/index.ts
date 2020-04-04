@@ -5,6 +5,7 @@ import { parse } from './parse';
 
 import { NormalizedNode } from './types';
 import filterToScopeNodes from './api/scope';
+import { getNodeKey } from './utils';
 
 const plugins = [
   'jsx',
@@ -39,16 +40,7 @@ const babelParserOptions = {
   plugins: plugins as parser.ParserPlugin[],
   decoratorsBeforeExport: true,
 };
-
-function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
-  return parse(
-    n.node,
-    n.parentPath ? n.parentPath.node : null,
-    n.parentPath && n.parentPath.parentPath
-      ? n.parentPath.parentPath.node
-      : null
-  );
-}
+let cache: Record<string, NormalizedNode> = {};
 
 function getNestedLevel(node: Traverse.NodePath, level = 0): number {
   if (node.scope.path.parentPath) {
@@ -57,15 +49,34 @@ function getNestedLevel(node: Traverse.NodePath, level = 0): number {
   return level;
 }
 
+function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
+  const key = getNodeKey(n.node);
+  if (cache[key]) {
+    return cache[key];
+  }
+  const normalizedNode = parse(
+    n.node,
+    n.parentPath ? n.parentPath.node : null,
+    n.parentPath && n.parentPath.parentPath
+      ? n.parentPath.parentPath.node
+      : null
+  );
+  if (normalizedNode.key) cache[normalizedNode.key] = normalizedNode;
+  normalizedNode.nesting = getNestedLevel(n.scope.path);
+
+  return normalizedNode;
+}
+
 export function analyze(code: string) {
   const ast = parser.parse(code, babelParserOptions);
   const nodes: NormalizedNode[] = [];
   const scopes: NormalizedNode[] = [];
+
+  cache = {};
   Traverse.default(ast, {
     enter(path: Traverse.NodePath) {
       const normalizedNode = toNormalizeNode(path);
       const scopeNode = toNormalizeNode(path.scope.path);
-      scopeNode.nesting = getNestedLevel(path.scope.path);
       if (normalizedNode) {
         nodes.push(normalizedNode);
       }

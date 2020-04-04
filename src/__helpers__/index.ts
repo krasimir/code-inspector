@@ -16,7 +16,7 @@ export function setupTest(
         if (typeof found === 'undefined') {
           expect('not-found').toStrictEqual(expectation);
         } else {
-          expect(found).toStrictEqual(expectation);
+          expect(found).toMatchObject(expectation as Record<string, any>);
         }
       });
     });

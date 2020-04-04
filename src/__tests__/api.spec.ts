@@ -13,23 +13,25 @@ describe('Given the code-inspector library', () => {
   describe('when passing some code', () => {
     it('should return all the ast nodes', () => {
       const { nodes } = analyze(code2);
-      expect(nodes.map(({ type }) => type)).toStrictEqual([
-        'Program',
-        'VariableDeclaration',
-        'VariableDeclarator',
-        'Identifier',
-        'NumericLiteral',
-        'ClassDeclaration',
-        'Identifier',
-        'ClassBody',
-        'ClassProperty',
-        'Identifier',
-        'NumericLiteral',
-        'ClassMethod',
-        'Identifier',
-        'BlockStatement',
-        'ReturnStatement',
-        'StringLiteral',
+      expect(
+        nodes.map(({ type, nesting }) => `${nesting} ${type}`)
+      ).toStrictEqual([
+        '0 Program',
+        '0 VariableDeclaration',
+        '0 VariableDeclarator',
+        '0 Identifier',
+        '0 NumericLiteral',
+        '1 ClassDeclaration',
+        '1 Identifier',
+        '1 ClassBody',
+        '1 ClassProperty',
+        '1 Identifier',
+        '1 NumericLiteral',
+        '2 ClassMethod',
+        '2 Identifier',
+        '2 BlockStatement',
+        '2 ReturnStatement',
+        '2 StringLiteral',
       ]);
     });
     it('should return all the scope nodes', () => {
