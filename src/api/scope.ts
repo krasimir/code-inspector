@@ -10,6 +10,7 @@ const NODE_TYPES_TO_IGNORE: Record<string, boolean> = {
   Program: true,
   BlockStatement: true,
   ObjectPattern: true,
+  AssignmentPattern: true,
 };
 
 export default function filterToScopeNodes(
