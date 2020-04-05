@@ -131,3 +131,7 @@ export function sort(nodes: NormalizedNode[]): NormalizedNode[] {
       })
   );
 }
+
+export function isVariable(node: NormalizedNode): boolean {
+  return !!VARIABLES_NODE_TYPES[node.type];
+}

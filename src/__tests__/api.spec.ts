@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { analyze, sort } from '../index';
+import { analyze, sort, isVariable } from '../index';
 
 const code2 = fs
   .readFileSync(`${__dirname}/code-samples/code2.ts`)
@@ -90,6 +90,23 @@ describe('Given the code-inspector library', () => {
         'ClassDeclaration - MyClass',
         'ClassMethod - MyClass.greeting()',
         'VariableDeclarator - text',
+      ]);
+    });
+    it('should allow us to check if the node is a variable', () => {
+      const { variables, scopes } = analyze(code10);
+      const expectation = sort([...variables, ...scopes]).map(
+        node => `${node.text} - ${isVariable(node)}`
+      );
+      // console.log(JSON.stringify(expectation, null, 2));
+      expect(expectation).toStrictEqual([
+        'Program - false',
+        'foobar() - false',
+        'ANSWER - true',
+        'barfoo() - false',
+        'AAA - true',
+        'MyClass - false',
+        'MyClass.greeting() - false',
+        'text - true',
       ]);
     });
   });

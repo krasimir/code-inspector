@@ -84,11 +84,12 @@ Code inspector exposes the following methods:
 
 * `analyze` - Analyzes the providing code.
 * `sort` - Sorts nodes by their starting position.
+* `isVariable` - Accepts a node and returns true or false if the node represents a variable.
 
 ```
 export function analyze(code: string): Analysis;
-
 export function sort(nodes: NormalizedNode[]): NormalizedNode[];
+export function isVariable(node: NormalizedNode): boolean;
 
 export interface Analysis {
   ast: any;
