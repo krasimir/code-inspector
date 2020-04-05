@@ -17,29 +17,33 @@ const code10 = fs
   .readFileSync(`${__dirname}/code-samples/code10.ts`)
   .toString('utf8');
 
+const code11 = fs
+  .readFileSync(`${__dirname}/code-samples/code11.ts`)
+  .toString('utf8');
+
 describe('Given the code-inspector library', () => {
   describe('when passing some code', () => {
     it('should return all the ast nodes', () => {
       const { nodes } = analyze(code2);
-      expect(
-        nodes.map(({ type, nesting }) => `${nesting} ${type}`)
-      ).toStrictEqual([
+      const res = nodes.map(({ type, nesting }) => `${nesting} ${type}`);
+      // console.log(JSON.stringify(res, null, 2));
+      expect(res).toStrictEqual([
         '0 Program',
-        '0 VariableDeclaration',
-        '0 VariableDeclarator',
-        '0 Identifier',
-        '0 NumericLiteral',
-        '1 ClassDeclaration',
-        '1 Identifier',
-        '1 ClassBody',
-        '1 ClassProperty',
+        '1 VariableDeclaration',
+        '1 VariableDeclarator',
         '1 Identifier',
         '1 NumericLiteral',
-        '2 ClassMethod',
+        '1 ClassDeclaration',
         '2 Identifier',
-        '2 BlockStatement',
-        '2 ReturnStatement',
-        '2 StringLiteral',
+        '2 ClassBody',
+        '2 ClassProperty',
+        '2 Identifier',
+        '2 NumericLiteral',
+        '2 ClassMethod',
+        '3 Identifier',
+        '3 BlockStatement',
+        '3 ReturnStatement',
+        '3 StringLiteral',
       ]);
     });
     it('should return all the scope nodes', () => {
@@ -66,19 +70,19 @@ describe('Given the code-inspector library', () => {
         ({ text, nesting }) => `${text} ${nesting}`
       );
       expect(expectation).toStrictEqual([
-        'A 0',
-        'b 0',
-        'c 0',
-        'd:number[] 0',
-        'e 1',
-        'f 1',
-        'i 2',
+        'A 1',
+        'b 1',
+        'c 1',
+        'd:number[] 1',
+        'e 2',
+        'f 2',
+        'i 3',
       ]);
     });
     it('should sort the nodes by location', () => {
       const { variables, scopes } = analyze(code10);
       const expectation = sort([...variables, ...scopes]).map(
-        ({ text, type }) => `${type} - ${text}`
+        ({ text, type, nesting }) => `${type} - ${text}`
       );
       // console.log(JSON.stringify(expectation, null, 2));
       expect(expectation).toStrictEqual([
@@ -107,6 +111,18 @@ describe('Given the code-inspector library', () => {
         'MyClass - false',
         'MyClass.greeting() - false',
         'text - true',
+      ]);
+    });
+
+    it('should set a proper nesting for the variables', () => {
+      const { variables, scopes } = analyze(code11);
+      const expectation = sort([...variables, ...scopes]).map(
+        node => `${node.text} - ${isVariable(node)} - ${node.nesting}`
+      );
+      expect(expectation).toStrictEqual([
+        'Program - false - 0',
+        'createGraphItem() - false - 1',
+        'label - true - 2',
       ]);
     });
   });

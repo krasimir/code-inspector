@@ -18,8 +18,8 @@ export function getNodeKey(node: any): string {
 }
 
 export function getNestedLevel(node: Traverse.NodePath, level = 0): number {
-  if (node.scope.path.parentPath) {
-    return getNestedLevel(node.scope.path.parentPath, level + 1);
+  if (node.parentPath && node.parentPath.scope) {
+    return getNestedLevel(node.parentPath.scope.path, level + 1);
   }
   return level;
 }

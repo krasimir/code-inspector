@@ -15,10 +15,10 @@ describe('Given the code8.tsx code sample', () => {
       // console.log(JSON.stringify(expectation, null, 2));
       expect(expectation).toStrictEqual([
         'Program | Program 0',
-        'ImportDeclaration | useState ⤺ "react" 0',
-        'ImportSpecifier | useState 0',
-        'Identifier | useState 0',
-        'StringLiteral | "react" 0',
+        'ImportDeclaration | useState ⤺ "react" 1',
+        'ImportSpecifier | useState 1',
+        'Identifier | useState 1',
+        'StringLiteral | "react" 1',
       ]);
     });
   });

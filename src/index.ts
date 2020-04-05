@@ -64,7 +64,7 @@ function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
       : null
   );
   if (normalizedNode.key) cache[normalizedNode.key] = normalizedNode;
-  normalizedNode.nesting = getNestedLevel(n.scope.path);
+  normalizedNode.nesting = getNestedLevel(n);
 
   return normalizedNode;
 }
@@ -80,7 +80,10 @@ export function analyze(code: string) {
   Traverse.default(ast, {
     enter(path: Traverse.NodePath) {
       const normalizedNode = toNormalizeNode(path);
-      const scopeNode = toNormalizeNode(path.scope.path);
+      const scopeNode = path.parentPath
+        ? toNormalizeNode(path.parentPath.scope.path)
+        : toNormalizeNode(path.scope.path);
+
       if (normalizedNode && !consumedNodes[normalizedNode.key || '']) {
         consumedNodes[normalizedNode.key || ''] = true;
         nodes.push(normalizedNode);
