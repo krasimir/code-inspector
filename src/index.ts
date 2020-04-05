@@ -4,7 +4,7 @@ import * as Traverse from '@babel/traverse';
 import { parse } from './parse';
 
 import { NormalizedNode } from './types';
-import { getNodeKey } from './utils';
+import { getNodeKey, getNestedLevel } from './utils';
 
 const plugins = [
   'jsx',
@@ -47,12 +47,9 @@ const SCOPE_NODE_TYPES_TO_IGNORE: Record<string, boolean> = {
   AssignmentPattern: true,
 };
 
-function getNestedLevel(node: Traverse.NodePath, level = 0): number {
-  if (node.scope.path.parentPath) {
-    return getNestedLevel(node.scope.path.parentPath, level + 1);
-  }
-  return level;
-}
+const VARIABLES_NODE_TYPES: Record<string, boolean> = {
+  VariableDeclarator: true,
+};
 
 function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
   const key = getNodeKey(n.node);
@@ -105,5 +102,6 @@ export function analyze(code: string) {
     ast,
     nodes,
     scopes,
+    variables: nodes.filter(({ type }) => VARIABLES_NODE_TYPES[type]),
   };
 }

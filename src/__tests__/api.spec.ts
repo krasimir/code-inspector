@@ -9,6 +9,10 @@ const code3 = fs
   .readFileSync(`${__dirname}/code-samples/code3.ts`)
   .toString('utf8');
 
+const code9 = fs
+  .readFileSync(`${__dirname}/code-samples/code9.ts`)
+  .toString('utf8');
+
 describe('Given the code-inspector library', () => {
   describe('when passing some code', () => {
     it('should return all the ast nodes', () => {
@@ -50,6 +54,21 @@ describe('Given the code-inspector library', () => {
         'boo() 3',
         'DATA.forEach(…) callback 4',
         'boo() 1',
+      ]);
+    });
+    it('should return all the variable nodes', () => {
+      const { variables, nodes } = analyze(code9);
+      const expectation = variables.map(
+        ({ text, nesting }) => `${text} ${nesting}`
+      );
+      expect(expectation).toStrictEqual([
+        'A 0',
+        'b 0',
+        'c 0',
+        'd:number[] 0',
+        'e 1',
+        'f 1',
+        'i 2',
       ]);
     });
   });

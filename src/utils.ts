@@ -16,3 +16,10 @@ export function getNodeKey(node: any): string {
     node.type + (start ? start.join(':') : '') + (end ? end.join(':') : '')
   );
 }
+
+export function getNestedLevel(node: Traverse.NodePath, level = 0): number {
+  if (node.scope.path.parentPath) {
+    return getNestedLevel(node.scope.path.parentPath, level + 1);
+  }
+  return level;
+}

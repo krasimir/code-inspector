@@ -12,6 +12,7 @@ export interface Analysis {
   ast: any;
   nodes: NormalizedNode[];
   scopes: NormalizedNode[];
+  variables: NormalizedNode[];
 }
 
 export function analyze(code: string): Analysis;
