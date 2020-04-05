@@ -15,4 +15,8 @@ export interface Analysis {
   variables: NormalizedNode[];
 }
 
+// Analyzing the providing code
 export function analyze(code: string): Analysis;
+
+// Sort nodes by their starting position
+export function sort(nodes: NormalizedNode[]): NormalizedNode[];

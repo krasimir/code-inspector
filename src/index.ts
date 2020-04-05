@@ -105,3 +105,29 @@ export function analyze(code: string) {
     variables: nodes.filter(({ type }) => VARIABLES_NODE_TYPES[type]),
   };
 }
+
+export function sort(nodes: NormalizedNode[]): NormalizedNode[] {
+  const consumed: Record<string, boolean> = {};
+  // console.log(nodes);
+  return (
+    nodes
+      // removing duplicates
+      .filter(node => {
+        if (!consumed[node.key || '']) {
+          consumed[node.key || ''] = true;
+          return true;
+        }
+        return false;
+      })
+      // sorting
+      .sort((a, b) => {
+        if (a.start[0] === b.start[0]) {
+          return a.start[1] >= b.start[1] ? 1 : -1;
+        }
+        if (a.start[0] > b.start[0]) {
+          return 1;
+        }
+        return -1;
+      })
+  );
+}

@@ -18,7 +18,8 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "strictNullChecks": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "src/__tests__"]

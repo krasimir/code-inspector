@@ -80,8 +80,15 @@ It is based on [@babel/traverse](https://www.npmjs.com/package/@babel/traverse),
 
 ## API
 
+Code inspector exposes the following methods:
+
+* `analyze` - Analyzes the providing code.
+* `sort` - Sorts nodes by their starting position.
+
 ```
 export function analyze(code: string): Analysis;
+
+export function sort(nodes: NormalizedNode[]): NormalizedNode[];
 
 export interface Analysis {
   ast: any;

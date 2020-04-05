@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { analyze } from '../index';
+import { analyze, sort } from '../index';
 
 const code2 = fs
   .readFileSync(`${__dirname}/code-samples/code2.ts`)
@@ -11,6 +11,10 @@ const code3 = fs
 
 const code9 = fs
   .readFileSync(`${__dirname}/code-samples/code9.ts`)
+  .toString('utf8');
+
+const code10 = fs
+  .readFileSync(`${__dirname}/code-samples/code10.ts`)
   .toString('utf8');
 
 describe('Given the code-inspector library', () => {
@@ -57,7 +61,7 @@ describe('Given the code-inspector library', () => {
       ]);
     });
     it('should return all the variable nodes', () => {
-      const { variables, nodes } = analyze(code9);
+      const { variables } = analyze(code9);
       const expectation = variables.map(
         ({ text, nesting }) => `${text} ${nesting}`
       );
@@ -69,6 +73,23 @@ describe('Given the code-inspector library', () => {
         'e 1',
         'f 1',
         'i 2',
+      ]);
+    });
+    it('should sort the nodes by location', () => {
+      const { variables, scopes } = analyze(code10);
+      const expectation = sort([...variables, ...scopes]).map(
+        ({ text, type }) => `${type} - ${text}`
+      );
+      // console.log(JSON.stringify(expectation, null, 2));
+      expect(expectation).toStrictEqual([
+        'Program - Program',
+        'FunctionDeclaration - foobar()',
+        'VariableDeclarator - ANSWER',
+        'FunctionDeclaration - barfoo()',
+        'VariableDeclarator - AAA',
+        'ClassDeclaration - MyClass',
+        'ClassMethod - MyClass.greeting()',
+        'VariableDeclarator - text',
       ]);
     });
   });
