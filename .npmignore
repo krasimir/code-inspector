@@ -8,3 +8,4 @@ yarn.lock
 demo
 jest
 scripts
+webpack.*.js
