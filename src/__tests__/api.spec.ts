@@ -40,6 +40,7 @@ describe('Given the code-inspector library', () => {
         ({ text, nesting }) => `${text} ${nesting}`
       );
       expect(expectation).toStrictEqual([
+        'Program 0',
         'NormalizeBoo(a) 1',
         'somethingElse(a, b) 1',
         'getAnswer(…) callback 2',

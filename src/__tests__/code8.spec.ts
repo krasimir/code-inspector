@@ -1,22 +1,24 @@
 import fs from 'fs';
 import { analyze } from '../index';
 
-const code7 = fs
-  .readFileSync(`${__dirname}/code-samples/code7.ts`)
+const code8 = fs
+  .readFileSync(`${__dirname}/code-samples/code8.jsx`)
   .toString('utf8');
 
-describe('Given the code7.tsx code sample', () => {
+describe('Given the code8.tsx code sample', () => {
   describe('when analyzing the code', () => {
     it('should return all the scope nodes', () => {
-      const { scopes } = analyze(code7);
-      const expectation = scopes.map(
+      const { nodes, ast } = analyze(code8);
+      const expectation = nodes.map(
         ({ text, nesting, type }) => `${type} | ${text} ${nesting}`
       );
       // console.log(JSON.stringify(expectation, null, 2));
       expect(expectation).toStrictEqual([
         'Program | Program 0',
-        'FunctionDeclaration | parseItems(items:any[], parent:Traverse.Node, grandParent:Traverse.Node, delimiter=",") 1',
-        'ArrowFunctionExpression | items.map(…) callback 3',
+        'ImportDeclaration | useState ⤺ "react" 0',
+        'ImportSpecifier | useState 0',
+        'Identifier | useState 0',
+        'StringLiteral | "react" 0',
       ]);
     });
   });

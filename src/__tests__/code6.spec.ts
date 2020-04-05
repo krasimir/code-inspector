@@ -13,6 +13,7 @@ describe('Given the code6.tsx code sample', () => {
         ({ text, nesting, type }) => `${type} | ${text} ${nesting}`
       );
       expect(expectation).toStrictEqual([
+        'Program | Program 0',
         'ArrowFunctionExpression | defer(…) callback 1',
         'ArrowFunctionExpression | progressiveJpg(src) 1',
         'ArrowFunctionExpression | smallProgressiveJpg(src) 1',

@@ -4,7 +4,6 @@ import * as Traverse from '@babel/traverse';
 import { parse } from './parse';
 
 import { NormalizedNode } from './types';
-import filterToScopeNodes from './api/scope';
 import { getNodeKey } from './utils';
 
 const plugins = [
@@ -42,6 +41,12 @@ const babelParserOptions = {
 };
 let cache: Record<string, NormalizedNode> = {};
 
+const SCOPE_NODE_TYPES_TO_IGNORE: Record<string, boolean> = {
+  BlockStatement: true,
+  ObjectPattern: true,
+  AssignmentPattern: true,
+};
+
 function getNestedLevel(node: Traverse.NodePath, level = 0): number {
   if (node.scope.path.parentPath) {
     return getNestedLevel(node.scope.path.parentPath, level + 1);
@@ -71,16 +76,24 @@ export function analyze(code: string) {
   const ast = parser.parse(code, babelParserOptions);
   const nodes: NormalizedNode[] = [];
   const scopes: NormalizedNode[] = [];
+  const consumedNodes: Record<string, boolean> = {};
+  const consumedScopes: Record<string, boolean> = {};
 
   cache = {};
   Traverse.default(ast, {
     enter(path: Traverse.NodePath) {
       const normalizedNode = toNormalizeNode(path);
       const scopeNode = toNormalizeNode(path.scope.path);
-      if (normalizedNode) {
+      if (normalizedNode && !consumedNodes[normalizedNode.key || '']) {
+        consumedNodes[normalizedNode.key || ''] = true;
         nodes.push(normalizedNode);
       }
-      if (scopeNode) {
+      if (
+        scopeNode &&
+        !consumedScopes[scopeNode.key || ''] &&
+        !SCOPE_NODE_TYPES_TO_IGNORE[scopeNode.type]
+      ) {
+        consumedScopes[scopeNode.key || ''] = true;
         scopes.push(scopeNode);
       }
     },
@@ -91,6 +104,6 @@ export function analyze(code: string) {
   return {
     ast,
     nodes,
-    scopes: filterToScopeNodes(scopes),
+    scopes,
   };
 }

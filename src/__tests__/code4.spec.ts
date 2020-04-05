@@ -13,6 +13,7 @@ describe('Given the code4.tsx code sample', () => {
         ({ text, nesting, type }) => `${type} | ${text} ${nesting}`
       );
       expect(expectation).toStrictEqual([
+        'Program | Program 0',
         'ArrowFunctionExpression | getIcon(type:ItemType) 1',
         'FunctionDeclaration | trimText(str:string, n:number) 1',
         'FunctionDeclaration | arrayMove(arr:Array, oldIndex:number, newIndex:number) 1',
