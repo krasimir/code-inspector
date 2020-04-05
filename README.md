@@ -1,6 +1,6 @@
 # CodeInspector
 
-Dependencies free static analysis of your code. Understands JavaScript (JSX, TypeScript).
+Dependencies free static analysis of your code. Understands JavaScript (JSX, TypeScript). Online playground at [https://inspector.now.sh/](https://inspector.now.sh/).
 
   - [Installation](#installation)
   - [Usage](#usage)

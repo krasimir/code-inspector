@@ -1,6 +1,6 @@
 {
   "name": "code-inspector",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "node/code-inspector.js",
   "description": "Static analysis for your code",
   "devDependencies": {
