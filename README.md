@@ -1,17 +1,17 @@
-# code-inspector
+# CodeInspector
 
-Dependencies free static analysis of your code.
+Dependencies free static analysis of your code. Understands JavaScript (JSX, TypeScript).
 
-- [code-inspector](#code-inspector)
   - [Installation](#installation)
   - [Usage](#usage)
-  - [Using it in a browser](#using-it-in-a-browser)
   - [How it works](#how-it-works)
   - [API](#api)
 
 ## Installation
 
 It's on [npm](https://www.npmjs.com/package/code-inspector) so `npm i code-inspector` or `yarn add code-inspector` will do the trick.
+
+The library works in a browser too. It's of course a bit heavy. There is a client-side bundle here [unpkg.com/code-inspector@latest/browser/code-inspector.js](https://unpkg.com/code-inspector@1.1.8/browser/code-inspector.js). Once you load the file you'll have a `CodeInspector` global variable available.
 
 ## Usage
 
@@ -69,10 +69,6 @@ The result will be:
   ]
 }
 ```
-
-## Using it in a browser
-
-The library works in a browser too. It's of course a bit heavy. There is a client-side bundle here [unpkg.com/code-inspector@latest/browser/code-inspector.js](https://unpkg.com/code-inspector@1.1.8/browser/code-inspector.js). Once you load the file you'll have a `CodeInspector` global variable available.
 
 ## How it works
 
