@@ -40,32 +40,36 @@ The result will be:
 {
   "ast": {...},
   "nodes": [
-    { "type": "Program", "text": "Program", "start": [1, 1], "end": [8, 1] },
-    { "type": "FunctionDeclaration", "text": "print<name>", "start": [3, 2], "end": [6, 4] },
-    { "type": "Identifier", "text": "print", "start": [3, 11], "end": [3, 16] },
-    { "type": "Identifier", "text": "name", "start": [3, 17], "end": [3, 21] },
-    { "type": "BlockStatement", "text": "⊏…⊐", "start": [3, 23], "end": [6, 4] },
-    { "type": "VariableDeclaration", "text": "format", "start": [4, 6], "end": [4, 46] },
-    { "type": "VariableDeclarator", "text": "format", "start": [4, 12], "end": [4, 45] },
-    { "type": "Identifier", "text": "format", "start": [4, 12], "end": [4, 18] },
-    { "type": "ArrowFunctionExpression", "text": "format<str>", "start": [4, 21], "end": [4, 45] },
-    { "type": "Identifier", "text": "str", "start": [4, 21], "end": [4, 24] },
-    { "type": "CallExpression", "text": "str.toUpperCase()", "start": [4, 28], "end": [4, 45] },
-    { "type": "MemberExpression", "text": "str.toUpperCase", "start": [4, 28], "end": [4, 43] },
-    { "type": "Identifier", "text": "str", "start": [4, 28], "end": [4, 31] },
-    { "type": "Identifier", "text": "toUpperCase", "start": [4, 32], "end": [4, 43] },
-    { "type": "ExpressionStatement", "text": "console.log(…)", "start": [5, 6], "end": [5, 32] },
-    { "type": "CallExpression", "text": "console.log(…)", "start": [5, 6], "end": [5, 31] },
-    { "type": "MemberExpression", "text": "console.log", "start": [5, 6], "end": [5, 17] },
-    { "type": "Identifier", "text": "console", "start": [5, 6], "end": [5, 13] },
-    { "type": "Identifier", "text": "log", "start": [5, 14], "end": [5, 17] },
-    { "type": "CallExpression", "text": "format(…)", "start": [5, 18], "end": [5, 30] },
-    { "type": "Identifier", "text": "format", "start": [5, 18], "end": [5, 24] },
-    { "type": "Identifier", "text": "name", "start": [5, 25], "end": [5, 29] }
+    { "type": "Program", "text": "Program", "start": [ 1, 1 ], "end": [ 4, 2 ], "key": "Program1:14:2", "nesting": 0 },
+    { "type": "FunctionDeclaration", "text": "print(name)", "start": [ 1, 1 ], "end": [ 4, 2 ], "key": "FunctionDeclaration1:14:2", "nesting": 1 },
+    { "type": "Identifier", "text": "print", "start": [ 1, 10 ], "end": [ 1, 15 ], "key": "Identifier1:101:15", "nesting": 1 },
+    { "type": "Identifier", "text": "name", "start": [ 1, 16 ], "end": [ 1, 20 ], "key": "Identifier1:161:20", "nesting": 1 },
+    { "type": "BlockStatement", "text": "⊏…⊐", "start": [ 1, 22 ], "end": [ 4, 2 ], "key": "BlockStatement1:224:2", "nesting": 1 },
+    { "type": "VariableDeclaration", "text": "format", "start": [ 2, 3 ], "end": [ 2, 43 ], "key": "VariableDeclaration2:32:43", "nesting": 1 },
+    { "type": "VariableDeclarator", "text": "format", "start": [ 2, 9 ], "end": [ 2, 42 ], "key": "VariableDeclarator2:92:42", "nesting": 1 },
+    { "type": "Identifier", "text": "format", "start": [ 2, 9 ], "end": [ 2, 15 ], "key": "Identifier2:92:15", "nesting": 1 },
+    { "type": "ArrowFunctionExpression", "text": "format(str)", "start": [ 2, 18 ], "end": [ 2, 42 ], "key": "ArrowFunctionExpression2:182:42", "nesting": 2 },
+    { "type": "Identifier", "text": "str", "start": [ 2, 18 ], "end": [ 2, 21 ], "key": "Identifier2:182:21", "nesting": 2 },
+    { "type": "CallExpression", "text": "str.toUpperCase()", "start": [ 2, 25 ], "end": [ 2, 42 ], "key": "CallExpression2:252:42", "nesting": 2 },
+    { "type": "MemberExpression", "text": "str.toUpperCase", "start": [ 2, 25 ], "end": [ 2, 40 ], "key": "MemberExpression2:252:40", "nesting": 2 },
+    { "type": "Identifier", "text": "str", "start": [ 2, 25 ], "end": [ 2, 28 ], "key": "Identifier2:252:28", "nesting": 2 },
+    { "type": "Identifier", "text": "toUpperCase", "start": [ 2, 29 ], "end": [ 2, 40 ], "key": "Identifier2:292:40", "nesting": 2 },
+    { "type": "ExpressionStatement", "text": "console.log(…)", "start": [ 3, 3 ], "end": [ 3, 29 ], "key": "ExpressionStatement3:33:29", "nesting": 1 },
+    { "type": "CallExpression", "text": "console.log(…)", "start": [ 3, 3 ], "end": [ 3, 28 ], "key": "CallExpression3:33:28", "nesting": 1 },
+    { "type": "MemberExpression", "text": "console.log", "start": [ 3, 3 ], "end": [ 3, 14 ], "key": "MemberExpression3:33:14", "nesting": 1 },
+    { "type": "Identifier", "text": "console", "start": [ 3, 3 ], "end": [ 3, 10 ], "key": "Identifier3:33:10", "nesting": 1 },
+    { "type": "Identifier", "text": "log", "start": [ 3, 11 ], "end": [ 3, 14 ], "key": "Identifier3:113:14", "nesting": 1 },
+    { "type": "CallExpression", "text": "format(…)", "start": [ 3, 15 ], "end": [ 3, 27 ], "key": "CallExpression3:153:27", "nesting": 1 },
+    { "type": "Identifier", "text": "format", "start": [ 3, 15 ], "end": [ 3, 21 ], "key": "Identifier3:153:21", "nesting": 1 },
+    { "type": "Identifier", "text": "name", "start": [ 3, 22 ], "end": [ 3, 26 ], "key": "Identifier3:223:26", "nesting": 1 }
   ],
   "scopes": [
-    { "type": "FunctionDeclaration", "text": "print<name>", "start": [3, 2], "end": [6, 4], "nesting": 1 },
-    { "type": "ArrowFunctionExpression", "text": "format<str>", "start": [4, 21], "end": [4, 45], "nesting": 2 }
+    { "type": "Program", "text": "Program", "start": [ 1, 1 ], "end": [ 4, 2 ], "key": "Program1:14:2", "nesting": 0 },
+    { "type": "FunctionDeclaration", "text": "print(name)", "start": [ 1, 1 ], "end": [ 4, 2 ], "key": "FunctionDeclaration1:14:2", "nesting": 1 },
+    { "type": "ArrowFunctionExpression", "text": "format(str)", "start": [ 2, 18 ], "end": [ 2, 42 ], "key": "ArrowFunctionExpression2:182:42", "nesting": 2 }
+  ],
+  "variables": [
+    { "type": "VariableDeclarator", "text": "format", "start": [ 2, 9 ], "end": [ 2, 42 ], "key": "VariableDeclarator2:92:42", "nesting": 1 }
   ]
 }
 ```
@@ -89,6 +93,7 @@ export interface Analysis {
 export interface NormalizedNode {
   text: string | number | boolean;
   type: string;
+  key?: string;
   start?: [number | undefined, number | undefined];
   end?: [number | undefined, number | undefined];
   left?: string | number | boolean;
