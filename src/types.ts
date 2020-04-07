@@ -16,3 +16,10 @@ export type ParserHelpers = {
   renderFunctionParameters: Function;
   parseItems: Function;
 };
+
+export interface Analysis {
+  ast: any;
+  nodes: NormalizedNode[];
+  scopes: NormalizedNode[];
+  variables: NormalizedNode[];
+}

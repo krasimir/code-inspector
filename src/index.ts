@@ -5,6 +5,7 @@ import { parse } from './parse';
 
 import { NormalizedNode } from './types';
 import { getNodeKey, getNestedLevel } from './utils';
+import graph from './graph';
 
 const plugins = [
   'jsx',
@@ -137,4 +138,8 @@ export function sort(nodes: NormalizedNode[]): NormalizedNode[] {
 
 export function isVariable(node: NormalizedNode): boolean {
   return !!VARIABLES_NODE_TYPES[node.type];
+}
+
+export function toGraph(nodes: NormalizedNode[]): string {
+  return graph(nodes);
 }

@@ -5,13 +5,13 @@
   "description": "Static analysis for your code",
   "devDependencies": {
     "@babel/core": "7.5.0",
+    "@babel/parser": "7.8.8",
     "@babel/plugin-transform-regenerator": "7.4.5",
     "@babel/plugin-transform-runtime": "7.5.0",
     "@babel/preset-env": "7.5.0",
     "@babel/preset-typescript": "7.8.3",
     "@babel/runtime": "7.5.0",
     "@babel/traverse": "7.9.0",
-    "@babel/parser": "7.8.8",
     "@babel/types": "7.9.0",
     "@jest/console": "25.1.0",
     "@types/jest": "25.1.4",
@@ -45,6 +45,7 @@
   },
   "scripts": {
     "build": "webpack --config ./webpack.browser.js --mode production && webpack --config ./webpack.node.js --mode production",
+    "dev": "webpack --config ./webpack.browser.js --watch --mode development",
     "test": "./node_modules/.bin/jest ./src/__tests__/*.spec.ts",
     "test-watch": "./node_modules/.bin/jest ./src/__tests__/*.spec.ts --watch",
     "release": "yarn test && yarn build",
