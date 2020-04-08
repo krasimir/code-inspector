@@ -3,7 +3,7 @@ import * as parser from '@babel/parser';
 import * as Traverse from '@babel/traverse';
 import { parse } from './parse';
 
-import { NormalizedNode } from './types';
+import { NormalizedNode, Analysis } from './types';
 import { getNodeKey, getNestedLevel } from './utils';
 import graph from './graph';
 
@@ -140,6 +140,6 @@ export function isVariable(node: NormalizedNode): boolean {
   return !!VARIABLES_NODE_TYPES[node.type];
 }
 
-export function toGraph(nodes: NormalizedNode[]): string {
-  return graph(nodes);
+export function toGraph(analysis: Analysis): string {
+  return graph(analysis);
 }

@@ -57,6 +57,7 @@ export function parse(
       grandParent
     );
     normalizedNode.key = getNodeKey(node);
+    if (parent) normalizedNode.parent = getNodeKey(parent);
 
     return normalizedNode;
   }

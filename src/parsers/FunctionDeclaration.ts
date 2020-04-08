@@ -8,11 +8,11 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
+  const funcName = helpers.parse(node.id).text;
   return {
     type: 'FunctionDeclaration',
-    text: `${helpers.parse(node.id).text}${helpers.renderFunctionParameters(
-      node
-    )}`,
+    text: `${funcName}${helpers.renderFunctionParameters(node)}`,
     ...helpers.normalizeLoc(node.loc),
+    meta: funcName,
   };
 }

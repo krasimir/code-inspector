@@ -8,13 +8,15 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
+  const imported = helpers.parse(node.local).text;
   return {
     type: 'ImportDefaultSpecifier',
-    text: `${helpers.parse(node.local).text}${
+    text: `${imported}${
       parent && parent.type === 'ImportDeclaration'
         ? ` ⤺ ${helpers.parse(parent.source).text}`
         : ''
     }`,
     ...helpers.normalizeLoc(node.loc),
+    meta: imported,
   };
 }
