@@ -1,5 +1,8 @@
 import fs from 'fs';
+import clipboardy from 'clipboardy';
+
 import { analyze, sort, isVariable } from '../index';
+import treeExpectation from '../__data__/tree.spec.json';
 
 const code2 = fs
   .readFileSync(`${__dirname}/code-samples/code2.ts`)
@@ -23,6 +26,10 @@ const code10 = fs
 
 const code11 = fs
   .readFileSync(`${__dirname}/code-samples/code11.ts`)
+  .toString('utf8');
+
+const code12 = fs
+  .readFileSync(`${__dirname}/code-samples/code12.ts`)
   .toString('utf8');
 
 describe('Given the code-inspector library', () => {
@@ -79,9 +86,10 @@ describe('Given the code-inspector library', () => {
         'b 1',
         'c 1',
         'd:number[] 1',
+        'foobar() 1',
         'e 2',
         'f 2',
-        'i 3',
+        'i 2',
       ]);
     });
     it('should sort the nodes by location', () => {
@@ -109,9 +117,9 @@ describe('Given the code-inspector library', () => {
       // console.log(JSON.stringify(expectation, null, 2));
       expect(expectation).toStrictEqual([
         'Program - false',
-        'foobar() - false',
+        'foobar() - true',
         'ANSWER - true',
-        'barfoo() - false',
+        'barfoo() - true',
         'AAA - true',
         'MyClass - false',
         'MyClass.greeting() - false',
@@ -126,12 +134,12 @@ describe('Given the code-inspector library', () => {
       );
       expect(expectation).toStrictEqual([
         'Program - false - 0',
-        'createGraphItem() - false - 1',
+        'createGraphItem() - true - 1',
         'label - true - 2',
       ]);
     });
 
-    fit('should set a proper path and scopePath', () => {
+    it('should set a proper path and scopePath', () => {
       const { nodes } = analyze(code2);
       const expectation1 = nodes.map(node => node.path);
       const expectation2 = nodes.map(node => node.scopePath);
@@ -173,6 +181,12 @@ describe('Given the code-inspector library', () => {
         'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassMethod-6:3-8:4',
         'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassMethod-6:3-8:4',
       ]);
+    });
+    it('should return a tree', () => {
+      const { tree } = analyze(code12);
+
+      clipboardy.writeSync(JSON.stringify(tree, null, 2));
+      expect(tree).toStrictEqual(treeExpectation);
     });
   });
 });

@@ -26,14 +26,3 @@ export function getNodePath(node: Traverse.NodePath, path = ''): string {
   }
   return path;
 }
-export function getNodeScopePath(node: Traverse.NodePath, path = ''): string {
-  if (node.parentPath && node.parentPath.scope) {
-    return getNodeScopePath(
-      node.parentPath.scope.path,
-      `${getNodeKey(node.parentPath.scope.path.node)}${
-        path !== '' ? `.${path}` : ''
-      }`
-    );
-  }
-  return path;
-}

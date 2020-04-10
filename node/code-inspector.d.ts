@@ -1,6 +1,7 @@
 export interface NormalizedNode {
   text: string | number | boolean;
   type: string;
+  key?: string;
   parent?: string;
   start?: [number | undefined, number | undefined];
   end?: [number | undefined, number | undefined];
@@ -10,6 +11,9 @@ export interface NormalizedNode {
   meta?: any;
   path?: string;
   scopePath?: string;
+  isScope?: boolean;
+  isVariable?: boolean;
+  children?: NormalizedNode[];
 }
 
 export interface Analysis {
@@ -17,13 +21,7 @@ export interface Analysis {
   nodes: NormalizedNode[];
   scopes: NormalizedNode[];
   variables: NormalizedNode[];
-  tree: TreeItem;
-}
-
-export interface TreeItem {
-  scope: boolean;
-  node: NormalizedNode;
-  children: TreeItem[];
+  tree: NormalizedNode;
 }
 
 export function analyze(code: string): Analysis;

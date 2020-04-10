@@ -11,6 +11,17 @@ export interface NormalizedNode {
   meta?: any;
   path?: string;
   scopePath?: string;
+  isScope?: boolean;
+  isVariable?: boolean;
+  children?: NormalizedNode[];
+}
+
+export interface Analysis {
+  ast: any;
+  nodes: NormalizedNode[];
+  scopes: NormalizedNode[];
+  variables: NormalizedNode[];
+  tree: NormalizedNode;
 }
 
 export type ParserHelpers = {
@@ -20,17 +31,3 @@ export type ParserHelpers = {
   renderFunctionParameters: Function;
   parseItems: Function;
 };
-
-export interface Analysis {
-  ast: any;
-  nodes: NormalizedNode[];
-  scopes: NormalizedNode[];
-  variables: NormalizedNode[];
-  tree: TreeItem;
-}
-
-export interface TreeItem {
-  scope: boolean;
-  node: NormalizedNode;
-  children: TreeItem[];
-}

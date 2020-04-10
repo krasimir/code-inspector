@@ -5,6 +5,10 @@ function test(value) {
 
 function foobar() {
   const ANSWER = 100;
+  const mult = v => v * 2;
+  function sqrt(v) {
+    return Math.sqrt(v);
+  }
   const x = ANSWER * 2;
   console.log(ANSWER);
 }

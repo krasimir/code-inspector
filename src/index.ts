@@ -4,7 +4,7 @@ import * as Traverse from '@babel/traverse';
 import { parse } from './parse';
 
 import { NormalizedNode, Analysis } from './types';
-import { getNodeKey, getNodePath, getNodeScopePath } from './utils';
+import { getNodeKey, getNodePath } from './utils';
 import { generateMermaidGraph } from './graph';
 
 const plugins = [
@@ -42,14 +42,18 @@ const babelParserOptions = {
 };
 let cache: Record<string, NormalizedNode> = {};
 
-const SCOPE_NODE_TYPES_TO_IGNORE: Record<string, boolean> = {
-  BlockStatement: true,
-  ObjectPattern: true,
-  AssignmentPattern: true,
+const NODES_DEFINING_SCOPES: Record<string, boolean> = {
+  FunctionDeclaration: true,
+  FunctionExpression: true,
+  ArrowFunctionExpression: true,
+  Program: true,
+  ClassDeclaration: true,
+  ClassMethod: true,
 };
 
 const VARIABLES_NODE_TYPES: Record<string, boolean> = {
   VariableDeclarator: true,
+  FunctionDeclaration: true,
 };
 
 function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
@@ -57,22 +61,37 @@ function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
   if (cache[key]) {
     return cache[key];
   }
-  const normalizedNode = parse(
+  const node = parse(
     n.node,
     n.parentPath ? n.parentPath.node : null,
     n.parentPath && n.parentPath.parentPath
       ? n.parentPath.parentPath.node
       : null
   );
-  if (normalizedNode.key) cache[normalizedNode.key] = normalizedNode;
-  normalizedNode.path = getNodePath(n);
-  normalizedNode.scopePath = getNodeScopePath(n);
-  normalizedNode.nesting =
-    normalizedNode.scopePath === ''
-      ? 0
-      : normalizedNode.scopePath.split('.').length;
+  if (node.key) cache[node.key] = node;
+  node.path = getNodePath(n);
+  node.isScope = !!NODES_DEFINING_SCOPES[node.type];
+  node.isVariable = !!VARIABLES_NODE_TYPES[node.type];
 
-  return normalizedNode;
+  return node;
+}
+
+function generateTree(nodes: NormalizedNode[]): NormalizedNode {
+  const dict: Record<string, NormalizedNode> = nodes.reduce(
+    (res: Record<string, NormalizedNode>, n) => {
+      res[n.key || ''] = n;
+      return res;
+    },
+    {}
+  );
+  nodes.forEach(node => {
+    const parentNode = dict[node.parent];
+    if (parentNode) {
+      if (!parentNode.children) parentNode.children = [];
+      parentNode.children.push(node);
+    }
+  });
+  return nodes.find(n => n.type === 'Program');
 }
 
 export function analyze(code: string) {
@@ -81,39 +100,36 @@ export function analyze(code: string) {
   const scopes: NormalizedNode[] = [];
   const consumedNodes: Record<string, boolean> = {};
   const consumedScopes: Record<string, boolean> = {};
-  let tree: TreeItem;
+  const stack: NormalizedNode[] = [];
 
   cache = {};
   Traverse.default(ast, {
     enter(path: Traverse.NodePath) {
-      const normalizedNode = toNormalizeNode(path);
-      const scopeNode = path.parentPath
-        ? toNormalizeNode(path.parentPath.scope.path)
-        : toNormalizeNode(path.scope.path);
+      const node = toNormalizeNode(path);
+      const scopePath = stack.map(item => item.key).join('.');
 
-      if (normalizedNode && !consumedNodes[normalizedNode.key || '']) {
-        consumedNodes[normalizedNode.key || ''] = true;
-        nodes.push(normalizedNode);
-      }
-      if (
-        scopeNode &&
-        !consumedScopes[scopeNode.key || ''] &&
-        !SCOPE_NODE_TYPES_TO_IGNORE[scopeNode.type]
-      ) {
-        consumedScopes[scopeNode.key || ''] = true;
-        scopes.push(scopeNode);
+      node.scopePath = scopePath;
+      node.nesting = scopePath === '' ? 0 : scopePath.split('.').length;
+
+      nodes.push(node);
+      if (NODES_DEFINING_SCOPES[node.type]) {
+        stack.push(node);
+        scopes.push(node);
       }
     },
     exit(path: Traverse.NodePath) {
-      // exit
+      const node = toNormalizeNode(path);
+      if (NODES_DEFINING_SCOPES[node.type]) {
+        stack.pop();
+      }
     },
   });
   return {
     ast,
+    tree: generateTree(nodes),
     nodes,
     scopes,
     variables: nodes.filter(({ type }) => VARIABLES_NODE_TYPES[type]),
-    tree,
   };
 }
 
@@ -133,7 +149,13 @@ export function sort(nodes: NormalizedNode[]): NormalizedNode[] {
       // sorting
       .sort((a, b) => {
         if (a.start[0] === b.start[0]) {
-          return a.start[1] >= b.start[1] ? 1 : -1;
+          if (a.start[1] > b.start[1]) {
+            return 1;
+          }
+          if (a.start[1] === b.start[1]) {
+            return a.end[0] > b.end[0] ? -1 : 1;
+          }
+          return -1;
         }
         if (a.start[0] > b.start[0]) {
           return 1;
