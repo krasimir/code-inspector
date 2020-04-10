@@ -8,6 +8,8 @@ export interface NormalizedNode {
   right?: string | number | boolean;
   nesting?: number;
   meta?: any;
+  path?: string;
+  scopePath?: string;
 }
 
 export interface Analysis {

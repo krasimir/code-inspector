@@ -9,6 +9,10 @@ const code3 = fs
   .readFileSync(`${__dirname}/code-samples/code3.ts`)
   .toString('utf8');
 
+const code5 = fs
+  .readFileSync(`${__dirname}/code-samples/code5.ts`)
+  .toString('utf8');
+
 const code9 = fs
   .readFileSync(`${__dirname}/code-samples/code9.ts`)
   .toString('utf8');
@@ -25,8 +29,9 @@ describe('Given the code-inspector library', () => {
   describe('when passing some code', () => {
     it('should return all the ast nodes', () => {
       const { nodes } = analyze(code2);
-      const res = nodes.map(({ type, nesting }) => `${nesting} ${type}`);
-      // console.log(JSON.stringify(res, null, 2));
+      const res = nodes.map(
+        ({ type, nesting, scopePath }) => `${nesting} ${type}`
+      );
       expect(res).toStrictEqual([
         '0 Program',
         '1 VariableDeclaration',
@@ -123,6 +128,50 @@ describe('Given the code-inspector library', () => {
         'Program - false - 0',
         'createGraphItem() - false - 1',
         'label - true - 2',
+      ]);
+    });
+
+    fit('should set a proper path and scopePath', () => {
+      const { nodes } = analyze(code2);
+      const expectation1 = nodes.map(node => node.path);
+      const expectation2 = nodes.map(node => node.scopePath);
+      // console.log(JSON.stringify(expectation1, null, 2));
+      // console.log(JSON.stringify(expectation2, null, 2));
+      expect(expectation1).toStrictEqual([
+        '',
+        'Program-1:1-10:1',
+        'Program-1:1-10:1.VariableDeclaration-1:1-1:19',
+        'Program-1:1-10:1.VariableDeclaration-1:1-1:19.VariableDeclarator-1:7-1:18',
+        'Program-1:1-10:1.VariableDeclaration-1:1-1:19.VariableDeclarator-1:7-1:18',
+        'Program-1:1-10:1',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassBody-3:11-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassBody-3:11-9:2.ClassProperty-4:3-4:19',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassBody-3:11-9:2.ClassProperty-4:3-4:19',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassBody-3:11-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassBody-3:11-9:2.ClassMethod-6:3-8:4',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassBody-3:11-9:2.ClassMethod-6:3-8:4',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassBody-3:11-9:2.ClassMethod-6:3-8:4.BlockStatement-6:15-8:4',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassBody-3:11-9:2.ClassMethod-6:3-8:4.BlockStatement-6:15-8:4.ReturnStatement-7:5-7:17',
+      ]);
+      expect(expectation2).toStrictEqual([
+        '',
+        'Program-1:1-10:1',
+        'Program-1:1-10:1',
+        'Program-1:1-10:1',
+        'Program-1:1-10:1',
+        'Program-1:1-10:1',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassMethod-6:3-8:4',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassMethod-6:3-8:4',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassMethod-6:3-8:4',
+        'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassMethod-6:3-8:4',
       ]);
     });
   });

@@ -2,88 +2,71 @@ import uniq from 'lodash/uniq';
 import get from 'lodash/get';
 import { NormalizedNode, Analysis } from './types';
 
-const IGNORE_SCOPES = ['Program', 'ArrowFunctionExpression', 'WhileStatement'];
-function findScope(
-  node: NormalizedNode,
-  nodes: NormalizedNode[],
-  scopes: NormalizedNode[]
-): NormalizedNode | undefined {
-  console.log(`${node.text} ${node.type}`);
-  const foundScope = scopes.find(
-    n => n.key === node.parent && !IGNORE_SCOPES.includes(n.type)
-  );
-  if (foundScope) {
-    console.log('direct parent is the scope');
-    return foundScope;
-  }
-  const parent = nodes.find(n => n.key === node.parent);
-  if (parent) {
-    return findScope(parent, nodes, scopes);
-  }
-  console.log('no scope');
-}
+const SCOPE_NODES_TO_IGNORE = ['WhileStatement', 'Program'];
+const ADDITIONAL_NODE_TYPES_TO_INCLUDE = [
+  'FunctionDeclaration',
+  'FunctionExpression',
+  'ClassDeclaration',
+  'ClassMethod',
+  'ClassProperty',
+  'JSXElement',
+];
 
-function trackUsagesOf(
-  node: NormalizedNode,
-  analysis: Analysis,
-  identifierMatcherField = 'text'
-) {
-  const { nodes, scopes } = analysis;
-  const res = [`${node.key}("${get(node, identifierMatcherField)}")`];
-  const usages = nodes.filter(
-    n => n.type === 'Identifier' && n.text === get(node, identifierMatcherField)
-  );
-  console.log(
-    '----------------------------------------->',
-    `${node.text} ${node.type}`,
-    `usages: ${usages.length}`
-  );
-  usages.forEach(usage => {
-    console.log('-');
-    const scope = findScope(usage, nodes, scopes);
-    if (scope && scope.key !== node.key) {
-      res.push(`${node.key} --> ${scope.key}`);
-    }
-  });
-  return res;
+function normalizedNode2GraphNode(node: NormalizedNode): any {
+  let label = node.text;
+  if (node.type === 'FunctionDeclaration') label = node.meta;
+  if (node.type === 'FunctionExpression') label = 'ƒ()';
+  return `${node.key}("${label}")`;
 }
-
-const graphParsers: Record<string, Function> = {
-  VariableDeclarator(node: NormalizedNode, analysis: Analysis) {
-    // ignore if this is an ObjectPattern
-    if (
-      analysis.nodes
-        .filter(n => n.type === 'ObjectPattern')
-        .find(n => n.parent === node.key)
-    ) {
-      return [];
-    }
-    return trackUsagesOf(node, analysis);
-  },
-  ImportDefaultSpecifier(node: NormalizedNode, analysis: Analysis) {
-    return trackUsagesOf(node, analysis, 'meta');
-  },
-  ObjectProperty(node: NormalizedNode, analysis: Analysis) {
-    if (node.parent.match(/^ObjectPattern/)) {
-      return trackUsagesOf(node, analysis);
-    }
-    return [];
-  },
-  FunctionDeclaration(node: NormalizedNode, analysis: Analysis) {
-    return trackUsagesOf(node, analysis, 'meta');
-  },
-};
 
 export default function toGraph(analysis: Analysis): string {
-  const { nodes, scopes } = analysis;
-  let graph: string[] = [];
+  const { nodes, scopes, variables } = analysis;
+  const graph: string[] = [];
+  const links: Array<NormalizedNode>[] = [];
+  const scopeNodes = scopes.reduce(
+    (obj: Record<string, NormalizedNode>, node: NormalizedNode) => {
+      if (!SCOPE_NODES_TO_IGNORE.includes(node.type)) {
+        obj[node.key] = node;
+      }
+      return obj;
+    },
+    {}
+  );
+  const getNodeByKey = (key: string) => nodes.find(n => n.key === key);
 
-  graph.push(`graph LR`);
-  nodes.forEach(node => {
-    if (graphParsers[node.type]) {
-      graph = graph.concat(graphParsers[node.type](node, analysis));
+  const functions = nodes.filter(n =>
+    ADDITIONAL_NODE_TYPES_TO_INCLUDE.includes(n.type)
+  );
+
+  variables.forEach(v => graph.push(normalizedNode2GraphNode(v)));
+
+  [].concat(variables, functions).forEach((node: NormalizedNode) => {
+    let scopeKey;
+    if (node.type === 'JSXElement') {
+      scopeKey = node.path
+        .split('.')
+        .reverse()
+        .find(n => n.match(/^JSXElement/));
+    }
+    if (!scopeKey) {
+      scopeKey = node.scopePath
+        .split('.')
+        .reverse()
+        .find(sKey => scopeNodes[sKey]);
+    }
+    if (scopeKey) {
+      links.push([
+        node,
+        scopeNodes[scopeKey] ? scopeNodes[scopeKey] : getNodeByKey(scopeKey),
+      ]);
     }
   });
 
-  return uniq(graph).join('\n');
+  links.forEach(([n, scope]) => {
+    graph.push(
+      `${normalizedNode2GraphNode(scope)} --- ${normalizedNode2GraphNode(n)}`
+    );
+  });
+
+  return uniq(['graph LR'].concat(graph)).join('\n');
 }

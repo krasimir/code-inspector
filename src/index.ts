@@ -4,7 +4,7 @@ import * as Traverse from '@babel/traverse';
 import { parse } from './parse';
 
 import { NormalizedNode, Analysis } from './types';
-import { getNodeKey, getNestedLevel } from './utils';
+import { getNodeKey, getNodePath, getNodeScopePath } from './utils';
 import graph from './graph';
 
 const plugins = [
@@ -65,7 +65,12 @@ function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
       : null
   );
   if (normalizedNode.key) cache[normalizedNode.key] = normalizedNode;
-  normalizedNode.nesting = getNestedLevel(n);
+  normalizedNode.path = getNodePath(n);
+  normalizedNode.scopePath = getNodeScopePath(n);
+  normalizedNode.nesting =
+    normalizedNode.scopePath === ''
+      ? 0
+      : normalizedNode.scopePath.split('.').length;
 
   return normalizedNode;
 }

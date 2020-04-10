@@ -23,11 +23,14 @@ describe('Given the code12.tsx code sample', () => {
           )
           .replace(
             /<div class="mermaid">([\s\S]*)<\/div>/gim,
-            `<div class="mermaid">${mermaid}</div>`
+            `<div class="mermaid">${mermaid.replace(/</g, '&lt;')}</div>`
           )
           .replace(
             /<section class="preview-in-mermaid">([\s\S]*)<\/section>/gim,
-            `<section class="preview-in-mermaid">${mermaid}</section>`
+            `<section class="preview-in-mermaid">${mermaid.replace(
+              /</g,
+              '&lt;'
+            )}</section>`
           )
       );
     });

@@ -12,14 +12,28 @@ export function getNodeKey(node: any): string {
   const { start, end } = node.loc
     ? normalizeLoc(node.loc as SourceLocation)
     : { start: [0, 0], end: [0, 0] };
-  return (
-    node.type + (start ? start.join(':') : '') + (end ? end.join(':') : '')
-  );
+  return `${`${node.type}-${start ? start.join(':') : ''}`}-${
+    end ? end.join(':') : ''
+  }`;
 }
 
-export function getNestedLevel(node: Traverse.NodePath, level = 0): number {
-  if (node.parentPath && node.parentPath.scope) {
-    return getNestedLevel(node.parentPath.scope.path, level + 1);
+export function getNodePath(node: Traverse.NodePath, path = ''): string {
+  if (node.parentPath) {
+    return getNodePath(
+      node.parentPath,
+      `${getNodeKey(node.parentPath.node)}${path !== '' ? `.${path}` : ''}`
+    );
   }
-  return level;
+  return path;
+}
+export function getNodeScopePath(node: Traverse.NodePath, path = ''): string {
+  if (node.parentPath && node.parentPath.scope) {
+    return getNodeScopePath(
+      node.parentPath.scope.path,
+      `${getNodeKey(node.parentPath.scope.path.node)}${
+        path !== '' ? `.${path}` : ''
+      }`
+    );
+  }
+  return path;
 }
