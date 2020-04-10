@@ -67,15 +67,6 @@ function GraphData(getNodeByKey: Function) {
   };
 }
 
-function findDefinition(
-  node: NormalizedNode,
-  nodes: NormalizedNode[]
-): NormalizedNode {
-  const allNodesInTheCurrentScope = nodes.filter(
-    n => n.scopePath === node.scopePath
-  );
-}
-
 export function generateMermaidGraph(analysis: Analysis): string {
   const { nodes, scopes, variables } = analysis;
   const getNodeByKey = (key: string) => nodes.find(n => n.key === key);
