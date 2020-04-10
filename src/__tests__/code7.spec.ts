@@ -16,7 +16,7 @@ describe('Given the code7.tsx code sample', () => {
       expect(expectation).toStrictEqual([
         'Program | Program 0',
         'FunctionDeclaration | parseItems(items:any[], parent:Traverse.Node, grandParent:Traverse.Node, delimiter=",") 1',
-        'ArrowFunctionExpression | items.map(…) callback 3',
+        'ArrowFunctionExpression | items.map(…) callback 2',
       ]);
     });
   });

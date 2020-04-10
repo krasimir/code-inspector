@@ -14,6 +14,7 @@ export interface NormalizedNode {
   isScope?: boolean;
   isVariable?: boolean;
   children?: NormalizedNode[];
+  variables?: string[];
 }
 
 export interface Analysis {

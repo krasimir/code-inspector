@@ -215,7 +215,7 @@ setupTest('', 'Conditional', 'not-found');
 setupTest('test.is() ? true : false', 'ConditionalExpression', {
   end: [1, 25],
   start: [1, 1],
-  text: 'test.is()',
+  text: 'test.is()?',
   type: 'ConditionalExpression',
 });
 

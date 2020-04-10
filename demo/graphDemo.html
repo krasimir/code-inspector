@@ -53,6 +53,10 @@ function test(value) {
 
 function foobar() {
   const ANSWER = 100;
+  const mult = v => v * 2;
+  function sqrt(v) {
+    return Math.sqrt(v);
+  }
   const x = ANSWER * 2;
   console.log(ANSWER);
 }
@@ -67,19 +71,27 @@ if (ANSWER === 42) {
 FunctionDeclaration-2:1-4:2("test()")
 ReturnStatement-3:3-3:32>"← value?"]
 ConditionalExpression-3:10-3:31{"value?"}
-FunctionDeclaration-6:1-10:2("foobar()")
-IfStatement-12:1-16:2{"if (ANSWER === 42)"}
+FunctionDeclaration-6:1-14:2("foobar()")
+FunctionDeclaration-9:3-11:4("sqrt()")
+ReturnStatement-10:5-10:25>"← Math.sqrt(…)"]
+IfStatement-16:1-20:2{"if (ANSWER === 42)"}
 FunctionDeclaration-2:1-4:2("test()") --- ReturnStatement-3:3-3:32>"← value?"]
-ReturnStatement-3:3-3:32>"← value?"] --- ConditionalExpression-3:10-3:31{"value?"}</section>
+ReturnStatement-3:3-3:32>"← value?"] --- ConditionalExpression-3:10-3:31{"value?"}
+FunctionDeclaration-6:1-14:2("foobar()") --- FunctionDeclaration-9:3-11:4("sqrt()")
+FunctionDeclaration-9:3-11:4("sqrt()") --- ReturnStatement-10:5-10:25>"← Math.sqrt(…)"]</section>
     </div>
     <div class="mermaid">graph LR
 FunctionDeclaration-2:1-4:2("test()")
 ReturnStatement-3:3-3:32>"← value?"]
 ConditionalExpression-3:10-3:31{"value?"}
-FunctionDeclaration-6:1-10:2("foobar()")
-IfStatement-12:1-16:2{"if (ANSWER === 42)"}
+FunctionDeclaration-6:1-14:2("foobar()")
+FunctionDeclaration-9:3-11:4("sqrt()")
+ReturnStatement-10:5-10:25>"← Math.sqrt(…)"]
+IfStatement-16:1-20:2{"if (ANSWER === 42)"}
 FunctionDeclaration-2:1-4:2("test()") --- ReturnStatement-3:3-3:32>"← value?"]
-ReturnStatement-3:3-3:32>"← value?"] --- ConditionalExpression-3:10-3:31{"value?"}</div>
+ReturnStatement-3:3-3:32>"← value?"] --- ConditionalExpression-3:10-3:31{"value?"}
+FunctionDeclaration-6:1-14:2("foobar()") --- FunctionDeclaration-9:3-11:4("sqrt()")
+FunctionDeclaration-9:3-11:4("sqrt()") --- ReturnStatement-10:5-10:25>"← Math.sqrt(…)"]</div>
   <script src="../browser/code-inspector.js"></script>
 </body>
 </html>

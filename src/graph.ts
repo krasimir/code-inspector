@@ -92,7 +92,7 @@ export function generateMermaidGraph(analysis: Analysis): string {
         .pop()
         .match(/^VariableDeclarator|FunctionDeclaration/)
     ) {
-      console.log(node.text, node.scopePath, findDefinition(node, nodes));
+      // console.log(node.text, node.scopePath, findDefinition(node, nodes));
     }
   });
 

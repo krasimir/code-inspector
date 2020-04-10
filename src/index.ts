@@ -98,21 +98,31 @@ export function analyze(code: string) {
   const ast = parser.parse(code, babelParserOptions);
   const nodes: NormalizedNode[] = [];
   const scopes: NormalizedNode[] = [];
-  const consumedNodes: Record<string, boolean> = {};
-  const consumedScopes: Record<string, boolean> = {};
   const stack: NormalizedNode[] = [];
+  const consumedNodes: Record<string, boolean> = {};
 
   cache = {};
   Traverse.default(ast, {
     enter(path: Traverse.NodePath) {
       const node = toNormalizeNode(path);
+
+      if (consumedNodes[node.key]) return;
+      consumedNodes[node.key] = true;
+
       const scopePath = stack.map(item => item.key).join('.');
 
       node.scopePath = scopePath;
       node.nesting = scopePath === '' ? 0 : scopePath.split('.').length;
 
       nodes.push(node);
-      if (NODES_DEFINING_SCOPES[node.type]) {
+      if (node.isVariable) {
+        const currentScope = stack[stack.length - 1];
+        if (currentScope) {
+          if (!currentScope.variables) currentScope.variables = [];
+          currentScope.variables.push(node.key);
+        }
+      }
+      if (node.isScope) {
         stack.push(node);
         scopes.push(node);
       }
@@ -124,6 +134,7 @@ export function analyze(code: string) {
       }
     },
   });
+
   return {
     ast,
     tree: generateTree(nodes),

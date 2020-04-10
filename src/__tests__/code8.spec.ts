@@ -7,8 +7,8 @@ const code8 = fs
 
 describe('Given the code8.tsx code sample', () => {
   describe('when analyzing the code', () => {
-    it('should return all the scope nodes', () => {
-      const { nodes, ast } = analyze(code8);
+    it('should not return duplicated nodes', () => {
+      const { nodes } = analyze(code8);
       const expectation = nodes.map(
         ({ text, nesting, type }) => `${type} | ${text} ${nesting}`
       );

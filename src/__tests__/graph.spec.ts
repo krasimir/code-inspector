@@ -12,8 +12,8 @@ describe('Given the code12.tsx code sample', () => {
     it('should return a svg image', () => {
       const graphDemoHTML = fs.readFileSync(htmlFile).toString('utf8');
       const mermaid = toMermaidGraph(analyze(code12));
-      console.log('\n\n------------------------');
-      console.log(mermaid);
+      // console.log('\n\n------------------------');
+      // console.log(mermaid);
       fs.writeFileSync(
         htmlFile,
         graphDemoHTML

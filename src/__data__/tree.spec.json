@@ -15,6 +15,11 @@
   "isVariable": false,
   "scopePath": "",
   "nesting": 0,
+  "variables": [
+    "VariableDeclarator-1:7-1:18",
+    "FunctionDeclaration-2:1-4:2",
+    "FunctionDeclaration-6:1-14:2"
+  ],
   "children": [
     {
       "type": "VariableDeclaration",
@@ -296,6 +301,12 @@
       "isVariable": true,
       "scopePath": "Program-1:1-21:1",
       "nesting": 1,
+      "variables": [
+        "VariableDeclarator-7:9-7:21",
+        "VariableDeclarator-8:9-8:26",
+        "FunctionDeclaration-9:3-11:4",
+        "VariableDeclarator-12:9-12:23"
+      ],
       "children": [
         {
           "type": "Identifier",
