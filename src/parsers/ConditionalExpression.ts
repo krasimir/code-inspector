@@ -8,7 +8,7 @@ export default function(
 ): NormalizedNode {
   return {
     type: 'ConditionalExpression',
-    text: helpers.parse(node.test).text,
+    text: `${helpers.parse(node.test).text}?`,
     ...helpers.normalizeLoc(node.loc),
   };
 }

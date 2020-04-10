@@ -5,7 +5,7 @@ import { parse } from './parse';
 
 import { NormalizedNode, Analysis } from './types';
 import { getNodeKey, getNodePath, getNodeScopePath } from './utils';
-import graph from './graph';
+import { generateMermaidGraph } from './graph';
 
 const plugins = [
   'jsx',
@@ -81,6 +81,7 @@ export function analyze(code: string) {
   const scopes: NormalizedNode[] = [];
   const consumedNodes: Record<string, boolean> = {};
   const consumedScopes: Record<string, boolean> = {};
+  let tree: TreeItem;
 
   cache = {};
   Traverse.default(ast, {
@@ -112,6 +113,7 @@ export function analyze(code: string) {
     nodes,
     scopes,
     variables: nodes.filter(({ type }) => VARIABLES_NODE_TYPES[type]),
+    tree,
   };
 }
 
@@ -145,6 +147,6 @@ export function isVariable(node: NormalizedNode): boolean {
   return !!VARIABLES_NODE_TYPES[node.type];
 }
 
-export function toGraph(analysis: Analysis): string {
-  return graph(analysis);
+export function toMermaidGraph(analysis: Analysis): string {
+  return generateMermaidGraph(analysis);
 }

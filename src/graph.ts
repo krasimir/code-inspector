@@ -2,71 +2,99 @@ import uniq from 'lodash/uniq';
 import get from 'lodash/get';
 import { NormalizedNode, Analysis } from './types';
 
+const GRAPH_TYPE = 'LR';
 const SCOPE_NODES_TO_IGNORE = ['WhileStatement', 'Program'];
-const ADDITIONAL_NODE_TYPES_TO_INCLUDE = [
+const BRANCHING = ['ConditionalExpression', 'IfStatement'];
+const GRAPH_VALID_TYPES = [
   'FunctionDeclaration',
   'FunctionExpression',
   'ClassDeclaration',
   'ClassMethod',
   'ClassProperty',
   'JSXElement',
+  'ImportDefaultSpecifier',
+  'ReturnStatement',
+  ...BRANCHING,
 ];
 
-function normalizedNode2GraphNode(node: NormalizedNode): any {
-  let label = node.text;
-  if (node.type === 'FunctionDeclaration') label = node.meta;
-  if (node.type === 'FunctionExpression') label = 'ƒ()';
-  return `${node.key}("${label}")`;
+function GraphData(getNodeByKey: Function) {
+  const data: string[] = [];
+  const addedNodes: NormalizedNode[] = [];
+
+  function getGraphLabel(node: NormalizedNode): any {
+    let label = node.text;
+    let graphType = ['(', ')'];
+    if (node.type === 'FunctionDeclaration') {
+      label = `${node.meta}()`;
+    }
+    if (node.type === 'ImportDefaultSpecifier') {
+      label = node.meta;
+    }
+    if (BRANCHING.includes(node.type)) {
+      graphType = ['{', '}'];
+    }
+    if (node.type === 'ReturnStatement') {
+      graphType = ['>', ']'];
+    }
+    if (node.type === 'FunctionExpression') label = 'ƒ()';
+    return `${node.key}${graphType[0]}"${label}"${graphType[1]}`;
+  }
+  return {
+    addNode(node: NormalizedNode) {
+      addedNodes.push(node);
+      data.push(getGraphLabel(node));
+    },
+    link(node1: NormalizedNode, node2: NormalizedNode) {
+      data.push(`${getGraphLabel(node1)} --- ${getGraphLabel(node2)}`);
+    },
+    export() {
+      addedNodes.forEach(node => {
+        const parent = node.path
+          .split('.')
+          .reverse()
+          .find(key => {
+            if (GRAPH_VALID_TYPES.includes(key.substr(0, key.indexOf('-')))) {
+              return key;
+            }
+            return false;
+          });
+        if (parent) {
+          this.link(getNodeByKey(parent), node);
+        }
+      });
+      return uniq([`graph ${GRAPH_TYPE}`].concat(data)).join('\n');
+    },
+  };
 }
 
-export default function toGraph(analysis: Analysis): string {
+function findDefinition(
+  node: NormalizedNode,
+  nodes: NormalizedNode[]
+): NormalizedNode {
+  const allNodesInTheCurrentScope = nodes.filter(
+    n => n.scopePath === node.scopePath
+  );
+}
+
+export function generateMermaidGraph(analysis: Analysis): string {
   const { nodes, scopes, variables } = analysis;
-  const graph: string[] = [];
-  const links: Array<NormalizedNode>[] = [];
-  const scopeNodes = scopes.reduce(
-    (obj: Record<string, NormalizedNode>, node: NormalizedNode) => {
-      if (!SCOPE_NODES_TO_IGNORE.includes(node.type)) {
-        obj[node.key] = node;
-      }
-      return obj;
-    },
-    {}
-  );
   const getNodeByKey = (key: string) => nodes.find(n => n.key === key);
+  const graph = GraphData(getNodeByKey);
 
-  const functions = nodes.filter(n =>
-    ADDITIONAL_NODE_TYPES_TO_INCLUDE.includes(n.type)
-  );
-
-  variables.forEach(v => graph.push(normalizedNode2GraphNode(v)));
-
-  [].concat(variables, functions).forEach((node: NormalizedNode) => {
-    let scopeKey;
-    if (node.type === 'JSXElement') {
-      scopeKey = node.path
-        .split('.')
-        .reverse()
-        .find(n => n.match(/^JSXElement/));
+  nodes.forEach((node, i) => {
+    if (GRAPH_VALID_TYPES.includes(node.type)) {
+      graph.addNode(node);
     }
-    if (!scopeKey) {
-      scopeKey = node.scopePath
+    if (
+      node.type === 'Identifier' &&
+      !node.path
         .split('.')
-        .reverse()
-        .find(sKey => scopeNodes[sKey]);
-    }
-    if (scopeKey) {
-      links.push([
-        node,
-        scopeNodes[scopeKey] ? scopeNodes[scopeKey] : getNodeByKey(scopeKey),
-      ]);
+        .pop()
+        .match(/^VariableDeclarator|FunctionDeclaration/)
+    ) {
+      console.log(node.text, node.scopePath, findDefinition(node, nodes));
     }
   });
 
-  links.forEach(([n, scope]) => {
-    graph.push(
-      `${normalizedNode2GraphNode(scope)} --- ${normalizedNode2GraphNode(n)}`
-    );
-  });
-
-  return uniq(['graph LR'].concat(graph)).join('\n');
+  return graph.export();
 }

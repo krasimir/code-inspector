@@ -12,5 +12,6 @@ export default function(
     type: 'VariableDeclarator',
     text: helpers.parse(node.id).text,
     ...helpers.normalizeLoc(node.loc),
+    meta: helpers.parse(node.id).text,
   };
 }

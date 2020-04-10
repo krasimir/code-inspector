@@ -17,6 +17,13 @@ export interface Analysis {
   nodes: NormalizedNode[];
   scopes: NormalizedNode[];
   variables: NormalizedNode[];
+  tree: TreeItem;
+}
+
+export interface TreeItem {
+  scope: boolean;
+  node: NormalizedNode;
+  children: TreeItem[];
 }
 
 export function analyze(code: string): Analysis;
