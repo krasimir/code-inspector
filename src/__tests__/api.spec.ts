@@ -196,7 +196,7 @@ describe('Given the code-inspector library', () => {
     it('should properly define variables out of the function arguments', () => {
       const { tree } = analyze(code14);
 
-      // clipboardy.writeSync(JSON.stringify(tree, null, 2));
+      clipboardy.writeSync(JSON.stringify(tree, null, 2));
       expect(tree).toStrictEqual(treeExpectationFunctionVariables);
     });
   });

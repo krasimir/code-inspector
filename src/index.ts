@@ -43,12 +43,13 @@ const babelParserOptions = {
 let cache: Record<string, NormalizedNode> = {};
 
 const NODES_DEFINING_SCOPES: Record<string, boolean> = {
+  Program: true,
   FunctionDeclaration: true,
   FunctionExpression: true,
   ArrowFunctionExpression: true,
-  Program: true,
   ClassDeclaration: true,
   ClassMethod: true,
+  ObjectMethod: true,
 };
 
 const VARIABLES_NODE_TYPES: Record<string, boolean> = {
@@ -73,6 +74,10 @@ function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
   node.isScope = !!NODES_DEFINING_SCOPES[node.type];
   node.isVariable = !!VARIABLES_NODE_TYPES[node.type];
 
+  if (node.meta && node.meta.params) {
+    if (!node.variables) node.variables = [];
+    node.meta.params.forEach((p: NormalizedNode) => node.variables.push(p.key));
+  }
   return node;
 }
 
@@ -113,8 +118,8 @@ export function analyze(code: string) {
 
       node.scopePath = scopePath;
       node.nesting = scopePath === '' ? 0 : scopePath.split('.').length;
-
       nodes.push(node);
+
       if (node.isVariable) {
         const currentScope = stack[stack.length - 1];
         if (currentScope) {
