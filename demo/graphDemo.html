@@ -47,17 +47,17 @@
   <div class="container">
     <div>
       <pre class="js">const ANSWER = 42;
-function test(value) {
+function test(value, anotherOne, fooBar) {
   return value ? ANSWER : null;
 }
 
 function foobar() {
   const ANSWER = 100;
   const mult = v => v * 2;
-  function sqrt(v) {
-    return Math.sqrt(v);
+  function sqrtAnd(v) {
+    return Math.sqrt(v) + ANSWER;
   }
-  const x = ANSWER * 2;
+  const x = ANSWER * mult(2);
   console.log(ANSWER);
 }
 
@@ -68,30 +68,40 @@ if (ANSWER === 42) {
 }
 </pre>
       <section class="preview-in-mermaid">graph LR
-FunctionDeclaration-2:1-4:2("test()")
-ReturnStatement-3:3-3:32>"← value?"]
-ConditionalExpression-3:10-3:31{"value?"}
-FunctionDeclaration-6:1-14:2("foobar()")
-FunctionDeclaration-9:3-11:4("sqrt()")
-ReturnStatement-10:5-10:25>"← Math.sqrt(…)"]
-IfStatement-16:1-20:2{"if (ANSWER === 42)"}
-FunctionDeclaration-2:1-4:2("test()") --- ReturnStatement-3:3-3:32>"← value?"]
+Program-1:1-21:1("Program") --- VariableDeclarator-1:7-1:18("ANSWER")
+Program-1:1-21:1("Program") --- FunctionDeclaration-2:1-4:2("[object Object]()")
+FunctionDeclaration-2:1-4:2("[object Object]()") --- ReturnStatement-3:3-3:32>"← value?"]
 ReturnStatement-3:3-3:32>"← value?"] --- ConditionalExpression-3:10-3:31{"value?"}
-FunctionDeclaration-6:1-14:2("foobar()") --- FunctionDeclaration-9:3-11:4("sqrt()")
-FunctionDeclaration-9:3-11:4("sqrt()") --- ReturnStatement-10:5-10:25>"← Math.sqrt(…)"]</section>
+ConditionalExpression-3:10-3:31{"value?"} -.- VariableDeclarator-1:7-1:18("ANSWER")
+ConditionalExpression-3:10-3:31{"value?"} --- NullLiteral-3:27-3:31("null")
+Program-1:1-21:1("Program") --- FunctionDeclaration-6:1-14:2("[object Object]()")
+FunctionDeclaration-6:1-14:2("[object Object]()") --- VariableDeclarator-7:9-7:21("ANSWER")
+FunctionDeclaration-6:1-14:2("[object Object]()") --- VariableDeclarator-8:9-8:26("mult")
+FunctionDeclaration-6:1-14:2("[object Object]()") --- FunctionDeclaration-9:3-11:4("[object Object]()")
+FunctionDeclaration-9:3-11:4("[object Object]()") --- ReturnStatement-10:5-10:34>"← Math.sqrt(…) + ANSWER"]
+ReturnStatement-10:5-10:34>"← Math.sqrt(…) + ANSWER"] --- BinaryExpression-10:12-10:33("Math.sqrt(…) + ANSWER")
+BinaryExpression-10:12-10:33("Math.sqrt(…) + ANSWER") -.- VariableDeclarator-7:9-7:21("ANSWER")
+FunctionDeclaration-6:1-14:2("[object Object]()") --- VariableDeclarator-12:9-12:29("x")
+VariableDeclarator-12:9-12:29("x") --- BinaryExpression-12:13-12:29("ANSWER * mult(…)")
+BinaryExpression-12:13-12:29("ANSWER * mult(…)") -.- VariableDeclarator-7:9-7:21("ANSWER")</section>
     </div>
     <div class="mermaid">graph LR
-FunctionDeclaration-2:1-4:2("test()")
-ReturnStatement-3:3-3:32>"← value?"]
-ConditionalExpression-3:10-3:31{"value?"}
-FunctionDeclaration-6:1-14:2("foobar()")
-FunctionDeclaration-9:3-11:4("sqrt()")
-ReturnStatement-10:5-10:25>"← Math.sqrt(…)"]
-IfStatement-16:1-20:2{"if (ANSWER === 42)"}
-FunctionDeclaration-2:1-4:2("test()") --- ReturnStatement-3:3-3:32>"← value?"]
+Program-1:1-21:1("Program") --- VariableDeclarator-1:7-1:18("ANSWER")
+Program-1:1-21:1("Program") --- FunctionDeclaration-2:1-4:2("[object Object]()")
+FunctionDeclaration-2:1-4:2("[object Object]()") --- ReturnStatement-3:3-3:32>"← value?"]
 ReturnStatement-3:3-3:32>"← value?"] --- ConditionalExpression-3:10-3:31{"value?"}
-FunctionDeclaration-6:1-14:2("foobar()") --- FunctionDeclaration-9:3-11:4("sqrt()")
-FunctionDeclaration-9:3-11:4("sqrt()") --- ReturnStatement-10:5-10:25>"← Math.sqrt(…)"]</div>
+ConditionalExpression-3:10-3:31{"value?"} -.- VariableDeclarator-1:7-1:18("ANSWER")
+ConditionalExpression-3:10-3:31{"value?"} --- NullLiteral-3:27-3:31("null")
+Program-1:1-21:1("Program") --- FunctionDeclaration-6:1-14:2("[object Object]()")
+FunctionDeclaration-6:1-14:2("[object Object]()") --- VariableDeclarator-7:9-7:21("ANSWER")
+FunctionDeclaration-6:1-14:2("[object Object]()") --- VariableDeclarator-8:9-8:26("mult")
+FunctionDeclaration-6:1-14:2("[object Object]()") --- FunctionDeclaration-9:3-11:4("[object Object]()")
+FunctionDeclaration-9:3-11:4("[object Object]()") --- ReturnStatement-10:5-10:34>"← Math.sqrt(…) + ANSWER"]
+ReturnStatement-10:5-10:34>"← Math.sqrt(…) + ANSWER"] --- BinaryExpression-10:12-10:33("Math.sqrt(…) + ANSWER")
+BinaryExpression-10:12-10:33("Math.sqrt(…) + ANSWER") -.- VariableDeclarator-7:9-7:21("ANSWER")
+FunctionDeclaration-6:1-14:2("[object Object]()") --- VariableDeclarator-12:9-12:29("x")
+VariableDeclarator-12:9-12:29("x") --- BinaryExpression-12:13-12:29("ANSWER * mult(…)")
+BinaryExpression-12:13-12:29("ANSWER * mult(…)") -.- VariableDeclarator-7:9-7:21("ANSWER")</div>
   <script src="../browser/code-inspector.js"></script>
 </body>
 </html>

@@ -14,5 +14,9 @@ export default function(
       node.params.length > 0 ? `…${node.params.length}` : ''
     })`,
     ...helpers.normalizeLoc(node.loc),
+    meta: {
+      funcName: helpers.parse(node.key).text,
+      params: node.params.map(p => helpers.parse(p)),
+    },
   };
 }

@@ -1,0 +1,1450 @@
+{
+  "type": "Program",
+  "text": "Program",
+  "start": [
+    1,
+    1
+  ],
+  "end": [
+    18,
+    1
+  ],
+  "key": "Program-1:1-18:1",
+  "path": "",
+  "isScope": true,
+  "isVariable": false,
+  "scopePath": "",
+  "nesting": 0,
+  "variables": [
+    "FunctionDeclaration-1:1-1:24",
+    "VariableDeclarator-2:7-2:37",
+    "VariableDeclarator-3:7-3:27",
+    "VariableDeclarator-7:7-11:2"
+  ],
+  "children": [
+    {
+      "type": "FunctionDeclaration",
+      "text": "A(foo, bar)",
+      "start": [
+        1,
+        1
+      ],
+      "end": [
+        1,
+        24
+      ],
+      "meta": {
+        "funcName": "A",
+        "params": [
+          {
+            "type": "Identifier",
+            "text": "foo",
+            "start": [
+              1,
+              12
+            ],
+            "end": [
+              1,
+              15
+            ],
+            "key": "Identifier-1:12-1:15"
+          },
+          {
+            "type": "Identifier",
+            "text": "bar",
+            "start": [
+              1,
+              17
+            ],
+            "end": [
+              1,
+              20
+            ],
+            "key": "Identifier-1:17-1:20"
+          }
+        ]
+      },
+      "key": "FunctionDeclaration-1:1-1:24",
+      "parent": "Program-1:1-18:1",
+      "path": "Program-1:1-18:1",
+      "isScope": true,
+      "isVariable": true,
+      "scopePath": "Program-1:1-18:1",
+      "nesting": 1,
+      "children": [
+        {
+          "type": "Identifier",
+          "text": "A",
+          "start": [
+            1,
+            10
+          ],
+          "end": [
+            1,
+            11
+          ],
+          "key": "Identifier-1:10-1:11",
+          "parent": "FunctionDeclaration-1:1-1:24",
+          "path": "Program-1:1-18:1.FunctionDeclaration-1:1-1:24",
+          "isScope": false,
+          "isVariable": false,
+          "scopePath": "Program-1:1-18:1.FunctionDeclaration-1:1-1:24",
+          "nesting": 2
+        },
+        {
+          "type": "Identifier",
+          "text": "foo",
+          "start": [
+            1,
+            12
+          ],
+          "end": [
+            1,
+            15
+          ],
+          "key": "Identifier-1:12-1:15",
+          "parent": "FunctionDeclaration-1:1-1:24",
+          "path": "Program-1:1-18:1.FunctionDeclaration-1:1-1:24",
+          "isScope": false,
+          "isVariable": false,
+          "scopePath": "Program-1:1-18:1.FunctionDeclaration-1:1-1:24",
+          "nesting": 2
+        },
+        {
+          "type": "Identifier",
+          "text": "bar",
+          "start": [
+            1,
+            17
+          ],
+          "end": [
+            1,
+            20
+          ],
+          "key": "Identifier-1:17-1:20",
+          "parent": "FunctionDeclaration-1:1-1:24",
+          "path": "Program-1:1-18:1.FunctionDeclaration-1:1-1:24",
+          "isScope": false,
+          "isVariable": false,
+          "scopePath": "Program-1:1-18:1.FunctionDeclaration-1:1-1:24",
+          "nesting": 2
+        },
+        {
+          "type": "BlockStatement",
+          "text": "⊏…⊐",
+          "start": [
+            1,
+            22
+          ],
+          "end": [
+            1,
+            24
+          ],
+          "key": "BlockStatement-1:22-1:24",
+          "parent": "FunctionDeclaration-1:1-1:24",
+          "path": "Program-1:1-18:1.FunctionDeclaration-1:1-1:24",
+          "isScope": false,
+          "isVariable": false,
+          "scopePath": "Program-1:1-18:1.FunctionDeclaration-1:1-1:24",
+          "nesting": 2
+        }
+      ]
+    },
+    {
+      "type": "VariableDeclaration",
+      "text": "B",
+      "start": [
+        2,
+        1
+      ],
+      "end": [
+        2,
+        38
+      ],
+      "key": "VariableDeclaration-2:1-2:38",
+      "parent": "Program-1:1-18:1",
+      "path": "Program-1:1-18:1",
+      "isScope": false,
+      "isVariable": false,
+      "scopePath": "Program-1:1-18:1",
+      "nesting": 1,
+      "children": [
+        {
+          "type": "VariableDeclarator",
+          "text": "B",
+          "start": [
+            2,
+            7
+          ],
+          "end": [
+            2,
+            37
+          ],
+          "meta": "B",
+          "key": "VariableDeclarator-2:7-2:37",
+          "parent": "VariableDeclaration-2:1-2:38",
+          "path": "Program-1:1-18:1.VariableDeclaration-2:1-2:38",
+          "isScope": false,
+          "isVariable": true,
+          "scopePath": "Program-1:1-18:1",
+          "nesting": 1,
+          "children": [
+            {
+              "type": "Identifier",
+              "text": "B",
+              "start": [
+                2,
+                7
+              ],
+              "end": [
+                2,
+                8
+              ],
+              "key": "Identifier-2:7-2:8",
+              "parent": "VariableDeclarator-2:7-2:37",
+              "path": "Program-1:1-18:1.VariableDeclaration-2:1-2:38.VariableDeclarator-2:7-2:37",
+              "isScope": false,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1",
+              "nesting": 1
+            },
+            {
+              "type": "FunctionExpression",
+              "text": "Name(foo, bar)",
+              "start": [
+                2,
+                11
+              ],
+              "end": [
+                2,
+                37
+              ],
+              "meta": {
+                "funcName": "Name",
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "text": "foo",
+                    "start": [
+                      2,
+                      25
+                    ],
+                    "end": [
+                      2,
+                      28
+                    ],
+                    "key": "Identifier-2:25-2:28"
+                  },
+                  {
+                    "type": "Identifier",
+                    "text": "bar",
+                    "start": [
+                      2,
+                      30
+                    ],
+                    "end": [
+                      2,
+                      33
+                    ],
+                    "key": "Identifier-2:30-2:33"
+                  }
+                ]
+              },
+              "key": "FunctionExpression-2:11-2:37",
+              "parent": "VariableDeclarator-2:7-2:37",
+              "path": "Program-1:1-18:1.VariableDeclaration-2:1-2:38.VariableDeclarator-2:7-2:37",
+              "isScope": true,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1",
+              "nesting": 1,
+              "children": [
+                {
+                  "type": "Identifier",
+                  "text": "Name",
+                  "start": [
+                    2,
+                    20
+                  ],
+                  "end": [
+                    2,
+                    24
+                  ],
+                  "key": "Identifier-2:20-2:24",
+                  "parent": "FunctionExpression-2:11-2:37",
+                  "path": "Program-1:1-18:1.VariableDeclaration-2:1-2:38.VariableDeclarator-2:7-2:37.FunctionExpression-2:11-2:37",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.FunctionExpression-2:11-2:37",
+                  "nesting": 2
+                },
+                {
+                  "type": "Identifier",
+                  "text": "foo",
+                  "start": [
+                    2,
+                    25
+                  ],
+                  "end": [
+                    2,
+                    28
+                  ],
+                  "key": "Identifier-2:25-2:28",
+                  "parent": "FunctionExpression-2:11-2:37",
+                  "path": "Program-1:1-18:1.VariableDeclaration-2:1-2:38.VariableDeclarator-2:7-2:37.FunctionExpression-2:11-2:37",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.FunctionExpression-2:11-2:37",
+                  "nesting": 2
+                },
+                {
+                  "type": "Identifier",
+                  "text": "bar",
+                  "start": [
+                    2,
+                    30
+                  ],
+                  "end": [
+                    2,
+                    33
+                  ],
+                  "key": "Identifier-2:30-2:33",
+                  "parent": "FunctionExpression-2:11-2:37",
+                  "path": "Program-1:1-18:1.VariableDeclaration-2:1-2:38.VariableDeclarator-2:7-2:37.FunctionExpression-2:11-2:37",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.FunctionExpression-2:11-2:37",
+                  "nesting": 2
+                },
+                {
+                  "type": "BlockStatement",
+                  "text": "⊏…⊐",
+                  "start": [
+                    2,
+                    35
+                  ],
+                  "end": [
+                    2,
+                    37
+                  ],
+                  "key": "BlockStatement-2:35-2:37",
+                  "parent": "FunctionExpression-2:11-2:37",
+                  "path": "Program-1:1-18:1.VariableDeclaration-2:1-2:38.VariableDeclarator-2:7-2:37.FunctionExpression-2:11-2:37",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.FunctionExpression-2:11-2:37",
+                  "nesting": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "VariableDeclaration",
+      "text": "C",
+      "start": [
+        3,
+        1
+      ],
+      "end": [
+        3,
+        28
+      ],
+      "key": "VariableDeclaration-3:1-3:28",
+      "parent": "Program-1:1-18:1",
+      "path": "Program-1:1-18:1",
+      "isScope": false,
+      "isVariable": false,
+      "scopePath": "Program-1:1-18:1",
+      "nesting": 1,
+      "children": [
+        {
+          "type": "VariableDeclarator",
+          "text": "C",
+          "start": [
+            3,
+            7
+          ],
+          "end": [
+            3,
+            27
+          ],
+          "meta": "C",
+          "key": "VariableDeclarator-3:7-3:27",
+          "parent": "VariableDeclaration-3:1-3:28",
+          "path": "Program-1:1-18:1.VariableDeclaration-3:1-3:28",
+          "isScope": false,
+          "isVariable": true,
+          "scopePath": "Program-1:1-18:1",
+          "nesting": 1,
+          "children": [
+            {
+              "type": "Identifier",
+              "text": "C",
+              "start": [
+                3,
+                7
+              ],
+              "end": [
+                3,
+                8
+              ],
+              "key": "Identifier-3:7-3:8",
+              "parent": "VariableDeclarator-3:7-3:27",
+              "path": "Program-1:1-18:1.VariableDeclaration-3:1-3:28.VariableDeclarator-3:7-3:27",
+              "isScope": false,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1",
+              "nesting": 1
+            },
+            {
+              "type": "ArrowFunctionExpression",
+              "text": "C(foo, bar)",
+              "start": [
+                3,
+                11
+              ],
+              "end": [
+                3,
+                27
+              ],
+              "meta": {
+                "funcName": "ƒ",
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "text": "foo",
+                    "start": [
+                      3,
+                      12
+                    ],
+                    "end": [
+                      3,
+                      15
+                    ],
+                    "key": "Identifier-3:12-3:15"
+                  },
+                  {
+                    "type": "Identifier",
+                    "text": "bar",
+                    "start": [
+                      3,
+                      17
+                    ],
+                    "end": [
+                      3,
+                      20
+                    ],
+                    "key": "Identifier-3:17-3:20"
+                  }
+                ]
+              },
+              "key": "ArrowFunctionExpression-3:11-3:27",
+              "parent": "VariableDeclarator-3:7-3:27",
+              "path": "Program-1:1-18:1.VariableDeclaration-3:1-3:28.VariableDeclarator-3:7-3:27",
+              "isScope": true,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1",
+              "nesting": 1,
+              "children": [
+                {
+                  "type": "Identifier",
+                  "text": "foo",
+                  "start": [
+                    3,
+                    12
+                  ],
+                  "end": [
+                    3,
+                    15
+                  ],
+                  "key": "Identifier-3:12-3:15",
+                  "parent": "ArrowFunctionExpression-3:11-3:27",
+                  "path": "Program-1:1-18:1.VariableDeclaration-3:1-3:28.VariableDeclarator-3:7-3:27.ArrowFunctionExpression-3:11-3:27",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ArrowFunctionExpression-3:11-3:27",
+                  "nesting": 2
+                },
+                {
+                  "type": "Identifier",
+                  "text": "bar",
+                  "start": [
+                    3,
+                    17
+                  ],
+                  "end": [
+                    3,
+                    20
+                  ],
+                  "key": "Identifier-3:17-3:20",
+                  "parent": "ArrowFunctionExpression-3:11-3:27",
+                  "path": "Program-1:1-18:1.VariableDeclaration-3:1-3:28.VariableDeclarator-3:7-3:27.ArrowFunctionExpression-3:11-3:27",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ArrowFunctionExpression-3:11-3:27",
+                  "nesting": 2
+                },
+                {
+                  "type": "BlockStatement",
+                  "text": "⊏…⊐",
+                  "start": [
+                    3,
+                    25
+                  ],
+                  "end": [
+                    3,
+                    27
+                  ],
+                  "key": "BlockStatement-3:25-3:27",
+                  "parent": "ArrowFunctionExpression-3:11-3:27",
+                  "path": "Program-1:1-18:1.VariableDeclaration-3:1-3:28.VariableDeclarator-3:7-3:27.ArrowFunctionExpression-3:11-3:27",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ArrowFunctionExpression-3:11-3:27",
+                  "nesting": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpressionStatement",
+      "text": "ƒ(foo, bar)",
+      "start": [
+        5,
+        1
+      ],
+      "end": [
+        5,
+        25
+      ],
+      "key": "ExpressionStatement-5:1-5:25",
+      "parent": "Program-1:1-18:1",
+      "path": "Program-1:1-18:1",
+      "isScope": false,
+      "isVariable": false,
+      "scopePath": "Program-1:1-18:1",
+      "nesting": 1,
+      "children": [
+        {
+          "type": "FunctionExpression",
+          "text": "ƒ(foo, bar)",
+          "start": [
+            5,
+            2
+          ],
+          "end": [
+            5,
+            23
+          ],
+          "meta": {
+            "funcName": "ƒ",
+            "params": [
+              {
+                "type": "Identifier",
+                "text": "foo",
+                "start": [
+                  5,
+                  11
+                ],
+                "end": [
+                  5,
+                  14
+                ],
+                "key": "Identifier-5:11-5:14"
+              },
+              {
+                "type": "Identifier",
+                "text": "bar",
+                "start": [
+                  5,
+                  16
+                ],
+                "end": [
+                  5,
+                  19
+                ],
+                "key": "Identifier-5:16-5:19"
+              }
+            ]
+          },
+          "key": "FunctionExpression-5:2-5:23",
+          "parent": "ExpressionStatement-5:1-5:25",
+          "path": "Program-1:1-18:1.ExpressionStatement-5:1-5:25",
+          "isScope": true,
+          "isVariable": false,
+          "scopePath": "Program-1:1-18:1",
+          "nesting": 1,
+          "children": [
+            {
+              "type": "Identifier",
+              "text": "foo",
+              "start": [
+                5,
+                11
+              ],
+              "end": [
+                5,
+                14
+              ],
+              "key": "Identifier-5:11-5:14",
+              "parent": "FunctionExpression-5:2-5:23",
+              "path": "Program-1:1-18:1.ExpressionStatement-5:1-5:25.FunctionExpression-5:2-5:23",
+              "isScope": false,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1.FunctionExpression-5:2-5:23",
+              "nesting": 2
+            },
+            {
+              "type": "Identifier",
+              "text": "bar",
+              "start": [
+                5,
+                16
+              ],
+              "end": [
+                5,
+                19
+              ],
+              "key": "Identifier-5:16-5:19",
+              "parent": "FunctionExpression-5:2-5:23",
+              "path": "Program-1:1-18:1.ExpressionStatement-5:1-5:25.FunctionExpression-5:2-5:23",
+              "isScope": false,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1.FunctionExpression-5:2-5:23",
+              "nesting": 2
+            },
+            {
+              "type": "BlockStatement",
+              "text": "⊏…⊐",
+              "start": [
+                5,
+                21
+              ],
+              "end": [
+                5,
+                23
+              ],
+              "key": "BlockStatement-5:21-5:23",
+              "parent": "FunctionExpression-5:2-5:23",
+              "path": "Program-1:1-18:1.ExpressionStatement-5:1-5:25.FunctionExpression-5:2-5:23",
+              "isScope": false,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1.FunctionExpression-5:2-5:23",
+              "nesting": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "VariableDeclaration",
+      "text": "Obj",
+      "start": [
+        7,
+        1
+      ],
+      "end": [
+        11,
+        3
+      ],
+      "key": "VariableDeclaration-7:1-11:3",
+      "parent": "Program-1:1-18:1",
+      "path": "Program-1:1-18:1",
+      "isScope": false,
+      "isVariable": false,
+      "scopePath": "Program-1:1-18:1",
+      "nesting": 1,
+      "children": [
+        {
+          "type": "VariableDeclarator",
+          "text": "Obj",
+          "start": [
+            7,
+            7
+          ],
+          "end": [
+            11,
+            2
+          ],
+          "meta": "Obj",
+          "key": "VariableDeclarator-7:7-11:2",
+          "parent": "VariableDeclaration-7:1-11:3",
+          "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3",
+          "isScope": false,
+          "isVariable": true,
+          "scopePath": "Program-1:1-18:1",
+          "nesting": 1,
+          "children": [
+            {
+              "type": "Identifier",
+              "text": "Obj",
+              "start": [
+                7,
+                7
+              ],
+              "end": [
+                7,
+                10
+              ],
+              "key": "Identifier-7:7-7:10",
+              "parent": "VariableDeclarator-7:7-11:2",
+              "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2",
+              "isScope": false,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1",
+              "nesting": 1
+            },
+            {
+              "type": "ObjectExpression",
+              "text": "{…}",
+              "start": [
+                7,
+                13
+              ],
+              "end": [
+                11,
+                2
+              ],
+              "key": "ObjectExpression-7:13-11:2",
+              "parent": "VariableDeclarator-7:7-11:2",
+              "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2",
+              "isScope": false,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1",
+              "nesting": 1,
+              "children": [
+                {
+                  "type": "ObjectMethod",
+                  "text": "D(…2)",
+                  "start": [
+                    8,
+                    3
+                  ],
+                  "end": [
+                    8,
+                    17
+                  ],
+                  "meta": {
+                    "funcName": "D",
+                    "params": [
+                      {
+                        "type": "Identifier",
+                        "text": "foo",
+                        "start": [
+                          8,
+                          5
+                        ],
+                        "end": [
+                          8,
+                          8
+                        ],
+                        "key": "Identifier-8:5-8:8"
+                      },
+                      {
+                        "type": "Identifier",
+                        "text": "bar",
+                        "start": [
+                          8,
+                          10
+                        ],
+                        "end": [
+                          8,
+                          13
+                        ],
+                        "key": "Identifier-8:10-8:13"
+                      }
+                    ]
+                  },
+                  "key": "ObjectMethod-8:3-8:17",
+                  "parent": "ObjectExpression-7:13-11:2",
+                  "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1",
+                  "nesting": 1,
+                  "children": [
+                    {
+                      "type": "Identifier",
+                      "text": "D",
+                      "start": [
+                        8,
+                        3
+                      ],
+                      "end": [
+                        8,
+                        4
+                      ],
+                      "key": "Identifier-8:3-8:4",
+                      "parent": "ObjectMethod-8:3-8:17",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectMethod-8:3-8:17",
+                      "isScope": false,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1
+                    },
+                    {
+                      "type": "Identifier",
+                      "text": "foo",
+                      "start": [
+                        8,
+                        5
+                      ],
+                      "end": [
+                        8,
+                        8
+                      ],
+                      "key": "Identifier-8:5-8:8",
+                      "parent": "ObjectMethod-8:3-8:17",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectMethod-8:3-8:17",
+                      "isScope": false,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1
+                    },
+                    {
+                      "type": "Identifier",
+                      "text": "bar",
+                      "start": [
+                        8,
+                        10
+                      ],
+                      "end": [
+                        8,
+                        13
+                      ],
+                      "key": "Identifier-8:10-8:13",
+                      "parent": "ObjectMethod-8:3-8:17",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectMethod-8:3-8:17",
+                      "isScope": false,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1
+                    },
+                    {
+                      "type": "BlockStatement",
+                      "text": "⊏…⊐",
+                      "start": [
+                        8,
+                        15
+                      ],
+                      "end": [
+                        8,
+                        17
+                      ],
+                      "key": "BlockStatement-8:15-8:17",
+                      "parent": "ObjectMethod-8:3-8:17",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectMethod-8:3-8:17",
+                      "isScope": false,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "ObjectMethod",
+                  "text": "E(…2)",
+                  "start": [
+                    9,
+                    3
+                  ],
+                  "end": [
+                    9,
+                    17
+                  ],
+                  "meta": {
+                    "funcName": "E",
+                    "params": [
+                      {
+                        "type": "Identifier",
+                        "text": "foo",
+                        "start": [
+                          9,
+                          5
+                        ],
+                        "end": [
+                          9,
+                          8
+                        ],
+                        "key": "Identifier-9:5-9:8"
+                      },
+                      {
+                        "type": "Identifier",
+                        "text": "bar",
+                        "start": [
+                          9,
+                          10
+                        ],
+                        "end": [
+                          9,
+                          13
+                        ],
+                        "key": "Identifier-9:10-9:13"
+                      }
+                    ]
+                  },
+                  "key": "ObjectMethod-9:3-9:17",
+                  "parent": "ObjectExpression-7:13-11:2",
+                  "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1",
+                  "nesting": 1,
+                  "children": [
+                    {
+                      "type": "Identifier",
+                      "text": "E",
+                      "start": [
+                        9,
+                        3
+                      ],
+                      "end": [
+                        9,
+                        4
+                      ],
+                      "key": "Identifier-9:3-9:4",
+                      "parent": "ObjectMethod-9:3-9:17",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectMethod-9:3-9:17",
+                      "isScope": false,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1
+                    },
+                    {
+                      "type": "Identifier",
+                      "text": "foo",
+                      "start": [
+                        9,
+                        5
+                      ],
+                      "end": [
+                        9,
+                        8
+                      ],
+                      "key": "Identifier-9:5-9:8",
+                      "parent": "ObjectMethod-9:3-9:17",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectMethod-9:3-9:17",
+                      "isScope": false,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1
+                    },
+                    {
+                      "type": "Identifier",
+                      "text": "bar",
+                      "start": [
+                        9,
+                        10
+                      ],
+                      "end": [
+                        9,
+                        13
+                      ],
+                      "key": "Identifier-9:10-9:13",
+                      "parent": "ObjectMethod-9:3-9:17",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectMethod-9:3-9:17",
+                      "isScope": false,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1
+                    },
+                    {
+                      "type": "BlockStatement",
+                      "text": "⊏…⊐",
+                      "start": [
+                        9,
+                        15
+                      ],
+                      "end": [
+                        9,
+                        17
+                      ],
+                      "key": "BlockStatement-9:15-9:17",
+                      "parent": "ObjectMethod-9:3-9:17",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectMethod-9:3-9:17",
+                      "isScope": false,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "ObjectProperty",
+                  "text": "F",
+                  "start": [
+                    10,
+                    3
+                  ],
+                  "end": [
+                    10,
+                    22
+                  ],
+                  "key": "ObjectProperty-10:3-10:22",
+                  "parent": "ObjectExpression-7:13-11:2",
+                  "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1",
+                  "nesting": 1,
+                  "children": [
+                    {
+                      "type": "Identifier",
+                      "text": "F",
+                      "start": [
+                        10,
+                        3
+                      ],
+                      "end": [
+                        10,
+                        4
+                      ],
+                      "key": "Identifier-10:3-10:4",
+                      "parent": "ObjectProperty-10:3-10:22",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectProperty-10:3-10:22",
+                      "isScope": false,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1
+                    },
+                    {
+                      "type": "ArrowFunctionExpression",
+                      "text": "F: ƒ",
+                      "start": [
+                        10,
+                        6
+                      ],
+                      "end": [
+                        10,
+                        22
+                      ],
+                      "meta": {
+                        "funcName": "ƒ",
+                        "params": [
+                          {
+                            "type": "Identifier",
+                            "text": "foo",
+                            "start": [
+                              10,
+                              7
+                            ],
+                            "end": [
+                              10,
+                              10
+                            ],
+                            "key": "Identifier-10:7-10:10"
+                          },
+                          {
+                            "type": "Identifier",
+                            "text": "bar",
+                            "start": [
+                              10,
+                              12
+                            ],
+                            "end": [
+                              10,
+                              15
+                            ],
+                            "key": "Identifier-10:12-10:15"
+                          }
+                        ]
+                      },
+                      "key": "ArrowFunctionExpression-10:6-10:22",
+                      "parent": "ObjectProperty-10:3-10:22",
+                      "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectProperty-10:3-10:22",
+                      "isScope": true,
+                      "isVariable": false,
+                      "scopePath": "Program-1:1-18:1",
+                      "nesting": 1,
+                      "children": [
+                        {
+                          "type": "Identifier",
+                          "text": "foo",
+                          "start": [
+                            10,
+                            7
+                          ],
+                          "end": [
+                            10,
+                            10
+                          ],
+                          "key": "Identifier-10:7-10:10",
+                          "parent": "ArrowFunctionExpression-10:6-10:22",
+                          "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectProperty-10:3-10:22.ArrowFunctionExpression-10:6-10:22",
+                          "isScope": false,
+                          "isVariable": false,
+                          "scopePath": "Program-1:1-18:1.ArrowFunctionExpression-10:6-10:22",
+                          "nesting": 2
+                        },
+                        {
+                          "type": "Identifier",
+                          "text": "bar",
+                          "start": [
+                            10,
+                            12
+                          ],
+                          "end": [
+                            10,
+                            15
+                          ],
+                          "key": "Identifier-10:12-10:15",
+                          "parent": "ArrowFunctionExpression-10:6-10:22",
+                          "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectProperty-10:3-10:22.ArrowFunctionExpression-10:6-10:22",
+                          "isScope": false,
+                          "isVariable": false,
+                          "scopePath": "Program-1:1-18:1.ArrowFunctionExpression-10:6-10:22",
+                          "nesting": 2
+                        },
+                        {
+                          "type": "BlockStatement",
+                          "text": "⊏…⊐",
+                          "start": [
+                            10,
+                            20
+                          ],
+                          "end": [
+                            10,
+                            22
+                          ],
+                          "key": "BlockStatement-10:20-10:22",
+                          "parent": "ArrowFunctionExpression-10:6-10:22",
+                          "path": "Program-1:1-18:1.VariableDeclaration-7:1-11:3.VariableDeclarator-7:7-11:2.ObjectExpression-7:13-11:2.ObjectProperty-10:3-10:22.ArrowFunctionExpression-10:6-10:22",
+                          "isScope": false,
+                          "isVariable": false,
+                          "scopePath": "Program-1:1-18:1.ArrowFunctionExpression-10:6-10:22",
+                          "nesting": 2
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ClassDeclaration",
+      "text": "F",
+      "start": [
+        13,
+        1
+      ],
+      "end": [
+        17,
+        2
+      ],
+      "key": "ClassDeclaration-13:1-17:2",
+      "parent": "Program-1:1-18:1",
+      "path": "Program-1:1-18:1",
+      "isScope": true,
+      "isVariable": false,
+      "scopePath": "Program-1:1-18:1",
+      "nesting": 1,
+      "children": [
+        {
+          "type": "Identifier",
+          "text": "F",
+          "start": [
+            13,
+            7
+          ],
+          "end": [
+            13,
+            8
+          ],
+          "key": "Identifier-13:7-13:8",
+          "parent": "ClassDeclaration-13:1-17:2",
+          "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2",
+          "isScope": false,
+          "isVariable": false,
+          "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2",
+          "nesting": 2
+        },
+        {
+          "type": "ClassBody",
+          "text": "⊏F⊐",
+          "start": [
+            13,
+            9
+          ],
+          "end": [
+            17,
+            2
+          ],
+          "key": "ClassBody-13:9-17:2",
+          "parent": "ClassDeclaration-13:1-17:2",
+          "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2",
+          "isScope": false,
+          "isVariable": false,
+          "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2",
+          "nesting": 2,
+          "children": [
+            {
+              "type": "ClassMethod",
+              "text": "F.constructor(foo, bar)",
+              "start": [
+                14,
+                3
+              ],
+              "end": [
+                14,
+                27
+              ],
+              "meta": {
+                "funcName": "constructor",
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "text": "foo",
+                    "start": [
+                      14,
+                      15
+                    ],
+                    "end": [
+                      14,
+                      18
+                    ],
+                    "key": "Identifier-14:15-14:18"
+                  },
+                  {
+                    "type": "Identifier",
+                    "text": "bar",
+                    "start": [
+                      14,
+                      20
+                    ],
+                    "end": [
+                      14,
+                      23
+                    ],
+                    "key": "Identifier-14:20-14:23"
+                  }
+                ]
+              },
+              "key": "ClassMethod-14:3-14:27",
+              "parent": "ClassBody-13:9-17:2",
+              "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2",
+              "isScope": true,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2",
+              "nesting": 2,
+              "children": [
+                {
+                  "type": "Identifier",
+                  "text": "constructor",
+                  "start": [
+                    14,
+                    3
+                  ],
+                  "end": [
+                    14,
+                    14
+                  ],
+                  "key": "Identifier-14:3-14:14",
+                  "parent": "ClassMethod-14:3-14:27",
+                  "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2.ClassMethod-14:3-14:27",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassMethod-14:3-14:27",
+                  "nesting": 3
+                },
+                {
+                  "type": "Identifier",
+                  "text": "foo",
+                  "start": [
+                    14,
+                    15
+                  ],
+                  "end": [
+                    14,
+                    18
+                  ],
+                  "key": "Identifier-14:15-14:18",
+                  "parent": "ClassMethod-14:3-14:27",
+                  "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2.ClassMethod-14:3-14:27",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassMethod-14:3-14:27",
+                  "nesting": 3
+                },
+                {
+                  "type": "Identifier",
+                  "text": "bar",
+                  "start": [
+                    14,
+                    20
+                  ],
+                  "end": [
+                    14,
+                    23
+                  ],
+                  "key": "Identifier-14:20-14:23",
+                  "parent": "ClassMethod-14:3-14:27",
+                  "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2.ClassMethod-14:3-14:27",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassMethod-14:3-14:27",
+                  "nesting": 3
+                },
+                {
+                  "type": "BlockStatement",
+                  "text": "⊏…⊐",
+                  "start": [
+                    14,
+                    25
+                  ],
+                  "end": [
+                    14,
+                    27
+                  ],
+                  "key": "BlockStatement-14:25-14:27",
+                  "parent": "ClassMethod-14:3-14:27",
+                  "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2.ClassMethod-14:3-14:27",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassMethod-14:3-14:27",
+                  "nesting": 3
+                }
+              ]
+            },
+            {
+              "type": "ClassMethod",
+              "text": "F.G(foo, bar)",
+              "start": [
+                16,
+                3
+              ],
+              "end": [
+                16,
+                17
+              ],
+              "meta": {
+                "funcName": "G",
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "text": "foo",
+                    "start": [
+                      16,
+                      5
+                    ],
+                    "end": [
+                      16,
+                      8
+                    ],
+                    "key": "Identifier-16:5-16:8"
+                  },
+                  {
+                    "type": "Identifier",
+                    "text": "bar",
+                    "start": [
+                      16,
+                      10
+                    ],
+                    "end": [
+                      16,
+                      13
+                    ],
+                    "key": "Identifier-16:10-16:13"
+                  }
+                ]
+              },
+              "key": "ClassMethod-16:3-16:17",
+              "parent": "ClassBody-13:9-17:2",
+              "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2",
+              "isScope": true,
+              "isVariable": false,
+              "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2",
+              "nesting": 2,
+              "children": [
+                {
+                  "type": "Identifier",
+                  "text": "G",
+                  "start": [
+                    16,
+                    3
+                  ],
+                  "end": [
+                    16,
+                    4
+                  ],
+                  "key": "Identifier-16:3-16:4",
+                  "parent": "ClassMethod-16:3-16:17",
+                  "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2.ClassMethod-16:3-16:17",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassMethod-16:3-16:17",
+                  "nesting": 3
+                },
+                {
+                  "type": "Identifier",
+                  "text": "foo",
+                  "start": [
+                    16,
+                    5
+                  ],
+                  "end": [
+                    16,
+                    8
+                  ],
+                  "key": "Identifier-16:5-16:8",
+                  "parent": "ClassMethod-16:3-16:17",
+                  "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2.ClassMethod-16:3-16:17",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassMethod-16:3-16:17",
+                  "nesting": 3
+                },
+                {
+                  "type": "Identifier",
+                  "text": "bar",
+                  "start": [
+                    16,
+                    10
+                  ],
+                  "end": [
+                    16,
+                    13
+                  ],
+                  "key": "Identifier-16:10-16:13",
+                  "parent": "ClassMethod-16:3-16:17",
+                  "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2.ClassMethod-16:3-16:17",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassMethod-16:3-16:17",
+                  "nesting": 3
+                },
+                {
+                  "type": "BlockStatement",
+                  "text": "⊏…⊐",
+                  "start": [
+                    16,
+                    15
+                  ],
+                  "end": [
+                    16,
+                    17
+                  ],
+                  "key": "BlockStatement-16:15-16:17",
+                  "parent": "ClassMethod-16:3-16:17",
+                  "path": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassBody-13:9-17:2.ClassMethod-16:3-16:17",
+                  "isScope": false,
+                  "isVariable": false,
+                  "scopePath": "Program-1:1-18:1.ClassDeclaration-13:1-17:2.ClassMethod-16:3-16:17",
+                  "nesting": 3
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

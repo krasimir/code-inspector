@@ -13,6 +13,9 @@ export default function(
     type: 'FunctionDeclaration',
     text: `${funcName}${helpers.renderFunctionParameters(node)}`,
     ...helpers.normalizeLoc(node.loc),
-    meta: funcName,
+    meta: {
+      funcName,
+      params: node.params.map(p => helpers.parse(p)),
+    },
   };
 }

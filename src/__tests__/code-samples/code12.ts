@@ -1,15 +1,15 @@
 const ANSWER = 42;
-function test(value) {
+function test(value, anotherOne, fooBar) {
   return value ? ANSWER : null;
 }
 
 function foobar() {
   const ANSWER = 100;
   const mult = v => v * 2;
-  function sqrt(v) {
-    return Math.sqrt(v);
+  function sqrtAnd(v) {
+    return Math.sqrt(v) + ANSWER;
   }
-  const x = ANSWER * 2;
+  const x = ANSWER * mult(2);
   console.log(ANSWER);
 }
 

@@ -16,5 +16,9 @@ export default function(
     type: 'FunctionExpression',
     text: `${funcName}${helpers.renderFunctionParameters(node)}`,
     ...helpers.normalizeLoc(node.loc),
+    meta: {
+      funcName,
+      params: node.params.map(p => helpers.parse(p)),
+    },
   };
 }

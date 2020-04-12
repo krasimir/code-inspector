@@ -14,5 +14,9 @@ export default function(
       helpers.parse(node.key).text
     }${helpers.renderFunctionParameters(node)}`,
     ...helpers.normalizeLoc(node.loc),
+    meta: {
+      funcName: helpers.parse(node.key).text,
+      params: node.params.map(p => helpers.parse(p)),
+    },
   };
 }

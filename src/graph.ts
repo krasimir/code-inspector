@@ -1,9 +1,8 @@
+/* eslint-disable no-param-reassign */
 import uniq from 'lodash/uniq';
-import get from 'lodash/get';
 import { NormalizedNode, Analysis } from './types';
 
 const GRAPH_TYPE = 'LR';
-const SCOPE_NODES_TO_IGNORE = ['WhileStatement', 'Program'];
 const BRANCHING = ['ConditionalExpression', 'IfStatement'];
 const GRAPH_VALID_TYPES = [
   'FunctionDeclaration',
@@ -44,48 +43,118 @@ function GraphData(getNodeByKey: Function) {
       addedNodes.push(node);
       data.push(getGraphLabel(node));
     },
-    link(node1: NormalizedNode, node2: NormalizedNode) {
-      data.push(`${getGraphLabel(node1)} --- ${getGraphLabel(node2)}`);
+    link(node1: NormalizedNode, node2: NormalizedNode, style = '---') {
+      data.push(`${getGraphLabel(node1)} ${style} ${getGraphLabel(node2)}`);
     },
     export() {
-      addedNodes.forEach(node => {
-        const parent = node.path
-          .split('.')
-          .reverse()
-          .find(key => {
-            if (GRAPH_VALID_TYPES.includes(key.substr(0, key.indexOf('-')))) {
-              return key;
-            }
-            return false;
-          });
-        if (parent) {
-          this.link(getNodeByKey(parent), node);
-        }
-      });
       return uniq([`graph ${GRAPH_TYPE}`].concat(data)).join('\n');
     },
   };
 }
 
 export function generateMermaidGraph(analysis: Analysis): string {
-  const { nodes, scopes, variables } = analysis;
-  const getNodeByKey = (key: string) => nodes.find(n => n.key === key);
+  const { nodes, scopes, variables, tree } = analysis;
+  const getNodeByKeyCache: Record<string, NormalizedNode> = {};
+  const getNodeByKey = (key: string) => {
+    if (getNodeByKeyCache[key]) return getNodeByKeyCache[key];
+    const found = nodes.find(n => n.key === key);
+    if (found) {
+      getNodeByKeyCache[key] = found;
+    }
+    return found;
+  };
   const graph = GraphData(getNodeByKey);
 
-  nodes.forEach((node, i) => {
-    if (GRAPH_VALID_TYPES.includes(node.type)) {
-      graph.addNode(node);
-    }
-    if (
-      node.type === 'Identifier' &&
-      !node.path
-        .split('.')
-        .pop()
-        .match(/^VariableDeclarator|FunctionDeclaration/)
-    ) {
-      // console.log(node.text, node.scopePath, findDefinition(node, nodes));
-    }
-  });
+  const traverse: Record<string, Function> = {
+    process(node: NormalizedNode, stack: NormalizedNode[]) {
+      if (this[node.type]) {
+        this[node.type](node, [...stack]);
+      }
+    },
+    processChildrenOf(node: NormalizedNode, stack: NormalizedNode[]) {
+      if (node.children) {
+        node.children.forEach(child => {
+          this.process(child, stack);
+        });
+      }
+    },
+    linkToParent(node: NormalizedNode, stack: NormalizedNode[], style = '---') {
+      const parent = stack[stack.length - 1];
+      if (parent) {
+        graph.link(parent, node, style);
+      }
+    },
+    addToStack(node: NormalizedNode, stack: NormalizedNode[]) {
+      stack.push(node);
+    },
+    //-----------------------------------------------------------------------
+    // Processing specific nodes
+    Program(node: NormalizedNode, stack: NormalizedNode[]) {
+      this.linkToParent(node, stack);
+      this.addToStack(node, stack);
+      this.processChildrenOf(node, stack);
+    },
+    VariableDeclaration(node: NormalizedNode, stack: NormalizedNode[]) {
+      const declarator = node.children.find(
+        n => n.type === 'VariableDeclarator'
+      );
+      if (declarator) {
+        this.linkToParent(declarator, stack);
+        if (declarator.children && declarator.children[1]) {
+          this.addToStack(declarator, stack);
+          this.process(declarator.children[1], stack);
+        }
+      }
+    },
+    FunctionDeclaration(node: NormalizedNode, stack: NormalizedNode[]) {
+      this.linkToParent(node, stack);
+      this.addToStack(node, stack);
+      const body = node.children.find(n => n.type === 'BlockStatement');
+      if (body) {
+        this.processChildrenOf(body, stack);
+      }
+    },
+    ReturnStatement(node: NormalizedNode, stack: NormalizedNode[]) {
+      this.linkToParent(node, stack);
+      this.addToStack(node, stack);
+      this.processChildrenOf(node, stack);
+    },
+    ConditionalExpression(node: NormalizedNode, stack: NormalizedNode[]) {
+      this.linkToParent(node, stack);
+      this.addToStack(node, stack);
+      this.processChildrenOf(node, stack);
+    },
+    BinaryExpression(node: NormalizedNode, stack: NormalizedNode[]) {
+      this.linkToParent(node, stack);
+      this.addToStack(node, stack);
+      this.processChildrenOf(node, stack);
+    },
+    NullLiteral(node: NormalizedNode, stack: NormalizedNode[]) {
+      this.linkToParent(node, stack);
+    },
+    Identifier(node: NormalizedNode, stack: NormalizedNode[]) {
+      const definition: NormalizedNode | undefined = [...stack]
+        .reverse()
+        .reduce((found, n) => {
+          if (found) return found;
+          if (n.isScope && n.variables && n.variables.length > 0) {
+            const definitionKey = n.variables.find(
+              key => getNodeByKey(key).meta === node.text
+            );
+            if (definitionKey) {
+              found = getNodeByKey(definitionKey);
+            }
+          }
+          return found;
+        }, undefined);
+
+      if (definition) {
+        this.linkToParent(definition, stack, '-.-');
+      }
+    },
+  };
+
+  traverse.process(tree, []);
 
   return graph.export();
 }

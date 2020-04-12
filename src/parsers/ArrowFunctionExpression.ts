@@ -8,12 +8,17 @@ export default function(
   parent: T.Node,
   grandParent: T.Node
 ): NormalizedNode {
+  const meta = {
+    funcName: 'ƒ',
+    params: node.params.map(p => helpers.parse(p)),
+  };
   if (parent) {
     if (parent.type === 'CallExpression') {
       return {
         type: 'ArrowFunctionExpression',
         text: `${helpers.parse(parent).text} callback`,
         ...helpers.normalizeLoc(node.loc),
+        meta,
       };
     }
     if (parent.type === 'NewExpression') {
@@ -21,6 +26,7 @@ export default function(
         type: 'ArrowFunctionExpression',
         text: `new ${helpers.parse(parent.callee).text}(…) argument`,
         ...helpers.normalizeLoc(node.loc),
+        meta,
       };
     }
     if (parent.type === 'VariableDeclarator') {
@@ -30,6 +36,7 @@ export default function(
           node
         )}`,
         ...helpers.normalizeLoc(node.loc),
+        meta,
       };
     }
     if (parent.type === 'ObjectProperty') {
@@ -37,6 +44,7 @@ export default function(
         type: 'ArrowFunctionExpression',
         text: `${helpers.parse(parent).text}: ƒ`,
         ...helpers.normalizeLoc(node.loc),
+        meta,
       };
     }
     if (parent.type === 'JSXExpressionContainer') {
@@ -44,6 +52,7 @@ export default function(
         type: 'ArrowFunctionExpression',
         text: `${helpers.parse(grandParent).text}`,
         ...helpers.normalizeLoc(node.loc),
+        meta,
       };
     }
   }
@@ -51,5 +60,6 @@ export default function(
     type: 'ArrowFunctionExpression',
     text: 'ƒ',
     ...helpers.normalizeLoc(node.loc),
+    meta,
   };
 }

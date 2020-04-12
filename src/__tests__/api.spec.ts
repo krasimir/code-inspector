@@ -3,6 +3,7 @@ import clipboardy from 'clipboardy';
 
 import { analyze, sort, isVariable } from '../index';
 import treeExpectation from '../__data__/tree.spec.json';
+import treeExpectationFunctionVariables from '../__data__/function.variables.json';
 
 const code2 = fs
   .readFileSync(`${__dirname}/code-samples/code2.ts`)
@@ -30,6 +31,10 @@ const code11 = fs
 
 const code12 = fs
   .readFileSync(`${__dirname}/code-samples/code12.ts`)
+  .toString('utf8');
+
+const code14 = fs
+  .readFileSync(`${__dirname}/code-samples/code14.ts`)
   .toString('utf8');
 
 describe('Given the code-inspector library', () => {
@@ -185,8 +190,14 @@ describe('Given the code-inspector library', () => {
     it('should return a tree', () => {
       const { tree } = analyze(code12);
 
-      clipboardy.writeSync(JSON.stringify(tree, null, 2));
+      // clipboardy.writeSync(JSON.stringify(tree, null, 2));
       expect(tree).toStrictEqual(treeExpectation);
+    });
+    it('should properly define variables out of the function arguments', () => {
+      const { tree } = analyze(code14);
+
+      // clipboardy.writeSync(JSON.stringify(tree, null, 2));
+      expect(tree).toStrictEqual(treeExpectationFunctionVariables);
     });
   });
 });
