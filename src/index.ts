@@ -4,7 +4,7 @@ import * as Traverse from '@babel/traverse';
 import { parse } from './parse';
 
 import { NormalizedNode, Analysis } from './types';
-import { getNodeKey, getNodePath } from './utils';
+import { getNodeKey, getNodePath, accessNode } from './utils';
 import { generateMermaidGraph } from './graph';
 
 const plugins = [
@@ -82,10 +82,7 @@ function toNormalizeNode(
 
   if (node.meta && node.meta.params) {
     if (!node.variables) node.variables = [];
-    node.meta.params.forEach((p: NormalizedNode) => {
-      p.nesting = node.nesting + 1;
-      node.variables.push(p.key);
-    });
+    node.meta.params.forEach((p: string) => node.variables.push(p));
   }
   return node;
 }
@@ -145,6 +142,8 @@ export function analyze(code: string) {
     },
   });
 
+  const getNodeByKey = accessNode(nodes);
+
   return {
     ast,
     tree: generateTree(nodes),
@@ -155,7 +154,7 @@ export function analyze(code: string) {
         res.push(node);
       }
       if (node.meta && node.meta.params) {
-        node.meta.params.forEach((p: NormalizedNode) => res.push(p));
+        node.meta.params.forEach((p: string) => res.push(getNodeByKey(p)));
       }
       return res;
     }, []),

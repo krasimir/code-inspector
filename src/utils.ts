@@ -1,5 +1,6 @@
 import * as Traverse from '@babel/traverse';
 import { SourceLocation } from '@babel/types';
+import { NormalizedNode } from './types';
 
 export function normalizeLoc(loc: SourceLocation) {
   return {
@@ -25,4 +26,16 @@ export function getNodePath(node: Traverse.NodePath, path = ''): string {
     );
   }
   return path;
+}
+
+export function accessNode(nodes: NormalizedNode[]): Function {
+  const getNodeByKeyCache: Record<string, NormalizedNode> = {};
+  return (key: string) => {
+    if (getNodeByKeyCache[key]) return getNodeByKeyCache[key];
+    const found = nodes.find(n => n.key === key);
+    if (found) {
+      getNodeByKeyCache[key] = found;
+    }
+    return found;
+  };
 }

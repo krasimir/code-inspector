@@ -36,34 +36,8 @@
       "meta": {
         "funcName": "A",
         "params": [
-          {
-            "type": "Identifier",
-            "text": "foo",
-            "start": [
-              1,
-              12
-            ],
-            "end": [
-              1,
-              15
-            ],
-            "key": "Identifier-1:12-1:15",
-            "nesting": 2
-          },
-          {
-            "type": "Identifier",
-            "text": "bar",
-            "start": [
-              1,
-              17
-            ],
-            "end": [
-              1,
-              20
-            ],
-            "key": "Identifier-1:17-1:20",
-            "nesting": 2
-          }
+          "Identifier-1:12-1:15",
+          "Identifier-1:17-1:20"
         ]
       },
       "key": "FunctionDeclaration-1:1-1:24",
@@ -228,34 +202,8 @@
               "meta": {
                 "funcName": "Name",
                 "params": [
-                  {
-                    "type": "Identifier",
-                    "text": "foo",
-                    "start": [
-                      2,
-                      25
-                    ],
-                    "end": [
-                      2,
-                      28
-                    ],
-                    "key": "Identifier-2:25-2:28",
-                    "nesting": 2
-                  },
-                  {
-                    "type": "Identifier",
-                    "text": "bar",
-                    "start": [
-                      2,
-                      30
-                    ],
-                    "end": [
-                      2,
-                      33
-                    ],
-                    "key": "Identifier-2:30-2:33",
-                    "nesting": 2
-                  }
+                  "Identifier-2:25-2:28",
+                  "Identifier-2:30-2:33"
                 ]
               },
               "key": "FunctionExpression-2:11-2:37",
@@ -424,34 +372,8 @@
               "meta": {
                 "funcName": "ƒ",
                 "params": [
-                  {
-                    "type": "Identifier",
-                    "text": "foo",
-                    "start": [
-                      3,
-                      12
-                    ],
-                    "end": [
-                      3,
-                      15
-                    ],
-                    "key": "Identifier-3:12-3:15",
-                    "nesting": 2
-                  },
-                  {
-                    "type": "Identifier",
-                    "text": "bar",
-                    "start": [
-                      3,
-                      17
-                    ],
-                    "end": [
-                      3,
-                      20
-                    ],
-                    "key": "Identifier-3:17-3:20",
-                    "nesting": 2
-                  }
+                  "Identifier-3:12-3:15",
+                  "Identifier-3:17-3:20"
                 ]
               },
               "key": "ArrowFunctionExpression-3:11-3:27",
@@ -562,34 +484,8 @@
           "meta": {
             "funcName": "ƒ",
             "params": [
-              {
-                "type": "Identifier",
-                "text": "foo",
-                "start": [
-                  5,
-                  11
-                ],
-                "end": [
-                  5,
-                  14
-                ],
-                "key": "Identifier-5:11-5:14",
-                "nesting": 2
-              },
-              {
-                "type": "Identifier",
-                "text": "bar",
-                "start": [
-                  5,
-                  16
-                ],
-                "end": [
-                  5,
-                  19
-                ],
-                "key": "Identifier-5:16-5:19",
-                "nesting": 2
-              }
+              "Identifier-5:11-5:14",
+              "Identifier-5:16-5:19"
             ]
           },
           "key": "FunctionExpression-5:2-5:23",
@@ -756,34 +652,8 @@
                   "meta": {
                     "funcName": "D",
                     "params": [
-                      {
-                        "type": "Identifier",
-                        "text": "foo",
-                        "start": [
-                          8,
-                          5
-                        ],
-                        "end": [
-                          8,
-                          8
-                        ],
-                        "key": "Identifier-8:5-8:8",
-                        "nesting": 2
-                      },
-                      {
-                        "type": "Identifier",
-                        "text": "bar",
-                        "start": [
-                          8,
-                          10
-                        ],
-                        "end": [
-                          8,
-                          13
-                        ],
-                        "key": "Identifier-8:10-8:13",
-                        "nesting": 2
-                      }
+                      "Identifier-8:5-8:8",
+                      "Identifier-8:10-8:13"
                     ]
                   },
                   "key": "ObjectMethod-8:3-8:17",
@@ -890,34 +760,8 @@
                   "meta": {
                     "funcName": "E",
                     "params": [
-                      {
-                        "type": "Identifier",
-                        "text": "foo",
-                        "start": [
-                          9,
-                          5
-                        ],
-                        "end": [
-                          9,
-                          8
-                        ],
-                        "key": "Identifier-9:5-9:8",
-                        "nesting": 2
-                      },
-                      {
-                        "type": "Identifier",
-                        "text": "bar",
-                        "start": [
-                          9,
-                          10
-                        ],
-                        "end": [
-                          9,
-                          13
-                        ],
-                        "key": "Identifier-9:10-9:13",
-                        "nesting": 2
-                      }
+                      "Identifier-9:5-9:8",
+                      "Identifier-9:10-9:13"
                     ]
                   },
                   "key": "ObjectMethod-9:3-9:17",
@@ -1062,34 +906,8 @@
                       "meta": {
                         "funcName": "ƒ",
                         "params": [
-                          {
-                            "type": "Identifier",
-                            "text": "foo",
-                            "start": [
-                              10,
-                              7
-                            ],
-                            "end": [
-                              10,
-                              10
-                            ],
-                            "key": "Identifier-10:7-10:10",
-                            "nesting": 2
-                          },
-                          {
-                            "type": "Identifier",
-                            "text": "bar",
-                            "start": [
-                              10,
-                              12
-                            ],
-                            "end": [
-                              10,
-                              15
-                            ],
-                            "key": "Identifier-10:12-10:15",
-                            "nesting": 2
-                          }
+                          "Identifier-10:7-10:10",
+                          "Identifier-10:12-10:15"
                         ]
                       },
                       "key": "ArrowFunctionExpression-10:6-10:22",
@@ -1242,34 +1060,8 @@
               "meta": {
                 "funcName": "constructor",
                 "params": [
-                  {
-                    "type": "Identifier",
-                    "text": "foo",
-                    "start": [
-                      14,
-                      15
-                    ],
-                    "end": [
-                      14,
-                      18
-                    ],
-                    "key": "Identifier-14:15-14:18",
-                    "nesting": 3
-                  },
-                  {
-                    "type": "Identifier",
-                    "text": "bar",
-                    "start": [
-                      14,
-                      20
-                    ],
-                    "end": [
-                      14,
-                      23
-                    ],
-                    "key": "Identifier-14:20-14:23",
-                    "nesting": 3
-                  }
+                  "Identifier-14:15-14:18",
+                  "Identifier-14:20-14:23"
                 ]
               },
               "key": "ClassMethod-14:3-14:27",
@@ -1376,34 +1168,8 @@
               "meta": {
                 "funcName": "G",
                 "params": [
-                  {
-                    "type": "Identifier",
-                    "text": "foo",
-                    "start": [
-                      16,
-                      5
-                    ],
-                    "end": [
-                      16,
-                      8
-                    ],
-                    "key": "Identifier-16:5-16:8",
-                    "nesting": 3
-                  },
-                  {
-                    "type": "Identifier",
-                    "text": "bar",
-                    "start": [
-                      16,
-                      10
-                    ],
-                    "end": [
-                      16,
-                      13
-                    ],
-                    "key": "Identifier-16:10-16:13",
-                    "nesting": 3
-                  }
+                  "Identifier-16:5-16:8",
+                  "Identifier-16:10-16:13"
                 ]
               },
               "key": "ClassMethod-16:3-16:17",

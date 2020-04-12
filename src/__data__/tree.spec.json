@@ -116,48 +116,9 @@
       "meta": {
         "funcName": "test",
         "params": [
-          {
-            "type": "Identifier",
-            "text": "value",
-            "start": [
-              2,
-              15
-            ],
-            "end": [
-              2,
-              20
-            ],
-            "key": "Identifier-2:15-2:20",
-            "nesting": 2
-          },
-          {
-            "type": "Identifier",
-            "text": "anotherOne",
-            "start": [
-              2,
-              22
-            ],
-            "end": [
-              2,
-              32
-            ],
-            "key": "Identifier-2:22-2:32",
-            "nesting": 2
-          },
-          {
-            "type": "Identifier",
-            "text": "fooBar",
-            "start": [
-              2,
-              34
-            ],
-            "end": [
-              2,
-              40
-            ],
-            "key": "Identifier-2:34-2:40",
-            "nesting": 2
-          }
+          "Identifier-2:15-2:20",
+          "Identifier-2:22-2:32",
+          "Identifier-2:34-2:40"
         ]
       },
       "key": "FunctionDeclaration-2:1-4:2",
@@ -591,20 +552,7 @@
                       "meta": {
                         "funcName": "ƒ",
                         "params": [
-                          {
-                            "type": "Identifier",
-                            "text": "v",
-                            "start": [
-                              8,
-                              16
-                            ],
-                            "end": [
-                              8,
-                              17
-                            ],
-                            "key": "Identifier-8:16-8:17",
-                            "nesting": 3
-                          }
+                          "Identifier-8:16-8:17"
                         ]
                       },
                       "key": "ArrowFunctionExpression-8:16-8:26",
@@ -718,20 +666,7 @@
               "meta": {
                 "funcName": "sqrtAnd",
                 "params": [
-                  {
-                    "type": "Identifier",
-                    "text": "v",
-                    "start": [
-                      9,
-                      20
-                    ],
-                    "end": [
-                      9,
-                      21
-                    ],
-                    "key": "Identifier-9:20-9:21",
-                    "nesting": 3
-                  }
+                  "Identifier-9:20-9:21"
                 ]
               },
               "key": "FunctionDeclaration-9:3-11:4",

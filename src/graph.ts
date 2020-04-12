@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import uniq from 'lodash/uniq';
 import { NormalizedNode, Analysis } from './types';
+import { accessNode } from './utils';
 
 const GRAPH_TYPE = 'LR';
 const BRANCHING = ['ConditionalExpression', 'IfStatement'];
@@ -54,15 +55,7 @@ function GraphData(getNodeByKey: Function) {
 
 export function generateMermaidGraph(analysis: Analysis): string {
   const { nodes, scopes, variables, tree } = analysis;
-  const getNodeByKeyCache: Record<string, NormalizedNode> = {};
-  const getNodeByKey = (key: string) => {
-    if (getNodeByKeyCache[key]) return getNodeByKeyCache[key];
-    const found = nodes.find(n => n.key === key);
-    if (found) {
-      getNodeByKeyCache[key] = found;
-    }
-    return found;
-  };
+  const getNodeByKey = accessNode(nodes);
   const graph = GraphData(getNodeByKey);
 
   const traverse: Record<string, Function> = {

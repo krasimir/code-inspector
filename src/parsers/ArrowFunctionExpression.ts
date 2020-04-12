@@ -10,7 +10,7 @@ export default function(
 ): NormalizedNode {
   const meta = {
     funcName: 'ƒ',
-    params: node.params.map(p => helpers.parse(p)),
+    params: node.params.map(p => helpers.parse(p).key),
   };
   if (parent) {
     if (parent.type === 'CallExpression') {

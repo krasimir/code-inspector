@@ -15,7 +15,7 @@ export default function(
     ...helpers.normalizeLoc(node.loc),
     meta: {
       funcName,
-      params: node.params.map(p => helpers.parse(p)),
+      params: node.params.map(p => helpers.parse(p).key),
     },
   };
 }
