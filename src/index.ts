@@ -57,7 +57,11 @@ const VARIABLES_NODE_TYPES: Record<string, boolean> = {
   FunctionDeclaration: true,
 };
 
-function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
+function toNormalizeNode(
+  n: Traverse.NodePath,
+  stack: NormalizedNode[]
+): NormalizedNode {
+  const scopePath = stack.map(item => item.key).join('.');
   const key = getNodeKey(n.node);
   if (cache[key]) {
     return cache[key];
@@ -70,13 +74,18 @@ function toNormalizeNode(n: Traverse.NodePath): NormalizedNode {
       : null
   );
   if (node.key) cache[node.key] = node;
+  node.scopePath = scopePath;
+  node.nesting = scopePath === '' ? 0 : scopePath.split('.').length;
   node.path = getNodePath(n);
   node.isScope = !!NODES_DEFINING_SCOPES[node.type];
   node.isVariable = !!VARIABLES_NODE_TYPES[node.type];
 
   if (node.meta && node.meta.params) {
     if (!node.variables) node.variables = [];
-    node.meta.params.forEach((p: NormalizedNode) => node.variables.push(p.key));
+    node.meta.params.forEach((p: NormalizedNode) => {
+      p.nesting = node.nesting + 1;
+      node.variables.push(p.key);
+    });
   }
   return node;
 }
@@ -109,15 +118,11 @@ export function analyze(code: string) {
   cache = {};
   Traverse.default(ast, {
     enter(path: Traverse.NodePath) {
-      const node = toNormalizeNode(path);
+      const node = toNormalizeNode(path, stack);
 
       if (consumedNodes[node.key]) return;
       consumedNodes[node.key] = true;
 
-      const scopePath = stack.map(item => item.key).join('.');
-
-      node.scopePath = scopePath;
-      node.nesting = scopePath === '' ? 0 : scopePath.split('.').length;
       nodes.push(node);
 
       if (node.isVariable) {
@@ -133,7 +138,7 @@ export function analyze(code: string) {
       }
     },
     exit(path: Traverse.NodePath) {
-      const node = toNormalizeNode(path);
+      const node = toNormalizeNode(path, stack);
       if (NODES_DEFINING_SCOPES[node.type]) {
         stack.pop();
       }
@@ -145,7 +150,15 @@ export function analyze(code: string) {
     tree: generateTree(nodes),
     nodes,
     scopes,
-    variables: nodes.filter(({ type }) => VARIABLES_NODE_TYPES[type]),
+    variables: nodes.reduce((res: NormalizedNode[], node: NormalizedNode) => {
+      if (node.isVariable) {
+        res.push(node);
+      }
+      if (node.meta && node.meta.params) {
+        node.meta.params.forEach((p: NormalizedNode) => res.push(p));
+      }
+      return res;
+    }, []),
   };
 }
 

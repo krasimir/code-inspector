@@ -91,7 +91,9 @@ describe('Given the code-inspector library', () => {
         'b 1',
         'c 1',
         'd:number[] 1',
-        'foobar() 1',
+        'foobar(valueA, valueB) 1',
+        'valueA 2',
+        'valueB 2',
         'e 2',
         'f 2',
         'i 2',
@@ -196,7 +198,7 @@ describe('Given the code-inspector library', () => {
     it('should properly define variables out of the function arguments', () => {
       const { tree } = analyze(code14);
 
-      clipboardy.writeSync(JSON.stringify(tree, null, 2));
+      // clipboardy.writeSync(JSON.stringify(tree, null, 2));
       expect(tree).toStrictEqual(treeExpectationFunctionVariables);
     });
   });

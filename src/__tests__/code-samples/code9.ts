@@ -5,7 +5,7 @@ var b = 'bbb';
 const c = 'ccc';
 const d: number[] = [];
 
-function foobar() {
+function foobar(valueA, valueB) {
   const e = 2;
   let f = 0;
   for (let i = 0; i < 10; i++) {
