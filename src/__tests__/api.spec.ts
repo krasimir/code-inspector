@@ -175,10 +175,10 @@ describe('Given the code-inspector library', () => {
         'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassMethod-6:3-8:4',
       ]);
     });
-    xit('should return a tree', () => {
+    fit('should return a tree', () => {
       const { tree } = analyze(code12);
 
-      // clipboardy.writeSync(JSON.stringify(tree, null, 2));
+      clipboardy.writeSync(JSON.stringify(tree, null, 2));
       expect(tree).toStrictEqual(treeExpectation);
     });
     xit('should properly define variables out of the function arguments', () => {
