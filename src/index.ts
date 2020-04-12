@@ -4,7 +4,7 @@ import * as Traverse from '@babel/traverse';
 import { parse } from './parse';
 
 import { NormalizedNode, Analysis } from './types';
-import { getNodeKey, getNodePath, accessNode } from './utils';
+import { getNodeKey, getNodePath } from './utils';
 import { generateMermaidGraph } from './graph';
 
 const plugins = [
@@ -52,11 +52,6 @@ const NODES_DEFINING_SCOPES: Record<string, boolean> = {
   ObjectMethod: true,
 };
 
-const VARIABLES_NODE_TYPES: Record<string, boolean> = {
-  VariableDeclarator: true,
-  FunctionDeclaration: true,
-};
-
 function toNormalizeNode(
   n: Traverse.NodePath,
   stack: NormalizedNode[]
@@ -73,17 +68,25 @@ function toNormalizeNode(
       ? n.parentPath.parentPath.node
       : null
   );
+  const parentType = node.parent
+    ? node.parent.substr(0, node.parent.indexOf('-'))
+    : '';
+
   if (node.key) cache[node.key] = node;
+
   node.scopePath = scopePath;
-  node.nesting = scopePath === '' ? 0 : scopePath.split('.').length;
   node.path = getNodePath(n);
   node.isScope = !!NODES_DEFINING_SCOPES[node.type];
-  node.isVariable = !!VARIABLES_NODE_TYPES[node.type];
+  node.isVariable = false;
 
-  if (node.meta && node.meta.params) {
-    if (!node.variables) node.variables = [];
-    node.meta.params.forEach((p: string) => node.variables.push(p));
+  if (
+    node.type === 'Identifier' &&
+    (parentType === 'VariableDeclarator' ||
+      parentType === 'FunctionDeclaration')
+  ) {
+    node.isVariable = true;
   }
+
   return node;
 }
 
@@ -142,22 +145,12 @@ export function analyze(code: string) {
     },
   });
 
-  const getNodeByKey = accessNode(nodes);
-
   return {
     ast,
     tree: generateTree(nodes),
     nodes,
     scopes,
-    variables: nodes.reduce((res: NormalizedNode[], node: NormalizedNode) => {
-      if (node.isVariable) {
-        res.push(node);
-      }
-      if (node.meta && node.meta.params) {
-        node.meta.params.forEach((p: string) => res.push(getNodeByKey(p)));
-      }
-      return res;
-    }, []),
+    variables: nodes.filter(n => n.isVariable),
   };
 }
 
@@ -194,7 +187,7 @@ export function sort(nodes: NormalizedNode[]): NormalizedNode[] {
 }
 
 export function isVariable(node: NormalizedNode): boolean {
-  return !!VARIABLES_NODE_TYPES[node.type];
+  return node.isVariable;
 }
 
 export function toMermaidGraph(analysis: Analysis): string {

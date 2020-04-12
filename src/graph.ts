@@ -3,7 +3,7 @@ import uniq from 'lodash/uniq';
 import { NormalizedNode, Analysis } from './types';
 import { accessNode } from './utils';
 
-const GRAPH_TYPE = 'LR';
+const GRAPH_TYPE = 'TB';
 const BRANCHING = ['ConditionalExpression', 'IfStatement'];
 const GRAPH_VALID_TYPES = [
   'FunctionDeclaration',
@@ -25,7 +25,7 @@ function GraphData(getNodeByKey: Function) {
     let label = node.text;
     let graphType = ['(', ')'];
     if (node.type === 'FunctionDeclaration') {
-      label = `${node.meta}()`;
+      label = `${node.meta.funcName}()`;
     }
     if (node.type === 'ImportDefaultSpecifier') {
       label = node.meta;
@@ -106,11 +106,16 @@ export function generateMermaidGraph(analysis: Analysis): string {
       if (body) {
         this.processChildrenOf(body, stack);
       }
+      if (node.meta && node.meta.params) {
+        node.meta.params.forEach((p: string) => {
+          this.linkToParent(getNodeByKey(p), stack);
+        });
+      }
     },
     ReturnStatement(node: NormalizedNode, stack: NormalizedNode[]) {
-      this.linkToParent(node, stack);
-      this.addToStack(node, stack);
-      this.processChildrenOf(node, stack);
+      if (node && node.children && node.children.length > 0) {
+        this.linkToParent(node.children[0], stack, `---|return|`);
+      }
     },
     ConditionalExpression(node: NormalizedNode, stack: NormalizedNode[]) {
       this.linkToParent(node, stack);

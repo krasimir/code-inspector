@@ -7,7 +7,6 @@ export interface NormalizedNode {
   end?: [number | undefined, number | undefined];
   left?: string | number | boolean;
   right?: string | number | boolean;
-  nesting?: number;
   meta?: any;
   path?: string;
   scopePath?: string;

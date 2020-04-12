@@ -9,16 +9,14 @@ describe('Given the code8.tsx code sample', () => {
   describe('when analyzing the code', () => {
     it('should not return duplicated nodes', () => {
       const { nodes } = analyze(code8);
-      const expectation = nodes.map(
-        ({ text, nesting, type }) => `${type} | ${text} ${nesting}`
-      );
+      const expectation = nodes.map(({ text, type }) => `${type} | ${text}`);
       // console.log(JSON.stringify(expectation, null, 2));
       expect(expectation).toStrictEqual([
-        'Program | Program 0',
-        'ImportDeclaration | useState ⤺ "react" 1',
-        'ImportSpecifier | useState 1',
-        'Identifier | useState 1',
-        'StringLiteral | "react" 1',
+        'Program | Program',
+        'ImportDeclaration | useState ⤺ "react"',
+        'ImportSpecifier | useState',
+        'Identifier | useState',
+        'StringLiteral | "react"',
       ]);
     });
   });
