@@ -1,6 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies, no-param-reassign */
 import * as parser from '@babel/parser';
 import * as Traverse from '@babel/traverse';
+import get from 'lodash/get';
+
 import { parse } from './parse';
 
 import { NormalizedNode, Analysis } from './types';
@@ -58,9 +60,11 @@ function toNormalizeNode(
 ): NormalizedNode {
   const scopePath = stack.map(item => item.key).join('.');
   const key = getNodeKey(n.node);
+
   if (cache[key]) {
     return cache[key];
   }
+
   const node = parse(
     n.node,
     n.parentPath ? n.parentPath.node : null,
@@ -68,9 +72,6 @@ function toNormalizeNode(
       ? n.parentPath.parentPath.node
       : null
   );
-  const parentType = node.parent
-    ? node.parent.substr(0, node.parent.indexOf('-'))
-    : '';
 
   if (node.key) cache[node.key] = node;
 
@@ -79,15 +80,30 @@ function toNormalizeNode(
   node.isScope = !!NODES_DEFINING_SCOPES[node.type];
   node.isVariable = false;
 
-  if (
-    node.type === 'Identifier' &&
-    (parentType === 'VariableDeclarator' ||
-      parentType === 'FunctionDeclaration')
-  ) {
-    node.isVariable = true;
-  }
-
   return node;
+}
+function setVariables(node: NormalizedNode, stack: NormalizedNode[]) {
+  const addVariable = (v: NormalizedNode, scopeBackDepth = 1) => {
+    const currentScope = stack[stack.length - scopeBackDepth];
+    if (currentScope) {
+      if (!currentScope.variables) currentScope.variables = [];
+      currentScope.variables.push(v.key);
+    }
+  };
+  const nodePathTypes = node.path
+    .split('.')
+    .map(k => k.substr(0, k.indexOf('-')));
+  const parentType = nodePathTypes[nodePathTypes.length - 1];
+
+  if (node.type === 'Identifier') {
+    if (parentType === 'VariableDeclarator') {
+      node.isVariable = true;
+      addVariable(node);
+    }
+  }
+  if (node.type === 'FunctionDeclaration') {
+    console.log(node);
+  }
 }
 
 function generateTree(nodes: NormalizedNode[]): NormalizedNode {
@@ -125,13 +141,6 @@ export function analyze(code: string) {
 
       nodes.push(node);
 
-      if (node.isVariable) {
-        const currentScope = stack[stack.length - 1];
-        if (currentScope) {
-          if (!currentScope.variables) currentScope.variables = [];
-          currentScope.variables.push(node.key);
-        }
-      }
       if (node.isScope) {
         stack.push(node);
         scopes.push(node);
@@ -139,6 +148,7 @@ export function analyze(code: string) {
     },
     exit(path: Traverse.NodePath) {
       const node = toNormalizeNode(path, stack);
+      setVariables(node, stack);
       if (NODES_DEFINING_SCOPES[node.type]) {
         stack.pop();
       }

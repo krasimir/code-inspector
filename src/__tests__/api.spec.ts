@@ -77,14 +77,18 @@ describe('Given the code-inspector library', () => {
         'boo()',
       ]);
     });
-    it('should return all the variable nodes', () => {
-      const { variables } = analyze(code9);
+    fit('should properly set the variables', () => {
+      const { variables, nodes } = analyze(code9);
+      const getNodeByKey = key => nodes.find(n => n.key === key);
       const expectation = variables.map(({ text }) => text);
+      const nodesAndTheirVariables = nodes
+        .filter(n => n.variables && n.variables.length > 0)
+        .map(n => `${n.type} ${n.variables.map(vn => getNodeByKey(vn).text)}`);
       expect(expectation).toStrictEqual([
         'A',
         'b',
         'c',
-        'd:number[]',
+        'd',
         'foobar',
         'valueA',
         'valueB',
@@ -92,6 +96,7 @@ describe('Given the code-inspector library', () => {
         'f',
         'i',
       ]);
+      expect(nodesAndTheirVariables).toStrictEqual([]);
     });
     it('should sort the nodes by location', () => {
       const { variables, scopes } = analyze(code10);
@@ -175,7 +180,7 @@ describe('Given the code-inspector library', () => {
         'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassMethod-6:3-8:4',
       ]);
     });
-    fit('should return a tree', () => {
+    xit('should return a tree', () => {
       const { tree } = analyze(code12);
 
       clipboardy.writeSync(JSON.stringify(tree, null, 2));
