@@ -30,7 +30,7 @@ export function getNodePath(node: Traverse.NodePath, path = ''): string {
 
 export function accessNode(nodes: NormalizedNode[]): Function {
   const getNodeByKeyCache: Record<string, NormalizedNode> = {};
-  return (key: string) => {
+  return (key: string): NormalizedNode | undefined => {
     if (getNodeByKeyCache[key]) return getNodeByKeyCache[key];
     const found = nodes.find(n => n.key === key);
     if (found) {
@@ -38,4 +38,8 @@ export function accessNode(nodes: NormalizedNode[]): Function {
     }
     return found;
   };
+}
+
+export function pathToTypes(p: string): string[] {
+  return p.split('.').map(k => k.substr(0, k.indexOf('-')));
 }

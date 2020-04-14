@@ -13,7 +13,7 @@ describe('Given the code7.tsx code sample', () => {
       // console.log(JSON.stringify(expectation, null, 2));
       expect(expectation).toStrictEqual([
         'Program | Program',
-        'FunctionDeclaration | parseItems(items:any[], parent:Traverse.Node, grandParent:Traverse.Node, delimiter=",")',
+        'FunctionDeclaration | parseItems(items, parent, grandParent, delimiter=",")',
         'ArrowFunctionExpression | items.map(…) callback',
       ]);
     });

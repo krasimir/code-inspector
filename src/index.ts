@@ -1,13 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies, no-param-reassign */
 import * as parser from '@babel/parser';
 import * as Traverse from '@babel/traverse';
-import get from 'lodash/get';
 
 import { parse } from './parse';
 
 import { NormalizedNode, Analysis } from './types';
-import { getNodeKey, getNodePath } from './utils';
+import { getNodeKey, getNodePath, accessNode, pathToTypes } from './utils';
 import { generateMermaidGraph } from './graph';
+import SortByLocation from './sort';
 
 const plugins = [
   'jsx',
@@ -44,14 +44,17 @@ const babelParserOptions = {
 };
 let cache: Record<string, NormalizedNode> = {};
 
-const NODES_DEFINING_SCOPES: Record<string, boolean> = {
-  Program: true,
+const NODES_FUNCTION_SCOPES: Record<string, boolean> = {
   FunctionDeclaration: true,
   FunctionExpression: true,
   ArrowFunctionExpression: true,
-  ClassDeclaration: true,
   ClassMethod: true,
   ObjectMethod: true,
+};
+const NODES_DEFINING_SCOPES: Record<string, boolean> = {
+  Program: true,
+  ClassDeclaration: true,
+  ...NODES_FUNCTION_SCOPES,
 };
 
 function toNormalizeNode(
@@ -82,48 +85,58 @@ function toNormalizeNode(
 
   return node;
 }
-function setVariables(node: NormalizedNode, stack: NormalizedNode[]) {
-  const addVariable = (v: NormalizedNode, scopeBackDepth = 1) => {
-    const currentScope = stack[stack.length - scopeBackDepth];
-    if (currentScope) {
-      if (!currentScope.variables) currentScope.variables = [];
-      currentScope.variables.push(v.key);
-    }
-  };
-  const nodePathTypes = node.path
-    .split('.')
-    .map(k => k.substr(0, k.indexOf('-')));
-  const parentType = nodePathTypes[nodePathTypes.length - 1];
-
-  if (node.type === 'Identifier') {
-    if (parentType === 'VariableDeclarator') {
-      node.isVariable = true;
-      addVariable(node);
-    }
-  }
-  if (node.type === 'FunctionDeclaration') {
-    console.log(node);
+function addChild(node: NormalizedNode, child: NormalizedNode) {
+  if (node && child) {
+    if (!node.children) node.children = [];
+    node.children.push(child);
   }
 }
+function addVariable(node: NormalizedNode, variableNodeKey: string) {
+  if (node) {
+    if (!node.variables) node.variables = [];
+    node.variables.push(variableNodeKey);
+  }
+}
+function setChildren(nodes: NormalizedNode[]) {
+  const getNodeByKey = accessNode(nodes);
+  nodes.forEach(node => addChild(getNodeByKey(node.parent), node));
+}
+function setVariables(nodes: NormalizedNode[]) {
+  const getNodeByKey = accessNode(nodes);
 
-function generateTree(nodes: NormalizedNode[]): NormalizedNode {
-  const dict: Record<string, NormalizedNode> = nodes.reduce(
-    (res: Record<string, NormalizedNode>, n) => {
-      res[n.key || ''] = n;
-      return res;
-    },
-    {}
-  );
   nodes.forEach(node => {
-    const parentNode = dict[node.parent];
-    if (parentNode) {
-      if (!parentNode.children) parentNode.children = [];
-      parentNode.children.push(node);
+    const fullPathTypes = pathToTypes(node.path);
+    const scopePathTypes = node.scopePath.split('.');
+    const parentType = fullPathTypes[fullPathTypes.length - 1];
+    const scopeNodeKey = scopePathTypes[scopePathTypes.length - 1];
+
+    if (node.type === 'Identifier') {
+      if (parentType === 'VariableDeclarator') {
+        node.isVariable = true;
+        addVariable(getNodeByKey(scopeNodeKey), node.key);
+      }
+    }
+    if (node.type === 'FunctionDeclaration') {
+      if (node.children && node.meta) {
+        const functionItself: NormalizedNode = node.children.find(
+          n => n.type === 'Identifier' && n.text === node.meta.funcName
+        );
+        if (functionItself) {
+          functionItself.isVariable = true;
+          addVariable(getNodeByKey(scopeNodeKey), functionItself.key);
+        }
+      }
+    }
+    if (NODES_FUNCTION_SCOPES[node.type]) {
+      if (node.meta && node.meta.params) {
+        node.meta.params.forEach((key: string) => {
+          getNodeByKey(key).isVariable = true;
+          addVariable(node, key);
+        });
+      }
     }
   });
-  return nodes.find(n => n.type === 'Program');
 }
-
 export function analyze(code: string) {
   const ast = parser.parse(code, babelParserOptions);
   const nodes: NormalizedNode[] = [];
@@ -132,6 +145,7 @@ export function analyze(code: string) {
   const consumedNodes: Record<string, boolean> = {};
 
   cache = {};
+
   Traverse.default(ast, {
     enter(path: Traverse.NodePath) {
       const node = toNormalizeNode(path, stack);
@@ -148,58 +162,27 @@ export function analyze(code: string) {
     },
     exit(path: Traverse.NodePath) {
       const node = toNormalizeNode(path, stack);
-      setVariables(node, stack);
       if (NODES_DEFINING_SCOPES[node.type]) {
         stack.pop();
       }
     },
   });
 
+  setChildren(nodes);
+  setVariables(nodes);
+
   return {
     ast,
-    tree: generateTree(nodes),
+    tree: nodes.find(n => n.type === 'Program'),
     nodes,
     scopes,
     variables: nodes.filter(n => n.isVariable),
   };
 }
-
-export function sort(nodes: NormalizedNode[]): NormalizedNode[] {
-  const consumed: Record<string, boolean> = {};
-  // console.log(nodes);
-  return (
-    nodes
-      // removing duplicates
-      .filter(node => {
-        if (!consumed[node.key || '']) {
-          consumed[node.key || ''] = true;
-          return true;
-        }
-        return false;
-      })
-      // sorting
-      .sort((a, b) => {
-        if (a.start[0] === b.start[0]) {
-          if (a.start[1] > b.start[1]) {
-            return 1;
-          }
-          if (a.start[1] === b.start[1]) {
-            return a.end[0] > b.end[0] ? -1 : 1;
-          }
-          return -1;
-        }
-        if (a.start[0] > b.start[0]) {
-          return 1;
-        }
-        return -1;
-      })
-  );
-}
-
 export function isVariable(node: NormalizedNode): boolean {
   return node.isVariable;
 }
-
 export function toMermaidGraph(analysis: Analysis): string {
   return generateMermaidGraph(analysis);
 }
+export const sort = SortByLocation;

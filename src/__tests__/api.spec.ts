@@ -77,7 +77,7 @@ describe('Given the code-inspector library', () => {
         'boo()',
       ]);
     });
-    fit('should properly set the variables', () => {
+    it('should properly set the variables', () => {
       const { variables, nodes } = analyze(code9);
       const getNodeByKey = key => nodes.find(n => n.key === key);
       const expectation = variables.map(({ text }) => text);
@@ -96,7 +96,10 @@ describe('Given the code-inspector library', () => {
         'f',
         'i',
       ]);
-      expect(nodesAndTheirVariables).toStrictEqual([]);
+      expect(nodesAndTheirVariables).toStrictEqual([
+        'Program A,b,c,d,foobar',
+        'FunctionDeclaration valueA,valueB,e,f,i',
+      ]);
     });
     it('should sort the nodes by location', () => {
       const { variables, scopes } = analyze(code10);
@@ -180,13 +183,13 @@ describe('Given the code-inspector library', () => {
         'Program-1:1-10:1.ClassDeclaration-3:1-9:2.ClassMethod-6:3-8:4',
       ]);
     });
-    xit('should return a tree', () => {
+    it('should return a tree', () => {
       const { tree } = analyze(code12);
 
-      clipboardy.writeSync(JSON.stringify(tree, null, 2));
+      // clipboardy.writeSync(JSON.stringify(tree, null, 2));
       expect(tree).toStrictEqual(treeExpectation);
     });
-    xit('should properly define variables out of the function arguments', () => {
+    it('should properly define variables out of the function arguments', () => {
       const { tree } = analyze(code14);
 
       // clipboardy.writeSync(JSON.stringify(tree, null, 2));

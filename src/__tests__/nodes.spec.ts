@@ -821,7 +821,7 @@ setupTest(code, 'TSBooleanKeyword', {
 setupTest(code, 'TSCallSignatureDeclaration', {
   end: [106, 32],
   start: [106, 3],
-  text: '(x:number, b:string):void',
+  text: '(x, b):void',
   type: 'TSCallSignatureDeclaration',
 });
 
@@ -835,7 +835,7 @@ setupTest(code, 'TSConditionalType', {
 setupTest(code, 'TSConstructSignatureDeclaration', {
   end: [112, 25],
   start: [112, 3],
-  text: 'new (x:number):void',
+  text: 'new (x):void',
   type: 'TSConstructSignatureDeclaration',
 });
 
@@ -844,7 +844,7 @@ setupTest(code, 'TSConstructorType', 'not-found');
 setupTest(code, 'TSDeclareFunction', {
   end: [115, 36],
   start: [115, 1],
-  text: 'declare f(a:number):void',
+  text: 'declare f(a):void',
   type: 'TSDeclareFunction',
 });
 
@@ -916,7 +916,7 @@ setupTest(code, 'TSImportType', {
 setupTest(code, 'TSIndexSignature', {
   end: [145, 20],
   start: [145, 3],
-  text: '[x:string]:any',
+  text: '[x]:any',
   type: 'TSIndexSignature',
 });
 
@@ -1042,7 +1042,7 @@ setupTest(code, 'TSOptionalType', {
 setupTest(code, 'TSParameterProperty', {
   end: [174, 28],
   start: [174, 7],
-  text: 'public y?:number=0',
+  text: 'public y=0',
   type: 'TSParameterProperty',
 });
 
