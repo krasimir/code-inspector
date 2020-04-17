@@ -13,8 +13,8 @@ function foobar() {
   console.log(ANSWER);
 }
 
-if (ANSWER === 42) {
-  test('no');
-} else {
-  test('yes');
-}
+// if (ANSWER === 42) {
+//   test('no');
+// } else {
+//   test('yes');
+// }

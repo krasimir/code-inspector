@@ -6,8 +6,9 @@ import { parse } from './parse';
 
 import { NormalizedNode, Analysis } from './types';
 import { getNodeKey, getNodePath, accessNode, pathToTypes } from './utils';
-import { generateMermaidGraph } from './graph';
+import graph from './graph';
 import SortByLocation from './sort';
+import { NODES_FUNCTION_SCOPES, NODES_DEFINING_SCOPES } from './constants';
 
 const plugins = [
   'jsx',
@@ -43,19 +44,6 @@ const babelParserOptions = {
   decoratorsBeforeExport: true,
 };
 let cache: Record<string, NormalizedNode> = {};
-
-const NODES_FUNCTION_SCOPES: Record<string, boolean> = {
-  FunctionDeclaration: true,
-  FunctionExpression: true,
-  ArrowFunctionExpression: true,
-  ClassMethod: true,
-  ObjectMethod: true,
-};
-const NODES_DEFINING_SCOPES: Record<string, boolean> = {
-  Program: true,
-  ClassDeclaration: true,
-  ...NODES_FUNCTION_SCOPES,
-};
 
 function toNormalizeNode(
   n: Traverse.NodePath,
@@ -182,7 +170,5 @@ export function analyze(code: string) {
 export function isVariable(node: NormalizedNode): boolean {
   return node.isVariable;
 }
-export function toMermaidGraph(analysis: Analysis): string {
-  return generateMermaidGraph(analysis);
-}
+export const toGraph = graph;
 export const sort = SortByLocation;

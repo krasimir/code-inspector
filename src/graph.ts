@@ -1,158 +1,50 @@
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign, @typescript-eslint/no-use-before-define, @typescript-eslint/no-empty-function */
 import uniq from 'lodash/uniq';
+import get from 'lodash/get';
 import { NormalizedNode, Analysis } from './types';
 import { accessNode } from './utils';
+import { NODES_FUNCTION_SCOPES, NODES_DEFINING_SCOPES } from './constants';
 
-const GRAPH_TYPE = 'TB';
-const BRANCHING = ['ConditionalExpression', 'IfStatement'];
-const GRAPH_VALID_TYPES = [
-  'FunctionDeclaration',
-  'FunctionExpression',
-  'ClassDeclaration',
-  'ClassMethod',
-  'ClassProperty',
-  'JSXElement',
-  'ImportDefaultSpecifier',
-  'ReturnStatement',
-  ...BRANCHING,
-];
-
-function GraphData(getNodeByKey: Function) {
-  const data: string[] = [];
-  const addedNodes: NormalizedNode[] = [];
-
-  function getGraphLabel(node: NormalizedNode): any {
-    let label = node.text;
-    let graphType = ['(', ')'];
-    if (node.type === 'FunctionDeclaration') {
-      label = `${node.meta.funcName}()`;
-    }
-    if (node.type === 'ImportDefaultSpecifier') {
-      label = node.meta;
-    }
-    if (BRANCHING.includes(node.type)) {
-      graphType = ['{', '}'];
-    }
-    if (node.type === 'ReturnStatement') {
-      graphType = ['>', ']'];
-    }
-    if (node.type === 'FunctionExpression') label = 'ƒ()';
-    return `${node.key}${graphType[0]}"${label}"${graphType[1]}`;
-  }
-  return {
-    addNode(node: NormalizedNode) {
-      addedNodes.push(node);
-      data.push(getGraphLabel(node));
-    },
-    link(node1: NormalizedNode, node2: NormalizedNode, style = '---') {
-      data.push(`${getGraphLabel(node1)} ${style} ${getGraphLabel(node2)}`);
-    },
-    export() {
-      return uniq([`graph ${GRAPH_TYPE}`].concat(data)).join('\n');
-    },
-  };
+interface GraphNode {
+  id: string;
+  text: string;
+  group?: string;
+}
+interface GraphLink {
+  from: string;
+  to: string;
 }
 
-export function generateMermaidGraph(analysis: Analysis): string {
+export default function(
+  analysis: Analysis
+): { nodes: GraphNode[]; links: GraphLink[] } {
   const { nodes, scopes, variables, tree } = analysis;
   const getNodeByKey = accessNode(nodes);
-  const graph = GraphData(getNodeByKey);
+  const nodesData: GraphNode[] = [];
+  const linksData: GraphLink[] = [];
+  const dict: Record<string, Function> = {};
 
-  const traverse: Record<string, Function> = {
-    process(node: NormalizedNode, stack: NormalizedNode[]) {
-      if (this[node.type]) {
-        this[node.type](node, [...stack]);
-      }
-    },
-    processChildrenOf(node: NormalizedNode, stack: NormalizedNode[]) {
-      if (node.children) {
-        node.children.forEach(child => {
-          this.process(child, stack);
-        });
-      }
-    },
-    linkToParent(node: NormalizedNode, stack: NormalizedNode[], style = '---') {
-      const parent = stack[stack.length - 1];
-      if (parent) {
-        graph.link(parent, node, style);
-      }
-    },
-    addToStack(node: NormalizedNode, stack: NormalizedNode[]) {
-      stack.push(node);
-    },
-    //-----------------------------------------------------------------------
-    // Processing specific nodes
-    Program(node: NormalizedNode, stack: NormalizedNode[]) {
-      this.linkToParent(node, stack);
-      this.addToStack(node, stack);
-      this.processChildrenOf(node, stack);
-    },
-    VariableDeclaration(node: NormalizedNode, stack: NormalizedNode[]) {
-      const declarator = node.children.find(
-        n => n.type === 'VariableDeclarator'
-      );
-      if (declarator) {
-        this.linkToParent(declarator, stack);
-        if (declarator.children && declarator.children[1]) {
-          this.addToStack(declarator, stack);
-          this.process(declarator.children[1], stack);
+  function process(node: NormalizedNode, parent?: NormalizedNode) {
+    const graphNode: GraphNode = { key: node.key, text: String(node.text) };
+    if (node.isScope) {
+      graphNode.isGroup = true;
+    }
+    if (node.scopePath !== '') {
+      graphNode.group = node.scopePath.split('.').pop();
+    }
+    nodesData.push(graphNode);
+    if (node.children) {
+      node.children.forEach(c => {
+        if (dict[c.type]) {
+          dict[c.type](c, parent || node);
+        } else {
+          process(c);
         }
-      }
-    },
-    FunctionDeclaration(node: NormalizedNode, stack: NormalizedNode[]) {
-      this.linkToParent(node, stack);
-      this.addToStack(node, stack);
-      const body = node.children.find(n => n.type === 'BlockStatement');
-      if (body) {
-        this.processChildrenOf(body, stack);
-      }
-      if (node.meta && node.meta.params) {
-        node.meta.params.forEach((p: string) => {
-          this.linkToParent(getNodeByKey(p), stack);
-        });
-      }
-    },
-    ReturnStatement(node: NormalizedNode, stack: NormalizedNode[]) {
-      if (node && node.children && node.children.length > 0) {
-        this.linkToParent(node.children[0], stack, `---|return|`);
-      }
-    },
-    ConditionalExpression(node: NormalizedNode, stack: NormalizedNode[]) {
-      this.linkToParent(node, stack);
-      this.addToStack(node, stack);
-      this.processChildrenOf(node, stack);
-    },
-    BinaryExpression(node: NormalizedNode, stack: NormalizedNode[]) {
-      this.linkToParent(node, stack);
-      this.addToStack(node, stack);
-      this.processChildrenOf(node, stack);
-    },
-    NullLiteral(node: NormalizedNode, stack: NormalizedNode[]) {
-      this.linkToParent(node, stack);
-    },
-    Identifier(node: NormalizedNode, stack: NormalizedNode[]) {
-      const definition: NormalizedNode | undefined = [...stack]
-        .reverse()
-        .reduce((found, n) => {
-          if (found) return found;
-          if (n.isScope && n.variables && n.variables.length > 0) {
-            const definitionKey = n.variables.find(
-              key => getNodeByKey(key).meta === node.text
-            );
-            if (definitionKey) {
-              found = getNodeByKey(definitionKey);
-            }
-          }
-          return found;
-        }, undefined);
+      });
+    }
+  }
 
-      if (definition) {
-        this.linkToParent(definition, stack, '-.-');
-      }
-    },
-  };
+  process(tree);
 
-  traverse.process(tree, []);
-
-  return graph.export();
+  return { nodes: nodesData, links: linksData };
 }
