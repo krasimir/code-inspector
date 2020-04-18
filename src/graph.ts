@@ -8,6 +8,7 @@ import { NODES_FUNCTION_SCOPES, NODES_DEFINING_SCOPES } from './constants';
 interface GraphNode {
   id: string;
   text: string;
+  type: string;
   scope?: string;
   scopeDepth?: number;
 }
@@ -29,6 +30,7 @@ export default function(
     const scopes = node.scopePath.split('.');
     const graphNode: GraphNode = {
       id: node.key,
+      type: node.type,
       text: String(node.text),
       scope: scopes[scopes.length - 1],
       scopeDepth: node.scopePath === '' ? 0 : scopes.length,

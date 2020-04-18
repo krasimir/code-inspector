@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 // https://bl.ocks.org/mbostock/2675ff61ea5e063ede2b5d63c08020c7
 
 function drawGraph(svgElement, graph) {
@@ -67,7 +68,58 @@ function drawGraph(svgElement, graph) {
           .on('end', dragended)
       );
 
+    n.on('mouseover', data => {
+      tooltip
+        .style('display', 'block')
+        .style(
+          'transform',
+          `translate(${d3.event.pageX + 10}px, ${d3.event.pageY - 30}px)`
+        )
+        .transition()
+        .duration(450)
+        .ease(d3.easeQuadOut)
+        .style('opacity', 1);
+      tooltip.select('text').text(data.text);
+      tooltip.select('rect').attr(
+        'width',
+        tooltip
+          .select('text')
+          .node()
+          .getBBox().width + 20
+      );
+    });
+    n.on('mouseout', () => {
+      tooltip.style('display', 'none');
+      tooltip.style('opacity', 0);
+      tooltip.select('text').text('');
+    });
+
     return n;
+  }
+  function createLink() {
+    return svg
+      .append('g')
+      .attr('class', 'links')
+      .selectAll('line')
+      .data(graph.links)
+      .enter()
+      .append('line');
+  }
+  function createTooltip() {
+    const t = svg.append('g');
+    t.attr('class', 'tooltip');
+    t.style('display', 'none');
+    t.style('opacity', 0);
+    t.append('rect')
+      .attr('width', 100)
+      .attr('height', 30)
+      .attr('rx', 4);
+    t.append('text')
+      .text('...')
+      .attr('x', 10)
+      .attr('y', 18);
+
+    return t;
   }
 
   const simulation = d3
@@ -81,15 +133,9 @@ function drawGraph(svgElement, graph) {
     .force('charge', d3.forceManyBody())
     .force('center', d3.forceCenter(width / 2, height / 2));
 
-  const link = svg
-    .append('g')
-    .attr('class', 'links')
-    .selectAll('line')
-    .data(graph.links)
-    .enter()
-    .append('line');
-
+  const link = createLink();
   const node = createNode();
+  const tooltip = createTooltip();
 
   node.append('title').text(function(d) {
     return d.id;

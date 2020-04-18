@@ -2,342 +2,399 @@
   "nodes": [
     {
       "id": "Program-1:1-21:1",
+      "type": "Program",
       "text": "Program",
       "scope": "",
       "scopeDepth": 0
     },
     {
       "id": "VariableDeclaration-1:1-1:19",
+      "type": "VariableDeclaration",
       "text": "ANSWER",
       "scope": "Program-1:1-21:1",
       "scopeDepth": 1
     },
     {
       "id": "VariableDeclarator-1:7-1:18",
+      "type": "VariableDeclarator",
       "text": "ANSWER",
       "scope": "Program-1:1-21:1",
       "scopeDepth": 1
     },
     {
       "id": "Identifier-1:7-1:13",
+      "type": "Identifier",
       "text": "ANSWER",
       "scope": "Program-1:1-21:1",
       "scopeDepth": 1
     },
     {
       "id": "NumericLiteral-1:16-1:18",
+      "type": "NumericLiteral",
       "text": "42",
       "scope": "Program-1:1-21:1",
       "scopeDepth": 1
     },
     {
       "id": "FunctionDeclaration-2:1-4:2",
+      "type": "FunctionDeclaration",
       "text": "test(value, anotherOne, fooBar)",
       "scope": "Program-1:1-21:1",
       "scopeDepth": 1
     },
     {
       "id": "Identifier-2:10-2:14",
+      "type": "Identifier",
       "text": "test",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-2:15-2:20",
+      "type": "Identifier",
       "text": "value",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-2:22-2:32",
+      "type": "Identifier",
       "text": "anotherOne",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-2:34-2:40",
+      "type": "Identifier",
       "text": "fooBar",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "BlockStatement-2:42-4:2",
+      "type": "BlockStatement",
       "text": "⊏…⊐",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "ReturnStatement-3:3-3:32",
+      "type": "ReturnStatement",
       "text": "← value?",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "ConditionalExpression-3:10-3:31",
+      "type": "ConditionalExpression",
       "text": "value?",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-3:10-3:15",
+      "type": "Identifier",
       "text": "value",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-3:18-3:24",
+      "type": "Identifier",
       "text": "ANSWER",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "NullLiteral-3:27-3:31",
+      "type": "NullLiteral",
       "text": "null",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2
     },
     {
       "id": "FunctionDeclaration-6:1-14:2",
+      "type": "FunctionDeclaration",
       "text": "foobar()",
       "scope": "Program-1:1-21:1",
       "scopeDepth": 1
     },
     {
       "id": "Identifier-6:10-6:16",
+      "type": "Identifier",
       "text": "foobar",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "BlockStatement-6:19-14:2",
+      "type": "BlockStatement",
       "text": "⊏…⊐",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "VariableDeclaration-7:3-7:22",
+      "type": "VariableDeclaration",
       "text": "ANSWER",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "VariableDeclarator-7:9-7:21",
+      "type": "VariableDeclarator",
       "text": "ANSWER",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-7:9-7:15",
+      "type": "Identifier",
       "text": "ANSWER",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "NumericLiteral-7:18-7:21",
+      "type": "NumericLiteral",
       "text": "100",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "VariableDeclaration-8:3-8:27",
+      "type": "VariableDeclaration",
       "text": "mult",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "VariableDeclarator-8:9-8:26",
+      "type": "VariableDeclarator",
       "text": "mult",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-8:9-8:13",
+      "type": "Identifier",
       "text": "mult",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "ArrowFunctionExpression-8:16-8:26",
+      "type": "ArrowFunctionExpression",
       "text": "mult(v)",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-8:16-8:17",
+      "type": "Identifier",
       "text": "v",
       "scope": "ArrowFunctionExpression-8:16-8:26",
       "scopeDepth": 3
     },
     {
       "id": "BinaryExpression-8:21-8:26",
+      "type": "BinaryExpression",
       "text": "v * 2",
       "scope": "ArrowFunctionExpression-8:16-8:26",
       "scopeDepth": 3
     },
     {
       "id": "Identifier-8:21-8:22",
+      "type": "Identifier",
       "text": "v",
       "scope": "ArrowFunctionExpression-8:16-8:26",
       "scopeDepth": 3
     },
     {
       "id": "NumericLiteral-8:25-8:26",
+      "type": "NumericLiteral",
       "text": "2",
       "scope": "ArrowFunctionExpression-8:16-8:26",
       "scopeDepth": 3
     },
     {
       "id": "FunctionDeclaration-9:3-11:4",
+      "type": "FunctionDeclaration",
       "text": "sqrtAnd(v)",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-9:12-9:19",
+      "type": "Identifier",
       "text": "sqrtAnd",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "Identifier-9:20-9:21",
+      "type": "Identifier",
       "text": "v",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "BlockStatement-9:23-11:4",
+      "type": "BlockStatement",
       "text": "⊏…⊐",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "ReturnStatement-10:5-10:34",
+      "type": "ReturnStatement",
       "text": "← Math.sqrt(…) + ANSWER",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "BinaryExpression-10:12-10:33",
+      "type": "BinaryExpression",
       "text": "Math.sqrt(…) + ANSWER",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "CallExpression-10:12-10:24",
+      "type": "CallExpression",
       "text": "Math.sqrt(…)",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "MemberExpression-10:12-10:21",
+      "type": "MemberExpression",
       "text": "Math.sqrt",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "Identifier-10:12-10:16",
+      "type": "Identifier",
       "text": "Math",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "Identifier-10:17-10:21",
+      "type": "Identifier",
       "text": "sqrt",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "Identifier-10:22-10:23",
+      "type": "Identifier",
       "text": "v",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "Identifier-10:27-10:33",
+      "type": "Identifier",
       "text": "ANSWER",
       "scope": "FunctionDeclaration-9:3-11:4",
       "scopeDepth": 3
     },
     {
       "id": "VariableDeclaration-12:3-12:30",
+      "type": "VariableDeclaration",
       "text": "x",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "VariableDeclarator-12:9-12:29",
+      "type": "VariableDeclarator",
       "text": "x",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-12:9-12:10",
+      "type": "Identifier",
       "text": "x",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "BinaryExpression-12:13-12:29",
+      "type": "BinaryExpression",
       "text": "ANSWER * mult(…)",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-12:13-12:19",
+      "type": "Identifier",
       "text": "ANSWER",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "CallExpression-12:22-12:29",
+      "type": "CallExpression",
       "text": "mult(…)",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-12:22-12:26",
+      "type": "Identifier",
       "text": "mult",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "NumericLiteral-12:27-12:28",
+      "type": "NumericLiteral",
       "text": "2",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "ExpressionStatement-13:3-13:23",
+      "type": "ExpressionStatement",
       "text": "console.log(…)",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "CallExpression-13:3-13:22",
+      "type": "CallExpression",
       "text": "console.log(…)",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "MemberExpression-13:3-13:14",
+      "type": "MemberExpression",
       "text": "console.log",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-13:3-13:10",
+      "type": "Identifier",
       "text": "console",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-13:11-13:14",
+      "type": "Identifier",
       "text": "log",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
     },
     {
       "id": "Identifier-13:15-13:21",
+      "type": "Identifier",
       "text": "ANSWER",
       "scope": "FunctionDeclaration-6:1-14:2",
       "scopeDepth": 2
