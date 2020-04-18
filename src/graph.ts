@@ -8,7 +8,8 @@ import { NODES_FUNCTION_SCOPES, NODES_DEFINING_SCOPES } from './constants';
 interface GraphNode {
   id: string;
   text: string;
-  group?: string;
+  scope?: string;
+  scopeDepth?: number;
 }
 interface GraphLink {
   source: string;
@@ -18,17 +19,20 @@ interface GraphLink {
 export default function(
   analysis: Analysis
 ): { nodes: GraphNode[]; links: GraphLink[] } {
-  const { nodes, scopes, variables, tree } = analysis;
+  const { nodes, variables, tree } = analysis;
   const getNodeByKey = accessNode(nodes);
   const nodesData: GraphNode[] = [];
   const linksData: GraphLink[] = [];
   const dict: Record<string, Function> = {};
 
   function process(node: NormalizedNode) {
-    const graphNode: GraphNode = { id: node.key, text: String(node.text) };
-    if (node.scopePath !== '') {
-      graphNode.group = node.scopePath.split('.').pop();
-    }
+    const scopes = node.scopePath.split('.');
+    const graphNode: GraphNode = {
+      id: node.key,
+      text: String(node.text),
+      scope: scopes[scopes.length - 1],
+      scopeDepth: node.scopePath === '' ? 0 : scopes.length,
+    };
     nodesData.push(graphNode);
     if (node.parent) {
       linksData.push({ source: node.parent, target: node.key });
