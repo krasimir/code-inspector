@@ -11,8 +11,8 @@ interface GraphNode {
   group?: string;
 }
 interface GraphLink {
-  from: string;
-  to: string;
+  source: string;
+  target: string;
 }
 
 export default function(
@@ -24,15 +24,15 @@ export default function(
   const linksData: GraphLink[] = [];
   const dict: Record<string, Function> = {};
 
-  function process(node: NormalizedNode, parent?: NormalizedNode) {
-    const graphNode: GraphNode = { key: node.key, text: String(node.text) };
-    if (node.isScope) {
-      graphNode.isGroup = true;
-    }
+  function process(node: NormalizedNode) {
+    const graphNode: GraphNode = { id: node.key, text: String(node.text) };
     if (node.scopePath !== '') {
       graphNode.group = node.scopePath.split('.').pop();
     }
     nodesData.push(graphNode);
+    if (node.parent) {
+      linksData.push({ source: node.parent, target: node.key });
+    }
     if (node.children) {
       node.children.forEach(c => {
         if (dict[c.type]) {
