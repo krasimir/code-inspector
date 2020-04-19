@@ -11,6 +11,7 @@ interface GraphNode {
   type: string;
   scope?: string;
   scopeDepth?: number;
+  meta?: any;
 }
 interface GraphLink {
   source: string;
@@ -36,6 +37,7 @@ export default function(
       text: String(node.text),
       scope: scopes[scopes.length - 1],
       scopeDepth: node.scopePath === '' ? 0 : scopes.length,
+      meta: node.meta,
     });
     if (parent) {
       linksData.push({
@@ -47,14 +49,36 @@ export default function(
 
   const dict: Record<string, Function> = {
     VariableDeclaration(node: NormalizedNode) {
-      const identifier: NormalizedNode = get(node, 'children.0.children.0');
-      addNodeToGraph(identifier, node.parent);
       return false;
+    },
+    FunctionDeclaration(node: NormalizedNode) {
+      addNodeToGraph(node, node.parent);
+      const body = node.children.find(({ type }) => type === 'BlockStatement');
+      if (body) {
+        body.children.forEach(bodyChild => {
+          process(bodyChild, node);
+        });
+      }
+    },
+    Identifier(node: NormalizedNode) {
+      const scopes = node.scopePath.split('.').reverse();
+      for (const scopeKey of scopes) {
+        const scopeNode: NormalizedNode = getNodeByKey(scopeKey);
+        if (scopeNode && scopeNode.variables) {
+          for (const variableKey of scopeNode.variables) {
+            const variable: NormalizedNode = getNodeByKey(variableKey);
+            if (variable && variable.text === node.text) {
+              addNodeToGraph(variable, scopeNode);
+              linksData.push({ source: variable.key, target: node.parent });
+            }
+          }
+        }
+      }
     },
   };
 
-  function process(node: NormalizedNode) {
-    addNodeToGraph(node, node.parent);
+  function process(node: NormalizedNode, parent?: NormalizedNode) {
+    addNodeToGraph(node, parent || node.parent);
     if (node.children) {
       node.children.forEach(c => {
         if (dict[c.type]) {

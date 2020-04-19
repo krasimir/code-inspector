@@ -8,53 +8,19 @@
       "scopeDepth": 0
     },
     {
-      "id": "Identifier-1:7-1:13",
-      "type": "Identifier",
-      "text": "ANSWER",
-      "scope": "Program-1:1-21:1",
-      "scopeDepth": 1
-    },
-    {
       "id": "FunctionDeclaration-2:1-4:2",
       "type": "FunctionDeclaration",
       "text": "test(value, anotherOne, fooBar)",
       "scope": "Program-1:1-21:1",
-      "scopeDepth": 1
-    },
-    {
-      "id": "Identifier-2:10-2:14",
-      "type": "Identifier",
-      "text": "test",
-      "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
-    },
-    {
-      "id": "Identifier-2:15-2:20",
-      "type": "Identifier",
-      "text": "value",
-      "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
-    },
-    {
-      "id": "Identifier-2:22-2:32",
-      "type": "Identifier",
-      "text": "anotherOne",
-      "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
-    },
-    {
-      "id": "Identifier-2:34-2:40",
-      "type": "Identifier",
-      "text": "fooBar",
-      "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
-    },
-    {
-      "id": "BlockStatement-2:42-4:2",
-      "type": "BlockStatement",
-      "text": "⊏…⊐",
-      "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
+      "scopeDepth": 1,
+      "meta": {
+        "funcName": "test",
+        "params": [
+          "Identifier-2:15-2:20",
+          "Identifier-2:22-2:32",
+          "Identifier-2:34-2:40"
+        ]
+      }
     },
     {
       "id": "ReturnStatement-3:3-3:32",
@@ -71,18 +37,20 @@
       "scopeDepth": 2
     },
     {
-      "id": "Identifier-3:10-3:15",
+      "id": "Identifier-2:15-2:20",
       "type": "Identifier",
       "text": "value",
       "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
+      "scopeDepth": 2,
+      "meta": null
     },
     {
-      "id": "Identifier-3:18-3:24",
+      "id": "Identifier-1:7-1:13",
       "type": "Identifier",
       "text": "ANSWER",
-      "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
+      "scope": "Program-1:1-21:1",
+      "scopeDepth": 1,
+      "meta": null
     },
     {
       "id": "NullLiteral-3:27-3:31",
@@ -95,34 +63,10 @@
   "links": [
     {
       "source": "Program-1:1-21:1",
-      "target": "Identifier-1:7-1:13"
-    },
-    {
-      "source": "Program-1:1-21:1",
       "target": "FunctionDeclaration-2:1-4:2"
     },
     {
       "source": "FunctionDeclaration-2:1-4:2",
-      "target": "Identifier-2:10-2:14"
-    },
-    {
-      "source": "FunctionDeclaration-2:1-4:2",
-      "target": "Identifier-2:15-2:20"
-    },
-    {
-      "source": "FunctionDeclaration-2:1-4:2",
-      "target": "Identifier-2:22-2:32"
-    },
-    {
-      "source": "FunctionDeclaration-2:1-4:2",
-      "target": "Identifier-2:34-2:40"
-    },
-    {
-      "source": "FunctionDeclaration-2:1-4:2",
-      "target": "BlockStatement-2:42-4:2"
-    },
-    {
-      "source": "BlockStatement-2:42-4:2",
       "target": "ReturnStatement-3:3-3:32"
     },
     {
@@ -130,12 +74,20 @@
       "target": "ConditionalExpression-3:10-3:31"
     },
     {
-      "source": "ConditionalExpression-3:10-3:31",
-      "target": "Identifier-3:10-3:15"
+      "source": "FunctionDeclaration-2:1-4:2",
+      "target": "Identifier-2:15-2:20"
     },
     {
-      "source": "ConditionalExpression-3:10-3:31",
-      "target": "Identifier-3:18-3:24"
+      "source": "Identifier-2:15-2:20",
+      "target": "ConditionalExpression-3:10-3:31"
+    },
+    {
+      "source": "Program-1:1-21:1",
+      "target": "Identifier-1:7-1:13"
+    },
+    {
+      "source": "Identifier-1:7-1:13",
+      "target": "ConditionalExpression-3:10-3:31"
     },
     {
       "source": "ConditionalExpression-3:10-3:31",
