@@ -24,25 +24,43 @@ export default function(
   const getNodeByKey = accessNode(nodes);
   const nodesData: GraphNode[] = [];
   const linksData: GraphLink[] = [];
-  const dict: Record<string, Function> = {};
 
-  function process(node: NormalizedNode) {
+  function addNodeToGraph(
+    node: NormalizedNode,
+    parent: string | NormalizedNode
+  ) {
     const scopes = node.scopePath.split('.');
-    const graphNode: GraphNode = {
+    nodesData.push({
       id: node.key,
       type: node.type,
       text: String(node.text),
       scope: scopes[scopes.length - 1],
       scopeDepth: node.scopePath === '' ? 0 : scopes.length,
-    };
-    nodesData.push(graphNode);
-    if (node.parent) {
-      linksData.push({ source: node.parent, target: node.key });
+    });
+    if (parent) {
+      linksData.push({
+        source: typeof parent === 'string' ? parent : parent.key,
+        target: node.key,
+      });
     }
+  }
+
+  const dict: Record<string, Function> = {
+    VariableDeclaration(node: NormalizedNode) {
+      const identifier: NormalizedNode = get(node, 'children.0.children.0');
+      addNodeToGraph(identifier, node.parent);
+      return false;
+    },
+  };
+
+  function process(node: NormalizedNode) {
+    addNodeToGraph(node, node.parent);
     if (node.children) {
       node.children.forEach(c => {
         if (dict[c.type]) {
-          dict[c.type](c, parent || node);
+          if (dict[c.type](c)) {
+            process(c);
+          }
         } else {
           process(c);
         }
