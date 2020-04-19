@@ -12,6 +12,7 @@ interface GraphNode {
   scope?: string;
   scopeDepth?: number;
   meta?: any;
+  isScope?: boolean;
 }
 interface GraphLink {
   source: string;
@@ -38,6 +39,7 @@ export default function(
       scope: scopes[scopes.length - 1],
       scopeDepth: node.scopePath === '' ? 0 : scopes.length,
       meta: node.meta,
+      isScope: node.isScope,
     });
     if (parent) {
       linksData.push({

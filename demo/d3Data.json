@@ -5,7 +5,8 @@
       "type": "Program",
       "text": "Program",
       "scope": "",
-      "scopeDepth": 0
+      "scopeDepth": 0,
+      "isScope": true
     },
     {
       "id": "FunctionDeclaration-2:1-4:2",
@@ -20,21 +21,24 @@
           "Identifier-2:22-2:32",
           "Identifier-2:34-2:40"
         ]
-      }
+      },
+      "isScope": true
     },
     {
       "id": "ReturnStatement-3:3-3:32",
       "type": "ReturnStatement",
       "text": "← value?",
       "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
+      "scopeDepth": 2,
+      "isScope": false
     },
     {
       "id": "ConditionalExpression-3:10-3:31",
       "type": "ConditionalExpression",
       "text": "value?",
       "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
+      "scopeDepth": 2,
+      "isScope": false
     },
     {
       "id": "Identifier-2:15-2:20",
@@ -42,7 +46,8 @@
       "text": "value",
       "scope": "FunctionDeclaration-2:1-4:2",
       "scopeDepth": 2,
-      "meta": null
+      "meta": null,
+      "isScope": false
     },
     {
       "id": "Identifier-1:7-1:13",
@@ -50,14 +55,16 @@
       "text": "ANSWER",
       "scope": "Program-1:1-21:1",
       "scopeDepth": 1,
-      "meta": null
+      "meta": null,
+      "isScope": false
     },
     {
       "id": "NullLiteral-3:27-3:31",
       "type": "NullLiteral",
       "text": "null",
       "scope": "FunctionDeclaration-2:1-4:2",
-      "scopeDepth": 2
+      "scopeDepth": 2,
+      "isScope": false
     }
   ],
   "links": [

@@ -43,58 +43,47 @@ function drawGraph(svgElement, graph) {
     d.fx = null;
     d.fy = null;
   }
-
   function createNode() {
-    const n = svg
-      .append('g')
-      .attr('class', 'nodes')
-      .selectAll('circle')
-      .data(graph.nodes)
-      .enter()
-      .append('circle')
-      .attr('r', data => {
-        const sizes = [16, 13, 8, 6, 4, 3, 2];
-        const radius = sizes[data.scopeDepth];
-        if (radius) {
-          return radius;
-        }
-        return 3;
-      })
+    return Nodes.getGraphic(
+      svg
+        .append('g')
+        .attr('class', 'nodes')
+        .selectAll('circle')
+        .data(graph.nodes)
+        .enter()
+    )
       .call(
         d3
           .drag()
           .on('start', dragstarted)
           .on('drag', dragged)
           .on('end', dragended)
-      );
-
-    n.on('mouseover', data => {
-      tooltip
-        .style('display', 'block')
-        .style(
-          'transform',
-          `translate(${d3.event.pageX + 10}px, ${d3.event.pageY - 30}px)`
-        )
-        .transition()
-        .duration(450)
-        .ease(d3.easeQuadOut)
-        .style('opacity', 1);
-      tooltip.select('text').text(data.text);
-      tooltip.select('rect').attr(
-        'width',
+      )
+      .on('mouseover', data => {
         tooltip
-          .select('text')
-          .node()
-          .getBBox().width + 20
-      );
-    });
-    n.on('mouseout', () => {
-      tooltip.style('display', 'none');
-      tooltip.style('opacity', 0);
-      tooltip.select('text').text('');
-    });
-
-    return n;
+          .style('display', 'block')
+          .style(
+            'transform',
+            `translate(${d3.event.pageX + 10}px, ${d3.event.pageY - 30}px)`
+          )
+          .transition()
+          .duration(450)
+          .ease(d3.easeQuadOut)
+          .style('opacity', 1);
+        tooltip.select('text').text(data.text);
+        tooltip.select('rect').attr(
+          'width',
+          tooltip
+            .select('text')
+            .node()
+            .getBBox().width + 20
+        );
+      })
+      .on('mouseout', () => {
+        tooltip.style('display', 'none');
+        tooltip.style('opacity', 0);
+        tooltip.select('text').text('');
+      });
   }
   function createLink() {
     return svg
@@ -131,7 +120,13 @@ function drawGraph(svgElement, graph) {
       })
     )
     .force('charge', d3.forceManyBody())
-    .force('center', d3.forceCenter(width / 2, height / 2));
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force(
+      'collide',
+      d3.forceCollide(function(d) {
+        return d.isScope ? 60 : 20;
+      })
+    );
 
   const link = createLink();
   const node = createNode();
