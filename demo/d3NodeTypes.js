@@ -42,23 +42,23 @@ const Nodes = {
   getGraphic(n) {
     return n.append('g').each(function(d, i) {
       let graphic;
-      switch (d.node.type) {
+      switch (d.type) {
         case 'Program':
           graphic = reactWithText(d3.select(this), 'program', 20);
           break;
         case 'FunctionDeclaration':
-          graphic = reactWithText(d3.select(this), d.node.meta.funcName);
+          graphic = reactWithText(d3.select(this), d.meta.funcName);
           break;
         case 'Identifier':
-          if (d.node.isVariable) {
-            graphic = reactWithText(d3.select(this), d.node.text);
+          if (d.isVariable) {
+            graphic = reactWithText(d3.select(this), d.text);
             graphic.attr('class', `${graphic.attr('class')} Variable`);
             break;
           }
         default:
-          graphic = reactWithText(d3.select(this), d.node.text, 12);
+          graphic = reactWithText(d3.select(this), d.text, 12);
       }
-      graphic.attr('class', `${graphic.attr('class')} ${d.node.type}`);
+      graphic.attr('class', `${graphic.attr('class')} ${d.type}`);
     });
   },
 };

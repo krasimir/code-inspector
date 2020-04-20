@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-// https://bl.ocks.org/mbostock/2675ff61ea5e063ede2b5d63c08020c7
+// Source: https://bl.ocks.org/mbostock/2675ff61ea5e063ede2b5d63c08020c7
+// Docs: https://github.com/d3/d3-force#links
 
 function drawGraph(svgElement, graph) {
+  graph.nodes.reverse();
+  graph.links.reverse();
   const svg = d3.select(svgElement);
   const width = window.innerWidth;
   const height = window.innerHeight;
@@ -65,7 +68,7 @@ function drawGraph(svgElement, graph) {
           .ease(d3.easeQuadOut)
           .style('opacity', 1);
         tooltip.select('text').text(
-          data.node.scopePath
+          data.scopePath
             .split('.')
             .map(s => {
               const text = s.split('-').shift();
@@ -86,6 +89,11 @@ function drawGraph(svgElement, graph) {
         tooltip.style('display', 'none');
         tooltip.style('opacity', 0);
         tooltip.select('text').text('');
+      })
+      .style('opacity', n => {
+        const step = 1 / 8;
+        const scopeDepth = n.scopePath.split('.').length;
+        return 1 - scopeDepth * step;
       });
   }
   function createLink() {
@@ -113,6 +121,14 @@ function drawGraph(svgElement, graph) {
 
     return t;
   }
+  function countLinks(n) {
+    return graph.links.reduce((res, { source, target }) => {
+      if (source.key === n.key || target.key === n.key) {
+        return res + 1;
+      }
+      return res;
+    }, 0);
+  }
 
   const simulation = d3
     .forceSimulation()
@@ -121,15 +137,16 @@ function drawGraph(svgElement, graph) {
       d3
         .forceLink()
         .id(function(d) {
-          return d.id;
+          return d.key;
         })
-        .distance(function(d) {
-          if (d.source.node.isScope) return 120;
-          return 70;
+        .distance(l => {
+          const d = countLinks(l.target) * 20;
+          console.log(`${l.source.text} - ${l.target.text} = ${d}`);
+          return d;
         })
-        .strength(1)
+        .strength(l => 1 / countLinks(l.source))
     )
-    .force('charge', d3.forceManyBody())
+    .force('charge', d3.forceManyBody().strength(-50))
     .force('center', d3.forceCenter(width / 2, height / 2));
 
   const link = createLink();

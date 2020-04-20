@@ -5,10 +5,6 @@ import { NormalizedNode, Analysis } from './types';
 import { accessNode } from './utils';
 import { NODES_FUNCTION_SCOPES, NODES_DEFINING_SCOPES } from './constants';
 
-interface GraphNode {
-  id: string;
-  node: NormalizedNode;
-}
 interface GraphLink {
   source: string;
   target: string;
@@ -16,15 +12,15 @@ interface GraphLink {
 
 export default function(
   analysis: Analysis
-): { nodes: GraphNode[]; links: GraphLink[] } {
+): { nodes: NormalizedNode[]; links: GraphLink[] } {
   const { nodes, variables, tree } = analysis;
   const getNodeByKey = accessNode(nodes);
-  const nodesData: GraphNode[] = [];
+  const nodesData: NormalizedNode[] = [];
   const linksData: GraphLink[] = [];
 
   function addNodeToGraph(node: NormalizedNode) {
     const parentScope = node.scopePath.split('.').pop();
-    nodesData.push({ id: node.key, node });
+    nodesData.push(node);
     if (parentScope !== '') {
       linksData.push({ source: parentScope, target: node.key });
     }
