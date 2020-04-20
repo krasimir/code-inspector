@@ -50,3 +50,11 @@ svg {
 .FunctionDeclaration text {
   fill: #fff;
 }
+
+.Variable rect {
+  fill: #104f26;
+  stroke: #0b5e0d;
+}
+.Variable text {
+  fill: #7fcd79;
+}

@@ -22,64 +22,21 @@ export default function(
   const nodesData: GraphNode[] = [];
   const linksData: GraphLink[] = [];
 
-  function addNodeToGraph(
-    node: NormalizedNode,
-    parent: string | NormalizedNode
-  ) {
-    const scopes = node.scopePath.split('.');
-    nodesData.push({
-      id: node.key,
-      node,
-    });
-    if (parent) {
-      linksData.push({
-        source: typeof parent === 'string' ? parent : parent.key,
-        target: node.key,
-      });
+  function addNodeToGraph(node: NormalizedNode) {
+    const parentScope = node.scopePath.split('.').pop();
+    nodesData.push({ id: node.key, node });
+    if (parentScope !== '') {
+      linksData.push({ source: parentScope, target: node.key });
     }
   }
 
-  const dict: Record<string, Function> = {
-    VariableDeclaration(node: NormalizedNode) {
-      return false;
-    },
-    FunctionDeclaration(node: NormalizedNode) {
-      addNodeToGraph(node, node.parent);
-      const body = node.children.find(({ type }) => type === 'BlockStatement');
-      if (body) {
-        body.children.forEach(bodyChild => {
-          process(bodyChild, node);
-        });
-      }
-    },
-    Identifier(node: NormalizedNode) {
-      const scopes = node.scopePath.split('.').reverse();
-      for (const scopeKey of scopes) {
-        const scopeNode: NormalizedNode = getNodeByKey(scopeKey);
-        if (scopeNode && scopeNode.variables) {
-          for (const variableKey of scopeNode.variables) {
-            const variable: NormalizedNode = getNodeByKey(variableKey);
-            if (variable && variable.text === node.text) {
-              addNodeToGraph(variable, scopeNode);
-              linksData.push({ source: variable.key, target: node.parent });
-            }
-          }
-        }
-      }
-    },
-  };
-
-  function process(node: NormalizedNode, parent?: NormalizedNode) {
-    addNodeToGraph(node, parent || node.parent);
+  function process(node: NormalizedNode) {
+    if (node.isScope) {
+      addNodeToGraph(node);
+    }
     if (node.children) {
       node.children.forEach(c => {
-        if (dict[c.type]) {
-          if (dict[c.type](c)) {
-            process(c);
-          }
-        } else {
-          process(c);
-        }
+        process(c);
       });
     }
   }

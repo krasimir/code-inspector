@@ -1,3 +1,4 @@
+/* eslint-disable no-fallthrough */
 function scopeToRadius(data) {
   const scopes = data.node.scopePath.split('.');
   const sizes = [16, 13, 8, 6, 4, 3, 2];
@@ -48,6 +49,12 @@ const Nodes = {
         case 'FunctionDeclaration':
           graphic = reactWithText(d3.select(this), d.node.meta.funcName);
           break;
+        case 'Identifier':
+          if (d.node.isVariable) {
+            graphic = reactWithText(d3.select(this), d.node.text);
+            graphic.attr('class', `${graphic.attr('class')} Variable`);
+            break;
+          }
         default:
           graphic = reactWithText(d3.select(this), d.node.text, 12);
       }
