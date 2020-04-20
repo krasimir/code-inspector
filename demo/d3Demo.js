@@ -21,13 +21,7 @@ function drawGraph(svgElement, graph) {
         return d.target.y;
       });
 
-    node
-      .attr('cx', function(d) {
-        return d.x;
-      })
-      .attr('cy', function(d) {
-        return d.y;
-      });
+    node.style('transform', d => `translate(${d.x}px, ${d.y}px)`);
   }
   function dragstarted(d) {
     if (!d3.event.active) simulation.alphaTarget(0.3).restart();
@@ -70,7 +64,12 @@ function drawGraph(svgElement, graph) {
           .duration(450)
           .ease(d3.easeQuadOut)
           .style('opacity', 1);
-        tooltip.select('text').text(data.text);
+        tooltip.select('text').text(
+          data.node.scopePath
+            .split('.')
+            .map(s => s.split('-').shift())
+            .join('.')
+        );
         tooltip.select('rect').attr(
           'width',
           tooltip
@@ -115,26 +114,23 @@ function drawGraph(svgElement, graph) {
     .forceSimulation()
     .force(
       'link',
-      d3.forceLink().id(function(d) {
-        return d.id;
-      })
+      d3
+        .forceLink()
+        .id(function(d) {
+          return d.id;
+        })
+        .distance(function(d) {
+          if (d.source.node.isScope) return 120;
+          return 70;
+        })
+        .strength(1)
     )
     .force('charge', d3.forceManyBody())
-    .force('center', d3.forceCenter(width / 2, height / 2))
-    .force(
-      'collide',
-      d3.forceCollide(function(d) {
-        return d.isScope ? 60 : 20;
-      })
-    );
+    .force('center', d3.forceCenter(width / 2, height / 2));
 
   const link = createLink();
   const node = createNode();
   const tooltip = createTooltip();
-
-  node.append('title').text(function(d) {
-    return d.id;
-  });
 
   simulation.nodes(graph.nodes).on('tick', ticked);
 

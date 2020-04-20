@@ -7,12 +7,7 @@ import { NODES_FUNCTION_SCOPES, NODES_DEFINING_SCOPES } from './constants';
 
 interface GraphNode {
   id: string;
-  text: string;
-  type: string;
-  scope?: string;
-  scopeDepth?: number;
-  meta?: any;
-  isScope?: boolean;
+  node: NormalizedNode;
 }
 interface GraphLink {
   source: string;
@@ -34,12 +29,7 @@ export default function(
     const scopes = node.scopePath.split('.');
     nodesData.push({
       id: node.key,
-      type: node.type,
-      text: String(node.text),
-      scope: scopes[scopes.length - 1],
-      scopeDepth: node.scopePath === '' ? 0 : scopes.length,
-      meta: node.meta,
-      isScope: node.isScope,
+      node,
     });
     if (parent) {
       linksData.push({
