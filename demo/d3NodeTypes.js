@@ -1,4 +1,4 @@
-/* eslint-disable no-fallthrough */
+/* eslint-disable no-fallthrough, no-case-declarations */
 function scopeToRadius(data) {
   const scopes = data.node.scopePath.split('.');
   const sizes = [16, 13, 8, 6, 4, 3, 2];
@@ -30,10 +30,12 @@ function reactWithText(container, text, fz = 14) {
     .append('text')
     .text(text)
     .attr('font-size', fz);
+  const textHeight = t.node().parentNode.getBBox().height;
 
   r.attr('width', t.node().parentNode.getBBox().width + 10);
+  r.attr('height', textHeight - 10);
   r.attr('x', -5);
-  r.attr('y', -15);
+  r.attr('y', -textHeight / 2);
   container.attr('class', 'rect-with-text');
   return container;
 }
@@ -47,7 +49,12 @@ const Nodes = {
           graphic = reactWithText(d3.select(this), 'program', 20);
           break;
         case 'FunctionDeclaration':
-          graphic = reactWithText(d3.select(this), d.meta.funcName);
+          const scopeDepth = d.scopePath.split('.').length;
+          graphic = reactWithText(
+            d3.select(this),
+            d.meta.funcName,
+            10 + 8 / scopeDepth
+          );
           break;
         case 'Identifier':
           if (d.isVariable) {

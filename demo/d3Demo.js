@@ -141,10 +141,9 @@ function drawGraph(svgElement, graph) {
         })
         .distance(l => {
           const d = countLinks(l.target) * 20;
-          console.log(`${l.source.text} - ${l.target.text} = ${d}`);
           return d;
         })
-        .strength(l => 1 / countLinks(l.source))
+        .strength(l => 1 / (countLinks(l.source) + countLinks(l.target)))
     )
     .force('charge', d3.forceManyBody().strength(-50))
     .force('center', d3.forceCenter(width / 2, height / 2));
