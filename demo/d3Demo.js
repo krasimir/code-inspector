@@ -67,7 +67,11 @@ function drawGraph(svgElement, graph) {
         tooltip.select('text').text(
           data.node.scopePath
             .split('.')
-            .map(s => s.split('-').shift())
+            .map(s => {
+              const text = s.split('-').shift();
+              if (text === '') return 'root';
+              return text;
+            })
             .join('.')
         );
         tooltip.select('rect').attr(
