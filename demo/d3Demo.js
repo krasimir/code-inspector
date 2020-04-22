@@ -1,6 +1,8 @@
+// source https://www.d3-graph-gallery.com/graph/arc_vertical.html
+
 // set the dimensions and margins of the graph
-const margin = { top: 20, right: 20, bottom: 20, left: 20 };
-const height = window.innerHeight - margin.top - margin.bottom;
+const margin = 40;
+const height = window.innerHeight - margin * 2;
 
 // append the svg object to the body of the page
 const svg = d3
@@ -9,13 +11,13 @@ const svg = d3
   .attr('width', window.innerWidth)
   .attr('height', window.innerHeight)
   .append('g')
-  .attr('transform', `translate(${margin.left},${margin.top})`);
+  .style('transform', `translate(${margin}px,${margin}px)`);
 
 // Read dummy data
 d3.json('d3Data.json', function(data) {
   // List of node names
   const allNodes = data.nodes.map(function(d) {
-    return d.text;
+    return d.key;
   });
 
   // A linear scale to position the nodes on the X axis
@@ -26,26 +28,22 @@ d3.json('d3Data.json', function(data) {
 
   // And give them a label
   const labelWidths = [];
-  svg
+  const n = svg
     .selectAll('mylabels')
     .data(data.nodes)
-    .enter()
-    .append('text')
-    .attr('x', 0)
-    .attr('y', function(d) {
-      return y(d.text) + 4;
-    })
-    .text(function(d) {
-      return d.text;
-    })
-    .each(function(d) {
-      labelWidths.push(
-        d3
-          .select(this)
-          .node()
-          .getBBox().width + 4
-      );
-    });
+    .enter();
+
+  Nodes.getGraphic(n).style('transform', function(d) {
+    const scopeDepth = d.scopePath.split('.').length;
+    const x = (scopeDepth - 1) * 20;
+    const width =
+      d3
+        .select(this)
+        .node()
+        .getBBox().width + 10;
+    labelWidths.push(x + width);
+    return `translate(${x}px, ${y(d.key) + 4}px)`;
+  });
   const graphXStartingPoint = Math.max(...labelWidths);
 
   // Add the circle for the nodes
@@ -56,17 +54,17 @@ d3.json('d3Data.json', function(data) {
     .append('circle')
     .attr('cx', graphXStartingPoint)
     .attr('cy', function(d) {
-      return y(d.text);
+      return y(d.key);
     })
     .attr('r', 8)
-    .style('fill', '#fff');
+    .style('fill', '#999');
 
   // Add links between nodes. Here is the tricky part.
   // In my input data, links are provided between nodes -id-, NOT between node names.
   // So I have to do a link between this id and the name
   const idToNode = {};
-  data.nodes.forEach(function(n) {
-    idToNode[n.key] = n;
+  data.nodes.forEach(function(no) {
+    idToNode[no.key] = no;
   });
   // Cool, now if I do idToNode["2"].name I've got the name of the node with id 2
 
@@ -77,8 +75,8 @@ d3.json('d3Data.json', function(data) {
     .enter()
     .append('path')
     .attr('d', function(d) {
-      const start = y(idToNode[d.source].text); // X position of start node on the X axis
-      const end = y(idToNode[d.target].text); // X position of end node
+      const start = y(idToNode[d.source].key); // X position of start node on the X axis
+      const end = y(idToNode[d.target].key); // X position of end node
       return [
         'M',
         graphXStartingPoint,
@@ -98,5 +96,5 @@ d3.json('d3Data.json', function(data) {
         .join(' ');
     })
     .style('fill', 'none')
-    .attr('stroke', 'black');
+    .attr('class', 'line');
 });

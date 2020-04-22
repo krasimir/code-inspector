@@ -1,6 +1,4 @@
-html{
-  width: 100%;
-}
+html{ width: 100%; }
 body{ 
   width: 100%;
   height: 100%;
@@ -8,5 +6,42 @@ body{
   padding: 0;
   font-family: 'Source Sans Pro', sans-serif;;
   font-size: 75%;
-  background: #999;
+  background: #fff;
+}
+svg {
+  width: 100%;
+  height: 100%;
+}
+.line {
+  stroke: #000;
+  stroke-width: 2px;
+}
+
+.rect-with-text rect {
+  fill: #e8e8e8;
+}
+.rect-with-text text {
+  fill: #000;
+  cursor: default;
+}
+
+.Program rect {
+  fill: #a4a4a4;
+}
+.Program text {
+  fill: #000;
+}
+
+.FunctionDeclaration rect {
+  fill: #2f6299;
+}
+.FunctionDeclaration text {
+  fill: #fff;
+}
+
+.Variable rect {
+  fill: #90eaaf;
+}
+.Variable text {
+  fill: #000;
 }

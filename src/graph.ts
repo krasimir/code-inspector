@@ -27,9 +27,7 @@ export default function(
   }
 
   function process(node: NormalizedNode) {
-    if (node.isScope) {
-      addNodeToGraph(node);
-    }
+    addNodeToGraph(node);
     if (node.children) {
       node.children.forEach(c => {
         process(c);
