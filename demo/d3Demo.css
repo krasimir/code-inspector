@@ -1,4 +1,6 @@
-html{ width: 100%; }
+html{
+  width: 100%;
+}
 body{ 
   width: 100%;
   height: 100%;
@@ -6,55 +8,5 @@ body{
   padding: 0;
   font-family: 'Source Sans Pro', sans-serif;;
   font-size: 75%;
-  background: #090909;
-}
-.links line {
-  stroke: #333;
-}
-.nodes circle {
-  pointer-events: all;
-  stroke: none;
-}
-svg {
-  width: 100%;
-  height: 100%;
-}
-.tooltip text {
-  font-weight: bold;
-}
-.tooltip rect {
-  fill: #d0d0d0;
-}
-.rect-with-text rect {
-  fill: #393939;
-  stroke: #000000;
-  stroke-width: 1px;
-}
-.rect-with-text text {
-  fill: #bcbcbc;
-  cursor: default;
-}
-
-.Program rect {
-  fill: #a80000;
-  stroke: #470000;
-}
-.Program text {
-  fill: #fff;
-}
-
-.FunctionDeclaration rect {
-  fill: #21446c;
-  stroke: #6493ea;
-}
-.FunctionDeclaration text {
-  fill: #fff;
-}
-
-.Variable rect {
-  fill: #104f26;
-  stroke: #0b5e0d;
-}
-.Variable text {
-  fill: #7fcd79;
+  background: #999;
 }

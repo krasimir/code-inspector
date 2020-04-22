@@ -1,165 +1,102 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-// Source: https://bl.ocks.org/mbostock/2675ff61ea5e063ede2b5d63c08020c7
-// Docs: https://github.com/d3/d3-force#links
+// set the dimensions and margins of the graph
+const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+const height = window.innerHeight - margin.top - margin.bottom;
 
-function drawGraph(svgElement, graph) {
-  graph.nodes.reverse();
-  graph.links.reverse();
-  const svg = d3.select(svgElement);
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+// append the svg object to the body of the page
+const svg = d3
+  .select('#diagram')
+  .append('svg')
+  .attr('width', window.innerWidth)
+  .attr('height', window.innerHeight)
+  .append('g')
+  .attr('transform', `translate(${margin.left},${margin.top})`);
 
-  function ticked() {
-    link
-      .attr('x1', function(d) {
-        return d.source.x;
-      })
-      .attr('y1', function(d) {
-        return d.source.y;
-      })
-      .attr('x2', function(d) {
-        return d.target.x;
-      })
-      .attr('y2', function(d) {
-        return d.target.y;
-      });
-
-    node.style('transform', d => `translate(${d.x}px, ${d.y}px)`);
-  }
-  function dragstarted(d) {
-    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-    d.fx = d.x;
-    d.fy = d.y;
-  }
-  function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
-  function dragended(d) {
-    if (!d3.event.active) simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
-  }
-  function createNode() {
-    return Nodes.getGraphic(
-      svg
-        .append('g')
-        .attr('class', 'nodes')
-        .selectAll('circle')
-        .data(graph.nodes)
-        .enter()
-    )
-      .call(
-        d3
-          .drag()
-          .on('start', dragstarted)
-          .on('drag', dragged)
-          .on('end', dragended)
-      )
-      .on('mouseover', data => {
-        tooltip
-          .style('display', 'block')
-          .style(
-            'transform',
-            `translate(${d3.event.pageX + 10}px, ${d3.event.pageY - 30}px)`
-          )
-          .transition()
-          .duration(450)
-          .ease(d3.easeQuadOut)
-          .style('opacity', 1);
-        tooltip.select('text').text(
-          data.scopePath
-            .split('.')
-            .map(s => {
-              const text = s.split('-').shift();
-              if (text === '') return 'root';
-              return text;
-            })
-            .join('.')
-        );
-        tooltip.select('rect').attr(
-          'width',
-          tooltip
-            .select('text')
-            .node()
-            .getBBox().width + 20
-        );
-      })
-      .on('mouseout', () => {
-        tooltip.style('display', 'none');
-        tooltip.style('opacity', 0);
-        tooltip.select('text').text('');
-      })
-      .style('opacity', n => {
-        const step = 1 / 8;
-        const scopeDepth = n.scopePath.split('.').length;
-        return 1 - scopeDepth * step;
-      });
-  }
-  function createLink() {
-    return svg
-      .append('g')
-      .attr('class', 'links')
-      .selectAll('line')
-      .data(graph.links)
-      .enter()
-      .append('line');
-  }
-  function createTooltip() {
-    const t = svg.append('g');
-    t.attr('class', 'tooltip');
-    t.style('display', 'none');
-    t.style('opacity', 0);
-    t.append('rect')
-      .attr('width', 100)
-      .attr('height', 30)
-      .attr('rx', 4);
-    t.append('text')
-      .text('...')
-      .attr('x', 10)
-      .attr('y', 18);
-
-    return t;
-  }
-  function countLinks(n) {
-    return graph.links.reduce((res, { source, target }) => {
-      if (source.key === n.key || target.key === n.key) {
-        return res + 1;
-      }
-      return res;
-    }, 0);
-  }
-
-  const simulation = d3
-    .forceSimulation()
-    .force(
-      'link',
-      d3
-        .forceLink()
-        .id(function(d) {
-          return d.key;
-        })
-        .distance(l => {
-          const d = countLinks(l.target) * 20;
-          return d;
-        })
-        .strength(l => 1 / (countLinks(l.source) + countLinks(l.target)))
-    )
-    .force('charge', d3.forceManyBody().strength(-50))
-    .force('center', d3.forceCenter(width / 2, height / 2));
-
-  const link = createLink();
-  const node = createNode();
-  const tooltip = createTooltip();
-
-  simulation.nodes(graph.nodes).on('tick', ticked);
-
-  simulation.force('link').links(graph.links);
-}
-
-window.addEventListener('load', () => {
-  d3.json('./d3Data.json', function(error, graph) {
-    if (error) throw error;
-    drawGraph(document.querySelector('svg'), graph);
+// Read dummy data
+d3.json('d3Data.json', function(data) {
+  // List of node names
+  const allNodes = data.nodes.map(function(d) {
+    return d.text;
   });
+
+  // A linear scale to position the nodes on the X axis
+  const y = d3
+    .scalePoint()
+    .range([0, height])
+    .domain(allNodes);
+
+  // And give them a label
+  const labelWidths = [];
+  svg
+    .selectAll('mylabels')
+    .data(data.nodes)
+    .enter()
+    .append('text')
+    .attr('x', 0)
+    .attr('y', function(d) {
+      return y(d.text) + 4;
+    })
+    .text(function(d) {
+      return d.text;
+    })
+    .each(function(d) {
+      labelWidths.push(
+        d3
+          .select(this)
+          .node()
+          .getBBox().width + 4
+      );
+    });
+  const graphXStartingPoint = Math.max(...labelWidths);
+
+  // Add the circle for the nodes
+  svg
+    .selectAll('mynodes')
+    .data(data.nodes)
+    .enter()
+    .append('circle')
+    .attr('cx', graphXStartingPoint)
+    .attr('cy', function(d) {
+      return y(d.text);
+    })
+    .attr('r', 8)
+    .style('fill', '#fff');
+
+  // Add links between nodes. Here is the tricky part.
+  // In my input data, links are provided between nodes -id-, NOT between node names.
+  // So I have to do a link between this id and the name
+  const idToNode = {};
+  data.nodes.forEach(function(n) {
+    idToNode[n.key] = n;
+  });
+  // Cool, now if I do idToNode["2"].name I've got the name of the node with id 2
+
+  // Add the links
+  svg
+    .selectAll('mylinks')
+    .data(data.links)
+    .enter()
+    .append('path')
+    .attr('d', function(d) {
+      const start = y(idToNode[d.source].text); // X position of start node on the X axis
+      const end = y(idToNode[d.target].text); // X position of end node
+      return [
+        'M',
+        graphXStartingPoint,
+        start, // the arc starts at the coordinate x=start, y=height-30 (where the starting node is)
+        'A', // This means we're gonna build an elliptical arc
+        ((start - end) / 2) * 4,
+        ',', // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance
+        (start - end) / 1.3,
+        0,
+        0,
+        ',',
+        start < end ? 1 : 0,
+        graphXStartingPoint,
+        ',',
+        end,
+      ] // We always want the arc on top. So if end is before start, putting 0 here turn the arc upside down.
+        .join(' ');
+    })
+    .style('fill', 'none')
+    .attr('stroke', 'black');
 });
