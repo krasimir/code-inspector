@@ -1,25 +1,4 @@
 /* eslint-disable no-fallthrough, no-case-declarations */
-function scopeToRadius(data) {
-  const scopes = data.node.scopePath.split('.');
-  const sizes = [16, 13, 8, 6, 4, 3, 2];
-  const radius = sizes[scopes.length];
-  if (radius) {
-    return radius;
-  }
-  return 3;
-}
-function circle(container, radius) {
-  container.append('circle').attr('r', radius);
-  return container;
-}
-
-function circleWithText(container, text, radius) {
-  container.append('circle').attr('r', radius);
-  const t = container.append('text').text(text);
-  t.attr('x', -t.node().getBBox().width / 2);
-  t.attr('y', 4);
-  return container;
-}
 function reactWithText(container, text, fz = 14) {
   const r = container
     .append('rect')

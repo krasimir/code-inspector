@@ -3,6 +3,19 @@
 // set the dimensions and margins of the graph
 const margin = 40;
 const height = window.innerHeight - margin * 2;
+const colors = {
+  lineColor: '#ddd',
+  lineHighlightColor: '#000',
+};
+
+// utils
+const getIndent = d => {
+  const scopeDepth = d.scopePath.split('.').length;
+  return (scopeDepth - 1) * 20;
+};
+const keyToCSSSelector = key => key.replace(/:/g, '_');
+const linkToCSSSelector = d =>
+  `${keyToCSSSelector(d.source)}--${keyToCSSSelector(d.target)}`;
 
 // append the svg object to the body of the page
 const svg = d3
@@ -33,9 +46,8 @@ d3.json('d3Data.json', function(data) {
     .data(data.nodes)
     .enter();
 
-  Nodes.getGraphic(n).style('transform', function(d) {
-    const scopeDepth = d.scopePath.split('.').length;
-    const x = (scopeDepth - 1) * 20;
+  const nodes = Nodes.getGraphic(n).style('transform', function(d) {
+    const x = getIndent(d);
     const width =
       d3
         .select(this)
@@ -46,18 +58,43 @@ d3.json('d3Data.json', function(data) {
   });
   const graphXStartingPoint = Math.max(...labelWidths);
 
-  // Add the circle for the nodes
-  svg
-    .selectAll('mynodes')
-    .data(data.nodes)
-    .enter()
-    .append('circle')
-    .attr('cx', graphXStartingPoint)
-    .attr('cy', function(d) {
-      return y(d.key);
+  nodes
+    .each(function(d) {
+      const node = d3.select(this);
+      node.style('opacity', 0.7);
+
+      // expanding the rect to the full length
+      const rect = node.select('rect');
+      rect.attr('width', graphXStartingPoint - getIndent(d));
+
+      // mouse events
+      node
+        .on('mouseover', () => {
+          d3.select(this).style('opacity', 1);
+          data.links.forEach(link => {
+            if (link.source === d.key || link.target === d.key) {
+              d3.select(`.${linkToCSSSelector(link)}`).style(
+                'stroke',
+                colors.lineHighlightColor
+              );
+            }
+          });
+        })
+        .on('mouseout', () => {
+          d3.select(this).style('opacity', 0.8);
+          data.links.forEach(link => {
+            d3.select(`.${linkToCSSSelector(link)}`).style(
+              'stroke',
+              colors.lineColor
+            );
+          });
+        });
     })
-    .attr('r', 8)
-    .style('fill', '#999');
+    .sort((a, b) => {
+      console.log(a.path.split('.').length, b.path.split('.').length);
+      if (a.path.split('.').length < b.path.split('.').length) return 1;
+      return -1;
+    });
 
   // Add links between nodes. Here is the tricky part.
   // In my input data, links are provided between nodes -id-, NOT between node names.
@@ -84,7 +121,7 @@ d3.json('d3Data.json', function(data) {
         'A', // This means we're gonna build an elliptical arc
         ((start - end) / 2) * 4,
         ',', // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance
-        (start - end) / 1.3,
+        (start - end) / 0.9,
         0,
         0,
         ',',
@@ -96,5 +133,6 @@ d3.json('d3Data.json', function(data) {
         .join(' ');
     })
     .style('fill', 'none')
-    .attr('class', 'line');
+    .style('stroke', colors.lineColor)
+    .attr('class', d => `line ${linkToCSSSelector(d)}`);
 });
