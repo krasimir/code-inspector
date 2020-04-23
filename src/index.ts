@@ -85,23 +85,27 @@ function addVariable(node: NormalizedNode, variableNodeKey: string) {
     node.variables.push(variableNodeKey);
   }
 }
-function setChildren(nodes: NormalizedNode[]) {
-  const getNodeByKey = accessNode(nodes);
+function setChildren(nodes: NormalizedNode[], getNodeByKey: Function) {
   nodes.forEach(node => addChild(getNodeByKey(node.parent), node));
 }
-function setVariables(nodes: NormalizedNode[]) {
-  const getNodeByKey = accessNode(nodes);
-
+function setVariables(nodes: NormalizedNode[], getNodeByKey: Function) {
   nodes.forEach(node => {
     const fullPathTypes = pathToTypes(node.path);
     const scopePathTypes = node.scopePath.split('.');
     const parentType = fullPathTypes[fullPathTypes.length - 1];
+    const grandParentType = fullPathTypes[fullPathTypes.length - 2];
     const scopeNodeKey = scopePathTypes[scopePathTypes.length - 1];
 
     if (node.type === 'Identifier') {
-      if (parentType === 'VariableDeclarator') {
-        node.isVariable = true;
-        addVariable(getNodeByKey(scopeNodeKey), node.key);
+      if (
+        parentType === 'VariableDeclarator' &&
+        grandParentType === 'VariableDeclaration'
+      ) {
+        const declaration = node.path.split('.').reverse()[1];
+        if (declaration) {
+          getNodeByKey(declaration).isVariable = true;
+          addVariable(getNodeByKey(scopeNodeKey), declaration);
+        }
       }
     }
     if (node.type === 'FunctionDeclaration') {
@@ -111,7 +115,7 @@ function setVariables(nodes: NormalizedNode[]) {
         );
         if (functionItself) {
           functionItself.isVariable = true;
-          addVariable(getNodeByKey(scopeNodeKey), functionItself.key);
+          addVariable(getNodeByKey(scopeNodeKey), node.key);
         }
       }
     }
@@ -156,8 +160,10 @@ export function analyze(code: string) {
     },
   });
 
-  setChildren(nodes);
-  setVariables(nodes);
+  const getNodeByKey = accessNode(nodes);
+
+  setChildren(nodes, getNodeByKey);
+  setVariables(nodes, getNodeByKey);
 
   return {
     ast,

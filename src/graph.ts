@@ -52,18 +52,15 @@ export default function(
     FunctionDeclaration(node: NormalizedNode) {
       addNodeToGraph(node);
     },
-    VariableDeclaration(node: NormalizedNode) {
-      addNodeToGraph(get(node, 'children.0.children.0'));
-    },
     Identifier(node: NormalizedNode) {
-      const scopes = node.scopePath.split('.').reverse();
-      for (const scopeKey of scopes) {
+      const scopes = node.scopePath.split('.');
+      for (const scopeKey of scopes.reverse()) {
         const scopeNode: NormalizedNode = getNodeByKey(scopeKey);
         if (scopeNode && scopeNode.variables) {
           for (const variableKey of scopeNode.variables) {
             const variable: NormalizedNode = getNodeByKey(variableKey);
             if (variable && variable.text === node.text) {
-              addNodeLink(variable.key, node.key);
+              addNodeLink(variable.key, scopes[0]);
             }
           }
         }

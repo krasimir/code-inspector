@@ -97,7 +97,7 @@ describe('Given the code-inspector library', () => {
         'i',
       ]);
       expect(nodesAndTheirVariables).toStrictEqual([
-        'Program A,b,c,d,foobar',
+        'Program A,b,c,d,foobar(valueA, valueB)',
         'FunctionDeclaration valueA,valueB,e,f,i',
       ]);
     });
@@ -111,13 +111,13 @@ describe('Given the code-inspector library', () => {
         'Program - Program',
         'FunctionDeclaration - foobar()',
         'Identifier - foobar',
-        'Identifier - ANSWER',
+        'VariableDeclaration - ANSWER',
         'FunctionDeclaration - barfoo()',
         'Identifier - barfoo',
-        'Identifier - AAA',
+        'VariableDeclaration - AAA',
         'ClassDeclaration - MyClass',
         'ClassMethod - MyClass.greeting()',
-        'Identifier - text',
+        'VariableDeclaration - text',
       ]);
     });
 

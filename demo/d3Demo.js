@@ -91,7 +91,6 @@ d3.json('d3Data.json', function(data) {
         });
     })
     .sort((a, b) => {
-      console.log(a.path.split('.').length, b.path.split('.').length);
       if (a.path.split('.').length < b.path.split('.').length) return 1;
       return -1;
     });
@@ -124,7 +123,7 @@ d3.json('d3Data.json', function(data) {
         'A', // This means we're gonna build an elliptical arc
         ((start - end) / 2) * 4,
         ',', // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance
-        (start - end) / 0.9,
+        (start - end) / (0.9 + (Math.random() * (0.5 - 0.1) + 0.1)),
         0,
         0,
         ',',
