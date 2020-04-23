@@ -25,10 +25,10 @@ svg {
 }
 
 .Program rect {
-  fill: #a4a4a4;
+  fill: #0e0909;
 }
 .Program text {
-  fill: #000;
+  fill: #fff;
 }
 
 .FunctionDeclaration rect {

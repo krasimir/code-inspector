@@ -112,6 +112,9 @@ d3.json('d3Data.json', function(data) {
     .enter()
     .append('path')
     .attr('d', function(d) {
+      if (!idToNode[d.source]) {
+        throw new Error(`There is no ${d.source} node in the data.`);
+      }
       const start = y(idToNode[d.source].key); // X position of start node on the X axis
       const end = y(idToNode[d.target].key); // X position of end node
       return [
