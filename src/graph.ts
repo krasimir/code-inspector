@@ -8,6 +8,7 @@ import { NODES_FUNCTION_SCOPES, NODES_DEFINING_SCOPES } from './constants';
 interface GraphLink {
   source: string;
   target: string;
+  type?: string;
 }
 
 export default function(
@@ -26,13 +27,17 @@ export default function(
       }
     });
   }
-  function addLink(s: string, t: string) {
+  function addLink(s: string, t: string, type?: string) {
     const linkExist = linksData.find(
       ({ source, target }) =>
         (source === s && target === t) || (source === t && target === s)
     );
     if (!linkExist) {
-      linksData.push({ source: s, target: t });
+      const link = { source: s, target: t };
+      if (type) {
+        link.type = type;
+      }
+      linksData.push(link);
       verifyLinking(s, t);
     }
   }
@@ -59,7 +64,6 @@ export default function(
       addNodeToGraph(node);
     },
     Identifier(node: NormalizedNode) {
-      // console.log(`----> ${node.key} ${node.text}`);
       const scopes = node.scopePath.split('.').reverse();
       for (const scopeKey of scopes) {
         const scopeNode: NormalizedNode = getNodeByKey(scopeKey);
@@ -67,10 +71,7 @@ export default function(
           for (const varKey of scopeNode.variables) {
             const varNode: NormalizedNode = getNodeByKey(varKey);
             if (varNode.variableIdentifier === node.text) {
-              // console.log(
-              //   `      ${scopeKey}/${varNode.key} ${varNode.variableIdentifier}`
-              // );
-              addLink(varNode.key, scopeKey);
+              addLink(varNode.key, scopes[0]);
               return;
             }
           }

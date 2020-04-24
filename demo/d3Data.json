@@ -3524,6 +3524,10 @@
       "target": "FunctionDeclaration-2:1-4:2"
     },
     {
+      "source": "FunctionDeclaration-2:1-4:2",
+      "target": "FunctionDeclaration-2:1-4:2"
+    },
+    {
       "source": "Identifier-2:15-2:20",
       "target": "FunctionDeclaration-2:1-4:2"
     },
@@ -3536,7 +3540,15 @@
       "target": "FunctionDeclaration-2:1-4:2"
     },
     {
+      "source": "VariableDeclaration-1:1-1:19",
+      "target": "FunctionDeclaration-2:1-4:2"
+    },
+    {
       "source": "Program-1:1-21:1",
+      "target": "FunctionDeclaration-6:1-14:2"
+    },
+    {
+      "source": "FunctionDeclaration-6:1-14:2",
       "target": "FunctionDeclaration-6:1-14:2"
     },
     {
@@ -3560,7 +3572,19 @@
       "target": "FunctionDeclaration-9:3-11:4"
     },
     {
+      "source": "FunctionDeclaration-9:3-11:4",
+      "target": "FunctionDeclaration-9:3-11:4"
+    },
+    {
       "source": "Identifier-9:20-9:21",
+      "target": "FunctionDeclaration-9:3-11:4"
+    },
+    {
+      "source": "VariableDeclaration-7:3-7:22",
+      "target": "FunctionDeclaration-9:3-11:4"
+    },
+    {
+      "source": "FunctionDeclaration-2:1-4:2",
       "target": "FunctionDeclaration-9:3-11:4"
     },
     {
