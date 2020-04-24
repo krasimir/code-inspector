@@ -26,9 +26,15 @@ export default function(
       }
     });
   }
-  function addNodeLink(source: string, target: string) {
-    linksData.push({ source, target });
-    verifyLinking(source, target);
+  function addLink(s: string, t: string) {
+    const linkExist = linksData.find(
+      ({ source, target }) =>
+        (source === s && target === t) || (source === t && target === s)
+    );
+    if (!linkExist) {
+      linksData.push({ source: s, target: t });
+      verifyLinking(s, t);
+    }
   }
   function addNodeToGraph(node: NormalizedNode) {
     const parentScope = node.scopePath.split('.').pop();
@@ -41,7 +47,7 @@ export default function(
         (source === node.key && target === parentScope)
     );
     if (parentScope !== '' && !linkExist) {
-      addNodeLink(parentScope, node.key);
+      addLink(parentScope, node.key);
     }
   }
 
@@ -53,15 +59,12 @@ export default function(
       addNodeToGraph(node);
     },
     Identifier(node: NormalizedNode) {
-      const scopes = node.scopePath.split('.');
-      for (const scopeKey of scopes.reverse()) {
+      const scopes = node.scopePath.split('.').reverse();
+      for (const scopeKey of scopes) {
         const scopeNode: NormalizedNode = getNodeByKey(scopeKey);
-        if (scopeNode && scopeNode.variables) {
-          for (const variableKey of scopeNode.variables) {
-            const variable: NormalizedNode = getNodeByKey(variableKey);
-            if (variable && variable.text === node.text) {
-              addNodeLink(variable.key, scopes[0]);
-            }
+        if (scopeNode.variables && scopeNode.variables.length > 0) {
+          for (const varKey of scopeNode.variables) {
+            const varNode: NormalizedNode = getNodeByKey(varKey);
           }
         }
       }

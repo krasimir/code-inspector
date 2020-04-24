@@ -11,7 +11,7 @@ export interface NormalizedNode {
   path?: string;
   scopePath?: string;
   isScope?: boolean;
-  isVariable?: boolean;
+  variableIdentifier?: string;
   children?: NormalizedNode[];
   variables?: string[];
 }

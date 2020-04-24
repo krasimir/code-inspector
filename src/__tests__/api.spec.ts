@@ -89,7 +89,7 @@ describe('Given the code-inspector library', () => {
         'b',
         'c',
         'd',
-        'foobar',
+        'foobar(valueA, valueB)',
         'valueA',
         'valueB',
         'e',
@@ -110,10 +110,8 @@ describe('Given the code-inspector library', () => {
       expect(expectation).toStrictEqual([
         'Program - Program',
         'FunctionDeclaration - foobar()',
-        'Identifier - foobar',
         'VariableDeclaration - ANSWER',
         'FunctionDeclaration - barfoo()',
-        'Identifier - barfoo',
         'VariableDeclaration - AAA',
         'ClassDeclaration - MyClass',
         'ClassMethod - MyClass.greeting()',
@@ -126,9 +124,9 @@ describe('Given the code-inspector library', () => {
       const expectation = nodes.filter(isVariable).map(node => node.text);
       // console.log(JSON.stringify(expectation, null, 2));
       expect(expectation).toStrictEqual([
-        'foobar',
+        'foobar()',
         'ANSWER',
-        'barfoo',
+        'barfoo()',
         'AAA',
         'text',
       ]);
@@ -137,7 +135,7 @@ describe('Given the code-inspector library', () => {
     it('should export properly only variables', () => {
       const { variables } = analyze(code11);
       const expectation = variables.map(node => node.text);
-      expect(expectation).toStrictEqual(['createGraphItem', 'label']);
+      expect(expectation).toStrictEqual(['createGraphItem()', 'label']);
     });
 
     it('should set a proper path and scopePath', () => {

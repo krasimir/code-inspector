@@ -13,7 +13,6 @@
   "scopePath": "",
   "path": "",
   "isScope": true,
-  "isVariable": false,
   "children": [
     {
       "type": "VariableDeclaration",
@@ -31,7 +30,6 @@
       "scopePath": "Program-1:1-21:1",
       "path": "Program-1:1-21:1",
       "isScope": false,
-      "isVariable": true,
       "children": [
         {
           "type": "VariableDeclarator",
@@ -50,7 +48,6 @@
           "scopePath": "Program-1:1-21:1",
           "path": "Program-1:1-21:1.VariableDeclaration-1:1-1:19",
           "isScope": false,
-          "isVariable": false,
           "children": [
             {
               "type": "Identifier",
@@ -68,8 +65,7 @@
               "parent": "VariableDeclarator-1:7-1:18",
               "scopePath": "Program-1:1-21:1",
               "path": "Program-1:1-21:1.VariableDeclaration-1:1-1:19.VariableDeclarator-1:7-1:18",
-              "isScope": false,
-              "isVariable": false
+              "isScope": false
             },
             {
               "type": "NumericLiteral",
@@ -86,12 +82,12 @@
               "parent": "VariableDeclarator-1:7-1:18",
               "scopePath": "Program-1:1-21:1",
               "path": "Program-1:1-21:1.VariableDeclaration-1:1-1:19.VariableDeclarator-1:7-1:18",
-              "isScope": false,
-              "isVariable": false
+              "isScope": false
             }
           ]
         }
-      ]
+      ],
+      "variableIdentifier": "ANSWER"
     },
     {
       "type": "FunctionDeclaration",
@@ -117,7 +113,6 @@
       "scopePath": "Program-1:1-21:1",
       "path": "Program-1:1-21:1",
       "isScope": true,
-      "isVariable": false,
       "children": [
         {
           "type": "Identifier",
@@ -135,8 +130,7 @@
           "parent": "FunctionDeclaration-2:1-4:2",
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
-          "isScope": false,
-          "isVariable": true
+          "isScope": false
         },
         {
           "type": "Identifier",
@@ -155,7 +149,7 @@
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "isScope": false,
-          "isVariable": true
+          "variableIdentifier": "test"
         },
         {
           "type": "Identifier",
@@ -174,7 +168,7 @@
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "isScope": false,
-          "isVariable": true
+          "variableIdentifier": "test"
         },
         {
           "type": "Identifier",
@@ -193,7 +187,7 @@
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "isScope": false,
-          "isVariable": true
+          "variableIdentifier": "test"
         },
         {
           "type": "BlockStatement",
@@ -211,7 +205,6 @@
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "isScope": false,
-          "isVariable": false,
           "children": [
             {
               "type": "ReturnStatement",
@@ -229,7 +222,6 @@
               "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
               "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2.BlockStatement-2:42-4:2",
               "isScope": false,
-              "isVariable": false,
               "children": [
                 {
                   "type": "ConditionalExpression",
@@ -247,7 +239,6 @@
                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
                   "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2.BlockStatement-2:42-4:2.ReturnStatement-3:3-3:32",
                   "isScope": false,
-                  "isVariable": false,
                   "children": [
                     {
                       "type": "Identifier",
@@ -265,8 +256,7 @@
                       "parent": "ConditionalExpression-3:10-3:31",
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2.BlockStatement-2:42-4:2.ReturnStatement-3:3-3:32.ConditionalExpression-3:10-3:31",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     },
                     {
                       "type": "Identifier",
@@ -284,8 +274,7 @@
                       "parent": "ConditionalExpression-3:10-3:31",
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2.BlockStatement-2:42-4:2.ReturnStatement-3:3-3:32.ConditionalExpression-3:10-3:31",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     },
                     {
                       "type": "NullLiteral",
@@ -302,8 +291,7 @@
                       "parent": "ConditionalExpression-3:10-3:31",
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2.BlockStatement-2:42-4:2.ReturnStatement-3:3-3:32.ConditionalExpression-3:10-3:31",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     }
                   ]
                 }
@@ -312,6 +300,7 @@
           ]
         }
       ],
+      "variableIdentifier": "test",
       "variables": [
         "Identifier-2:15-2:20",
         "Identifier-2:22-2:32",
@@ -338,7 +327,6 @@
       "scopePath": "Program-1:1-21:1",
       "path": "Program-1:1-21:1",
       "isScope": true,
-      "isVariable": false,
       "children": [
         {
           "type": "Identifier",
@@ -356,8 +344,7 @@
           "parent": "FunctionDeclaration-6:1-14:2",
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
-          "isScope": false,
-          "isVariable": true
+          "isScope": false
         },
         {
           "type": "BlockStatement",
@@ -375,7 +362,6 @@
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
           "isScope": false,
-          "isVariable": false,
           "children": [
             {
               "type": "VariableDeclaration",
@@ -393,7 +379,6 @@
               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2",
               "isScope": false,
-              "isVariable": true,
               "children": [
                 {
                   "type": "VariableDeclarator",
@@ -412,7 +397,6 @@
                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-7:3-7:22",
                   "isScope": false,
-                  "isVariable": false,
                   "children": [
                     {
                       "type": "Identifier",
@@ -430,8 +414,7 @@
                       "parent": "VariableDeclarator-7:9-7:21",
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-7:3-7:22.VariableDeclarator-7:9-7:21",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     },
                     {
                       "type": "NumericLiteral",
@@ -448,12 +431,12 @@
                       "parent": "VariableDeclarator-7:9-7:21",
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-7:3-7:22.VariableDeclarator-7:9-7:21",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     }
                   ]
                 }
-              ]
+              ],
+              "variableIdentifier": "ANSWER"
             },
             {
               "type": "VariableDeclaration",
@@ -471,7 +454,6 @@
               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2",
               "isScope": false,
-              "isVariable": true,
               "children": [
                 {
                   "type": "VariableDeclarator",
@@ -490,7 +472,6 @@
                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-8:3-8:27",
                   "isScope": false,
-                  "isVariable": false,
                   "children": [
                     {
                       "type": "Identifier",
@@ -508,8 +489,7 @@
                       "parent": "VariableDeclarator-8:9-8:26",
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-8:3-8:27.VariableDeclarator-8:9-8:26",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     },
                     {
                       "type": "ArrowFunctionExpression",
@@ -533,7 +513,6 @@
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-8:3-8:27.VariableDeclarator-8:9-8:26",
                       "isScope": true,
-                      "isVariable": false,
                       "children": [
                         {
                           "type": "Identifier",
@@ -552,7 +531,7 @@
                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.ArrowFunctionExpression-8:16-8:26",
                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-8:3-8:27.VariableDeclarator-8:9-8:26.ArrowFunctionExpression-8:16-8:26",
                           "isScope": false,
-                          "isVariable": true
+                          "variableIdentifier": "ƒ"
                         },
                         {
                           "type": "BinaryExpression",
@@ -572,7 +551,6 @@
                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.ArrowFunctionExpression-8:16-8:26",
                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-8:3-8:27.VariableDeclarator-8:9-8:26.ArrowFunctionExpression-8:16-8:26",
                           "isScope": false,
-                          "isVariable": false,
                           "children": [
                             {
                               "type": "Identifier",
@@ -590,8 +568,7 @@
                               "parent": "BinaryExpression-8:21-8:26",
                               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.ArrowFunctionExpression-8:16-8:26",
                               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-8:3-8:27.VariableDeclarator-8:9-8:26.ArrowFunctionExpression-8:16-8:26.BinaryExpression-8:21-8:26",
-                              "isScope": false,
-                              "isVariable": false
+                              "isScope": false
                             },
                             {
                               "type": "NumericLiteral",
@@ -608,8 +585,7 @@
                               "parent": "BinaryExpression-8:21-8:26",
                               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.ArrowFunctionExpression-8:16-8:26",
                               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-8:3-8:27.VariableDeclarator-8:9-8:26.ArrowFunctionExpression-8:16-8:26.BinaryExpression-8:21-8:26",
-                              "isScope": false,
-                              "isVariable": false
+                              "isScope": false
                             }
                           ]
                         }
@@ -620,7 +596,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "variableIdentifier": "mult"
             },
             {
               "type": "FunctionDeclaration",
@@ -644,7 +621,6 @@
               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2",
               "isScope": true,
-              "isVariable": false,
               "children": [
                 {
                   "type": "Identifier",
@@ -662,8 +638,7 @@
                   "parent": "FunctionDeclaration-9:3-11:4",
                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4",
-                  "isScope": false,
-                  "isVariable": true
+                  "isScope": false
                 },
                 {
                   "type": "Identifier",
@@ -682,7 +657,7 @@
                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4",
                   "isScope": false,
-                  "isVariable": true
+                  "variableIdentifier": "sqrtAnd"
                 },
                 {
                   "type": "BlockStatement",
@@ -700,7 +675,6 @@
                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4",
                   "isScope": false,
-                  "isVariable": false,
                   "children": [
                     {
                       "type": "ReturnStatement",
@@ -718,7 +692,6 @@
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4",
                       "isScope": false,
-                      "isVariable": false,
                       "children": [
                         {
                           "type": "BinaryExpression",
@@ -738,7 +711,6 @@
                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47",
                           "isScope": false,
-                          "isVariable": false,
                           "children": [
                             {
                               "type": "BinaryExpression",
@@ -758,7 +730,6 @@
                               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46",
                               "isScope": false,
-                              "isVariable": false,
                               "children": [
                                 {
                                   "type": "CallExpression",
@@ -776,7 +747,6 @@
                                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46.BinaryExpression-10:12-10:33",
                                   "isScope": false,
-                                  "isVariable": false,
                                   "children": [
                                     {
                                       "type": "MemberExpression",
@@ -794,7 +764,6 @@
                                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46.BinaryExpression-10:12-10:33.CallExpression-10:12-10:24",
                                       "isScope": false,
-                                      "isVariable": false,
                                       "children": [
                                         {
                                           "type": "Identifier",
@@ -812,8 +781,7 @@
                                           "parent": "MemberExpression-10:12-10:21",
                                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46.BinaryExpression-10:12-10:33.CallExpression-10:12-10:24.MemberExpression-10:12-10:21",
-                                          "isScope": false,
-                                          "isVariable": false
+                                          "isScope": false
                                         },
                                         {
                                           "type": "Identifier",
@@ -831,8 +799,7 @@
                                           "parent": "MemberExpression-10:12-10:21",
                                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46.BinaryExpression-10:12-10:33.CallExpression-10:12-10:24.MemberExpression-10:12-10:21",
-                                          "isScope": false,
-                                          "isVariable": false
+                                          "isScope": false
                                         }
                                       ]
                                     },
@@ -852,8 +819,7 @@
                                       "parent": "CallExpression-10:12-10:24",
                                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46.BinaryExpression-10:12-10:33.CallExpression-10:12-10:24",
-                                      "isScope": false,
-                                      "isVariable": false
+                                      "isScope": false
                                     }
                                   ]
                                 },
@@ -873,8 +839,7 @@
                                   "parent": "BinaryExpression-10:12-10:33",
                                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46.BinaryExpression-10:12-10:33",
-                                  "isScope": false,
-                                  "isVariable": false
+                                  "isScope": false
                                 }
                               ]
                             },
@@ -894,7 +859,6 @@
                               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46",
                               "isScope": false,
-                              "isVariable": false,
                               "children": [
                                 {
                                   "type": "Identifier",
@@ -912,8 +876,7 @@
                                   "parent": "CallExpression-10:36-10:46",
                                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46.CallExpression-10:36-10:46",
-                                  "isScope": false,
-                                  "isVariable": false
+                                  "isScope": false
                                 },
                                 {
                                   "type": "BooleanLiteral",
@@ -930,8 +893,7 @@
                                   "parent": "CallExpression-10:36-10:46",
                                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4.BlockStatement-9:23-11:4.ReturnStatement-10:5-10:47.BinaryExpression-10:12-10:46.CallExpression-10:36-10:46",
-                                  "isScope": false,
-                                  "isVariable": false
+                                  "isScope": false
                                 }
                               ]
                             }
@@ -942,6 +904,7 @@
                   ]
                 }
               ],
+              "variableIdentifier": "sqrtAnd",
               "variables": [
                 "Identifier-9:20-9:21"
               ]
@@ -962,7 +925,6 @@
               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2",
               "isScope": false,
-              "isVariable": true,
               "children": [
                 {
                   "type": "VariableDeclarator",
@@ -981,7 +943,6 @@
                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-12:3-12:30",
                   "isScope": false,
-                  "isVariable": false,
                   "children": [
                     {
                       "type": "Identifier",
@@ -999,8 +960,7 @@
                       "parent": "VariableDeclarator-12:9-12:29",
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-12:3-12:30.VariableDeclarator-12:9-12:29",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     },
                     {
                       "type": "BinaryExpression",
@@ -1020,7 +980,6 @@
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-12:3-12:30.VariableDeclarator-12:9-12:29",
                       "isScope": false,
-                      "isVariable": false,
                       "children": [
                         {
                           "type": "Identifier",
@@ -1038,8 +997,7 @@
                           "parent": "BinaryExpression-12:13-12:29",
                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-12:3-12:30.VariableDeclarator-12:9-12:29.BinaryExpression-12:13-12:29",
-                          "isScope": false,
-                          "isVariable": false
+                          "isScope": false
                         },
                         {
                           "type": "CallExpression",
@@ -1057,7 +1015,6 @@
                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-12:3-12:30.VariableDeclarator-12:9-12:29.BinaryExpression-12:13-12:29",
                           "isScope": false,
-                          "isVariable": false,
                           "children": [
                             {
                               "type": "Identifier",
@@ -1075,8 +1032,7 @@
                               "parent": "CallExpression-12:22-12:29",
                               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-12:3-12:30.VariableDeclarator-12:9-12:29.BinaryExpression-12:13-12:29.CallExpression-12:22-12:29",
-                              "isScope": false,
-                              "isVariable": false
+                              "isScope": false
                             },
                             {
                               "type": "NumericLiteral",
@@ -1093,8 +1049,7 @@
                               "parent": "CallExpression-12:22-12:29",
                               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-12:3-12:30.VariableDeclarator-12:9-12:29.BinaryExpression-12:13-12:29.CallExpression-12:22-12:29",
-                              "isScope": false,
-                              "isVariable": false
+                              "isScope": false
                             }
                           ]
                         }
@@ -1102,7 +1057,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "variableIdentifier": "x"
             },
             {
               "type": "ExpressionStatement",
@@ -1120,7 +1076,6 @@
               "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
               "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2",
               "isScope": false,
-              "isVariable": false,
               "children": [
                 {
                   "type": "CallExpression",
@@ -1138,7 +1093,6 @@
                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.ExpressionStatement-13:3-13:23",
                   "isScope": false,
-                  "isVariable": false,
                   "children": [
                     {
                       "type": "MemberExpression",
@@ -1156,7 +1110,6 @@
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.ExpressionStatement-13:3-13:23.CallExpression-13:3-13:22",
                       "isScope": false,
-                      "isVariable": false,
                       "children": [
                         {
                           "type": "Identifier",
@@ -1174,8 +1127,7 @@
                           "parent": "MemberExpression-13:3-13:14",
                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.ExpressionStatement-13:3-13:23.CallExpression-13:3-13:22.MemberExpression-13:3-13:14",
-                          "isScope": false,
-                          "isVariable": false
+                          "isScope": false
                         },
                         {
                           "type": "Identifier",
@@ -1193,8 +1145,7 @@
                           "parent": "MemberExpression-13:3-13:14",
                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.ExpressionStatement-13:3-13:23.CallExpression-13:3-13:22.MemberExpression-13:3-13:14",
-                          "isScope": false,
-                          "isVariable": false
+                          "isScope": false
                         }
                       ]
                     },
@@ -1214,8 +1165,7 @@
                       "parent": "CallExpression-13:3-13:22",
                       "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2",
                       "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.ExpressionStatement-13:3-13:23.CallExpression-13:3-13:22",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     }
                   ]
                 }
@@ -1224,6 +1174,7 @@
           ]
         }
       ],
+      "variableIdentifier": "foobar",
       "variables": [
         "VariableDeclaration-7:3-7:22",
         "VariableDeclaration-8:3-8:27",
@@ -1247,7 +1198,6 @@
       "scopePath": "Program-1:1-21:1",
       "path": "Program-1:1-21:1",
       "isScope": false,
-      "isVariable": false,
       "children": [
         {
           "type": "BinaryExpression",
@@ -1267,7 +1217,6 @@
           "scopePath": "Program-1:1-21:1",
           "path": "Program-1:1-21:1.IfStatement-16:1-20:2",
           "isScope": false,
-          "isVariable": false,
           "children": [
             {
               "type": "Identifier",
@@ -1285,8 +1234,7 @@
               "parent": "BinaryExpression-16:5-16:18",
               "scopePath": "Program-1:1-21:1",
               "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BinaryExpression-16:5-16:18",
-              "isScope": false,
-              "isVariable": false
+              "isScope": false
             },
             {
               "type": "NumericLiteral",
@@ -1303,8 +1251,7 @@
               "parent": "BinaryExpression-16:5-16:18",
               "scopePath": "Program-1:1-21:1",
               "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BinaryExpression-16:5-16:18",
-              "isScope": false,
-              "isVariable": false
+              "isScope": false
             }
           ]
         },
@@ -1324,7 +1271,6 @@
           "scopePath": "Program-1:1-21:1",
           "path": "Program-1:1-21:1.IfStatement-16:1-20:2",
           "isScope": false,
-          "isVariable": false,
           "children": [
             {
               "type": "ExpressionStatement",
@@ -1342,7 +1288,6 @@
               "scopePath": "Program-1:1-21:1",
               "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BlockStatement-16:20-18:2",
               "isScope": false,
-              "isVariable": false,
               "children": [
                 {
                   "type": "CallExpression",
@@ -1360,7 +1305,6 @@
                   "scopePath": "Program-1:1-21:1",
                   "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BlockStatement-16:20-18:2.ExpressionStatement-17:3-17:14",
                   "isScope": false,
-                  "isVariable": false,
                   "children": [
                     {
                       "type": "Identifier",
@@ -1378,8 +1322,7 @@
                       "parent": "CallExpression-17:3-17:13",
                       "scopePath": "Program-1:1-21:1",
                       "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BlockStatement-16:20-18:2.ExpressionStatement-17:3-17:14.CallExpression-17:3-17:13",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     },
                     {
                       "type": "StringLiteral",
@@ -1396,8 +1339,7 @@
                       "parent": "CallExpression-17:3-17:13",
                       "scopePath": "Program-1:1-21:1",
                       "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BlockStatement-16:20-18:2.ExpressionStatement-17:3-17:14.CallExpression-17:3-17:13",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     }
                   ]
                 }
@@ -1421,7 +1363,6 @@
           "scopePath": "Program-1:1-21:1",
           "path": "Program-1:1-21:1.IfStatement-16:1-20:2",
           "isScope": false,
-          "isVariable": false,
           "children": [
             {
               "type": "ExpressionStatement",
@@ -1439,7 +1380,6 @@
               "scopePath": "Program-1:1-21:1",
               "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BlockStatement-18:8-20:2",
               "isScope": false,
-              "isVariable": false,
               "children": [
                 {
                   "type": "CallExpression",
@@ -1457,7 +1397,6 @@
                   "scopePath": "Program-1:1-21:1",
                   "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BlockStatement-18:8-20:2.ExpressionStatement-19:3-19:15",
                   "isScope": false,
-                  "isVariable": false,
                   "children": [
                     {
                       "type": "Identifier",
@@ -1475,8 +1414,7 @@
                       "parent": "CallExpression-19:3-19:14",
                       "scopePath": "Program-1:1-21:1",
                       "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BlockStatement-18:8-20:2.ExpressionStatement-19:3-19:15.CallExpression-19:3-19:14",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     },
                     {
                       "type": "StringLiteral",
@@ -1493,8 +1431,7 @@
                       "parent": "CallExpression-19:3-19:14",
                       "scopePath": "Program-1:1-21:1",
                       "path": "Program-1:1-21:1.IfStatement-16:1-20:2.BlockStatement-18:8-20:2.ExpressionStatement-19:3-19:15.CallExpression-19:3-19:14",
-                      "isScope": false,
-                      "isVariable": false
+                      "isScope": false
                     }
                   ]
                 }

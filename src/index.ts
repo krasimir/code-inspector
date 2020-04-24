@@ -69,7 +69,6 @@ function toNormalizeNode(
   node.scopePath = scopePath;
   node.path = getNodePath(n);
   node.isScope = !!NODES_DEFINING_SCOPES[node.type];
-  node.isVariable = false;
 
   return node;
 }
@@ -103,7 +102,7 @@ function setVariables(nodes: NormalizedNode[], getNodeByKey: Function) {
       ) {
         const declaration = node.path.split('.').reverse()[1];
         if (declaration) {
-          getNodeByKey(declaration).isVariable = true;
+          getNodeByKey(declaration).variableIdentifier = node.text;
           addVariable(getNodeByKey(scopeNodeKey), declaration);
         }
       }
@@ -114,15 +113,15 @@ function setVariables(nodes: NormalizedNode[], getNodeByKey: Function) {
           n => n.type === 'Identifier' && n.text === node.meta.funcName
         );
         if (functionItself) {
-          functionItself.isVariable = true;
-          addVariable(getNodeByKey(scopeNodeKey), node.key);
+          node.variableIdentifier = functionItself.text.toString();
         }
+        addVariable(getNodeByKey(scopeNodeKey), node.key);
       }
     }
     if (NODES_FUNCTION_SCOPES[node.type]) {
       if (node.meta && node.meta.params) {
         node.meta.params.forEach((key: string) => {
-          getNodeByKey(key).isVariable = true;
+          getNodeByKey(key).variableIdentifier = node.meta.funcName;
           addVariable(node, key);
         });
       }
@@ -170,11 +169,11 @@ export function analyze(code: string) {
     tree: nodes.find(n => n.type === 'Program'),
     nodes,
     scopes,
-    variables: nodes.filter(n => n.isVariable),
+    variables: nodes.filter(n => !!n.variableIdentifier),
   };
 }
 export function isVariable(node: NormalizedNode): boolean {
-  return node.isVariable;
+  return !!node.variableIdentifier;
 }
 export const toGraph = graph;
 export const sort = SortByLocation;
