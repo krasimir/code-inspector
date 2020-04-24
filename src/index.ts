@@ -121,7 +121,7 @@ function setVariables(nodes: NormalizedNode[], getNodeByKey: Function) {
     if (NODES_FUNCTION_SCOPES[node.type]) {
       if (node.meta && node.meta.params) {
         node.meta.params.forEach((key: string) => {
-          getNodeByKey(key).variableIdentifier = node.meta.funcName;
+          getNodeByKey(key).variableIdentifier = getNodeByKey(key).text;
           addVariable(node, key);
         });
       }

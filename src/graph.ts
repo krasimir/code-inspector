@@ -59,12 +59,20 @@ export default function(
       addNodeToGraph(node);
     },
     Identifier(node: NormalizedNode) {
+      // console.log(`----> ${node.key} ${node.text}`);
       const scopes = node.scopePath.split('.').reverse();
       for (const scopeKey of scopes) {
         const scopeNode: NormalizedNode = getNodeByKey(scopeKey);
         if (scopeNode.variables && scopeNode.variables.length > 0) {
           for (const varKey of scopeNode.variables) {
             const varNode: NormalizedNode = getNodeByKey(varKey);
+            if (varNode.variableIdentifier === node.text) {
+              // console.log(
+              //   `      ${scopeKey}/${varNode.key} ${varNode.variableIdentifier}`
+              // );
+              addLink(varNode.key, scopeKey);
+              return;
+            }
           }
         }
       }

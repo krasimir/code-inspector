@@ -184,7 +184,7 @@ describe('Given the code-inspector library', () => {
     it('should return a tree', () => {
       const { tree } = analyze(code12);
 
-      // clipboardy.writeSync(JSON.stringify(tree, null, 2));
+      clipboardy.writeSync(JSON.stringify(tree, null, 2));
       expect(tree).toStrictEqual(treeExpectation);
     });
     it('should properly define variables out of the function arguments', () => {

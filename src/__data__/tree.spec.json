@@ -149,7 +149,7 @@
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "isScope": false,
-          "variableIdentifier": "test"
+          "variableIdentifier": "value"
         },
         {
           "type": "Identifier",
@@ -168,7 +168,7 @@
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "isScope": false,
-          "variableIdentifier": "test"
+          "variableIdentifier": "anotherOne"
         },
         {
           "type": "Identifier",
@@ -187,7 +187,7 @@
           "scopePath": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "path": "Program-1:1-21:1.FunctionDeclaration-2:1-4:2",
           "isScope": false,
-          "variableIdentifier": "test"
+          "variableIdentifier": "fooBar"
         },
         {
           "type": "BlockStatement",
@@ -531,7 +531,7 @@
                           "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.ArrowFunctionExpression-8:16-8:26",
                           "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.VariableDeclaration-8:3-8:27.VariableDeclarator-8:9-8:26.ArrowFunctionExpression-8:16-8:26",
                           "isScope": false,
-                          "variableIdentifier": "ƒ"
+                          "variableIdentifier": "v"
                         },
                         {
                           "type": "BinaryExpression",
@@ -657,7 +657,7 @@
                   "scopePath": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.FunctionDeclaration-9:3-11:4",
                   "path": "Program-1:1-21:1.FunctionDeclaration-6:1-14:2.BlockStatement-6:19-14:2.FunctionDeclaration-9:3-11:4",
                   "isScope": false,
-                  "variableIdentifier": "sqrtAnd"
+                  "variableIdentifier": "v"
                 },
                 {
                   "type": "BlockStatement",
