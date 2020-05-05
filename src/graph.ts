@@ -42,43 +42,12 @@ export default function(
     }
   }
   function addNodeToGraph(node: NormalizedNode) {
-    const parentScope = node.scopePath.split('.').pop();
     if (!nodesData.find(({ key }) => key === node.key)) {
       nodesData.push(node);
     }
-    const linkExist = linksData.find(
-      ({ source, target }) =>
-        (source === parentScope && target === node.key) ||
-        (source === node.key && target === parentScope)
-    );
-    if (parentScope !== '' && !linkExist) {
-      addLink(parentScope, node.key);
-    }
   }
 
-  const dict: Record<string, Function> = {
-    Program(node: NormalizedNode) {
-      addNodeToGraph(node);
-    },
-    FunctionDeclaration(node: NormalizedNode) {
-      addNodeToGraph(node);
-    },
-    Identifier(node: NormalizedNode) {
-      const scopes = node.scopePath.split('.').reverse();
-      for (const scopeKey of scopes) {
-        const scopeNode: NormalizedNode = getNodeByKey(scopeKey);
-        if (scopeNode.variables && scopeNode.variables.length > 0) {
-          for (const varKey of scopeNode.variables) {
-            const varNode: NormalizedNode = getNodeByKey(varKey);
-            if (varNode.variableIdentifier === node.text) {
-              addLink(varNode.key, scopes[0]);
-              return;
-            }
-          }
-        }
-      }
-    },
-  };
+  const dict: Record<string, Function> = {};
 
   function process(node: NormalizedNode) {
     if (dict[node.type]) dict[node.type](node);
