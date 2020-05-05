@@ -7,7 +7,8 @@
   "globals": {
     "chrome": true,
     "d3": true,
-    "Nodes": true
+    "Nodes": true,
+    "mermaid": true
   },
   "rules": {
     "no-restricted-globals": 0,
