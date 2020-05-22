@@ -24,14 +24,12 @@
     "babel-eslint": "9.0.0",
     "babel-jest": "25.1.0",
     "babel-loader": "8.0.4",
+    "clipboardy": "2.3.0",
     "eslint": "5.16.0",
-    "eslint-config-airbnb": "17.1.1",
-    "eslint-config-prettier": "4.3.0",
-    "eslint-config-wesbos": "0.0.19",
+    "eslint-config-prettier": "6.11.0",
     "eslint-plugin-html": "5.0.5",
     "eslint-plugin-import": "2.20.0",
     "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react": "7.18.0",
     "eslint-plugin-react-hooks": "1.7.0",
     "jest": "25.1.0",
@@ -41,8 +39,7 @@
     "ts-loader": "6.2.1",
     "typescript": "3.7.5",
     "webpack": "4.41.6",
-    "webpack-cli": "3.1.2",
-    "clipboardy": "2.3.0"
+    "webpack-cli": "3.1.2"
   },
   "scripts": {
     "build": "webpack --config ./webpack.browser.js --mode production && webpack --config ./webpack.node.js --mode production",
@@ -77,6 +74,5 @@
       "<rootDir>/demo/"
     ]
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
