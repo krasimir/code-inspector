@@ -1,4 +1,5 @@
 graph TB
   A --- B
   B-->C[fa:fa-ban forbidden]
-  B-->D(fa:fa-spinner);
+  B-->D(fa:fa-spinner)
+  E --- X
