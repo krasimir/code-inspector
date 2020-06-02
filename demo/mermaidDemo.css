@@ -1,16 +1,24 @@
-html{
+html {
   width: 100%;
 }
-body { 
+body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Source Sans Pro', sans-serif;;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 75%;
   background: #fff;
 }
 svg {
   width: 100%;
   height: 100%;
+}
+.node-def > rect {
+  fill: #a9cffb;
+  stroke: #3b84a6;
+}
+.node-branching rect {
+  fill: #e5fba9;
+  stroke: #a69b3b;
 }

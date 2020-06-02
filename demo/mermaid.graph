@@ -1,5 +1,24 @@
 graph TB
-  A --- B
-  B-->C[fa:fa-ban forbidden]
-  B-->D(fa:fa-spinner)
-  E --- X
+Program-1:1-21:1("Program")-->FunctionDeclaration-2:1-4:2("test(value, anotherOne, fooBar)")
+FunctionDeclaration-2:1-4:2("test(value, anotherOne, fooBar)")-->ConditionalExpression-3:10-3:31("value?")
+Program-1:1-21:1("Program")-->FunctionDeclaration-6:1-14:2("foobar()")
+FunctionDeclaration-6:1-14:2("foobar()")-->FunctionDeclaration-9:3-11:4("sqrtAnd(v)")
+FunctionDeclaration-9:3-11:4("sqrtAnd(v)")-->CallExpression-10:12-10:24("Math.sqrt(…)")
+FunctionDeclaration-9:3-11:4("sqrtAnd(v)")-->CallExpression-10:36-10:46("test(…)")
+FunctionDeclaration-6:1-14:2("foobar()")-->CallExpression-12:22-12:29("mult(…)")
+FunctionDeclaration-6:1-14:2("foobar()")-->CallExpression-13:3-13:22("console.log(…)")
+Program-1:1-21:1("Program")-->IfStatement-16:1-20:2("if (ANSWER === 42)")
+Program-1:1-21:1("Program")-->CallExpression-17:3-17:13("test(…)")
+Program-1:1-21:1("Program")-->CallExpression-19:3-19:14("test(…)")
+class Program-1:1-21:1 node-def
+class FunctionDeclaration-2:1-4:2 node-def
+class ConditionalExpression-3:10-3:31 node-branching
+class FunctionDeclaration-6:1-14:2 node-def
+class FunctionDeclaration-9:3-11:4 node-def
+class CallExpression-10:12-10:24 node-call
+class CallExpression-10:36-10:46 node-call
+class CallExpression-12:22-12:29 node-call
+class CallExpression-13:3-13:22 node-call
+class IfStatement-16:1-20:2 node-branching
+class CallExpression-17:3-17:13 node-call
+class CallExpression-19:3-19:14 node-call

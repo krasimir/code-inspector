@@ -1,41 +1,41 @@
 /* eslint-disable import/no-extraneous-dependencies, no-param-reassign */
-import * as parser from '@babel/parser';
-import * as Traverse from '@babel/traverse';
+import * as parser from "@babel/parser";
+import * as Traverse from "@babel/traverse";
 
-import { parse } from './parse';
+import { parse } from "./parse";
 
-import { NormalizedNode, Analysis } from './types';
-import { getNodeKey, getNodePath, accessNode, pathToTypes } from './utils';
-import graph from './graph';
-import SortByLocation from './sort';
-import { NODES_FUNCTION_SCOPES, NODES_DEFINING_SCOPES } from './constants';
+import { NormalizedNode, Analysis } from "./types";
+import { getNodeKey, getNodePath, accessNode, pathToTypes } from "./utils";
+import G from "./graph";
+import SortByLocation from "./sort";
+import { NODES_FUNCTION_SCOPES, NODES_DEFINING_SCOPES } from "./constants";
 
 const plugins = [
-  'jsx',
-  'typescript',
-  'asyncGenerators',
-  'bigInt',
-  'classProperties',
-  'classPrivateProperties',
-  'classPrivateMethods',
-  ['decorators', { decoratorsBeforeExport: false }],
-  'doExpressions',
-  'dynamicImport',
-  'exportDefaultFrom',
-  'exportNamespaceFrom',
-  'functionBind',
-  'functionSent',
-  'importMeta',
-  'logicalAssignment',
-  'nullishCoalescingOperator',
-  'numericSeparator',
-  'objectRestSpread',
-  'optionalCatchBinding',
-  'optionalChaining',
-  'partialApplication',
-  ['pipelineOperator', { proposal: 'minimal' }],
-  'throwExpressions',
-  'topLevelAwait',
+  "jsx",
+  "typescript",
+  "asyncGenerators",
+  "bigInt",
+  "classProperties",
+  "classPrivateProperties",
+  "classPrivateMethods",
+  ["decorators", { decoratorsBeforeExport: false }],
+  "doExpressions",
+  "dynamicImport",
+  "exportDefaultFrom",
+  "exportNamespaceFrom",
+  "functionBind",
+  "functionSent",
+  "importMeta",
+  "logicalAssignment",
+  "nullishCoalescingOperator",
+  "numericSeparator",
+  "objectRestSpread",
+  "optionalCatchBinding",
+  "optionalChaining",
+  "partialApplication",
+  ["pipelineOperator", { proposal: "minimal" }],
+  "throwExpressions",
+  "topLevelAwait",
 ];
 const babelParserOptions = {
   allowImportExportEverywhere: true,
@@ -49,7 +49,7 @@ function toNormalizeNode(
   n: Traverse.NodePath,
   stack: NormalizedNode[]
 ): NormalizedNode {
-  const scopePath = stack.map(item => item.key).join('.');
+  const scopePath = stack.map((item) => item.key).join(".");
   const key = getNodeKey(n.node);
 
   if (cache[key]) {
@@ -85,32 +85,32 @@ function addVariable(node: NormalizedNode, variableNodeKey: string) {
   }
 }
 function setChildren(nodes: NormalizedNode[], getNodeByKey: Function) {
-  nodes.forEach(node => addChild(getNodeByKey(node.parent), node));
+  nodes.forEach((node) => addChild(getNodeByKey(node.parent), node));
 }
 function setVariables(nodes: NormalizedNode[], getNodeByKey: Function) {
-  nodes.forEach(node => {
+  nodes.forEach((node) => {
     const fullPathTypes = pathToTypes(node.path);
-    const scopePathTypes = node.scopePath.split('.');
+    const scopePathTypes = node.scopePath.split(".");
     const parentType = fullPathTypes[fullPathTypes.length - 1];
     const grandParentType = fullPathTypes[fullPathTypes.length - 2];
     const scopeNodeKey = scopePathTypes[scopePathTypes.length - 1];
 
-    if (node.type === 'Identifier') {
+    if (node.type === "Identifier") {
       if (
-        parentType === 'VariableDeclarator' &&
-        grandParentType === 'VariableDeclaration'
+        parentType === "VariableDeclarator" &&
+        grandParentType === "VariableDeclaration"
       ) {
-        const declaration = node.path.split('.').reverse()[1];
+        const declaration = node.path.split(".").reverse()[1];
         if (declaration) {
           getNodeByKey(declaration).variableIdentifier = node.text;
           addVariable(getNodeByKey(scopeNodeKey), declaration);
         }
       }
     }
-    if (node.type === 'FunctionDeclaration') {
+    if (node.type === "FunctionDeclaration") {
       if (node.children && node.meta) {
         const functionItself: NormalizedNode = node.children.find(
-          n => n.type === 'Identifier' && n.text === node.meta.funcName
+          (n) => n.type === "Identifier" && n.text === node.meta.funcName
         );
         if (functionItself) {
           node.variableIdentifier = functionItself.text.toString();
@@ -166,14 +166,14 @@ export function analyze(code: string) {
 
   return {
     ast,
-    tree: nodes.find(n => n.type === 'Program'),
+    tree: nodes.find((n) => n.type === "Program"),
     nodes,
     scopes,
-    variables: nodes.filter(n => !!n.variableIdentifier),
+    variables: nodes.filter((n) => !!n.variableIdentifier),
   };
 }
 export function isVariable(node: NormalizedNode): boolean {
   return !!node.variableIdentifier;
 }
-export const toGraph = graph;
+export const graph = G;
 export const sort = SortByLocation;

@@ -5,7 +5,7 @@ function test(value, anotherOne, fooBar) {
 
 function foobar() {
   const ANSWER = 100;
-  const mult = v => v * 2;
+  const mult = (v) => v * 2;
   function sqrtAnd(v) {
     return Math.sqrt(v) + ANSWER + test(true);
   }
@@ -14,7 +14,7 @@ function foobar() {
 }
 
 if (ANSWER === 42) {
-  test('no');
+  test("no");
 } else {
-  test('yes');
+  test("yes");
 }
